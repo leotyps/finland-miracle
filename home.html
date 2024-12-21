@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>48intens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+</head>
+
+<body class="bg-white">
+    <nav class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">48intens</div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="menu" class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-700 hover:text-purple-600">News</a>
+                <a href="#" class="text-gray-700 hover:text-purple-600">Theater</a>
+                <a href="#" class="text-gray-700 hover:text-purple-600">Member</a>
+                <a href="#" class="text-gray-700 hover:text-purple-600">MyPage</a>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Theater</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">MyPage</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-12">
+        <div class="flex flex-col space-y-2 text-left md:text-left">
+            <h1 class="text-6xl font-bold">48.</h1>
+            <h1 class="text-6xl font-bold">Intens.</h1>
+            <h1 class="text-6xl font-bold">Website.</h1>
+        </div>
+        <div class="flex justify-left md:justify-between items-center mt-8">
+            <p class="text-xl hidden md:block">Flying With<br />TIntens</p>
+            <button class="bg-black text-white px-6 py-2 rounded-full flex items-center">
+                Work
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-6 py-8">
+        <div class="relative overflow-hidden rounded-xl aspect-[2/1]">
+            <div class="banner-slider h-full flex items-center justify-center">
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-6 py-8">
+        <div class="relative overflow-hidden rounded-md">
+            <div class="image-carousel flex space-x-3 rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akb.png" alt="AKB48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/ske.png" alt="SKE48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/nmb.png" alt="NMB48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/hkt.png" alt="HKT48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/ngt.png" alt="NGT48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/stu.png" alt="STU48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/bnk.png" alt="BNK48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/mnl.png" alt="MNL48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akbsh.png" alt="AKB48 Team SH" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akbtp.png" alt="AKB48 Team TP" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/cgm.png" alt="CGM48" class="rounded-md">
+                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/klp.png" alt="KLP48" class="rounded-md">
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-6 py-12">
+        <h2 class="text-4xl font-bold max-w-2xl">
+            To enhance the growth of your website, it's essential to expedite the release of new pages.
+        </h2>
+    </div>
+    <script src="/utils/banner.js"></script>
+    <script>
+        tns({
+            container: '.image-carousel',
+            items: 7,
+            slideBy: 1,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayButtonOutput: false,
+            controls: false,
+            nav: false,
+            mouseDrag: true,
+            speed: 400,
+            loop: true,
+            responsive: {
+                0: {
+                    items: 3
+                },
+                1024: {
+                    items: 7 
+                }
+            }
+        });
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
