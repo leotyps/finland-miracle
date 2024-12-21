@@ -1,3 +1,20 @@
+function timeAgo(date) {
+    const now = new Date();
+    const diff = now - new Date(date);
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 1) return `${days} days ago`;
+    if (days === 1) return `a day ago`;
+    if (hours > 1) return `${hours} hours ago`;
+    if (hours === 1) return `an hour ago`;
+    if (minutes > 1) return `${minutes} minutes ago`;
+    if (minutes === 1) return `a minute ago`;
+    return `${seconds} seconds ago`;
+}
+
 async function fetchYoutubeVideos() {
     try {
         const response = await fetch('https://intensprotectionexenew.vercel.app/api/youtube_jkt48');
@@ -25,8 +42,8 @@ async function fetchYoutubeVideos() {
                                 <img src="${channelLogo}" alt="${video.channelTitle}" class="w-8 h-8 rounded-full mr-2">
                                 <h3 class="text-lg font-bold">${video.title}</h3>
                             </div>
-                            <p class="text-sm font-semibold text-gray-500">${new Date(video.publishedAt).toLocaleDateString()}</p>
-                            <p class="text-sm font-semibold text-gray-500">${video.channelTitle}</p>
+                            <p class="text-sm text-gray-500">Channel: ${video.channelTitle}</p>
+                            <p class="text-sm text-gray-500">Published: ${timeAgo(video.publishedAt)}</p>
                         </div>
                     </a>
                 </div>
