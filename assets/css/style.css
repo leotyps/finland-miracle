@@ -1,0 +1,7 @@
+#popup {
+    z-index: 9999; /* Pastikan popup berada di atas semua elemen */
+}
+
+body.no-scroll {
+    overflow: hidden; /* Mencegah halaman di-scroll saat popup muncul */
+}
