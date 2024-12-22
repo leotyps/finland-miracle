@@ -207,5 +207,29 @@
     </footer>
     
     <script src="/utils/page-news.js"></script>
+    <script>
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const footerLogo = document.getElementById('footer-logo');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+                mobileMenu.style.transition = 'max-height 0.3s ease-in-out';
+            } else {
+                mobileMenu.style.maxHeight = '0';
+            }
+        });
+
+        footerLogo.addEventListener('click', () => {
+            footerLogo.classList.add('scale-125');
+            footerLogo.style.transition = 'transform 0.5s ease-in-out';
+            setTimeout(() => {
+                footerLogo.classList.remove('scale-125');
+            }, 300);
+        });
+    </script>
 </body>
 </html>
