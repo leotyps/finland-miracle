@@ -32,12 +32,7 @@ async function fetchTheaterData() {
         container.innerHTML = '';
 
         if (theaterData.length === 0) {
-            container.innerHTML = `
-                <div class="flex flex-col items-center justify-center h-96">
-                    <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Theater Not Found" class="w-32 h-32 mb-4">
-                    <p class="text-gray-500 text-lg font-bold">Theater Not Found 😭</p>
-                </div>
-            `;
+            showNotFoundMessage(container, 'Theater Not Found 😭');
             return;
         }
 
@@ -78,7 +73,22 @@ async function fetchTheaterData() {
         });
     } catch (error) {
         console.error('Error fetching data:', error);
+        const container = document.getElementById('theater-container');
+        showNotFoundMessage(container, 'Theater Not Found 😭');
     }
+}
+
+function showNotFoundMessage(container, message) {
+    container.className = 'min-h-[24rem] relative';
+
+    container.innerHTML = `
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="flex flex-col items-center">
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
+                <p class="text-gray-500 text-lg font-bold">${message}</p>
+            </div>
+        </div>
+    `;
 }
 
 function getShowStatus(showInfo) {
@@ -198,4 +208,5 @@ async function showPopup(show, banner, members) {
         console.error('Error in showPopup:', error);
     }
 }
+
 fetchTheaterData();
