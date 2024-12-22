@@ -1,10 +1,16 @@
 async function fetchYoutubeVideos() {
     try {
+        const container = document.getElementById('youtube-container');
+        
         const response = await fetch('https://intensprotectionexenew.vercel.app/api/video');
         const data = await response.json();
+        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[24rem] relative';
 
-        const container = document.getElementById('youtube-container');
-        container.innerHTML = ''; // Hapus skeleton loader
+        container.innerHTML = ''; 
+        if (!data || data.length === 0) {
+            showNotFoundMessage(container, 'Videos Not Found 😭');
+            return;
+        }
 
         data.forEach(video => {
             const videoCard = `
@@ -28,8 +34,21 @@ async function fetchYoutubeVideos() {
     } catch (error) {
         console.error('Error fetching YouTube videos:', error);
         const container = document.getElementById('youtube-container');
-        container.innerHTML = '<p class="text-center text-red-500">Failed to load videos. Please try again later.</p>';
+        showNotFoundMessage(container, 'Videos Not Found 😭');
     }
+}
+
+function showNotFoundMessage(container, message) {
+    container.className = 'min-h-[24rem] relative';
+    
+    container.innerHTML = `
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="flex flex-col items-center">
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
+                <p class="text-gray-500 text-lg font-bold">${message}</p>
+            </div>
+        </div>
+    `;
 }
 
 fetchYoutubeVideos();
