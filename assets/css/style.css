@@ -5,3 +5,6 @@
 body.no-scroll {
     overflow: hidden; /* Mencegah halaman di-scroll saat popup muncul */
 }
+#popup.hidden {
+    display: none;
+}

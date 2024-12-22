@@ -3,6 +3,8 @@ function getQueryParam(param) {
   return urlParams.get(param);
 }
 
+
+
 async function fetchDetailNews() {
   try {
     const beritaId = getQueryParam("id");
@@ -10,9 +12,9 @@ async function fetchDetailNews() {
       console.error("Berita ID tidak ditemukan di URL.");
       document.getElementById(
         "news-detail-container"
-      ).innerHTML = `<div class="bg-white rounded-lg shadow-md overflow-hidden p-4 h-64 flex items-center justify-center">
+      ).innerHTML = `<div class="bg-white rounded-lg shadow-md overflow-hidden p-6 h-72 flex items-center justify-center">
           <div class="text-center">
-            <h2 class="text-xl font-bold">Nothing to see here!</h2>
+            <h2 class="text-2xl font-bold">Nothing to see here!</h2>
           </div>
         </div>`;
       return;
@@ -20,15 +22,15 @@ async function fetchDetailNews() {
 
     const container = document.getElementById("news-detail-container");
     container.innerHTML = `
-        <div class="max-w-3xl mx-auto p-6 bg-blue-200 shadow-md rounded-lg animate-pulse">
-            <div class="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
-            <div class="h-4 bg-gray-300 rounded w-1/4 mb-4"></div>
-            <div class="w-full h-64 bg-gray-300 rounded-lg mb-6"></div>
-            <div class="space-y-4">
-                <div class="h-4 bg-gray-300 rounded"></div>
-                <div class="h-4 bg-gray-300 rounded w-5/6"></div>
-                <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                <div class="h-4 bg-gray-300 rounded w-4/5"></div>
+        <div class="max-w-10xl mx-auto p-8 bg-blue-200 shadow-lg rounded-xl animate-pulse">
+            <div class="h-10 bg-gray-300 rounded w-3/4 mb-6"></div>
+            <div class="h-6 bg-gray-300 rounded w-1/3 mb-6"></div>
+            <div class="w-full h-72 bg-gray-300 rounded-lg mb-8"></div>
+            <div class="space-y-6">
+                <div class="h-6 bg-gray-300 rounded"></div>
+                <div class="h-6 bg-gray-300 rounded w-5/6"></div>
+                <div class="h-6 bg-gray-300 rounded w-3/4"></div>
+                <div class="h-6 bg-gray-300 rounded w-4/5"></div>
             </div>
         </div>
     `;
@@ -54,15 +56,15 @@ async function fetchDetailNews() {
       const container = document.getElementById("news-detail-container");
 
       const detailTemplate = `
-            <div class="max-w-3xl mx-auto p-6 bg-blue-200 shadow-md rounded-lg">
-                <h1 class="text-3xl font-bold mb-4">${judul}</h1>
-                <p class="text-gray-500 text-sm mb-4">${tanggal}</p>
+            <div class="max-w-10xl mx-auto p-8 bg-blue-200 shadow-lg rounded-xl">
+                <h1 class="text-3xl font-bold mb-6">${judul}</h1>
+                <p class="text-gray-600 text-base mb-6">${tanggal}</p>
                 ${
                   gambar
-                    ? `<img src="${gambar}" alt="${judul}" class="w-full h-auto rounded-lg mb-6">`
+                    ? `<img src="${gambar}" alt="${judul}" class="w-25 h-auto rounded-lg mb-8">`
                     : ""
                 } 
-                <div class="text-gray-800 leading-relaxed">${konten}</div>
+                <div class="text-gray-900 leading-relaxed text-sm font-semibold">${konten}</div>
             </div>
         `;
 

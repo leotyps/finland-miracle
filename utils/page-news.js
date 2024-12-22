@@ -27,7 +27,7 @@ async function fetchPageNews() {
       const waktu = news.waktu || "Waktu tidak tersedia";
       const judul = news.judul || "Judul tidak tersedia";
 
-      const detailUrl = `/page/detail.html?id=${beritaId}`;
+      const detailUrl = `/components/detail/detail.html?id=${beritaId}`;
 
       const newsCard = `
                 <a href="${detailUrl}" class="block bg-blue-200 text-black hover:shadow-lg rounded-lg overflow-hidden p-4 transition-shadow duration-300">

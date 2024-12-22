@@ -1,24 +1,37 @@
 async function fetchYoutubeVideos() {
     try {
         const container = document.getElementById('youtube-container');
-        
+
+        // Tampilkan skeleton card atau pesan loading (opsional)
+        container.innerHTML = `
+            <div class="bg-white rounded-lg shadow-md overflow-hidden skeleton">
+                <div class="relative bg-gray-300 h-48 w-full rounded"></div>
+                <div class="p-4">
+                    <div class="bg-gray-300 h-6 w-3/4 mb-2 rounded"></div>
+                    <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
+                </div>
+            </div>
+        `.repeat(4); // Tambahkan skeleton untuk 4 item
+
         const response = await fetch('https://intensprotectionexenew.vercel.app/api/video');
         const data = await response.json();
-        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[24rem] relative';
 
-        container.innerHTML = ''; 
+        container.innerHTML = ''; // Bersihkan skeleton setelah data diambil
         if (!data || data.length === 0) {
             showNotFoundMessage(container, 'Videos Not Found 😭');
             return;
         }
 
-        data.forEach(video => {
+        // Batasi hanya 4 data yang ditampilkan
+        const limitedData = data.slice(0, 4);
+
+        limitedData.forEach(video => {
             const videoCard = `
-                <div class="video-card bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
                     <div class="relative">
                         <iframe 
                             src="${video.url}" 
-                            class="w-full h-52" 
+                            class="w-full h-48 object-cover" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen>
@@ -33,14 +46,12 @@ async function fetchYoutubeVideos() {
         });
     } catch (error) {
         console.error('Error fetching YouTube videos:', error);
-        const container = document.getElementById('youtube-container');
         showNotFoundMessage(container, 'Videos Not Found 😭');
     }
 }
 
 function showNotFoundMessage(container, message) {
     container.className = 'min-h-[24rem] relative';
-    
     container.innerHTML = `
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="flex flex-col items-center">
