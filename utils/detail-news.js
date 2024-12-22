@@ -1,6 +1,6 @@
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param); 
+  return urlParams.get(param);
 }
 
 async function fetchDetailNews() {
@@ -20,11 +20,17 @@ async function fetchDetailNews() {
 
     const container = document.getElementById("news-detail-container");
     container.innerHTML = `
-      <div class="flex-col gap-4 w-full flex items-center justify-center">
-        <div class="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full">
-          <div class="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"></div>
+        <div class="max-w-3xl mx-auto p-6 bg-blue-200 shadow-md rounded-lg animate-pulse">
+            <div class="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
+            <div class="h-4 bg-gray-300 rounded w-1/4 mb-4"></div>
+            <div class="w-full h-64 bg-gray-300 rounded-lg mb-6"></div>
+            <div class="space-y-4">
+                <div class="h-4 bg-gray-300 rounded"></div>
+                <div class="h-4 bg-gray-300 rounded w-5/6"></div>
+                <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                <div class="h-4 bg-gray-300 rounded w-4/5"></div>
+            </div>
         </div>
-      </div>
     `;
 
     setTimeout(async () => {
@@ -35,7 +41,7 @@ async function fetchDetailNews() {
       if (!response.ok) throw new Error("Network response was not ok");
 
       const data = await response.json();
-      console.log(data); 
+      console.log(data);
 
       const judul = data.judul || "Judul tidak tersedia";
       const tanggal = data.tanggal || "Tanggal tidak tersedia";
@@ -60,8 +66,8 @@ async function fetchDetailNews() {
             </div>
         `;
 
-      container.innerHTML = detailTemplate; 
-    }, 1000); 
+      container.innerHTML = detailTemplate;
+    }, 1000);
   } catch (error) {
     console.error("Error fetching Detail News:", error);
     const container = document.getElementById("news-detail-container");
