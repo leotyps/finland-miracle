@@ -208,5 +208,4 @@ async function showPopup(show, banner, members) {
         console.error('Error in showPopup:', error);
     }
 }
-
 fetchTheaterData();
