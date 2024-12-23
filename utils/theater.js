@@ -98,17 +98,11 @@ async function fetchTheaterData() {
             container.innerHTML += theaterCard;
         });
 
-        document.getElementById('close-popup').addEventListener('click', () => {
-            const popup = document.getElementById('popup');
-            popup.classList.add('hidden');
-            document.body.classList.remove('no-scroll');
-        });
     } catch (error) {
         console.error('Error fetching data:', error);
         showNotFoundMessage(container, 'Theater Not Found 😭');
     }
 }
-
 
 function showNotFoundMessage(container, message) {
     container.className = 'min-h-[24rem] relative';
@@ -206,10 +200,16 @@ async function showPopup(show, banner, members) {
 
         popupContent.innerHTML = `
             <div class="bg-white rounded-lg shadow-lg p-4 max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-xl font-bold">${show.setlist}</h2>
+                    <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-400 transition duration-300" 
+                            onclick="document.getElementById('popup').classList.add('hidden'); document.body.classList.remove('no-scroll');">
+                        Close
+                    </button>
+                </div>
                 <div>
                     <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" alt="${show.setlist}" class="w-full h-48 sm:h-40 object-cover rounded-lg mb-4">
                 </div>
-                <h2 class="text-xl font-bold mb-3">${show.setlist}</h2>
                 <div class="space-y-2 mb-4">
                     <div class="text-sm text-gray-500"><strong>Date:</strong> ${show.showInfo.split(' ')[0]}</div>
                     <div class="text-sm text-gray-500"><strong>Time:</strong> ${show.time} WIB</div>
@@ -252,6 +252,5 @@ async function showPopup(show, banner, members) {
         console.error('Error in showPopup:', error);
     }
 }
-
 
 fetchTheaterData();
