@@ -24,7 +24,7 @@ async function fetchDetailMember() {
     <tr>
       <td class="w-1/3">
         <!-- Skeleton untuk gambar profil -->
-        <div class="w-48 h-48 bg-gray-300 rounded-lg"></div>
+        <div class="w-full h-48 bg-gray-300 rounded-lg"></div>
       </td>
       <td class="w-1/3 text-gray-900 leading-relaxed text-lg font-semibold">
         <!-- Skeleton untuk teks informasi -->
@@ -40,11 +40,11 @@ async function fetchDetailMember() {
       </td>
     </tr>
   </table>
-  <div class="space-y-2 mt-4">
+  <div class="space-y-2 mt-4 flex flex-col md:flex-row md:space-x-4 md:space-y-0 justify-center">
     <!-- Skeleton untuk link sosial media -->
-    <div class="w-24 h-5 bg-gray-300 rounded"></div>
-    <div class="w-24 h-5 bg-gray-300 rounded"></div>
-    <div class="w-24 h-5 bg-gray-300 rounded"></div>
+    <div class="w-full md:w-24 h-5 bg-gray-300 rounded"></div>
+    <div class="w-full md:w-24 h-5 bg-gray-300 rounded"></div>
+    <div class="w-full md:w-24 h-5 bg-gray-300 rounded"></div>
   </div>
 </div>
 
