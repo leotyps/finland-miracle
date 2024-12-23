@@ -1,11 +1,8 @@
-// Fetch and initialize banners dynamically
 fetch('https://intensprotectionexenew.vercel.app/api/banners')
     .then(response => response.json())
     .then(data => {
         if (data.success && data.data) {
             const bannerSlider = document.querySelector('.banner-slider');
-
-            // Create banners
             data.data.forEach(banner => {
                 const link = document.createElement('a');
                 link.href = banner.value;
@@ -20,7 +17,6 @@ fetch('https://intensprotectionexenew.vercel.app/api/banners')
                 bannerSlider.appendChild(link);
             });
 
-            // Initialize Tiny Slider
             tns({
                 container: '.banner-slider',
                 items: 1,
