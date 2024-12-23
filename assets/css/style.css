@@ -8,17 +8,3 @@ body.no-scroll {
 #popup.hidden {
     display: none;
 }
-
-/* Tambahkan ini ke file CSS Anda */
-#modal {
-  transition: opacity 0.3s ease;
-  opacity: 0;
-}
-
-#modal.fade-in {
-  opacity: 1;
-}
-
-#modal.fade-out {
-  opacity: 0;
-}
