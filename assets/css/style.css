@@ -1,15 +1,11 @@
-#popup {
-    z-index: 9999; /* Pastikan popup berada di atas semua elemen */
-}
 
 body.no-scroll {
-    overflow: hidden; /* Mencegah halaman di-scroll saat popup muncul */
+    overflow: hidden;
 }
 #popup.hidden {
     display: none;
 }
 
-/* Tambahkan ini ke file CSS Anda */
 #modal {
   transition: opacity 0.3s ease;
   opacity: 0;
@@ -22,3 +18,4 @@ body.no-scroll {
 #modal.fade-out {
   opacity: 0;
 }
+

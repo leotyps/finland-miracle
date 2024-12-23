@@ -94,11 +94,27 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-6 py-12">
-        <h2 class="text-4xl font-bold max-w-2xl">
-            Web Intens introduces you to the world of JKT48 more closely.
-        </h2>
+    <div class="container mx-auto px-6 pt-6 pb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div>
+                <h2 class="text-4xl font-bold text-gray-900 leading-tight ml-4 lg:ml-6">
+                    Web Intens introduces you 
+                    to the <br>world of JKT48 
+                    more closely.
+                </h2>
+            </div>
+            <div class="rounded-lg">
+                <div class="mb-6">
+                    <h3 class="text-4xl font-bold text-gray-900 mb-8 ml-4 lg:ml-6">
+                        Upcoming Birthdays
+                    </h3>
+                </div>
+                <div id="birthday-container" class="space-y-4 ml-4 lg:ml-6">
+                </div>
+            </div>
+        </div>
     </div>
+    
 
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold text-center mb-6">Hot News.</h1>
@@ -201,6 +217,7 @@
     <script src="/utils/youtube.js"></script>
     <script src="/utils/banner.js"></script>
     <script src="/utils/theater.js"></script>
+    <script src="/utils/birthday.js"></script>
     <script>
         tns({
             container: '.image-carousel',
