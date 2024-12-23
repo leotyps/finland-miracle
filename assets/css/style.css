@@ -1,10 +1,25 @@
-#popup {
-    z-index: 9999; /* Pastikan popup berada di atas semua elemen */
-}
 
 body.no-scroll {
-    overflow: hidden; /* Mencegah halaman di-scroll saat popup muncul */
+    overflow: hidden;
 }
 #popup.hidden {
     display: none;
+<<<<<<< HEAD
 }
+=======
+}
+
+#modal {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+#modal.fade-in {
+  opacity: 1;
+}
+
+#modal.fade-out {
+  opacity: 0;
+}
+
+>>>>>>> b76e32af60c7809af7251338fa2523fda3f46ba0
