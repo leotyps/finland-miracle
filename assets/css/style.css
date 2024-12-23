@@ -1,8 +1,12 @@
-
 body.no-scroll {
     overflow: hidden;
 }
+
 #popup.hidden {
     display: none;
 
+}
+
+footer {
+    margin-top: 70px;
 }
