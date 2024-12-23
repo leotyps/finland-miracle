@@ -15,23 +15,14 @@ async function fetchHotNews() {
 
         const topThreeNews = data.berita.slice(0, 3);
 
-        let highlightedIndex = localStorage.getItem('highlightedIndex');
-        if (highlightedIndex === null) {
-            highlightedIndex = Math.floor(Math.random() * topThreeNews.length);
-            localStorage.setItem('highlightedIndex', highlightedIndex);
-        } else {
-            highlightedIndex = parseInt(highlightedIndex, 10);
-        }
-
-        topThreeNews.forEach((news, index) => {
-            const isHighlighted = index === highlightedIndex;
-            const cardClass = isHighlighted ? 'bg-blue-300 text-white' : 'bg-white text-black';
+        topThreeNews.forEach((news) => {
+            const cardClass = 'bg-white text-black';
 
             const newsCard = `
-                <div class="news-card ${cardClass} rounded-lg shadow-md overflow-hidden p-4 cursor-pointer" onclick="window.location.href='/news/${news.berita_id}'">
+                <div class="news-card ${cardClass} border-2 border-gray-200 rounded-lg overflow-hidden p-4 cursor-pointer" onclick="window.location.href='/components/detail/news.html?id=${news.berita_id}'">
                     <div class="flex items-center mb-4">
                         <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}" alt="Badge" class="w-15 h-5 mr-3 rounded-lg">
-                        <span class="text-sm ${isHighlighted ? 'text-gray-200' : 'text-gray-500'}">${news.waktu}</span>
+                        <span class="text-sm text-gray-500">${news.waktu}</span>
                     </div>
                     <h3 class="text-lg font-bold mb-2">${news.judul}</h3>
                 </div>
