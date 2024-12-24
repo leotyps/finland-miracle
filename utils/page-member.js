@@ -9,19 +9,30 @@ async function fetchMembers() {
 
     const container = document.getElementById("page-member-container");
     container.innerHTML = "";
+
     container.className =
-      "grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-9 gap-4 p-4";
+      "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-4";
 
     members.forEach((member) => {
       const memberId = member.id_member;
       const detailUrl = `/components/detail/member.html?id=${memberId}`;
+      const isMainMember = member.kategori === "Anggota JKT48";
+
+      const cardBg = isMainMember ? "bg-rose-200 hover:bg-rose-100" : "bg-blue-100 hover:bg-blue-200";
+      const badgeColor = isMainMember ? "bg-rose-400" : "bg-blue-500";
 
       const card = `
-        <a href="${detailUrl}" class="bg-blue-200 shadow-md rounded-lg flex flex-col items-center p-4 cursor-pointer">
-          <div class="w-24 h-24 rounded-full mb-4 overflow-hidden">
-            <img src="https://jkt48.com${member.ava_member}" alt="${member.nama_member}" class="w-full h-full object-cover">
+        <a href="${detailUrl}" class="${cardBg} shadow-md rounded-lg flex flex-col items-center p-4 cursor-pointer relative">
+          <span class="${badgeColor} text-white text-xs px-2 py-1 rounded absolute top-2 right-2">
+            ${member.kategori}
+          </span>
+          <div class="w-full h-40 mb-4 overflow-hidden rounded-lg">
+            <img src="https://jkt48.com${member.ava_member}" alt="${member.nama_member}" 
+                class="w-full h-full object-cover">
           </div>
-          <div class="text-center text-lg font-semibold leading-tight break-words">${member.nama_member}</div>
+          <div class="text-center text-2x1 font-semibold leading-tight break-words">
+            ${member.nama_member}
+          </div>
         </a>
       `;
 
@@ -31,6 +42,5 @@ async function fetchMembers() {
     console.error("Error fetching members:", error);
   }
 }
-
 
 fetchMembers();
