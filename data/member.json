@@ -9,6 +9,7 @@
         "img_alt": "https://res.cloudinary.com/haymzm4wp/image/upload/v1704955001/eep8y1aal9g3891mv1jx.jpg",
         "url": "aralie",
         "group": "jkt48",
+        "video_perkenalan": "XAruFC4n0P0",
         "description": "📌 Name: Abigail Rachel\r\n🎂 🎂 Birthday: 6 Agustus 2008\r\n🩸 Blood type: B\r\n🏹 Zodiac signs: Leo",
         "jikosokai": "Seperti bunga yang mekar, aku akan membuat kamu…kamu…dan kamu terbayang-bayang. Aku Ara, Aralie!",
         "socials": [
@@ -50,6 +51,7 @@
         "img_alt": "https://res.cloudinary.com/haymzm4wp/image/upload/v1704955207/elvpyo6boofno8h60lyb.jpg",
         "url": "delynn",
         "group": "jkt48",
+        "video_perkenalan": "HkP3yC5P0PA",
         "height": "167cm",
         "description": "📌 Name: Adeline Wijaya\r\n🎂 Birthday: 1 September 2007\r\n🩸 Blood type: B\r\n🏹 Zodiac signs: Virgo",
         "jikosokai": "Nyemangatin dan ngangenin, siapa yang kamu pikirkan?",
@@ -228,6 +230,7 @@
         "description": "📌 Name: Alya Amanda\r\n🎂 Birthday: 26 Agustus 2006\r\n 🩸Blood type: A\r\n🏹 Zodiac signs: Virgo\r\n📝 Hobby: Motorcycling, doing sunday morning rides",
         "group": "jkt48",
         "height": "160cm",
+        "video_perkenalan": "A1zx-64cr7M",
         "jikosokai": "Jika hatimu sedang menangis aku akan datang sebagai pelangi! Halo aku Alya!",
         "socials": [
             {
@@ -269,6 +272,7 @@
         "height": "160cm",
         "description": "📌 Name: Amanda Puspita Sukma Mulyadewi\r\n🎂 Birthday: 17 December 2004\r\n🩸 Blood type: O\r\n🏹 Zodiac signs:  Sagitarius\r\n📝 Hobby: Dance, Automotive",
         "group": "jkt48",
+        "video_perkenalan": "F_MsFhfZHyw",
         "jikosokai": "Melaju cepat bagai motor 1000cc! Aku si gadis penyuka motor.",
         "socials": [
             {
@@ -309,6 +313,7 @@
         "url": "christy",
         "description": "📌 Name: Angelina Christy\r\n🎂 Birthday: 5 December 2005\r\n🩸 Blood type: O\r\n🏹 Zodiac signs: Sagitarius\r\n📝 Hobby: Dancing",
         "group": "jkt48",
+        "video_perkenalan": "syK_VjWJjeY",
         "height": "163cm",
         "jikosokai": "Peduli dan berbaik hati, siapakah dia? Chris.. (ty!)",
         "socials": [
@@ -378,6 +383,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "q0Xiy-HhLEU",
         "idn_username": "jkt48_anindya"
     },
     {
@@ -420,6 +426,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 10",
+        "video_perkenalan": "iyv-2LfZ_yw",
         "idn_username": "jkt48_lia"
     },
     {
@@ -461,48 +468,8 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "R3HPWXgIwks",
         "idn_username": "jkt48_lana"
-    },
-    {
-        "_id": "65ce68eb1dd7aa2c8c0ca706",
-        "name": "Callista Alifia",
-        "nicknames": [
-            "Callie"
-        ],
-        "img": "https://static.showroom-live.com/image/room/cover/8b558b8317e4ec4aa4d6afdb9c7c62675cdd352a49bf2a42d2900ec35aa32a67_m.jpeg?v=1685542636",
-        "img_alt": "https://res.cloudinary.com/haymzm4wp/image/upload/v1709325818/aozaqvzl9uoo1pdfsxqf.jpg",
-        "url": "callie",
-        "description": "📌 Name: Callista Alifia Wardhana\r\n🎂 Birthday: 8 August 2005\r\n🩸 Blood type: O\r\n🏹 Zodiac signs: Leo\r\n📝 Hobby: Dance, Listening to Music",
-        "group": "jkt48",
-        "height": "157cm",
-        "jikosokai": "Si beruang madu, penyuka madu!",
-        "socials": [
-            {
-                "title": "Twitter",
-                "url": "https://twitter.com/AW_CallieJKT48"
-            },
-            {
-                "title": "Instagram",
-                "url": "https://www.instagram.com/jkt48.callie.a/"
-            },
-            {
-                "title": "TikTok",
-                "url": "https://tiktok.com/@jkt48.callie.a"
-            },
-            {
-                "title": "SHOWROOM",
-                "url": "https://www.showroom-live.com/JKT48_Callie"
-            },
-            {
-                "title": "IDN",
-                "url": "https://click.idn.media/VKUf?af_dp=idnapp://profile/0609625b-63dc-4e08-bd4b-4dfe124220ba&af_web_dp=https://www.idn.app/jkt48_callie&c=web-android&deep_link_value=profile/0609625b-63dc-4e08-bd4b-4dfe124220ba&pid=idnapp"
-            }
-        ],
-        "room_id": 400714,
-        "sr_exists": true,
-        "is_graduate": false,
-        "generation": "Gen 10",
-        "idn_username": "jkt48_callie"
     },
     {
         "_id": "65ce68ed1dd7aa2c8c0ca774",
@@ -543,6 +510,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "Obxn7knXq38",
         "idn_username": "jkt48_erine"
     },
     {
@@ -585,6 +553,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "Azwe5GrJbJw",
         "idn_username": "jkt48_cathy"
     },
     {
@@ -626,6 +595,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "6zkHlOl2jpg",
         "idn_username": "jkt48_elin"
     },
     {
@@ -667,6 +637,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "fdP30ZtwQSE",
         "idn_username": "jkt48_chelsea"
     },
     {
@@ -708,6 +679,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 8",
+        "video_perkenalan": "QBXhvMSbx6E",
         "idn_username": "jkt48_oniel"
     },
     {
@@ -749,6 +721,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "ORECz7NyioE",
         "idn_username": "jkt48_cynthia"
     },
     {
@@ -790,6 +763,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "TF1eFUCWLIg",
         "idn_username": "jkt48_danella"
     },
     {
@@ -831,6 +805,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "p250QlcRi28",
         "idn_username": "jkt48_daisy"
     },
     {
@@ -870,6 +845,7 @@
         ],
         "room_id": 318222,
         "sr_exists": true,
+        "video_perkenalan": "FkEcqc2elbk",
         "is_graduate": false,
         "generation": "Gen 7",
         "idn_username": "jkt48_olla"
@@ -912,6 +888,7 @@
         "room_id": 317738,
         "sr_exists": true,
         "is_graduate": false,
+        "video_perkenalan": "ROwniZ7gJMQ",
         "generation": "Gen 3",
         "idn_username": "jkt48_feni"
     },
@@ -954,6 +931,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 8",
+        "video_perkenalan": "SjNYQIw1TOA",
         "idn_username": "jkt48_fiony"
     },
     {
@@ -995,6 +973,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 8",
+        "video_perkenalan": "IC21I61BzRU",
         "idn_username": "jkt48_flora"
     },
     {
@@ -1035,6 +1014,7 @@
         "room_id": 318225,
         "sr_exists": true,
         "is_graduate": false,
+        "video_perkenalan": "kdLuPyPOv1A",
         "generation": "Gen 7",
         "idn_username": "jkt48_freya"
     },
@@ -1077,6 +1057,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "jDHfbFuG3b4",
         "idn_username": "jkt48_fritzy"
     },
     {
@@ -1116,6 +1097,7 @@
         ],
         "room_id": 400715,
         "sr_exists": true,
+        "video_perkenalan": "v2iMGnJjdUA",
         "is_graduate": false,
         "generation": "Gen 10",
         "idn_username": "jkt48_ella"
@@ -1159,6 +1141,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "CY4wiewZ1dM",
         "idn_username": "jkt48_Gendis"
     },
     {
@@ -1200,6 +1183,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 6",
+        "video_perkenalan": "d1Hr6J22FWk",
         "idn_username": "jkt48_gita"
     },
     {
@@ -1241,6 +1225,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "_IWCSQypw1U",
         "idn_username": "jkt48_gracie"
     },
     {
@@ -1282,6 +1267,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "FVB78FBmBJE",
         "idn_username": "jkt48_greesel"
     },
     {
@@ -1323,6 +1309,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 7",
+        "video_perkenalan": "HyHGOCJJSNY",
         "idn_username": "jkt48_eli"
     },
     {
@@ -1364,6 +1351,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "AtQ5wXw9hZg",
         "idn_username": "jkt48_lily"
     },
     {
@@ -1405,6 +1393,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 9",
+        "video_perkenalan": "yq-2IGkS-7M",
         "idn_username": "jkt48_indah"
     },
     {
@@ -1446,6 +1435,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 10",
+        "video_perkenalan": "1aierBjB9Io?si=1lB481D1xM5d1JXp",
         "idn_username": "jkt48_indira"
     },
     {
@@ -1487,6 +1477,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "osOtCl1QfZw",
         "idn_username": "jkt48_trisha"
     },
     {
@@ -1528,6 +1519,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 7",
+        "video_perkenalan": "pphK2eq7JFM",
         "idn_username": "jkt48_jessi"
     },
     {
@@ -1569,6 +1561,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 10",
+        "video_perkenalan": "fGRAOEz3rkY",
         "idn_username": "jkt48_lyn"
     },
     {
@@ -1610,6 +1603,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 9",
+        "video_perkenalan": "tKVdC4ylVO0",
         "idn_username": "jkt48_kathrina"
     },
     {
@@ -1651,6 +1645,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "wgE7QhulJkc",
         "idn_username": "jkt48_moreen"
     },
     {
@@ -1692,6 +1687,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 8",
+        "video_perkenalan": "DdIvsJVYbOs",
         "idn_username": "jkt48_lulu"
     },
     {
@@ -1733,6 +1729,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 9",
+        "video_perkenalan": "0vWnkbkpYUI",
         "idn_username": "jkt48_marsha"
     },
     {
@@ -1774,6 +1771,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 11",
+        "video_perkenalan": "wQuccIp6BNM",
         "idn_username": "jkt48_michie"
     },
     {
@@ -1815,6 +1813,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "keCoUnUnrCk",
         "idn_username": "jkt48_levi"
     },
     {
@@ -1857,6 +1856,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 7",
+        "video_perkenalan": "4eUzsiJcE6c",
         "idn_username": "jkt48_muthe"
     },
     {
@@ -1897,6 +1897,7 @@
         "room_id": 510064,
         "sr_exists": true,
         "is_graduate": false,
+        "video_perkenalan": "dVPVlqVPgZ0",
         "generation": "Gen 12",
         "idn_username": "jkt48_nayla"
     },
@@ -1939,6 +1940,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "uKHbpHf3Efc",
         "idn_username": "jkt48_nachia"
     },
     {
@@ -1980,6 +1982,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "VtRUL3XyfZo",
         "idn_username": "jkt48_oline"
     },
     {
@@ -2020,6 +2023,7 @@
         "room_id": 400718,
         "sr_exists": true,
         "is_graduate": false,
+        "video_perkenalan": "RGjhuqrPIvc",
         "generation": "Gen 10",
         "idn_username": "jkt48_raisha"
     },
@@ -2062,6 +2066,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "rW6gsReuL5c",
         "idn_username": "jkt48_regie"
     },
     {
@@ -2103,6 +2108,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "QOYUQ4KEaZY",
         "idn_username": "jkt48_ribka"
     },
     {
@@ -2143,6 +2149,7 @@
         "room_id": 510071,
         "sr_exists": true,
         "is_graduate": false,
+        "video_perkenalan": "ZMunV8WLDEY",
         "generation": "Gen 12",
         "idn_username": "jkt48_nala"
     },
@@ -2190,6 +2197,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 3",
+        "video_perkenalan": "AYFure5ZZA4",
         "idn_username": "jkt48_gracia"
     },
     {
@@ -2231,6 +2239,7 @@
         "sr_exists": true,
         "is_graduate": false,
         "generation": "Gen 12",
+        "video_perkenalan": "ST1GwVjfC8s",
         "idn_username": "jkt48_kimmy"
     }
 ]

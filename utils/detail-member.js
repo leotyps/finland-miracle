@@ -5,7 +5,7 @@ function getQueryParam(param) {
 
 async function fetchDetailMember() {
   const container = document.getElementById("member-detail-container");
-  
+
   try {
     const memberId = getQueryParam("id");
     if (!memberId) {
@@ -51,7 +51,7 @@ async function fetchDetailMember() {
 
     container.innerHTML = `
       <div class="max-w-6xl mx-auto p-6">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="border-2 border-gray-200 bg-white rounded-xl overflow-hidden">
           <div class="md:flex">
             <div class="md:w-1/3 p-6">
               <img src="${memberData.profileImage}" alt="${memberData.name}" 
@@ -104,9 +104,18 @@ async function fetchDetailMember() {
               </div>
             </div>
           </div>
+
+          ${jikoMember?.video_perkenalan ? `
+          <div class="mt-6 px-6">
+            <h2 class="text-xl font-bold mb-4">Introduction Video</h2>
+            <iframe class="w-full aspect-video rounded-lg shadow-lg"
+              src="https://www.youtube.com/embed/${jikoMember.video_perkenalan}" 
+              title="Introduction Video" frameborder="0" allowfullscreen>
+            </iframe>
+          </div>` : ''}
         </div>
       </div>`;
-      
+
   } catch (error) {
     console.error("Error fetching member details:", error);
     container.innerHTML = `
