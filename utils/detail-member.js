@@ -50,7 +50,7 @@ async function fetchDetailMember() {
     const jikoMember = memberJsonData.find(member => member.name === memberData.name);
 
     container.innerHTML = `
-      <div class="max-w-6xl mx-auto p-6">
+      <div class="max-w-5xl mx-auto p-6">
         <div class="border-2 border-gray-200 bg-white rounded-xl overflow-hidden">
           <div class="md:flex">
             <div class="md:w-1/3 p-6">
@@ -106,7 +106,7 @@ async function fetchDetailMember() {
           </div>
 
           ${jikoMember?.video_perkenalan ? `
-          <div class="mt-6 px-6">
+          <div class="mt-6 px-6 pb-4">
             <h2 class="text-xl font-bold mb-4">Introduction Video</h2>
             <iframe class="w-full aspect-video rounded-lg shadow-lg"
               src="https://www.youtube.com/embed/${jikoMember.video_perkenalan}" 
