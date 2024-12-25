@@ -69,8 +69,7 @@ async function fetchPageNews() {
       const judul = news.judul || "Judul tidak tersedia";
 
       const colorClass = colors[index % colors.length];
-      const detailUrl = `/components/detail/news.html?id=${beritaId}`;
-
+      const detailUrl = `/news/${beritaId}`;
       const newsCard = `
       <a href="${detailUrl}" class="block ${colorClass} text-white rounded-lg shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
         onclick="localStorage.setItem('newsColor', '${colorClass}')">
