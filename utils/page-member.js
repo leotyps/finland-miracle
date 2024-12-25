@@ -13,11 +13,20 @@ async function fetchMembers() {
     container.className =
       "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-4";
 
+    if (!members || members.length === 0) {
+      showNotFoundMessage(container, "Member tidak ditemukan 😭");
+      return;
+    }
+
     const renderMembers = (filteredMembers) => {
       container.innerHTML = "";
+      if (filteredMembers.length === 0) {
+        showNotFoundMessage(container, "Member tidak ditemukan 😭");
+        return;
+      }
       filteredMembers.forEach((member) => {
         const memberId = member.id_member;
-        const detailUrl = `/member/${memberId}`; 
+        const detailUrl = `/member/${memberId}`;
         const isMainMember = member.kategori === "Anggota JKT48";
 
         const cardBg = isMainMember ? "bg-rose-200 hover:bg-rose-100" : "bg-blue-100 hover:bg-blue-200";
@@ -46,15 +55,28 @@ async function fetchMembers() {
     const searchInput = document.getElementById("search-member");
     searchInput.addEventListener("input", (e) => {
       const query = e.target.value.toLowerCase();
-      const filteredMembers = members.filter(member => 
-        member.nama_member.toLowerCase().includes(query) || 
+      const filteredMembers = members.filter((member) =>
+        member.nama_member.toLowerCase().includes(query) ||
         member.nickname?.toLowerCase().includes(query)
       );
       renderMembers(filteredMembers);
     });
   } catch (error) {
     console.error("Error fetching members:", error);
+    const container = document.getElementById("page-member-container");
+    showNotFoundMessage(container, "Gagal memuat data member. Silakan coba lagi nanti.");
   }
+}
+
+function showNotFoundMessage(container, message) {
+  container.className = "flex items-center justify-center min-h-[24rem]";
+
+  container.innerHTML = `
+    <div class="flex flex-col items-center">
+      <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
+      <p class="text-gray-500 text-lg font-bold">${message}</p>
+    </div>
+  `;
 }
 
 fetchMembers();
