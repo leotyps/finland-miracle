@@ -11,7 +11,7 @@ if (!userName || !oshimen) {
     document.getElementById("membership-anggota").textContent = `Anggota Platinum`;
     let membershipNumber = localStorage.getItem("membershipNumber");
     if (!membershipNumber) {
-        membershipNumber = `JEKATE48-${Math.floor(100000 + Math.random() * 900000).toString()}`;
+        membershipNumber = `48Intens-${Math.floor(100000 + Math.random() * 900000).toString()}`;
         localStorage.setItem("membershipNumber", membershipNumber);
     }
 
