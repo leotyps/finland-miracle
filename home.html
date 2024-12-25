@@ -28,16 +28,24 @@
             <div id="menu" class="hidden md:flex space-x-6">
                 <a href="./components/page/news.html" class="font-semibold hover:text-purple-200">News</a>
                 <a href="#" class="font-semibold text-gray-700 hover:text-purple-200">Theater</a>
-                <a href="./components/page/member.html" class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
+                <a href="./components/page/member.html"
+                    class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
             </div>
         </div>
         <div id="mobile-menu" class="font-semibold hidden md:hidden bg-white border-t border-gray-200">
-            <a href="./components/page/news.html" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
+            <a href="./components/page/news.html"
+                class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
             <a href="#" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Theater</a>
-            <a href="./components/page/member.html" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
+            <a href="./components/page/member.html"
+                class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
         </div>
     </nav>
 
+    <div id="progressContainer" class="relative w-full h-1 bg-gray-700">
+        <div id="progressBar" class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
+            style="width: 0%;">
+        </div>
+    </div>
 
     <div class="container mx-auto px-6 py-12">
         <div class="flex flex-col space-y-2 text-left md:text-left">
@@ -209,10 +217,7 @@
     </footer>
 
 
-
-
-
-
+    <script src="/progress.js"></script>
     <script src="/utils/news.js"></script>
     <script src="/middleware/middleware.js"></script>
     <!-- <script src="/security/typicalsleepingboy.js"></script> -->
