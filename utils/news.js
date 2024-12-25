@@ -20,13 +20,16 @@ async function fetchHotNews() {
             const colorClass = colors[index % colors.length];
 
             const newsCard = `
-                <div class="news-card ${colorClass} text-white border-2 border-gray-200 rounded-lg overflow-hidden p-4 cursor-pointer transition-all duration-300 hover:shadow-lg" onclick="window.location.href='/news/${news.berita_id}'">
-                    <div class="flex items-center mb-4">
-                        <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}" alt="Badge" class="w-15 h-5 mr-3 rounded-lg">
-                        <span class="text-sm text-white-200">${news.waktu}</span>
+                <a href="/news/${news.berita_id}" class="block ${colorClass} text-white rounded-lg shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
+                    onclick="localStorage.setItem('newsColor', '${colorClass}')">
+                    <div class="p-4">
+                        <div class="flex items-center mb-4">
+                            <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}" alt="Badge" class="w-14 h-5 mr-3 rounded-lg">
+                            <span class="text-sm text-white-200">${news.waktu}</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">${news.judul}</h3>
                     </div>
-                    <h3 class="text-lg font-bold mb-2">${news.judul}</h3>
-                </div>
+                </a>
             `;
             container.innerHTML += newsCard;
         });

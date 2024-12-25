@@ -103,7 +103,7 @@ async function fetchDetailNews() {
       return;
     }
 
-    const colorClass = localStorage.getItem('newsColor') || 'bg-blue-200';
+    const colorClass = localStorage.getItem('newsColor') || 'bg-blue-500';
 
     try {
       const response = await fetch(
