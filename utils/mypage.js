@@ -16,7 +16,7 @@ if (!userName || !oshimen) {
     }
 
     document.getElementById("membership-number").textContent = membershipNumber;
-    JsBarcode("#barcode", membershipNumber.replace("JEKATE48-", ""), {
+    JsBarcode("#barcode", membershipNumber.replace("48Intens-", ""), {
         format: "CODE39",
         lineColor: "#000",
         width: 2,
