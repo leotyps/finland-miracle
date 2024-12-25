@@ -17,7 +17,7 @@ async function fetchMembers() {
       container.innerHTML = "";
       filteredMembers.forEach((member) => {
         const memberId = member.id_member;
-        const detailUrl = `/components/detail/member.html?id=${memberId}`;
+        const detailUrl = `/member/${memberId}`; 
         const isMainMember = member.kategori === "Anggota JKT48";
 
         const cardBg = isMainMember ? "bg-rose-200 hover:bg-rose-100" : "bg-blue-100 hover:bg-blue-200";
