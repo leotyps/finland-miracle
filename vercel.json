@@ -4,6 +4,54 @@
         {
             "source": "/",
             "destination": "/home.html"
+        },
+        {
+            "source": "/members",
+            "destination": "/components/page/member"
+        },
+        {
+            "source": "/news",
+            "destination": "/components/page/news"
+        },
+        {
+            "source": "/schedule",
+            "destination": "/components/page/schedule"
+        },
+        {
+            "source": "/mypage",
+            "destination": "/components/login/mypage"
+        },
+        {
+            "source": "/login",
+            "destination": "/components/login/login"
+        },
+        {
+            "source": "/about",
+            "destination": "/components/page/about"
+        },
+        {
+            "source": "/maintenance",
+            "destination": "/middleware/maintenance"
+        },
+        {
+            "source": "/:path*/:slug",
+            "destination": "/:path*/:slug.html"
+        },
+        {
+            "source": "/:path*",
+            "destination": "/:path*"
+        },
+        {
+            "source": "/components/detail/:slug",
+            "destination": "/components/detail/:slug.html"
+        },
+        {
+            "source": "/middleware/:slug",
+            "destination": "/middleware/:slug.html"
+        },
+        {
+            "source": "/components/page/:slug",
+            "destination": "/components/page/:slug.html"
         }
     ]
 }
