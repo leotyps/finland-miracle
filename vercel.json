@@ -34,6 +34,10 @@
             "destination": "/middleware/maintenance"
         },
         {
+            "source": "/news/:id",
+            "destination": "/components/detail/news.html?id=:id"
+        },
+        {
             "source": "/:path*/:slug",
             "destination": "/:path*/:slug.html"
         },

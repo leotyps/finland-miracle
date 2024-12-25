@@ -19,7 +19,7 @@ async function fetchHotNews() {
             const cardClass = 'bg-white text-black';
 
             const newsCard = `
-                <div class="news-card ${cardClass} border-2 border-gray-200 rounded-lg overflow-hidden p-4 cursor-pointer" onclick="window.location.href='/components/detail/news.html?id=${news.berita_id}'">
+                <div class="news-card ${cardClass} border-2 border-gray-200 rounded-lg overflow-hidden p-4 cursor-pointer" onclick="window.location.href='/news/${news.berita_id}'">
                     <div class="flex items-center mb-4">
                         <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}" alt="Badge" class="w-15 h-5 mr-3 rounded-lg">
                         <span class="text-sm text-gray-500">${news.waktu}</span>
