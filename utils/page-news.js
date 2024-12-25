@@ -93,7 +93,8 @@ async function fetchPageNews() {
 
 async function fetchDetailNews() {
   try {
-    const beritaId = getQueryParam("id");
+    const pathSegments = window.location.pathname.split('/');
+    const beritaId = pathSegments[pathSegments.length - 1];
     const container = document.getElementById("news-detail-container");
 
     if (!beritaId) {
