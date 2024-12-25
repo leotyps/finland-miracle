@@ -6,7 +6,7 @@
             "destination": "/home.html"
         },
         {
-            "source": "/members",
+            "source": "/member",
             "destination": "/components/page/member"
         },
         {
