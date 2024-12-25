@@ -7,7 +7,8 @@ async function fetchDetailMember() {
   const container = document.getElementById("member-detail-container");
 
   try {
-    const memberId = getQueryParam("id");
+    const pathSegments = window.location.pathname.split('/');
+    const memberId = pathSegments[pathSegments.length - 1];
     if (!memberId) {
       container.innerHTML = `
         <div class="flex items-center justify-center h-96">
