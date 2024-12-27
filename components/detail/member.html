@@ -1,106 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>48intens - Member</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>48intens - Member</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/assets/css/style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-</head>
-
-<body class="bg-white min-h-screen flex flex-col">
-  <nav class="bg-white border-b border-gray-200">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="/home" class="text-2xl font-bold">48intens</a>
-      <div class="md:hidden">
-        <button id="menu-toggle" class="text-gray-700 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
-      </div>
-      <div id="menu" class="hidden md:flex space-x-6">
-        <a href="/news" class="font-semibold hover:text-purple-200">News</a>
-        <a href="/schedule" class="font-semibold text-gray-700 hover:text-purple-200">Schedule</a>
-        <a href="/member" class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
-      </div>
-    </div>
-    <div id="mobile-menu" class="font-semibold hidden md:hidden bg-white border-t border-gray-200">
-      <a href="/news" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
-      <a href="/schedule" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">schedule</a>
-      <a href="/member" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
-    </div>
-  </nav>
-
-
-  <div id="progressContainer" class="relative w-full h-1 bg-gray-700">
-    <div id="progressBar" class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
-      style="width: 0%;">
-    </div>
-  </div>
-
-  <div class="container mx-auto px-4 py-8 flex-grow">
-    <div id="member-detail-container" class="gap-4"></div>
-  </div>
-
-  <footer class="bg-gray-900 text-white py-8">
-    <div class="container mx-auto px-6">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-        <div class="mb-6 md:mb-0">
-          <h2 class="text-3xl font-extrabold text-white">48intens</h2>
-          <p class="text-base text-gray-400 mt-2">Bringing JKT48 closer to you.</p>
+  <body class="bg-white min-h-screen flex flex-col">
+    <nav class="bg-white border-b border-gray-200">
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/home" class="text-2xl font-bold">48intens</a>
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
         </div>
-        <div class="flex flex-col md:flex-row md:items-center gap-4">
-          <a href="/home" class="text-lg font-medium text-gray-400 hover:text-white transition">About 48intens</a>
-          <a href="/member" class="text-lg font-medium text-gray-400 hover:text-white transition">Members</a>
-          <a href="/news" class="text-lg font-medium text-gray-400 hover:text-white transition">News</a>
+        <div id="menu" class="hidden md:flex space-x-6">
+          <a href="/news" class="font-semibold hover:text-purple-200">News</a>
+          <a
+            href="/schedule"
+            class="font-semibold text-gray-700 hover:text-purple-200"
+            >Schedule</a
+          >
+          <a
+            href="/member"
+            class="font-semibold text-gray-700 hover:text-purple-200"
+            >Member</a
+          >
         </div>
       </div>
+      <div
+        id="mobile-menu"
+        class="font-semibold hidden md:hidden bg-white border-t border-gray-200">
+        <a
+          href="/news"
+          class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+          >News</a
+        >
+        <a
+          href="/schedule"
+          class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+          >schedule</a
+        >
+        <a
+          href="/member"
+          class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+          >Member</a
+        >
+      </div>
+    </nav>
 
-      <div class="flex justify-center md:justify-end mt-6 space-x-6">
-        <a href="https://discord.com" target="_blank" class="text-gray-400 hover:text-white text-2xl transition">
-          <i class="fab fa-discord"></i>
-        </a>
-        <a href="https://instagram.com" target="_blank" class="text-gray-400 hover:text-white text-2xl transition">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-white text-2xl transition">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </div>
-      <div class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
-        &copy; 2024 48intens. All rights reserved.
-      </div>
+    <div id="progressContainer" class="relative w-full h-1 bg-gray-700">
+      <div
+        id="progressBar"
+        class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
+        style="width: 0%"></div>
     </div>
-  </footer>
 
-  <script src="/progress.js"></script>
-  <script src="/utils/detail-member.js"></script>
-  <script>
-    const menuToggle = document.getElementById("menu-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const footerLogo = document.getElementById("footer-logo");
+    <div class="container mx-auto px-4 py-8 flex-grow">
+      <div id="member-detail-container" class="gap-4"></div>
+    </div>
 
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-      if (!mobileMenu.classList.contains("hidden")) {
-        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-        mobileMenu.style.transition = "max-height 0.3s ease-in-out";
-      } else {
-        mobileMenu.style.maxHeight = "0";
-      }
-    });
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div class="mb-6 md:mb-0">
+            <h2 class="text-3xl font-extrabold text-white">48intens</h2>
+            <p class="text-base text-gray-400 mt-2">
+              Bringing JKT48 closer to you.
+            </p>
+          </div>
+          <div class="flex flex-col md:flex-row md:items-center gap-4">
+            <a
+              href="/about"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >About 48intens</a
+            >
+            <a
+              href="/member"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >Members</a
+            >
+            <a
+              href="/news"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >News</a
+            >
+          </div>
+        </div>
 
-    footerLogo.addEventListener("click", () => {
-      footerLogo.classList.add("scale-125");
-      footerLogo.style.transition = "transform 0.5s ease-in-out";
-      setTimeout(() => {
-        footerLogo.classList.remove("scale-125");
-      }, 300);
-    });
-  </script>
-</body>
+        <div class="flex justify-center md:justify-end mt-6 space-x-6">
+          <a
+            href="https://48intens.com/discord"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-discord"></i>
+          </a>
+          <a
+            href="https://48intens.com/instagram"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://48intens.com/twitter"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        <div
+          class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
+          &copy; 2024 48intens. All rights reserved.
+        </div>
+      </div>
+    </footer>
 
+    <script src="/progress.js"></script>
+    <script src="/utils/detail-member.js"></script>
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const footerLogo = document.getElementById("footer-logo");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        if (!mobileMenu.classList.contains("hidden")) {
+          mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+          mobileMenu.style.transition = "max-height 0.3s ease-in-out";
+        } else {
+          mobileMenu.style.maxHeight = "0";
+        }
+      });
+
+      footerLogo.addEventListener("click", () => {
+        footerLogo.classList.add("scale-125");
+        footerLogo.style.transition = "transform 0.5s ease-in-out";
+        setTimeout(() => {
+          footerLogo.classList.remove("scale-125");
+        }, 300);
+      });
+    </script>
+  </body>
 </html>
