@@ -9,16 +9,17 @@ async function fetchYoutubeVideos() {
                     <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
                 </div>
             </div>
-        `.repeat(4); 
+        `.repeat(4);
 
         const response = await fetch('https://intensprotectionexenew.vercel.app/api/video');
         const data = await response.json();
 
-        container.innerHTML = ''; 
+        container.innerHTML = '';
         if (!data || data.length === 0) {
             showNotFoundMessage(container, 'Videos Not Found 😭');
             return;
         }
+
         const limitedData = data.slice(0, 4);
 
         limitedData.forEach(video => {
@@ -28,14 +29,14 @@ async function fetchYoutubeVideos() {
 
             const videoCard = `
                 <div class="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
-                    <div class="relative">
+                    <div class="relative bg-white px-2">
                         <img 
                             src="${thumbnailUrl}" 
                             alt="${video.title} thumbnail" 
-                            class="w-full h-48 object-cover rounded-t-lg">
+                            class="w-full h-auto max-h-64 object-cover rounded-lg">
                     </div>
                     <div class="p-4">
-                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="text-2x1 font-bold mb-2">
+                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="text-lg font-bold mb-2 block">
                             ${video.title}
                         </a>
                         <div class="flex items-center">

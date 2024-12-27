@@ -1,11 +1,21 @@
 async function fetchHotNews() {
     try {
         const container = document.getElementById('hot-news-container');
-        
+        container.innerHTML = Array(6).fill(`
+            <div class="bg-white rounded-lg shadow-md overflow-hidden p-4 skeleton">
+                <div class="flex items-center mb-4">
+                    <div class="bg-gray-300 w-10 h-5 mr-3 rounded"></div>
+                    <div class="bg-gray-300 w-20 h-4 rounded"></div>
+                </div>
+                <div class="bg-gray-300 h-6 w-3/4 mb-4 rounded"></div>
+                <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
+                <div class="bg-gray-200 h-4 w-1/4 rounded"></div>
+            </div>
+        `).join(''); 
+
         const response = await fetch('https://intensprotectionexenew.vercel.app/api/news');
         const data = await response.json();
 
-        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4';
         container.innerHTML = '';
 
         if (!data || !data.berita || data.berita.length === 0) {
@@ -13,7 +23,7 @@ async function fetchHotNews() {
             return;
         }
 
-        const topThreeNews = data.berita.slice(0, 4);
+        const topThreeNews = data.berita.slice(0, 6); 
         const colors = ["bg-blue-500", "bg-purple-500", "bg-green-500", "bg-red-500/50"];
 
         topThreeNews.forEach((news, index) => {

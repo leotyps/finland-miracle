@@ -1,38 +1,34 @@
 async function fetchTheaterData() {
     const container = document.getElementById('theater-container');
-    container.innerHTML = `
-        <div class="bg-white rounded-lg shadow-md overflow-hidden skeleton">
-            <div class="relative bg-gray-300 h-48 w-full rounded"></div>
-            <div class="p-4">
-                <div class="bg-gray-300 h-6 w-3/4 mb-2 rounded"></div>
-                <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
-                <div class="bg-gray-200 h-4 w-1/3 mb-2 rounded"></div>
-            </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-md overflow-hidden skeleton">
-            <div class="relative bg-gray-300 h-48 w-full rounded"></div>
-            <div class="p-4">
-                <div class="bg-gray-300 h-6 w-3/4 mb-2 rounded"></div>
-                <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
-                <div class="bg-gray-200 h-4 w-1/3 mb-2 rounded"></div>
-            </div>
-        </div>
-    `;
+    container.innerHTML = ''; 
 
     try {
-        const [theaterResponse, bannerResponse, memberResponse] = await Promise.all([
-            fetch('https://intensprotectionexenew.vercel.app/api/theater'),
+        const theaterResponse = await fetch('https://intensprotectionexenew.vercel.app/api/theater');
+        const theaterData = await theaterResponse.json();
+        
+        const skeletonCount = theaterData.length || 1;  
+        container.innerHTML = Array(skeletonCount).fill(`
+            <div class="bg-white rounded-lg shadow-md overflow-hidden skeleton">
+                <div class="relative bg-gray-300 h-48 w-full rounded"></div>
+                <div class="p-4">
+                    <div class="bg-gray-300 h-6 w-3/4 mb-2 rounded"></div>
+                    <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
+                    <div class="bg-gray-200 h-4 w-1/3 mb-2 rounded"></div>
+                </div>
+            </div>
+        `).join(''); 
+
+        const [bannerResponse, memberResponse] = await Promise.all([
             fetch('/data/theater.json'),
             fetch('https://intensprotectionexenew.vercel.app/api/member')
         ]);
-
-        const [theaterData, bannerData, memberData] = await Promise.all([
-            theaterResponse.json(),
+        
+        const [bannerData, memberData] = await Promise.all([
             bannerResponse.json(),
             memberResponse.json()
         ]);
 
-        container.innerHTML = '';
+        container.innerHTML = ''; 
 
         if (theaterData.length === 0) {
             showNotFoundMessage(container, 'Theater Not Found 😭');
@@ -49,10 +45,10 @@ async function fetchTheaterData() {
                     <div class="relative">
                         <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" 
                             alt="${show.setlist}" 
-                            class="w-full h-50 object-cover rounded-t-lg">
+                            class="w-full h-auto max-h-64 object-cover rounded-t-lg">
                         <div class="absolute inset-0 bg-black bg-opacity-30 rounded-t-lg"></div>
                         ${birthdayMembers 
-                            ? `<span class="absolute top-2 left-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white text-xs px-3 py-1 rounded-full">Birthday</span>`
+                            ? `<span class="absolute top-2 left-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white text-xs px-3 py-1 rounded-full">Birthday</span>` 
                             : ''}
                         ${status
                             ? `<span class="absolute top-2 right-2 ${status.color} text-white text-xs px-3 py-1 rounded-full">${status.text}</span>`
@@ -98,6 +94,7 @@ function showNotFoundMessage(container, message) {
         </div>
     `;
 }
+
 
 function getShowStatus(showInfo) {
     const now = new Date();
@@ -170,7 +167,7 @@ async function showPopup(show, banner, members) {
         const description = banner ? banner.description : 'No description available';
         const memberCards = showMembers.map(member => {
             return `
-                <a href="/member/${member.memberId}" class="flex flex-col items-center bg-white p-2 rounded-lg">
+                <a href="/member/${member.memberId}" class="flex flex-col items-center bg-gray-50 p-2 rounded-lg">
                     <img src="https://jkt48.com${member.ava_member}" alt="${member.displayName}" class="w-16 h-16 object-cover rounded-full mb-2">
                     <span class="text-xs font-semibold">${member.displayName}</span>
                 </a>

@@ -6,7 +6,24 @@ body.no-scroll {
     display: none;
 
 }
+
 #progressBar {
     transition: width 0.2s ease-out;
-  }
-  
+}
+
+.thumbnail-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.thumbnail-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
