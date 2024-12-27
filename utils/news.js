@@ -13,7 +13,7 @@ async function fetchHotNews() {
             return;
         }
 
-        const topThreeNews = data.berita.slice(0, 3);
+        const topThreeNews = data.berita.slice(0, 4);
         const colors = ["bg-blue-500", "bg-purple-500", "bg-green-500", "bg-red-500/50"];
 
         topThreeNews.forEach((news, index) => {
