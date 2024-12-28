@@ -27,3 +27,8 @@ body.no-scroll {
     height: 100%;
     object-fit: cover;
 }
+.social-feed {
+    min-height: 400px;
+    width: 100%;
+    overflow: hidden;
+}

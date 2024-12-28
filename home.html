@@ -5,10 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>48intens Website</title>
-    <meta name="description" content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta name="description"
+        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta name="keywords" content="48intens, JKT48, jekate48, member, news" />
     <meta property="og:title" content="48intens Website" />
-    <meta property="og:description" content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta property="og:description"
+        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta property="og:image" content="/assets/image/intens.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -16,7 +18,8 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="48intens Website" />
-    <meta name="twitter:description" content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta name="twitter:description"
+        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta name="twitter:image" content="/assets/image/intens.webp" />
     <meta name="twitter:creator" content="@48intens" />
     <link rel="icon" href="/assets/image/icon.png" />
@@ -25,6 +28,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css" />
+    <script async src="https://www.instagram.com/embed.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script async src="https://www.tiktok.com/embed.js"></script>
 </head>
 
 <body class="bg-white min-h-screen flex flex-col">
@@ -40,7 +46,7 @@
                     </svg>
                 </button>
             </div>
-           <div id="menu" class="hidden md:flex space-x-6">
+            <div id="menu" class="hidden md:flex space-x-6">
                 <a href="/news" class="font-semibold hover:text-purple-200">News</a>
                 <a href="/schedule" class="font-semibold text-gray-700 hover:text-purple-200">Schedule</a>
                 <a href="/member" class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
@@ -153,17 +159,14 @@
 
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold text-center mb-6">Hot News.</h1>
-        <div id="hot-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        </div>
+        <div id="hot-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </div>
-    
 
     <div class="container mx-auto px-4 py-6 sm:py-8">
         <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6">
             Theater Upcoming.
         </h1>
-        <div id="theater-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        </div>
+        <div id="theater-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </div>
 
     <div id="popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
@@ -175,6 +178,40 @@
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold text-center mb-6">JKT48 YouTube.</h1>
         <div id="youtube-container" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-6">48intens on Social Media.</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-6">Instagram</h3>
+                <div class="social-feed aspect-square">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/48intens/"
+                        data-instgrm-version="14" style="width: 100%; height: 100%; min-width: 326px;">
+                    </blockquote>
+                </div>
+            </div>
+    
+            <div class="p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-6">Twitter</h3>
+                <div class="social-feed aspect-square" style="min-height: 400px;">
+                    <a 
+                        class="twitter-timeline" 
+                        data-height="600"
+                        data-chrome="noheader nofooter"
+                        href="https://twitter.com/48intens">
+                        Tweets by 48intens
+                    </a>
+                    <script async src="https://platform.twitter.com/widgets.js"></script>
+                </div>
+            </div>
+            <div class="p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-6">TikTok</h3>
+                <div class="social-feed aspect-square">
+                    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@48intens" data-unique-id="48intens" data-embed-from="embed_page" data-embed-type="creator" style="max-width:780px; min-width:288px;"> <section> <a target="_blank" href="https://www.tiktok.com/@48intens?refer=creator_embed">@48intens</a> </section> </blockquote>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="bg-gray-900 text-white py-8">
@@ -193,6 +230,7 @@
                     <a href="/news" class="text-lg font-medium text-gray-400 hover:text-white transition">News</a>
                 </div>
             </div>
+
 
             <div class="flex justify-center md:justify-end mt-6 space-x-6">
                 <a href="https://48intens.com/discord" target="_blank"
@@ -266,6 +304,8 @@
                 footerLogo.classList.remove("scale-125");
             }, 300);
         });
+
+    
     </script>
 </body>
 
