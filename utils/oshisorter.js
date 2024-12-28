@@ -111,7 +111,7 @@ function displayPair(pair) {
                 <img src='${member.img_alt}' alt='${member.name}' class='w-full h-full object-cover' onerror="this.src='https://jkt48.com/images/logo.svg'">
             </div>
             <div class="w-full bg-gradient-to-r from-red-500 to-red-600 p-4">
-                <p class='text-xl font-bold text-white'>${member.name}</p>
+                <p class='text-sm font-bold text-white'>${member.name}</p>
                 <p class='text-sm text-white opacity-90'>${member.generation}</p>
             </div>
         </div>`;
