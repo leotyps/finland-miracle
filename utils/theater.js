@@ -187,7 +187,7 @@ async function showPopup(show, banner, members) {
                     <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" alt="${show.setlist}" class="w-full h-48 sm:h-40 object-cover rounded-lg mb-4">
                 </div>
                 <div class="space-y-2 mb-4">
-                    <div class="text-sm text-gray-500"><strong>Date:</strong> ${show.showInfo.split(' ')[0]}</div>
+                    <div class="text-sm text-gray-500"><strong>Date:</strong> ${show.showInfo.split(' ')[0]} ${show.showInfo.split(' ')[1]}</div>
                     <div class="text-sm text-gray-500"><strong>Time:</strong> ${show.time} WIB</div>
                     ${show.birthdayMembers.length > 0 ? `
                         <div class="text-sm text-gray-500">
