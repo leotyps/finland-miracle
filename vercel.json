@@ -18,6 +18,10 @@
             "destination": "/components/page/schedule"
         },
         {
+            "source": "/ingames",
+            "destination": "/components/page/ingames"
+        },
+        {
             "source": "/mypage",
             "destination": "/components/login/mypage"
         },
