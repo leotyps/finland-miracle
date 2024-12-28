@@ -19,7 +19,7 @@
         },
         {
             "source": "/shorter",
-            "destination": "/components/page/ingames"
+            "destination": "/components/page/shorter"
         },
         {
             "source": "/ingames",
