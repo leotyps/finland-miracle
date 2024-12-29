@@ -224,6 +224,51 @@ function getBorderColor(index) {
     return ['border-yellow-400', 'border-gray-300', 'border-yellow-600', 'border-purple-500'][index] || 'border-purple-500';
 }
 
+function generateShareableLink(sortedMembers) {
+    const compactData = sortedMembers.map(member => [
+        member.name,
+        member.generation,
+        member.img_alt
+    ]);
+    const encodedData = btoa(JSON.stringify(compactData));
+    const baseUrl = '/share';
+    return `${baseUrl}?d=${encodedData}`;
+}
+
+function decodeShareData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedData = urlParams.get('d');
+    if (!encodedData) return null;
+    
+    try {
+        const decodedData = JSON.parse(atob(encodedData));
+        return decodedData.map(([name, generation, img]) => ({
+            name,
+            generation,
+            img
+        }));
+    } catch (e) {
+        console.error('Failed to decode share data:', e);
+        return null;
+    }
+}
+
+function copyShareLink() {
+    const input = document.getElementById('share-link-input');
+    input.select();
+    document.execCommand('copy');
+
+    const button = input.nextElementSibling;
+    const originalText = button.textContent;
+    button.textContent = 'Tersalin!';
+    button.classList.add('bg-green-600');
+    
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.remove('bg-green-600');
+    }, 2000);
+}
+
 function endSorting() {
     sortingInProgress = false;
     sortingComplete = true;
@@ -247,6 +292,29 @@ function endSorting() {
                         <p class='font-bold'>${member.name}</p>
                         <p class='text-sm text-gray-600'>${member.generation}</p>
                     </div>`).join('')}
+            </div>
+            <div class="mt-6 p-4 bg-white rounded-lg shadow-md">
+                <p class="text-lg font-semibold mb-4">Bagikan Hasil Anda:</p>
+                <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                    <div class="flex-1 w-full">
+                        <input type="text" 
+                            value="${generateShareableLink(sortedMembers)}" 
+                            readonly 
+                            class="w-full px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none"
+                            id="share-link-input">
+                    </div>
+                    <button onclick="copyShareLink()" 
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Salin Link
+                    </button>
+                </div>
+                <div class="mt-4 flex justify-center gap-4">
+                    <a href="https://twitter.com/intent/tweet?text=Cek hasil Intens Oshi Sorter saya!&url=${encodeURIComponent(generateShareableLink(sortedMembers))}" 
+                        target="_blank" 
+                        class="text-blue-600 hover:text-blue-800">
+                        <i class="fab fa-twitter"></i> Tweet
+                    </a>
+                </div>
             </div>
         </div>`;
 

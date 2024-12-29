@@ -26,6 +26,10 @@
             "destination": "/components/game/guess"
         },
         {
+            "source": "/share",
+            "destination": "/components/page/share"
+        },
+        {
             "source": "/guess/ingame",
             "destination": "/components/game/guess-ingame"
         },
