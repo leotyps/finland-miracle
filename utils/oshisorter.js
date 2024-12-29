@@ -1,10 +1,22 @@
 const members = [];
 let selectedGenerations = new Set();
+let generationHistory = [];
 let currentPairIndex = 0;
 let sortingInProgress = false;
 let remainingPairs = [];
 let winnerScores = new Map();
 let sortingComplete = false;
+const MAX_PAIRS = 30;
+
+function optimizeImageUrl(url) {
+    if (url && url.includes('jkt48.com')) {
+        const cloudinaryBase = 'https://res.cloudinary.com/dlx2zm7ha/image/fetch/';
+        const optimizedParams = 'f_auto,q_auto,w_300'; 
+        return `${cloudinaryBase}${optimizedParams}/${encodeURIComponent(url)}`;
+    }
+    return url;
+}
+
 
 function updateStartButton() {
     const startButton = document.getElementById('start');
@@ -13,7 +25,7 @@ function updateStartButton() {
         return;
     }
     startButton.style.display = 'block';
-    
+
     if (sortingComplete) {
         startButton.textContent = 'Reset';
         startButton.className = `
@@ -25,8 +37,18 @@ function updateStartButton() {
         startButton.textContent = 'Start';
         startButton.toggleAttribute('disabled', selectedGenerations.size === 0);
         startButton.className = selectedGenerations.size > 0
-            ? `mt-6 px-8 py-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-bold rounded-lg shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50`
-            : `mt-6 px-8 py-4 bg-gradient-to-r from-gray-300 to-gray-400 text-gray-600 font-bold rounded-lg cursor-not-allowed`;
+            ? `mt-6 px-8 py-4 rounded-lg font-bold
+                bg-purple-800 text-white border border-purple-900
+                dark:bg-purple-900 dark:text-white dark:border-purple-800
+                hover:bg-purple-900 hover:border-purple-800
+                dark:hover:bg-purple-950 dark:hover:border-purple-700
+                transform hover:scale-105 hover:shadow-md
+                transition-all duration-300`
+            : `mt-6 px-8 py-4 rounded-lg font-bold
+                bg-gray-100 text-gray-400 border border-gray-300
+                dark:bg-gray-700 dark:text-gray-500 dark:border-gray-600
+                cursor-not-allowed
+                transition-all duration-300`;
     }
 }
 
@@ -36,11 +58,20 @@ function getFilteredMembers() {
 
 function generatePairs(members) {
     const pairs = [];
-    for (let i = 0; i < members.length; i++) {
-        for (let j = i + 1; j < members.length; j++) {
-            pairs.push([members[i], members[j]]);
+    const shuffledMembers = [...members].sort(() => Math.random() - 0.5);
+
+    const selectedMembers = shuffledMembers.length > 10
+        ? shuffledMembers.slice(0, 10)
+        : shuffledMembers;
+
+    for (let i = 0; i < selectedMembers.length; i++) {
+        for (let j = i + 1; j < selectedMembers.length; j++) {
+            pairs.push([selectedMembers[i], selectedMembers[j]]);
+            if (pairs.length >= MAX_PAIRS) break;
         }
+        if (pairs.length >= MAX_PAIRS) break;
     }
+
     return pairs.sort(() => Math.random() - 0.5);
 }
 
@@ -51,6 +82,19 @@ async function loadMembers() {
 
     const generations = [...new Set(data.map(member => member.generation))];
     const filterButtonsContainer = document.getElementById('filter-buttons');
+    const undoButton = document.createElement('button');
+    undoButton.className = `
+        px-2 py-2 mb-4 rounded-lg font-medium text-xs
+        bg-red-100 text-red-800 border border-red-400
+        dark:bg-gray-700 dark:text-red-400
+        hover:bg-red-200 hover:border-red-500 hover:shadow-md
+        dark:hover:bg-gray-600 dark:hover:border-red-300
+        transform hover:scale-105
+        transition-all duration-300
+    `;
+    undoButton.textContent = 'Undo Last Selection';
+    undoButton.onclick = undoLastGeneration;
+    filterButtonsContainer.appendChild(undoButton);
 
     const genList = document.createElement('div');
     genList.className = 'grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4';
@@ -58,31 +102,63 @@ async function loadMembers() {
     generations.forEach(gen => {
         const button = document.createElement('button');
         button.className = `
-            gen-btn w-full px-6 py-3 rounded-lg font-semibold transition-all duration-300
-            bg-gradient-to-r from-gray-100 to-gray-200 hover:from-purple-500 hover:to-purple-600 hover:text-white
+            w-full px-6 py-3 rounded-lg font-medium text-xs
+            bg-purple-100 text-purple-800 border border-purple-400
+            dark:bg-gray-700 dark:text-purple-400
+            hover:bg-purple-800 hover:text-white hover:border-purple-900
+            dark:hover:bg-purple-900 dark:hover:text-white dark:hover:border-purple-800
+            transform hover:scale-105 hover:shadow-md
+            transition-all duration-300
         `;
         button.textContent = `${gen}`;
         button.dataset.gen = gen;
+        button.classList.add('gen-btn');
         genList.appendChild(button);
 
         button.addEventListener('click', () => toggleGeneration(gen));
     });
-
     filterButtonsContainer.appendChild(genList);
 }
 
 function toggleGeneration(gen) {
-    selectedGenerations.has(gen) ? selectedGenerations.delete(gen) : selectedGenerations.add(gen);
+    if (selectedGenerations.has(gen)) {
+        selectedGenerations.delete(gen);
+        generationHistory = generationHistory.filter(g => g !== gen);
+    } else {
+        selectedGenerations.add(gen);
+        generationHistory.push(gen);
+    }
     updateGenerationUI();
     updateStartButton();
+}
+
+function undoLastGeneration() {
+    if (generationHistory.length > 0) {
+        const lastGen = generationHistory.pop();
+        selectedGenerations.delete(lastGen);
+        updateGenerationUI();
+        updateStartButton();
+    }
 }
 
 function updateGenerationUI() {
     document.querySelectorAll('.gen-btn').forEach(btn => {
         const isSelected = selectedGenerations.has(btn.dataset.gen);
         btn.className = isSelected
-            ? `gen-btn w-full px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-purple-500 to-purple-600 text-white border-2 border-purple-500`
-            : `gen-btn w-full px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-gray-100 to-gray-200 hover:from-purple-500 hover:to-purple-600 hover:text-white`;
+            ? `gen-btn w-full px-6 py-3 rounded-lg font-semibold
+                bg-purple-800 text-white border-2 border-purple-900
+                dark:bg-purple-900 dark:text-white dark:border-purple-800
+                hover:bg-purple-900 hover:border-purple-800
+                dark:hover:bg-purple-950 dark:hover:border-purple-700
+                transform hover:scale-105 hover:shadow-md
+                transition-all duration-300`
+            : `gen-btn w-full px-6 py-3 rounded-lg font-medium text-xs
+                bg-purple-100 text-purple-800 border border-purple-400
+                dark:bg-gray-700 dark:text-purple-400
+                hover:bg-purple-800 hover:text-white hover:border-purple-900
+                dark:hover:bg-purple-900 dark:hover:text-white dark:hover:border-purple-800
+                transform hover:scale-105 hover:shadow-md
+                transition-all duration-300`;
     });
     resetDisplay();
 }
@@ -108,7 +184,11 @@ function displayPair(pair) {
     const cardTemplate = (member, index) => `
         <div class="w-full h-full flex flex-col items-center cursor-pointer" role="button" tabindex="0" onclick="selectWinner(${index})">
             <div class="relative w-full h-full overflow-hidden rounded-t-lg">
-                <img src='${member.img_alt}' alt='${member.name}' class='w-full h-full object-cover' onerror="this.src='https://jkt48.com/images/logo.svg'">
+                <img src='${optimizeImageUrl(member.img_alt)}' 
+                        alt='${member.name}' 
+                        class='w-full h-full object-cover'
+                        loading="lazy"
+                        onerror="this.src='https://jkt48.com/images/logo.svg'">
             </div>
             <div class="w-full bg-gradient-to-r from-red-500 to-red-600 p-4">
                 <p class='text-sm font-bold text-white'>${member.name}</p>
@@ -146,8 +226,8 @@ function getBorderColor(index) {
 
 function endSorting() {
     sortingInProgress = false;
-    sortingComplete = true; 
-    
+    sortingComplete = true;
+
     const sortedMembers = Array.from(winnerScores.entries())
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5)
@@ -159,7 +239,11 @@ function endSorting() {
             <div class='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4'>
                 ${sortedMembers.map((member, index) => `
                     <div class='flex flex-col items-center'>
-                        <img src='${member.img_alt}' alt='${member.name}' class='w-24 h-24 object-cover rounded-full border-4 ${getBorderColor(index)}' onerror="this.src='https://jkt48.com/images/logo.svg'">
+                        <img src='${optimizeImageUrl(member.img_alt)}' 
+                                alt='${member.name}' 
+                                class='w-24 h-24 object-cover rounded-full border-4 ${getBorderColor(index)}'
+                                loading="lazy"
+                                onerror="this.src='https://jkt48.com/images/logo.svg'">
                         <p class='font-bold'>${member.name}</p>
                         <p class='text-sm text-gray-600'>${member.generation}</p>
                     </div>`).join('')}
@@ -175,6 +259,7 @@ function resetSorting() {
     sortingComplete = false;
     winnerScores.clear();
     selectedGenerations.clear();
+    generationHistory = [];
     currentPairIndex = 0;
     remainingPairs = [];
     updateGenerationUI();
@@ -191,12 +276,14 @@ document.getElementById('start').addEventListener('click', () => {
     if (selectedGenerations.size === 0) {
         return alert('Silahkan pilih gen berapa yang ingin ada shorter');
     }
-    
+
     sortingInProgress = true;
-    resetDisplay(); 
-    updateStartButton(); 
+    resetDisplay();
+    updateStartButton();
     winnerScores.clear();
-    remainingPairs = generatePairs(getFilteredMembers());
+
+    const filteredMembers = getFilteredMembers();
+    remainingPairs = generatePairs(filteredMembers);
     currentPairIndex = 0;
 
     if (remainingPairs.length === 0) {
