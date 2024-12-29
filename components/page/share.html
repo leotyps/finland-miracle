@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,26 +24,40 @@
     <link rel="icon" href="/assets/image/icon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/assets/css/style.css" />
-
 </head>
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center py-16">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-xl shadow-2xl p-8">
-                <div class="text-center mb-10">
-                    <h1 class="text-4xl font-bold mb-3">Hasil Intens Oshi Sorter</h1>
-                    <p class="text-gray-600 text-lg">Top 5 Member Favorit</p>
+            <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+                <div class="relative h-48 bg-gradient-to-r from-blue-600 to-blue-800">
+                    <img src="/assets/image/banner_oshi_sorter.png" 
+                            alt="48intens Banner" 
+                            class="w-full h-full object-cover opacity-50"
+                            onerror="this.style.display='none'">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <img src="/assets/image/icon.png" 
+                                alt="48intens Logo" 
+                                class="h-20 w-20"
+                                onerror="this.style.display='none'">
+                    </div>
                 </div>
 
-                <div id="result-container" class="mb-10">
-                </div>
+                <div class="p-8">
+                    <div class="text-center mb-10">
+                        <h1 class="text-4xl font-bold mb-3">Hasil Intens Oshi Sorter</h1>
+                        <p class="text-gray-600 text-lg">Top 5 Member Favorit</p>
+                    </div>
 
-                <div class="text-center">
-                    <a href="/"
-                        class="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold">
-                        Coba Intens Oshi Sorter
-                    </a>
+                    <div id="result-container" class="mb-10">
+                    </div>
+
+                    <div class="text-center">
+                        <a href="/"
+                            class="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold">
+                            Coba Intens Oshi Sorter
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,5 +129,4 @@
         });
     </script>
 </body>
-
 </html>
