@@ -18,8 +18,8 @@
             "destination": "/components/page/schedule"
         },
         {
-            "source": "/shorter",
-            "destination": "/components/game/shorter"
+            "source": "/sorter",
+            "destination": "/components/game/sorter"
         },
         {
             "source": "/ingames",

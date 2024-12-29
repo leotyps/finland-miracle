@@ -5,10 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>48intens - InGames</title>
-    <meta name="description" content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta name="description"
+        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta name="keywords" content="48intens, JKT48, jekate48, member, news" />
     <meta property="og:title" content="48intens Website" />
-    <meta property="og:description" content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta property="og:description"
+        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta property="og:image" content="/assets/image/intens.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -16,7 +18,8 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="48intens Website" />
-    <meta name="twitter:description" content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta name="twitter:description"
+        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta name="twitter:image" content="/assets/image/intens.webp" />
     <meta name="twitter:creator" content="@48intens" />
     <link rel="icon" href="/assets/image/icon.png" />
@@ -59,37 +62,21 @@
     </div>
 
     <div class="container mx-auto px-4 py-8 flex-grow">
-        <h1 class="text-4xl font-bold text-left mb-8">Intens Games.</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-white border rounded-lg shadow-md overflow-hidden">
-                <img src="/assets/image/intens.webp" alt="Game 1 Banner" class="w-full h-48 object-cover" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold mb-2">JKT48 Shorter</h2>
-                    <p class="text-gray-600 mb-4">Under Maintanance</p>
-                    <a href="/sorter"
-                        class="px-4 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white rounded hover:bg-purple-600">Play</a>
-                </div>
+        <h1 class="text-4xl font-bold text-left mb-8">Intens Guess Member.</h1>
+    
+        <div id="guess-member" class="flex flex-col items-center">
+            <div id="filter-buttons" class="flex flex-wrap justify-bet gap-4 mb-6">
             </div>
-            <div class="bg-white border rounded-lg shadow-md overflow-hidden">
-                <img src="/assets/image/game2.jpg" alt="Game 2 Banner" class="w-full h-48 object-cover" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold mb-2">Tebak Member</h2>
-                    <p class="text-gray-600 mb-4">Under Maintanance</p>
-                    <a href="/play/game2"
-                        class="px-4 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white rounded hover:bg-purple-600">Play</a>
-                </div>
-            </div>
-            <div class="bg-white border rounded-lg shadow-md overflow-hidden">
-                <img src="/assets/image/game3.jpg" alt="Game 3 Banner" class="w-full h-48 object-cover" />
-                <div class="p-4">
-                    <h2 class="text-lg font-bold mb-2">Tebak Jiko</h2>
-                    <p class="text-gray-600 mb-4">Under Maintanance</p>
-                    <a href="/play/game3"
-                        class="px-4 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white rounded hover:bg-purple-600">Play</a>
-                </div>
-            </div>
+    
+            
+    
+            <button id="start" disabled
+                class="mt-6 px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                Start
+            </button>
         </div>
     </div>
+
 
     <footer class="bg-gray-900 text-white py-8">
         <div class="container mx-auto px-6">
@@ -129,6 +116,7 @@
     </footer>
 
     <script src="/progress.js"></script>
+
     <script>
         const menuToggle = document.getElementById("menu-toggle");
         const mobileMenu = document.getElementById("mobile-menu");
