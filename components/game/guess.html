@@ -191,15 +191,13 @@
         const questionCount = document.getElementById('question-count');
         const startButton = document.getElementById('start');
 
-        // Enable button if selection is made
         questionCount.addEventListener('change', () => {
             startButton.disabled = !questionCount.value;
         });
 
-        // Redirect to ingame page with the selected number of questions
         startButton.addEventListener('click', () => {
             localStorage.setItem('questionCount', questionCount.value);
-            window.location.href = 'guess-ingame.html';
+            window.location.href = '/guess/ingame';
         });
     </script>
     <script src="/progress.js"></script>
