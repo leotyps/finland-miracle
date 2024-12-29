@@ -22,6 +22,14 @@
             "destination": "/components/game/sorter"
         },
         {
+            "source": "/guess",
+            "destination": "/components/game/guess"
+        },
+        {
+            "source": "/guess/ingame",
+            "destination": "/components/game/guess-ingame"
+        },
+        {
             "source": "/ingames",
             "destination": "/components/page/ingames"
         },

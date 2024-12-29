@@ -97,7 +97,7 @@ function quizCompleted() {
     }
   ).then(() => {
     resetQuiz();
-    window.location.href = "guess.html";
+    window.location.href = "/guess";
   });
 }
 
