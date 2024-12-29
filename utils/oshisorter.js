@@ -267,14 +267,46 @@ function resetSorting() {
     resetDisplay();
 }
 
-document.getElementById('start').addEventListener('click', () => {
+
+function showNotification(message) {
+    const notificationContainer = document.createElement('div');
+    notificationContainer.id = 'notification-container';
+    notificationContainer.className = `
+        fixed top-16 right-4 z-50 flex items-center bg-purple-800 text-white
+        px-4 py-3 rounded-lg shadow-lg transform transition-all duration-300 opacity-0
+        sm:top-20 sm:right-6 max-w-xs w-full sm:max-w-sm
+    `;
+    
+    notificationContainer.innerHTML = `
+        <div class="flex items-center w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0h.01M12 15h.01M21.75 12A9.75 9.75 0 1112 2.25 9.75 9.75 0 0121.75 12z" />
+            </svg>
+            <span class="text-sm sm:text-base break-words">${message}</span>
+        </div>
+    `;
+
+    document.body.appendChild(notificationContainer);
+    setTimeout(() => {
+        notificationContainer.style.opacity = '1';
+        notificationContainer.style.transform = 'translateY(0)';
+    }, 50);
+    setTimeout(() => {
+        notificationContainer.style.opacity = '0';
+        notificationContainer.style.transform = 'translateY(10px)';
+        setTimeout(() => notificationContainer.remove(), 300);
+    }, 3000);
+}
+
+function startSorting() {
     if (sortingComplete) {
         resetSorting();
         return;
     }
 
     if (selectedGenerations.size === 0) {
-        return alert('Silahkan pilih gen berapa yang ingin ada shorter');
+        showNotification('Silahkan pilih gen berapa yang ingin ada shorter');
+        return;
     }
 
     sortingInProgress = true;
@@ -290,11 +322,15 @@ document.getElementById('start').addEventListener('click', () => {
         sortingInProgress = false;
         updateStartButton();
         resetDisplay();
-        return alert('Membernya kurang silahkan pilih gen lainnya lagi ');
+        showNotification('Membernya kurang silahkan pilih gen lainnya lagi');
+        return;
     }
 
     displayPair(remainingPairs[0]);
     updateProgress();
-});
+}
+
+document.getElementById('start').addEventListener('click', startSorting);
+
 
 loadMembers();
