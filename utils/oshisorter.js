@@ -304,14 +304,14 @@ function endSorting() {
                             id="share-link-input">
                     </div>
                     <button onclick="copyShareLink()" 
-                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        class="px-6 py-2 bg-purple-800 text-white border-2 border-purple-900 text-white rounded-lg hover:bg-blue-700 transition-colors">
                         Salin Link
                     </button>
                 </div>
                 <div class="mt-4 flex justify-center gap-4">
                     <a href="https://twitter.com/intent/tweet?text=Cek hasil Intens Oshi Sorter saya!&url=${encodeURIComponent(generateShareableLink(sortedMembers))}" 
                         target="_blank" 
-                        class="text-blue-600 hover:text-blue-800">
+                        class="text-purple-900 hover:text-purple-900">
                         <i class="fab fa-twitter"></i> Tweet
                     </a>
                 </div>
