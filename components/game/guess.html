@@ -105,27 +105,46 @@
 
     <div class="container mx-auto px-4 py-8 flex-grow">
       <h1 class="text-4xl font-bold text-left mb-8">Intens Guess Member.</h1>
-        <h1 class="text-2xl font-bold text-left mb-8">Pilih Jumlah Soal</h1>
+      <h1 id="game-title" class="text-2xl font-bold text-left mb-8">Pilih Jumlah Soal</h1>
 
-        <div id="quiz-settings" class="flex flex-col items-center">
-          <label for="question-count" class="mb-4 text-lg font-semibold"
-            >Jumlah Soal:</label
-          >
-          <select id="question-count" class="border rounded px-4 py-2 mb-6 w-full md:w-1/2">
-            <option value="">Pilih Jumlah</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-          </select>
-          <button
-            id="start"
-            disabled
-            class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 disabled:bg-gray-400 disabled:cursor-not-allowed w-full md:w-1/2">
-            Start
-          </button>
+      <div id="quiz-settings" class="flex flex-col items-center">
+        <label for="question-count" class="mb-4 text-lg font-semibold"
+          >Jumlah Soal:</label
+        >
+        <select id="question-count" class="border rounded px-4 py-2 mb-6 w-full md:w-1/2">
+          <option value="">Pilih Jumlah</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+        </select>
+        <button
+          id="start"
+          disabled
+          class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 disabled:bg-gray-400 disabled:cursor-not-allowed w-full md:w-1/2">
+          Start
+        </button>
+      </div>
+
+      <div id="game-container" class="flex flex-col items-center" style="display: none;">
+        <div id="score-container" class="flex justify-around mb-5 border-2 border-gray-300 rounded-lg p-2 w-full max-w-sm">
+          <p>Benar: <span id="correct">0</span></p>
+          <p>Salah: <span id="incorrect">0</span></p>
+        </div>
+
+        <div id="card" class="border border-gray-300 rounded-lg overflow-hidden shadow-lg max-w-md w-full">
+          <div id="foto-container" class="p-5 bg-gray-200 flex justify-center">
+            <img id="foto" src="" alt="Artis" class="max-h-96 w-full object-contain" />
+          </div>
+
+          <div id="choices-container" class="grid grid-cols-2 gap-2 p-4">
+            <button class="choice-btn bg-purple-600 text-white rounded-lg px-4 py-2" onclick="checkAnswer(this)"></button>
+            <button class="choice-btn bg-purple-600 text-white rounded-lg px-4 py-2" onclick="checkAnswer(this)"></button>
+            <button class="choice-btn bg-purple-600 text-white rounded-lg px-4 py-2" onclick="checkAnswer(this)"></button>
+            <button class="choice-btn bg-purple-600 text-white rounded-lg px-4 py-2" onclick="checkAnswer(this)"></button>
+          </div>
         </div>
       </div>
     </div>
@@ -190,6 +209,9 @@
     <script>
         const questionCount = document.getElementById('question-count');
         const startButton = document.getElementById('start');
+        const gameContainer = document.getElementById('game-container');
+        const quizSettings = document.getElementById('quiz-settings');
+        const gameTitle = document.getElementById('game-title');
 
         questionCount.addEventListener('change', () => {
             startButton.disabled = !questionCount.value;
@@ -197,10 +219,15 @@
 
         startButton.addEventListener('click', () => {
             localStorage.setItem('questionCount', questionCount.value);
-            window.location.href = '/guess/ingame';
+            quizSettings.style.display = 'none';
+            gameContainer.style.display = 'flex';
+            gameTitle.textContent = 'Ingame Guess Member.';
+            startGame();
         });
     </script>
     <script src="/progress.js"></script>
+    <script src="/utils/guess-member.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
       const menuToggle = document.getElementById("menu-toggle");
