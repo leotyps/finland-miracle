@@ -1,90 +1,46 @@
-function parseDate(indonesianDate) {
-    const months = {
-        Januari: "01", Februari: "02", Maret: "03", April: "04", Mei: "05", Juni: "06",
-        Juli: "07", Agustus: "08", September: "09", Oktober: "10", November: "11", Desember: "12"
-    };
+function displayBirthdays() {
+    const container = document.getElementById('birthdayContainer');
+    const countElement = document.getElementById('birthdayCount');
 
-    const [day, month, year] = indonesianDate.split(" ");
-    const monthNumber = months[month];
+    fetch('https://intensprotectionexenew.vercel.app/api/birthdays')
+        .then(response => response.json())
+        .then(data => {
+            countElement.textContent = `${data.length} Members`;
 
-    if (!monthNumber) {
-        console.error("Invalid month in date:", indonesianDate);
-        return null;
-    }
+            container.innerHTML = data.map(member => {
+                const shortenedLink = member.profileLink.match(/\/(\d+)(?=\?|$)/)[0];
 
-    return new Date(`${year}-${monthNumber}-${day.padStart(2, "0")}`);
-}
-
-async function fetchBirthdays() {
-    const container = document.getElementById('birthday-container');
-
-    try {
-        const response = await fetch('https://intensprotectionexenew.vercel.app/api/birthdays');
-        const data = await response.json();
-
-        container.innerHTML = '';
-
-        if (data.length === 0) {
-            container.innerHTML = `
-                <div class="text-center text-gray-500 py-4 text-lg">
-                    No upcoming birthdays
-                </div>
-            `;
-            return;
-        }
-
-        const today = new Date();
-        const todayDay = today.getDate();
-        const todayMonth = today.getMonth();
-
-        data.forEach((member, index) => {
-            const parsedDate = parseDate(member.birthday);
-
-            if (!parsedDate) {
-                return; 
-            }
-
-            const birthDay = parsedDate.getDate();
-            const birthMonth = parsedDate.getMonth();
-
-            let status = '';
-            if (birthDay === todayDay && birthMonth === todayMonth) {
-                status = 'Today';
-            } else if (
-                birthDay === todayDay + 1 &&
-                birthMonth === todayMonth
-            ) {
-                status = 'Tomorrow';
-            }
-            const memberCard = `
-                <div class="flex items-center space-x-4 p-4 bg-violet-100/60 rounded-lg shadow-sm max-w-md">
-                    <img src="${member.imgSrc}" alt="${member.name}" class="w-16 h-16 rounded-full object-cover">
-                    <div class="flex-1">
-                        <h4 class="text-lg font-semibold text-gray-800">${member.name}</h4>
-                        <p class="text-sm text-gray-600">${member.birthday}</p>
+                return `
+                    <div class="bg-white rounded-xl p-4 hover:shadow-sm transition-shadow">
+                        <a href="/member/${shortenedLink}" class="flex items-center space-x-4">
+                            <div class="relative flex-shrink-0">
+                                <img src="${member.imgSrc}" alt="${member.name}" class="w-16 h-16 rounded-3xl object-cover">
+                                <div class="absolute -bottom-1 -right-1">
+                                    <div class="bg-gray-100 rounded-full p-1">
+                                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-sm font-medium text-gray-900 truncate">${member.name}</h3>
+                                <p class="text-xs text-gray-500">${member.birthday}</p>
+                            </div>
+                            <div class="text-xs text-gray-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </div>
+                        </a>
                     </div>
-                    ${
-                        status
-                            ? `<span class="text-sm text-gray-500 font-medium">${status}</span>`
-                            : ''
-                    }
-                </div>
-                ${
-                    index < data.length - 1
-                        ? `<div class="border-t border-dashed border-gray-300 mx-4"></div>`
-                        : ''
-                }
-            `;
-            container.innerHTML += memberCard;
+                `;
+            }).join('');
+        })
+        .catch(error => {
+            container.innerHTML = '<div class="text-center py-3 text-sm text-gray-500">Failed to load birthday data</div>';
+            console.error('Error:', error);
         });
-    } catch (error) {
-        console.error('Error fetching birthdays:', error);
-        container.innerHTML = `
-            <div class="text-center text-gray-500 py-4 text-lg">
-                Failed to load birthday data
-            </div>
-        `;
-    }
 }
 
-document.addEventListener('DOMContentLoaded', fetchBirthdays);
+document.addEventListener('DOMContentLoaded', displayBirthdays, { once: true });

@@ -159,10 +159,26 @@
     </div>
 
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold text-center mb-6">Hot News.</h1>
-        <div id="hot-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="lg:col-span-3">
+                <h1 class="text-4xl font-bold mb-6">Hot News.</h1>
+                <div id="hot-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+            </div>
+    
+            <div class="lg:col-span-1">
+                <div class="bg-yellow-100 rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold">Upcoming Birthdays</h2>
+                        <div id="birthdayCount" class="text-sm text-gray-500">0 Members</div>
+                    </div>
+                    <div id="birthdayContainer" class="space-y-4 mt-9">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
+    
     <div class="container mx-auto px-4 py-6 sm:py-8">
         <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6">
             Theater Upcoming.
@@ -171,7 +187,7 @@
     </div>
 
     <div id="popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="relative bg-white rounded-lg shadow-lg max-w-lg w-full">
+        <div class="relative bg-white rounded-3xl shadow-lg max-w-lg w-full">
             <div id="popup-content"></div>
         </div>
     </div>
@@ -224,6 +240,7 @@
     <script src="/middleware/middleware.js"></script>
     <!-- <script src="/security/typicalsleepingboy.js"></script> -->
     <script src="/utils/youtube.js"></script>
+    <script src="/utils/birthday.js"></script>
     <script src="/utils/banner.js"></script>
     <script src="/utils/theater.js"></script>
     <script src="/utils/birthday.js"></script>

@@ -2,7 +2,7 @@ async function fetchHotNews() {
     try {
         const container = document.getElementById('hot-news-container');
         container.innerHTML = Array(6).fill(`
-            <div class="bg-white rounded-lg shadow-md overflow-hidden p-4 skeleton">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden p-4 skeleton">
                 <div class="flex items-center mb-4">
                     <div class="bg-gray-300 w-10 h-5 mr-3 rounded"></div>
                     <div class="bg-gray-300 w-20 h-4 rounded"></div>
@@ -30,11 +30,11 @@ async function fetchHotNews() {
             const colorClass = colors[index % colors.length];
 
             const newsCard = `
-                <a href="/news/${news.berita_id}" class="block ${colorClass} text-white rounded-lg shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
+                <a href="/news/${news.berita_id}" class="block ${colorClass} text-white rounded-3xl shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
                     onclick="localStorage.setItem('newsColor', '${colorClass}')">
                     <div class="p-4">
                         <div class="flex items-center mb-4">
-                            <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}" alt="Badge" class="w-14 h-5 mr-3 rounded-lg">
+                            <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}" alt="Badge" class="w-14 h-5 mr-3 rounded-3xl">
                             <span class="text-sm text-white-200">${news.waktu}</span>
                         </div>
                         <h3 class="text-lg font-bold mb-2">${news.judul}</h3>

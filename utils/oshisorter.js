@@ -30,21 +30,21 @@ function updateStartButton() {
         startButton.textContent = 'Reset';
         startButton.className = `
             mt-6 px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 
-            text-white font-bold rounded-lg shadow-lg 
+            text-white font-bold rounded-3xl shadow-lg 
             hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50
         `;
     } else {
         startButton.textContent = 'Start';
         startButton.toggleAttribute('disabled', selectedGenerations.size === 0);
         startButton.className = selectedGenerations.size > 0
-            ? `mt-6 px-8 py-4 rounded-lg font-bold
+            ? `mt-6 px-8 py-4 rounded-3xl font-bold
                 bg-purple-800 text-white border border-purple-900
                 dark:bg-purple-900 dark:text-white dark:border-purple-800
                 hover:bg-purple-900 hover:border-purple-800
                 dark:hover:bg-purple-950 dark:hover:border-purple-700
                 transform hover:scale-105 hover:shadow-md
                 transition-all duration-300`
-            : `mt-6 px-8 py-4 rounded-lg font-bold
+            : `mt-6 px-8 py-4 rounded-3xl font-bold
                 bg-gray-100 text-gray-400 border border-gray-300
                 dark:bg-gray-700 dark:text-gray-500 dark:border-gray-600
                 cursor-not-allowed
@@ -84,7 +84,7 @@ async function loadMembers() {
     const filterButtonsContainer = document.getElementById('filter-buttons');
     const undoButton = document.createElement('button');
     undoButton.className = `
-        px-2 py-2 mb-4 rounded-lg font-medium text-xs
+        px-2 py-2 mb-4 rounded-3xl font-medium text-xs
         bg-red-100 text-red-800 border border-red-400
         dark:bg-gray-700 dark:text-red-400
         hover:bg-red-200 hover:border-red-500 hover:shadow-md
@@ -102,7 +102,7 @@ async function loadMembers() {
     generations.forEach(gen => {
         const button = document.createElement('button');
         button.className = `
-            w-full px-6 py-3 rounded-lg font-medium text-xs
+            w-full px-6 py-3 rounded-3xl font-medium text-xs
             bg-purple-100 text-purple-800 border border-purple-400
             dark:bg-gray-700 dark:text-purple-400
             hover:bg-purple-800 hover:text-white hover:border-purple-900
@@ -145,14 +145,14 @@ function updateGenerationUI() {
     document.querySelectorAll('.gen-btn').forEach(btn => {
         const isSelected = selectedGenerations.has(btn.dataset.gen);
         btn.className = isSelected
-            ? `gen-btn w-full px-6 py-3 rounded-lg font-semibold
+            ? `gen-btn w-full px-6 py-3 rounded-3xl font-semibold
                 bg-purple-800 text-white border-2 border-purple-900
                 dark:bg-purple-900 dark:text-white dark:border-purple-800
                 hover:bg-purple-900 hover:border-purple-800
                 dark:hover:bg-purple-950 dark:hover:border-purple-700
                 transform hover:scale-105 hover:shadow-md
                 transition-all duration-300`
-            : `gen-btn w-full px-6 py-3 rounded-lg font-medium text-xs
+            : `gen-btn w-full px-6 py-3 rounded-3xl font-medium text-xs
                 bg-purple-100 text-purple-800 border border-purple-400
                 dark:bg-gray-700 dark:text-purple-400
                 hover:bg-purple-800 hover:text-white hover:border-purple-900
@@ -293,18 +293,18 @@ function endSorting() {
                         <p class='text-sm text-gray-600'>${member.generation}</p>
                     </div>`).join('')}
             </div>
-            <div class="mt-6 p-4 bg-white rounded-lg shadow-md">
+            <div class="mt-6 p-4 bg-white rounded-3xl shadow-md">
                 <p class="text-lg font-semibold mb-4">Bagikan Hasil Anda:</p>
                 <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
                     <div class="flex-1 w-full">
                         <input type="text" 
                             value="${generateShareableLink(sortedMembers)}" 
                             readonly 
-                            class="w-full px-4 py-2 border rounded-lg bg-gray-50 focus:outline-none"
+                            class="w-full px-4 py-2 border rounded-3xl bg-gray-50 focus:outline-none"
                             id="share-link-input">
                     </div>
                     <button onclick="copyShareLink()" 
-                        class="px-6 py-2 bg-purple-800 text-white border-2 border-purple-900 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        class="px-6 py-2 bg-purple-800 text-white border-2 border-purple-900 text-white rounded-3xl hover:bg-blue-700 transition-colors">
                         Salin Link
                     </button>
                 </div>
@@ -341,7 +341,7 @@ function showNotification(message) {
     notificationContainer.id = 'notification-container';
     notificationContainer.className = `
         fixed top-16 right-4 z-50 flex items-center bg-purple-800 text-white
-        px-4 py-3 rounded-lg shadow-lg transform transition-all duration-300 opacity-0
+        px-4 py-3 rounded-3xl shadow-lg transform transition-all duration-300 opacity-0
         sm:top-20 sm:right-6 max-w-xs w-full sm:max-w-sm
     `;
     

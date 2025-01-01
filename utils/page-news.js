@@ -29,9 +29,9 @@ async function fetchPageNews() {
   container.innerHTML = "";
   for (let i = 0; i < skeletonCount; i++) {
     const skeletonCard = ` 
-    <div class="block bg-gray-300 rounded-lg shadow-md animate-pulse overflow-hidden">
+    <div class="block bg-gray-300 rounded-3xl shadow-md animate-pulse overflow-hidden">
       <div class="p-4">
-        <div class="w-20 h-5 bg-gray-400 rounded-lg mb-3"></div>
+        <div class="w-20 h-5 bg-gray-400 rounded-3xl mb-3"></div>
         <div class="h-6 bg-gray-400 rounded mb-2"></div>
         <div class="h-4 bg-gray-400 rounded w-3/4"></div>
       </div>
@@ -71,10 +71,10 @@ async function fetchPageNews() {
       const colorClass = colors[index % colors.length];
       const detailUrl = `/news/${beritaId}`;
       const newsCard = `
-      <a href="${detailUrl}" class="block ${colorClass} text-white rounded-lg shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
+      <a href="${detailUrl}" class="block ${colorClass} text-white rounded-3xl shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
         onclick="localStorage.setItem('newsColor', '${colorClass}')">
         <div class="p-4">
-          <img src="${badgeUrl}" alt="Badge" class="w-14 h-5 mb-3 rounded-lg">
+          <img src="${badgeUrl}" alt="Badge" class="w-14 h-5 mb-3 rounded-3xl">
           <h3 class="text-lg text-white font-bold mb-2">${judul}</h3>
           <span class="text-sm text-white-200">${waktu}</span>
         </div>
@@ -127,7 +127,7 @@ async function fetchDetailNews() {
           <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
           <p class="text-white text-base mb-6">${tanggal}</p>
           ${gambar
-          ? `<img src="${gambar}" alt="${judul}" class="w-25 h-13 rounded-lg mb-8">`
+          ? `<img src="${gambar}" alt="${judul}" class="w-25 h-13 rounded-3xl mb-8">`
           : ""
         } 
           <div class="text-white leading-relaxed text-sm font-semibold">${konten}</div>

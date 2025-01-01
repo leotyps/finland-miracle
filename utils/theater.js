@@ -8,7 +8,7 @@ async function fetchTheaterData() {
         
         const skeletonCount = theaterData.length || 1;  
         container.innerHTML = Array(skeletonCount).fill(`
-            <div class="bg-white rounded-lg shadow-md overflow-hidden skeleton">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden skeleton">
                 <div class="relative bg-gray-300 h-48 w-full rounded"></div>
                 <div class="p-4">
                     <div class="bg-gray-300 h-6 w-3/4 mb-2 rounded"></div>
@@ -41,7 +41,7 @@ async function fetchTheaterData() {
             const birthdayMembers = show.birthdayMembers.length > 0;
 
             const theaterCard = `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
+                <div class="bg-white rounded-3xl shadow-md overflow-hidden max-w-md mx-auto">
                     <div class="relative">
                         <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" 
                             alt="${show.setlist}" 
@@ -66,7 +66,7 @@ async function fetchTheaterData() {
                         <div class="text-sm text-gray-500 mb-3">
                             <strong>Jumlah Member:</strong> ${show.members.length > 0 ? show.members.length : 'No Members 😭'}
                         </div>
-                        <button class="w-full bg-blue-300 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-400 transition duration-300" 
+                        <button class="w-full bg-blue-300 text-white px-4 py-2 rounded-3xl text-sm hover:bg-blue-400 transition duration-300" 
                             onclick="showPopup(${JSON.stringify(show).replace(/"/g, '&quot;')}, ${JSON.stringify(banner).replace(/"/g, '&quot;')}, ${JSON.stringify(memberData.members.member).replace(/"/g, '&quot;')})">
                             Detail
                         </button>
@@ -167,7 +167,7 @@ async function showPopup(show, banner, members) {
         const description = banner ? banner.description : 'No description available';
         const memberCards = showMembers.map(member => {
             return `
-                <a href="/member/${member.memberId}" class="flex flex-col items-center bg-gray-50 p-2 rounded-lg">
+                <a href="/member/${member.memberId}" class="flex flex-col items-center bg-gray-50 p-2 rounded-3xl">
                     <img src="https://jkt48.com${member.ava_member}" alt="${member.displayName}" class="w-16 h-16 object-cover rounded-full mb-2">
                     <span class="text-xs font-semibold">${member.displayName}</span>
                 </a>
@@ -175,16 +175,16 @@ async function showPopup(show, banner, members) {
         }).join('');
 
         popupContent.innerHTML = `
-            <div class="bg-white rounded-lg shadow-lg p-4 max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
+            <div class="bg-white rounded-3xl shadow-lg p-4 max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
                 <div class="flex justify-between items-start mb-4">
                     <h2 class="text-xl font-bold">${show.setlist}</h2>
-                    <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-400 transition duration-300" 
+                    <button class="bg-red-500 text-white px-3 py-1 rounded-3xl hover:bg-red-400 transition duration-300" 
                             onclick="document.getElementById('popup').classList.add('hidden'); document.body.classList.remove('no-scroll');">
                         Close
                     </button>
                 </div>
                 <div>
-                    <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" alt="${show.setlist}" class="w-full h-48 sm:h-40 object-cover rounded-lg mb-4">
+                    <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" alt="${show.setlist}" class="w-full h-48 sm:h-40 object-cover rounded-3xl mb-4">
                 </div>
                 <div class="space-y-2 mb-4">
                     <div class="text-sm text-gray-500"><strong>Date:</strong> ${show.showInfo.split(' ')[0]} ${show.showInfo.split(' ')[1]}</div>

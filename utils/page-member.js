@@ -45,7 +45,7 @@ async function fetchMembers() {
 
         const card = document.createElement("a");
         card.href = detailUrl;
-        card.className = `${cardBg} shadow-md rounded-lg flex flex-col items-center p-4 cursor-pointer relative`;
+        card.className = `${cardBg} shadow-md rounded-3xl flex flex-col items-center p-4 cursor-pointer relative`;
 
         const badge = document.createElement("span");
         badge.className = `${badgeColor} text-white text-xs px-2 py-1 rounded absolute top-2 right-2`;
@@ -53,7 +53,7 @@ async function fetchMembers() {
         card.appendChild(badge);
 
         const imageContainer = document.createElement("div");
-        imageContainer.className = "w-full h-40 mb-4 overflow-hidden rounded-lg";
+        imageContainer.className = "w-full h-40 mb-4 overflow-hidden rounded-3xl";
         const img = document.createElement("img");
         img.src = `https://jkt48.com${member.ava_member}`;
         img.alt = member.nama_member;

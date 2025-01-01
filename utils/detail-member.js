@@ -23,7 +23,7 @@ async function fetchDetailMember() {
         <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
           <div class="md:flex">
             <div class="md:w-1/3 p-6">
-              <div class="bg-gray-300 w-full h-96 rounded-lg"></div>
+              <div class="bg-gray-300 w-full h-96 rounded-3xl"></div>
             </div>
             <div class="md:w-2/3 p-6">
               <div class="h-8 bg-gray-300 rounded w-1/2 mb-4"></div>
@@ -57,7 +57,7 @@ async function fetchDetailMember() {
     <div class="flex flex-col sm:flex-row">
       <div class="w-full sm:w-1/3 p-6">
         <img src="${memberData.profileImage}" alt="${memberData.name}" 
-            class="w-full h-[400px] sm:h-auto rounded-lg shadow-md object-cover">
+            class="w-full h-[400px] sm:h-auto rounded-3xl shadow-md object-cover">
       </div>
 
       <div class="w-full sm:w-2/3 p-6">
@@ -75,7 +75,7 @@ async function fetchDetailMember() {
             <p class="text-gray-700 text-base"><span class="font-semibold">Zodiak:</span> ${memberData.zodiac || 'Tidak tersedia'}</p>
             <p class="text-gray-700 text-base"><span class="font-semibold">Tinggi:</span> ${memberData.height || 'Tidak tersedia'}</p>
           </div>
-          <div class="bg-blue-200/30 p-4 rounded-lg">
+          <div class="bg-blue-200/30 p-4 rounded-3xl">
             <p class="text-gray-700 italic text-base">${jikoMember ? jikoMember.jikosokai : 'Tidak tersedia'}</p>
           </div>
         </div>
@@ -85,7 +85,7 @@ async function fetchDetailMember() {
           ${jikoMember?.video_perkenalan ? `
           <div class="mt-8 px-6 pb-6">
             <h2 class="text-2xl font-bold mb-4">Introduction Video</h2>
-            <iframe class="w-full aspect-video rounded-lg shadow-lg"
+            <iframe class="w-full aspect-video rounded-3xl shadow-lg"
               src="https://www.youtube.com/embed/${jikoMember.video_perkenalan}" 
               title="Introduction Video" frameborder="0" allowfullscreen>
             </iframe>

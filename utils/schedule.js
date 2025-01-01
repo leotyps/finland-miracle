@@ -33,13 +33,13 @@ function renderCalendar(year, month) {
     }
     for (let i = 0; i < startingDay; i++) {
         const emptyDay = document.createElement('div');
-        emptyDay.className = 'min-h-32 bg-gray-50 rounded-lg hidden lg:block';
+        emptyDay.className = 'min-h-32 bg-gray-50 rounded-3xl hidden lg:block';
         calendar.appendChild(emptyDay);
     }
 
     for (let day = 1; day <= lastDay.getDate(); day++) {
         const dayCell = document.createElement('div');
-        dayCell.className = 'min-h-32 bg-white border rounded-lg p-2 flex flex-col';
+        dayCell.className = 'min-h-32 bg-white border rounded-3xl p-2 flex flex-col';
         const dateText = document.createElement('div');
         dateText.className = 'text-lg font-bold text-gray-800 mb-2';
         dateText.textContent = day;

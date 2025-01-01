@@ -2,7 +2,7 @@ async function fetchYoutubeVideos() {
     try {
         const container = document.getElementById('youtube-container');
         container.innerHTML = `
-            <div class="bg-white rounded-lg shadow-md overflow-hidden skeleton">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden skeleton">
                 <div class="relative bg-gray-300 h-48 w-full rounded"></div>
                 <div class="p-4">
                     <div class="bg-gray-300 h-6 w-3/4 mb-2 rounded"></div>
@@ -28,7 +28,7 @@ async function fetchYoutubeVideos() {
             const channelThumbnail = "https://yt3.googleusercontent.com/wBipLZF1IVqYGuYsZc0xxj5ist11fQMHWkN6vtBDCojWd8QTTlJLB8tOCOtoh7IRdmGHDn6I=s160-c-k-c0x00ffffff-no-rj";
 
             const videoCard = `
-                <div class="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
+                <div class="bg-slate-50 rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
                     <div class="relative bg-white px-2">
                         <img 
                             src="${thumbnailUrl}" 
