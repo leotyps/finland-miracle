@@ -12,7 +12,7 @@ function displayBirthdays() {
 
                 return `
                     <div class="bg-white rounded-xl p-4 hover:shadow-sm transition-shadow">
-                        <a href="/member/${shortenedLink}" class="flex items-center space-x-4">
+                        <a href="/member${shortenedLink}" class="flex items-center space-x-4">
                             <div class="relative flex-shrink-0">
                                 <img src="${member.imgSrc}" alt="${member.name}" class="w-16 h-16 rounded-3xl object-cover">
                                 <div class="absolute -bottom-1 -right-1">
