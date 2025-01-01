@@ -2,6 +2,22 @@ function displayBirthdays() {
     const container = document.getElementById('birthdayContainer');
     const countElement = document.getElementById('birthdayCount');
 
+    // Menampilkan skeleton loader dengan ukuran lebih kecil
+    container.innerHTML = Array(3)
+        .fill(`
+            <div class="bg-white rounded-xl p-4 hover:shadow-sm transition-shadow skeleton">
+                <div class="flex items-center space-x-4">
+                    <div class="relative flex-shrink-0">
+                        <div class="bg-gray-300 w-16 h-16 rounded-3xl"></div>
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        <div class="bg-gray-300 h-4 w-3/4 rounded"></div>
+                        <div class="bg-gray-200 h-3 w-1/2 rounded"></div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
     fetch('https://intensprotectionexenew.vercel.app/api/birthdays')
         .then(response => response.json())
         .then(data => {
