@@ -2,7 +2,6 @@ function displayBirthdays() {
     const container = document.getElementById('birthdayContainer');
     const countElement = document.getElementById('birthdayCount');
 
-    // Menampilkan skeleton loader dengan ukuran lebih kecil
     container.innerHTML = Array(3)
         .fill(`
             <div class="bg-white rounded-xl p-4 hover:shadow-sm transition-shadow skeleton">

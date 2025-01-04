@@ -100,17 +100,10 @@ function getShowStatus(showInfo) {
     const now = new Date();
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
     const [_, datePart, timePart] = showInfo.split(" ");
     const showDateTime = new Date(`${datePart}T${timePart}:00`);
 
-    const showDateOnly = new Date(showDateTime);
-    showDateOnly.setHours(0, 0, 0, 0);
-
-    if (showDateOnly.getTime() === today.getTime()) {
+    if (showDateTime.toDateString() === today.toDateString()) {
         if (showDateTime <= now) {
             return {
                 text: "Sedang Berlangsung",
@@ -123,24 +116,17 @@ function getShowStatus(showInfo) {
         };
     }
 
-    if (showDateOnly.getTime() === tomorrow.getTime()) {
-        return {
-            text: "Besok",
-            color: "bg-yellow-500",
-        };
-    }
-
     if (showDateTime > now) {
         return {
             text: "Upcoming",
             color: "bg-red-500",
         };
     }
-    return {
-        text: "Sudah Lewat",
-        color: "bg-gray-500",
-    };
+
+    return null; 
 }
+
+
 
 async function showPopup(show, banner, members) {
     try {
@@ -165,14 +151,19 @@ async function showPopup(show, banner, members) {
         });
 
         const description = banner ? banner.description : 'No description available';
-        const memberCards = showMembers.map(member => {
-            return `
+        const memberCards = showMembers.length > 0
+            ? showMembers.map(member => `
                 <a href="/member/${member.memberId}" class="flex flex-col items-center bg-gray-50 p-2 rounded-3xl">
                     <img src="https://jkt48.com${member.ava_member}" alt="${member.displayName}" class="w-16 h-16 object-cover rounded-full mb-2">
                     <span class="text-xs font-semibold">${member.displayName}</span>
                 </a>
-            `;
-        }).join('');
+            `).join('')
+            : Array(3).fill(`
+                <div class="flex flex-col items-center bg-gray-50 p-2 rounded-3xl">
+                    <img src="https://jkt48.com/images/logo.svg" alt="Placeholder" class="w-16 h-16 object-cover rounded-full mb-2">
+                    <span class="text-xs font-semibold">No Member</span>
+                </div>
+            `).join('');
 
         popupContent.innerHTML = `
             <div class="bg-white rounded-3xl shadow-lg p-4 max-h-[90vh] overflow-y-auto mx-4 sm:mx-0">
@@ -201,7 +192,7 @@ async function showPopup(show, banner, members) {
                 </div>
                 <h3 class="text-sm font-bold mb-3">Lineup Members:</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    ${showMembers.length > 0 ? memberCards : 'No members available'}
+                    ${memberCards}
                 </div>
             </div>
         `;
