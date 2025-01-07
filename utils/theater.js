@@ -1,3 +1,67 @@
+function formatShowDate(dateString, showInfo) {
+    const date = new Date(dateString);
+
+    const dateOptions = {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        timeZone: 'Asia/Jakarta'
+    };
+    const formattedDate = new Intl.DateTimeFormat('id-ID', dateOptions).format(date);
+    const time = showInfo.split(" ")[2];
+    const formattedTime = `${time.replace(":", ".")} WIB`;
+    return { formattedDate, formattedTime };
+}
+
+function getShowStatus(showInfo) {
+    const now = new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const [_, datePart, timePart] = showInfo.split(" ");
+    const showDateTime = new Date(`${datePart}T${timePart}:00`);
+
+    const showDateOnly = new Date(showDateTime);
+    showDateOnly.setHours(0, 0, 0, 0);
+
+    // Check if show is today
+    if (showDateOnly.getTime() === today.getTime()) {
+        if (showDateTime <= now) {
+            return {
+                text: "Sedang Berlangsung",
+                color: "bg-green-500",
+            };
+        }
+        return {
+            text: "Hari ini",
+            color: "bg-blue-500",
+        };
+    }
+
+    // Check if show is tomorrow
+    if (showDateOnly.getTime() === tomorrow.getTime()) {
+        return {
+            text: "Besok",
+            color: "bg-yellow-500",
+        };
+    }
+
+    // Check if show is in the future (after tomorrow)
+    if (showDateTime > now) {
+        return {
+            text: "Upcoming",
+            color: "bg-red-500",
+        };
+    }
+
+    return {
+        text: "Selesai",
+        color: "bg-gray-500",
+    };
+}
 async function fetchTheaterData() {
     const container = document.getElementById('theater-container');
     container.innerHTML = ''; 
@@ -64,7 +128,7 @@ async function fetchTheaterData() {
                             <strong>Time:</strong> ${show.time} WIB
                         </div>
                         <div class="text-sm text-gray-500 mb-3">
-                            <strong>Jumlah Member:</strong> ${show.members.length > 0 ? show.members.length : 'No Members 😭'}
+                            <strong>Jumlah Member:</strong> ${show.members.length > 0 ? show.members.length : 'No Members 😭'} member
                         </div>
                         <button class="w-full bg-blue-300 text-white px-4 py-2 rounded-3xl text-sm hover:bg-blue-400 transition duration-300" 
                             onclick="showPopup(${JSON.stringify(show).replace(/"/g, '&quot;')}, ${JSON.stringify(banner).replace(/"/g, '&quot;')}, ${JSON.stringify(memberData.members.member).replace(/"/g, '&quot;')})">
@@ -96,38 +160,6 @@ function showNotFoundMessage(container, message) {
 }
 
 
-function getShowStatus(showInfo) {
-    const now = new Date();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const [_, datePart, timePart] = showInfo.split(" ");
-    const showDateTime = new Date(`${datePart}T${timePart}:00`);
-
-    if (showDateTime.toDateString() === today.toDateString()) {
-        if (showDateTime <= now) {
-            return {
-                text: "Sedang Berlangsung",
-                color: "bg-green-500",
-            };
-        }
-        return {
-            text: "Hari ini",
-            color: "bg-blue-500",
-        };
-    }
-
-    if (showDateTime > now) {
-        return {
-            text: "Upcoming",
-            color: "bg-red-500",
-        };
-    }
-
-    return null; 
-}
-
-
-
 async function showPopup(show, banner, members) {
     try {
         const memberNicknamesResponse = await fetch('/data/member.json');
@@ -135,6 +167,10 @@ async function showPopup(show, banner, members) {
 
         const popup = document.getElementById('popup');
         const popupContent = document.getElementById('popup-content');
+
+        // Add these styles to prevent content shifting
+        document.body.style.paddingRight = getScrollbarWidth() + 'px';
+        document.body.classList.add('no-scroll');
 
         const showMembers = show.members.map(memberName => {
             const apiMember = members.find(m => m.nama_member === memberName);
@@ -170,7 +206,7 @@ async function showPopup(show, banner, members) {
                 <div class="flex justify-between items-start mb-4">
                     <h2 class="text-xl font-bold">${show.setlist}</h2>
                     <button class="bg-red-500 text-white px-3 py-1 rounded-3xl hover:bg-red-400 transition duration-300" 
-                            onclick="document.getElementById('popup').classList.add('hidden'); document.body.classList.remove('no-scroll');">
+                            onclick="closePopup()">
                         Close
                     </button>
                 </div>
@@ -198,11 +234,21 @@ async function showPopup(show, banner, members) {
         `;
 
         popup.classList.remove('hidden');
-        document.body.classList.add('no-scroll');
     } catch (error) {
         console.error('Error fetching member nicknames:', error);
     }
 }
 
+// Add these helper functions
+function getScrollbarWidth() {
+    return window.innerWidth - document.documentElement.clientWidth;
+}
+
+function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.add('hidden');
+    document.body.style.paddingRight = '0';
+    document.body.classList.remove('no-scroll');
+}
 
 fetchTheaterData();

@@ -6,7 +6,6 @@ body.no-scroll {
     display: none;
 
 }
-
 #progressBar {
     transition: width 0.2s ease-out;
 }
