@@ -1,67 +1,56 @@
-function formatShowDate(dateString, showInfo) {
-    const date = new Date(dateString);
-
-    const dateOptions = {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        timeZone: 'Asia/Jakarta'
-    };
-    const formattedDate = new Intl.DateTimeFormat('id-ID', dateOptions).format(date);
-    const time = showInfo.split(" ")[2];
-    const formattedTime = `${time.replace(":", ".")} WIB`;
-    return { formattedDate, formattedTime };
-}
-
 function getShowStatus(showInfo) {
-    const now = new Date();
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    try {
+        const now = new Date();
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    const [_, datePart, timePart] = showInfo.split(" ");
-    const showDateTime = new Date(`${datePart}T${timePart}:00`);
-
-    const showDateOnly = new Date(showDateTime);
-    showDateOnly.setHours(0, 0, 0, 0);
-
-    // Check if show is today
-    if (showDateOnly.getTime() === today.getTime()) {
-        if (showDateTime <= now) {
-            return {
-                text: "Sedang Berlangsung",
-                color: "bg-green-500",
-            };
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const showInfoParts = showInfo.split(", ");
+        if (showInfoParts.length < 2) {
+            console.error("Invalid showInfo format:", showInfo);
+            return null;
         }
-        return {
-            text: "Hari ini",
-            color: "bg-blue-500",
-        };
-    }
+        const [datePart, timePart] = showInfoParts[1].split(" ");
+        if (!datePart || !timePart) {
+            console.error("Invalid showInfo format:", showInfo);
+            return null;
+        }
+        const showDateTime = new Date(`${datePart.replace(/-/g, "/")} ${timePart}:00`);
+        if (isNaN(showDateTime.getTime())) {
+            console.error("Invalid show date/time:", `${datePart} ${timePart}`);
+            return null;
+        }
 
-    // Check if show is tomorrow
-    if (showDateOnly.getTime() === tomorrow.getTime()) {
-        return {
-            text: "Besok",
-            color: "bg-yellow-500",
-        };
-    }
+        const showDateOnly = new Date(showDateTime);
+        showDateOnly.setHours(0, 0, 0, 0);
 
-    // Check if show is in the future (after tomorrow)
-    if (showDateTime > now) {
-        return {
-            text: "Upcoming",
-            color: "bg-red-500",
-        };
-    }
+        if (showDateTime < now) {
+            return { text: "Selesai" };
+        }
+        if (showDateOnly.getTime() === today.getTime()) {
+            if (showDateTime <= now) {
+                return { text: "Sedang Berlangsung" };
+            }
+            return { text: "Hari ini" };
+        }
+        if (showDateOnly.getTime() === tomorrow.getTime()) {
+            return { text: "Besok" };
+        }
 
-    return {
-        text: "Selesai",
-        color: "bg-gray-500",
-    };
+        if (showDateTime > now) {
+            return { text: "Upcoming" };
+        }
+
+        return null;
+    } catch (error) {
+        console.error("Error in getShowStatus:", error);
+        return null;
+    }
 }
+
+
+
 async function fetchTheaterData() {
     const container = document.getElementById('theater-container');
     container.innerHTML = ''; 
@@ -114,9 +103,9 @@ async function fetchTheaterData() {
                         ${birthdayMembers 
                             ? `<span class="absolute top-2 left-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white text-xs px-3 py-1 rounded-full">Birthday</span>` 
                             : ''}
-                        ${status
-                            ? `<span class="absolute top-2 right-2 ${status.color} text-white text-xs px-3 py-1 rounded-full">${status.text}</span>`
-                            : ''}
+                            ${status 
+                                ? `<span class="absolute top-2 right-2 bg-white/30 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md">${status.text}</span>`
+                                : ''}                                         
                     </div>
 
                     <div class="p-4">
@@ -145,7 +134,6 @@ async function fetchTheaterData() {
         showNotFoundMessage(container, 'Theater Not Found 😭');
     }
 }
-
 function showNotFoundMessage(container, message) {
     container.className = 'min-h-[24rem] relative';
 
@@ -168,7 +156,6 @@ async function showPopup(show, banner, members) {
         const popup = document.getElementById('popup');
         const popupContent = document.getElementById('popup-content');
 
-        // Add these styles to prevent content shifting
         document.body.style.paddingRight = getScrollbarWidth() + 'px';
         document.body.classList.add('no-scroll');
 
@@ -239,7 +226,7 @@ async function showPopup(show, banner, members) {
     }
 }
 
-// Add these helper functions
+
 function getScrollbarWidth() {
     return window.innerWidth - document.documentElement.clientWidth;
 }
