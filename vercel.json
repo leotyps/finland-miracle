@@ -7,55 +7,55 @@
         },
         {
             "source": "/member",
-            "destination": "/components/page/member.html"
+            "destination": "/components/page/member"
         },
         {
             "source": "/news",
-            "destination": "/components/page/news.html"
+            "destination": "/components/page/news"
         },
         {
             "source": "/schedule",
-            "destination": "/components/page/schedule.html"
+            "destination": "/components/page/schedule"
         },
         {
             "source": "/sorter",
-            "destination": "/components/game/sorter.html"
+            "destination": "/components/game/sorter"
         },
         {
             "source": "/guess",
-            "destination": "/components/game/guess.html"
+            "destination": "/components/game/guess"
         },
         {
             "source": "/share",
-            "destination": "/components/page/share.html"
+            "destination": "/components/page/share"
         },
         {
             "source": "/guess/ingame",
-            "destination": "/components/game/guess-ingame.html"
+            "destination": "/components/game/guess-ingame"
         },
         {
             "source": "/ingames",
-            "destination": "/components/page/ingames.html"
+            "destination": "/components/page/ingames"
         },
         {
             "source": "/mypage",
-            "destination": "/components/login/mypage.html"
+            "destination": "/components/login/mypage"
         },
         {
             "source": "/login",
-            "destination": "/components/login/login.html"
+            "destination": "/components/login/login"
         },
         {
             "source": "/about",
-            "destination": "/components/page/about.html"
+            "destination": "/components/page/about"
         },
         {
             "source": "/notfound",
-            "destination": "/components/page/notfound.html"
+            "destination": "/components/page/notfound"
         },
         {
             "source": "/maintenance",
-            "destination": "/middleware/maintenance.html"
+            "destination": "/middleware/maintenance"
         },
         {
             "source": "/news/:id",
@@ -63,7 +63,15 @@
         },
         {
             "source": "/member/:id",
-            "destination": "/components/detail/member.html?id=:id"
+            "destination": "/components/detail/member?id=:id"
+        },
+        {
+            "source": "/:path*/:slug",
+            "destination": "/:path*/:slug.html"
+        },
+        {
+            "source": "/:path*",
+            "destination": "/:path*"
         },
         {
             "source": "/components/detail/:slug",
