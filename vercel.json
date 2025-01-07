@@ -50,6 +50,10 @@
             "destination": "/components/page/about"
         },
         {
+            "source": "/notfound",
+            "destination": "/components/page/notfound"
+        },
+        {
             "source": "/maintenance",
             "destination": "/middleware/maintenance"
         },
@@ -81,5 +85,8 @@
             "source": "/components/page/:slug",
             "destination": "/components/page/:slug.html"
         }
-    ]
+    ],
+    "errorPages": {
+        "500": "/components/page/500.html"
+    }
 }
