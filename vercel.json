@@ -85,8 +85,5 @@
             "source": "/components/page/:slug",
             "destination": "/components/page/:slug.html"
         }
-    ],
-    "errorPages": {
-        "500": "/components/page/500.html"
-    }
+    ]
 }
