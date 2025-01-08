@@ -12,8 +12,14 @@ fetch('https://intensprotectionexenew.vercel.app/api/banners')
                 img.src = banner.img_url;
                 img.alt = 'Banner';
                 img.className = 'w-full h-full object-cover';
+                img.onload = function() {
+                    link.appendChild(img);
+                    bannerSlider.appendChild(link);
+                };
 
-                link.appendChild(img);
+                img.onerror = function() {
+                    window.location.href = '/notfound';
+                };
                 bannerSlider.appendChild(link);
             });
 
