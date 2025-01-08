@@ -105,13 +105,13 @@
 
     <div class="container mx-auto px-4 py-8 flex-grow">
       <h1 class="text-4xl font-bold text-left mb-8">Intens Guess Member.</h1>
-      <div
-        class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 w-full max-w-2xl">
-        <h2 class="text-2xl font-bold mb-4 text-center">Hasil Guess</h2>
-        <div class="flex items-center justify-center flex-grow mt-10">
-          <table class="min-w-full bg-white dark:bg-gray-700">
+      <div class="flex items-center justify-center flex-grow mt-10">
+        <div
+          class="bg-gray-800 shadow-md rounded-lg p-6 w-full max-w-2xl">
+          <h2 class="text-2xl font-bold mb-4 text-center text-white">Hasil Quiz</h2>
+          <table class="min-w-full bg-gray-700 text-white">
             <thead>
-              <tr class="w-full bg-gray-200 dark:bg-gray-600">
+              <tr class="w-full bg-gray-600">
                 <th class="py-2 px-4 text-left">No</th>
                 <th class="py-2 px-4 text-left">Foto</th>
                 <th class="py-2 px-4 text-left">Jawaban</th>
@@ -120,7 +120,7 @@
             </thead>
             <tbody id="resultsTable"></tbody>
           </table>
-          <div class="mt-4">
+          <div class="mt-4 text-white">
             <p id="totalQuestions" class="text-lg"></p>
             <p id="correctCount" class="text-lg"></p>
             <p id="incorrectCount" class="text-lg"></p>
@@ -128,7 +128,7 @@
           <!-- Button Section -->
           <div class="mt-6 flex justify-center">
             <button
-              onclick="window.location.href='/'"
+              onclick="window.location.href='/guess'"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Kembali
             </button>
@@ -216,20 +216,42 @@
     </script>
     <script src="/progress.js"></script>
     <script src="/utils/guess-member.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     <script>
-      const menuToggle = document.getElementById("menu-toggle");
-      const mobileMenu = document.getElementById("mobile-menu");
+      document.addEventListener("DOMContentLoaded", function () {
+        const quizResults =
+          JSON.parse(localStorage.getItem("quizResults")) || [];
+        const resultsTable = document.getElementById("resultsTable");
+        const totalQuestions = quizResults.length;
+        const correctCount = quizResults.filter(
+          (result) => result.correct
+        ).length;
+        const incorrectCount = totalQuestions - correctCount;
 
-      menuToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-        if (!mobileMenu.classList.contains("hidden")) {
-          mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-          mobileMenu.style.transition = "max-height 0.3s ease-in-out";
-        } else {
-          mobileMenu.style.maxHeight = "0";
-        }
+        quizResults.forEach((result, index) => {
+          const row = document.createElement("tr");
+          row.className = "border-b dark:border-gray-600 text-white";
+          row.innerHTML = `
+            <td class="py-2 px-4">${index + 1}</td>
+            <td class="py-2 px-4"><img src="${
+              result.question
+            }" alt="Foto" class="w-16 h-16 object-cover rounded" /></td>
+            <td class="py-2 px-4">${result.answer}</td>
+            <td class="py-2 px-4">${result.correct ? "✅" : "❌"}</td>
+          `;
+          resultsTable.appendChild(row);
+        });
+
+        document.getElementById(
+          "totalQuestions"
+        ).textContent = `Total Soal: ${totalQuestions}`;
+        document.getElementById(
+          "correctCount"
+        ).textContent = `Jawaban Benar: ${correctCount}`;
+        document.getElementById(
+          "incorrectCount"
+        ).textContent = `Jawaban Salah: ${incorrectCount}`;
+
+        localStorage.removeItem("quizResults");
       });
     </script>
   </body>
