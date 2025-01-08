@@ -30,8 +30,8 @@
             "destination": "/components/page/share"
         },
         {
-            "source": "/guess/ingame",
-            "destination": "/components/game/guess-ingame"
+            "source": "/guess/result",
+            "destination": "/components/game/guess-result"
         },
         {
             "source": "/ingames",
