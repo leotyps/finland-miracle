@@ -94,39 +94,40 @@ async function fetchTheaterData() {
             const birthdayMembers = show.birthdayMembers.length > 0;
 
             const theaterCard = `
-                <div class="bg-white rounded-3xl shadow-md overflow-hidden max-w-md mx-auto">
-                    <div class="relative">
-                        <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" 
-                            alt="${show.setlist}" 
-                            class="w-full h-auto max-h-64 object-cover rounded-t-lg">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 rounded-t-lg"></div>
-                        ${birthdayMembers 
-                            ? `<span class="absolute top-2 left-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white text-xs px-3 py-1 rounded-full">Birthday</span>` 
-                            : ''}
-                            ${status 
-                                ? `<span class="absolute top-2 right-2 bg-white/30 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md">${status.text}</span>`
-                                : ''}                                         
-                    </div>
-
-                    <div class="p-4">
-                        <h3 class="text-base font-bold mb-2">${show.setlist}</h3>
-                        <div class="text-sm text-gray-500 mb-2">
-                            <strong>Date:</strong> ${show.showInfo.split(' ')[0]} ${show.showInfo.split(' ')[1]}
-                        </div>
-                        <div class="text-sm text-gray-500 mb-2">
-                            <strong>Time:</strong> ${show.time} WIB
-                        </div>
-                        <div class="text-sm text-gray-500 mb-3">
-                            <strong>Jumlah Member:</strong> ${show.members.length > 0 ? show.members.length : 'No Members 😭'} member
-                        </div>
-                        <button class="w-full bg-blue-300 text-white px-4 py-2 rounded-3xl text-sm hover:bg-blue-400 transition duration-300" 
-                            onclick="showPopup(${JSON.stringify(show).replace(/"/g, '&quot;')}, ${JSON.stringify(banner).replace(/"/g, '&quot;')}, ${JSON.stringify(memberData.members.member).replace(/"/g, '&quot;')})">
-                            Detail
-                        </button>
-                    </div>
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden max-w-md mx-auto">
+                <div class="relative">
+                    <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" 
+                        alt="${show.setlist}" 
+                        class="w-full h-auto max-h-64 object-cover rounded-t-lg">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-t-lg"></div>
+                    ${birthdayMembers 
+                        ? `<span class="absolute top-2 left-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white text-xs px-3 py-1 rounded-full">Birthday</span>` 
+                        : ''}
+                        ${status 
+                            ? `<span class="absolute top-2 right-2 bg-white/30 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md">${status.text}</span>`
+                            : ''}                                         
                 </div>
-            `;
-            container.innerHTML += theaterCard;
+
+                <div class="p-4">
+                    <h3 class="text-base font-bold mb-2">${show.setlist}</h3>
+                    <div class="text-sm text-gray-500 mb-2">
+                        <strong>Date:</strong> ${show.showInfo.split(' ')[0]} ${show.showInfo.split(' ')[1]}
+                    </div>
+                    <div class="text-sm text-gray-500 mb-2">
+                        <strong>Time:</strong> ${show.time} WIB
+                    </div>
+                    <div class="text-sm text-gray-500 mb-3">
+                        <strong>Jumlah Member:</strong> ${show.members.length > 0 ? show.members.length : 'No Members 😭'} member
+                    </div>
+                    <button class="w-full bg-blue-300 text-white px-4 py-2 rounded-3xl text-sm hover:bg-blue-400 transition duration-300" 
+                        onclick="showPopup(${JSON.stringify(show).replace(/"/g, '&quot;')}, ${JSON.stringify(banner).replace(/"/g, '&quot;')}, ${JSON.stringify(memberData.members.member).replace(/"/g, '&quot;')})">
+                        Detail
+                    </button>
+                </div>
+            </div>
+        `;
+        container.innerHTML += theaterCard;
+
         });
 
     } catch (error) {
