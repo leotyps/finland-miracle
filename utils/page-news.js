@@ -123,7 +123,7 @@ async function fetchDetailNews() {
       const gambar = data.gambar || null;
 
       const detailTemplate = `
-        <div class="max-w-10xl mx-auto p-8 ${colorClass} shadow-lg rounded-xl">
+        <div class="max-w-10xl mx-auto p-8 ${colorClass} shadow-lg rounded-3xl">
           <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
           <p class="text-white text-base mb-6">${tanggal}</p>
           ${gambar
