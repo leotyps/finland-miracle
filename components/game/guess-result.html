@@ -105,10 +105,17 @@
 
     <div class="container mx-auto px-4 py-8 flex-grow">
       <h1 class="text-4xl font-bold text-left mb-8">Intens Guess Member.</h1>
+<<<<<<< HEAD
       <div
         class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 w-full max-w-2xl">
         <h2 class="text-2xl font-bold mb-4 text-center">Hasil Guess</h2>
         <div class="flex items-center justify-center flex-grow mt-10">
+=======
+      <div class="flex items-center justify-center flex-grow mt-10"></div>
+        <div
+          class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 w-full max-w-2xl">
+          <h2 class="text-2xl font-bold mb-4 text-center">Hasil Guess</h2>
+>>>>>>> 1eec222345ab732050a5660e68c7082b75ebada8
           <table class="min-w-full bg-white dark:bg-gray-700">
             <thead>
               <tr class="w-full bg-gray-200 dark:bg-gray-600">
@@ -128,7 +135,11 @@
           <!-- Button Section -->
           <div class="mt-6 flex justify-center">
             <button
+<<<<<<< HEAD
               onclick="window.location.href='/'"
+=======
+              onclick="window.location.href='/guess'"
+>>>>>>> 1eec222345ab732050a5660e68c7082b75ebada8
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Kembali
             </button>
@@ -137,6 +148,11 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
+=======
+      </div>
+    </div>
+>>>>>>> 1eec222345ab732050a5660e68c7082b75ebada8
 
     <footer class="bg-gray-900 text-white py-8">
       <div class="container mx-auto px-6">
@@ -189,12 +205,17 @@
         </div>
         <div
           class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
+<<<<<<< HEAD
           &copy; 2025 48intens. All rights reserved.<br />All 48Intens servers
           are under managed by Typicalsleepingboy & RyuuG Dev
+=======
+                         &copy; 2025 48intens. All rights reserved.<br>All 48Intens servers are under managed by Typicalsleepingboy & RyuuG Dev
+>>>>>>> 1eec222345ab732050a5660e68c7082b75ebada8
         </div>
       </div>
     </footer>
 
+<<<<<<< HEAD
     <script>
       const questionCount = document.getElementById("question-count");
       const startButton = document.getElementById("start");
@@ -213,6 +234,27 @@
         gameTitle.textContent = "Ingame Guess Member.";
         startGame();
       });
+=======
+    
+    <script>
+        const questionCount = document.getElementById('question-count');
+        const startButton = document.getElementById('start');
+        const gameContainer = document.getElementById('game-container');
+        const quizSettings = document.getElementById('quiz-settings');
+        const gameTitle = document.getElementById('game-title');
+
+        questionCount.addEventListener('change', () => {
+            startButton.disabled = !questionCount.value;
+        });
+
+        startButton.addEventListener('click', () => {
+            localStorage.setItem('questionCount', questionCount.value);
+            quizSettings.style.display = 'none';
+            gameContainer.style.display = 'flex';
+            gameTitle.textContent = 'Ingame Guess Member.';
+            startGame();
+        });
+>>>>>>> 1eec222345ab732050a5660e68c7082b75ebada8
     </script>
     <script src="/progress.js"></script>
     <script src="/utils/guess-member.js"></script>
