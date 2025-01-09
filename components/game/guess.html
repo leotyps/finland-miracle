@@ -140,10 +140,10 @@
           </div>
 
           <div id="choices-container" class="grid grid-cols-2 gap-2 p-4">
-            <button class="choice-btn bg-purple-600 text-white rounded-3xl px-4 py-2"></button>
-            <button class="choice-btn bg-purple-600 text-white rounded-3xl px-4 py-2"></button>
-            <button class="choice-btn bg-purple-600 text-white rounded-3xl px-4 py-2"></button>
-            <button class="choice-btn bg-purple-600 text-white rounded-3xl px-4 py-2"></button>
+            <button class="choice-btn bg-purple-600 text-white rounded-3xl px-4 py-2" onclick="checkAnswer(this)"></button>
+            <button class="choice-btn bg-purple-600 text-white rounded-3xl px-4 py-2" onclick="checkAnswer(this)"></button>
+            <button class="choice-btn bg-purple-600 text-white rounded-3xl px-4 py-2" onclick="checkAnswer(this)"></button>
+            <button class="choice-btn bg-purple-600 text-white rounded-3xl px-4 py-2" onclick="checkAnswer(this)"></button>
           </div>
         </div>
       </div>
@@ -207,6 +207,24 @@
 
     
     <script>
+        const questionCount = document.getElementById('question-count');
+        const startButton = document.getElementById('start');
+        const gameContainer = document.getElementById('game-container');
+        const quizSettings = document.getElementById('quiz-settings');
+        const gameTitle = document.getElementById('game-title');
+
+        questionCount.addEventListener('change', () => {
+            startButton.disabled = !questionCount.value;
+        });
+
+        startButton.addEventListener('click', () => {
+            localStorage.setItem('questionCount', questionCount.value);
+            quizSettings.style.display = 'none';
+            gameContainer.style.display = 'flex';
+            gameTitle.textContent = 'Ingame Guess Member.';
+            startGame();
+        });
+
         const menuToggle = document.getElementById("menu-toggle");
       const mobileMenu = document.getElementById("mobile-menu");
 

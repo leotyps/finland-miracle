@@ -1,22 +1,3 @@
-const questionCount = document.getElementById('question-count');
-const startButton = document.getElementById('start');
-const gameContainer = document.getElementById('game-container');
-const quizSettings = document.getElementById('quiz-settings');
-const gameTitle = document.getElementById('game-title');
-
-questionCount.addEventListener('change', () => {
-    startButton.disabled = !questionCount.value;
-});
-
-startButton.addEventListener('click', () => {
-    localStorage.setItem('questionCount', questionCount.value);
-    quizSettings.style.display = 'none';
-    gameContainer.style.display = 'flex';
-    gameTitle.textContent = 'Ingame Guess Member.';
-    startGame();
-});
-
-
 const quizData = [];
 
 fetch("/data/quiz.json")
