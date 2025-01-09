@@ -257,6 +257,20 @@
 
         localStorage.removeItem("quizResults");
       });
+
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        if (!mobileMenu.classList.contains("hidden")) {
+          mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+          mobileMenu.style.transition = "max-height 0.3s ease-in-out";
+        } else {
+          mobileMenu.style.maxHeight = "0";
+        }
+      });
+      
     </script>
   </body>
 </html>
