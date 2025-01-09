@@ -38,6 +38,10 @@
             "destination": "/components/page/ingames"
         },
         {
+            "source": "/tebakjiko",
+            "destination": "/components/game/jiko"
+        },
+        {
             "source": "/mypage",
             "destination": "/components/login/mypage"
         },
