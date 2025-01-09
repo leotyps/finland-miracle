@@ -9,6 +9,7 @@ let maxQuestions = 10;
 let timerInterval;
 let timerValue = 15;
 let isAnswering = false;
+let scoreThreshold = 5; // Added score threshold for win condition
 
 async function loadQuestions() {
     try {
@@ -34,7 +35,7 @@ function startTimer() {
         document.getElementById("timer").textContent = timerValue;
         if (timerValue <= 0) {
             clearInterval(timerInterval);
-            handleTimeUp(); 
+            handleTimeUp();
         }
     }, 1000);
 }
@@ -43,14 +44,12 @@ function handleTimeUp() {
     isAnswering = false;
     wrongAttempts += 1;
     wrongAnswers += 1;
-    document.getElementById("lose-message").classList.remove("hidden");
-    document.getElementById("win-message").classList.add("hidden");
     document.getElementById("score").textContent = `Score: ${score}`;
-    endGame(); 
+    endGame(); // Directly end game when no answer is provided
 }
 
 function showNextQuestion() {
-    if (questions.length === 0 || wrongAttempts >= maxAttempts || questions.length === 0) {
+    if (questions.length === 0 || wrongAttempts >= maxAttempts) {
         endGame();
         return;
     }
@@ -68,13 +67,14 @@ function showNextQuestion() {
     document.getElementById("result").classList.add("hidden");
     document.getElementById("win-message").classList.add("hidden");
     document.getElementById("lose-message").classList.add("hidden");
+    document.getElementById("question-card").classList.remove("hidden");
 
     isAnswering = true;
     startTimer();
 }
 
 function checkAnswer() {
-    if (!isAnswering) return; 
+    if (!isAnswering) return;
     isAnswering = false;
     clearInterval(timerInterval);
 
@@ -94,15 +94,25 @@ function checkAnswer() {
     }
 
     document.getElementById("score").textContent = `Score: ${score}`;
-    endGame();
+
+    // Check if should continue or end game
+    if (wrongAttempts >= maxAttempts || questions.length === 0) {
+        endGame();
+    } else {
+        // Wait 1 second before showing next question
+        setTimeout(() => {
+            showNextQuestion();
+        }, 1000);
+    }
 }
 
 function endGame() {
-    clearInterval(timerInterval); 
+    clearInterval(timerInterval);
     document.getElementById("question-card").classList.add("hidden");
     document.getElementById("result").classList.remove("hidden");
 
-    if (score > 0) {
+    // Show win message only if score is 5 or higher
+    if (correctAnswers >= scoreThreshold) {
         document.getElementById("win-message").classList.remove("hidden");
         document.getElementById("lose-message").classList.add("hidden");
     } else {
