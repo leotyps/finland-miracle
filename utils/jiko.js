@@ -9,7 +9,7 @@ let maxQuestions = 10;
 let timerInterval;
 let timerValue = 15;
 let isAnswering = false;
-let scoreThreshold = 5; // Added score threshold for win condition
+let scoreThreshold = 5; 
 
 async function loadQuestions() {
   try {
@@ -49,7 +49,7 @@ function handleTimeUp() {
   document.getElementById(
     "score"
   ).textContent = `Benar: ${score} | Salah: ${wrongAnswers}`;
-  endGame(); // Directly end game when no answer is provided
+  endGame(); 
 }
 
 function showNextQuestion() {
@@ -104,11 +104,9 @@ function checkAnswer() {
     "score"
   ).textContent = `Benar: ${score} | Salah: ${wrongAnswers}`;
 
-  // Check if should continue or end game
   if (wrongAttempts >= maxAttempts || questions.length === 0) {
     endGame();
   } else {
-    // Wait 1 second before showing next question
     setTimeout(() => {
       showNextQuestion();
     }, 1000);
@@ -119,8 +117,6 @@ function endGame() {
   clearInterval(timerInterval);
   document.getElementById("question-card").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
-
-  // Menyembunyikan form jawaban
   document.getElementById("answer-input").classList.add("hidden");
   document.getElementById("submit-answer").classList.add("hidden");
 
@@ -135,7 +131,7 @@ function endGame() {
   }
 
   document.getElementById("correct-count").textContent = correctAnswers;
-  document.getElementById("wrong-count").textContent = wrongAnswers; // Tampilkan jumlah jawaban salah
+  document.getElementById("wrong-count").textContent = wrongAnswers; 
 
   questions = shuffleArray(questions);
 }

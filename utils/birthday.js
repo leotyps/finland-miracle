@@ -29,7 +29,7 @@ function displayBirthdays() {
                     <div class="bg-white rounded-xl p-4 hover:shadow-sm transition-shadow">
                         <a href="/member${shortenedLink}" class="flex items-center space-x-4">
                             <div class="relative flex-shrink-0">
-                                <img src="${member.imgSrc}" alt="${member.name}" class="w-16 h-16 rounded-3xl object-cover">
+                                <img src="${member.imgSrc}" alt="${member.name}" class="w-16 h-16 rounded-3xl object-cover loading="lazy"">
                                 <div class="absolute -bottom-1 -right-1">
                                     <div class="bg-gray-100 rounded-full p-1">
                                         <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

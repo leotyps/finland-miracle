@@ -57,7 +57,7 @@ async function fetchDetailMember() {
     <div class="flex flex-col sm:flex-row">
       <div class="w-full sm:w-1/3 p-6">
         <img src="${memberData.profileImage}" alt="${memberData.name}" 
-            class="w-full h-[400px] sm:h-auto rounded-3xl shadow-md object-cover">
+            class="w-full h-[400px] sm:h-auto rounded-3xl shadow-md object-cover loading="lazy"">
       </div>
 
       <div class="w-full sm:w-2/3 p-6">
@@ -103,7 +103,7 @@ function showNotFoundMessage(container, message) {
 
   container.innerHTML = `
     <div class="flex flex-col items-center">
-      <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
+      <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4 loading="lazy"">
       <p class="text-gray-500 text-lg font-bold">${message}</p>
     </div>
   `;
