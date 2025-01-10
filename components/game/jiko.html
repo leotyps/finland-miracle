@@ -33,12 +33,12 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="/home" class="text-2xl font-bold">48intens</a>
             <div class="md:hidden">
-                <button id="menu-toggle" class="text-gray-700 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
+                <button id="menu-toggle" class="text-gray-700 focus:outline-none relative w-6 h-6">
+                    <div class="menu-icon">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </div>
                 </button>
             </div>
             <div id="menu" class="hidden md:flex space-x-6">
@@ -48,11 +48,16 @@
                 <a href="/ingames" class="font-semibold text-gray-700 hover:text-purple-200">InGames</a>
             </div>
         </div>
-        <div id="mobile-menu" class="font-semibold hidden md:hidden bg-white border-t border-gray-200">
-            <a href="/news" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
-            <a href="/schedule" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
-            <a href="/member" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
-            <a href="/ingames" class="font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">InGames</a>
+        <div id="mobile-menu" class="font-semibold hidden md:hidden bg-white border-t border-gray-200 overflow-hidden">
+            <div class="mobile-menu-content">
+                <a href="/news" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
+                <a href="/schedule"
+                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
+                <a href="/member"
+                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
+                <a href="/ingames"
+                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">InGames</a>
+            </div>
         </div>
     </nav>
 
@@ -63,13 +68,14 @@
 
     <div class="container mx-auto px-4 py-8 flex-grow">
         <h1 class="text-4xl font-bold text-left mb-8">Tebak Jiko Member JKT48.</h1>
-    
+
         <div class="max-w-md mx-auto">
             <div id="game-card" class="bg-white rounded-xl shadow-lg p-6 mb-6">
                 <div id="score" class="text-center mb-4 text-xl font-bold">Benar: 0 | Salah: 0</div>
                 <div id="question-card" class="bg-purple-100 rounded-lg p-4 mb-4">
                     <p class="text-center text-lg font-medium">Loading question...</p>
-                    <p class="text-center text-sm font-medium text-gray-600 mt-2" id="timer-note">You have 15 seconds to guess.</p>
+                    <p class="text-center text-sm font-medium text-gray-600 mt-2" id="timer-note">You have 15 seconds to
+                        guess.</p>
                     <p id="timer" class="text-center text-xl font-bold mt-4">15</p>
                 </div>
                 <div class="space-y-4">
@@ -82,7 +88,7 @@
                     </button>
                 </div>
             </div>
-    
+
             <div id="result" class="hidden">
                 <div id="win-message"
                     class="hidden bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-xl text-center mb-6 shadow-lg">
@@ -92,10 +98,10 @@
                     class="hidden bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-xl text-center mb-6 shadow-lg">
                     <strong class="font-bold text-lg">Yahhh dah kalah Cupu lu gitu aja ga bisa 🫵😂</strong>
                 </div>
-                <div id="final-score"
-                    class="bg-red-500/50 rounded-xl shadow-lg px-6 py-6 text-left mb-6">
+                <div id="final-score" class="bg-red-500/50 rounded-xl shadow-lg px-6 py-6 text-left mb-6">
                     <p class="text-xl font-medium text-white-700">Game Over!</p>
-                    <p class="text-lg font-semibold text-white mt-4">Jawaban Benar: <span id="correct-count">0</span></p>
+                    <p class="text-lg font-semibold text-white mt-4">Jawaban Benar: <span id="correct-count">0</span>
+                    </p>
                     <p class="text-lg font-semibold text-white mt-2">Jawaban Salah: <span id="wrong-count">0</span></p>
                 </div>
                 <button id="restart-game"
@@ -103,10 +109,10 @@
                     Restart Game
                 </button>
             </div>
-        
+
         </div>
     </div>
-    
+
     <footer class="bg-gray-900 text-white py-8">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
@@ -150,15 +156,14 @@
     <script>
         const menuToggle = document.getElementById("menu-toggle");
         const mobileMenu = document.getElementById("mobile-menu");
+        const menuIcon = document.querySelector(".menu-icon");
 
         menuToggle.addEventListener("click", () => {
             mobileMenu.classList.toggle("hidden");
-            if (!mobileMenu.classList.contains("hidden")) {
-                mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-                mobileMenu.style.transition = "max-height 0.3s ease-in-out";
-            } else {
-                mobileMenu.style.maxHeight = "0";
-            }
+            menuIcon.classList.toggle("menu-active");
+            setTimeout(() => {
+                mobileMenu.classList.toggle("active");
+            }, 10);
         });
     </script>
 </body>
