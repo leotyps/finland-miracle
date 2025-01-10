@@ -53,9 +53,12 @@
         <div id="mobile-menu" class="font-semibold hidden md:hidden bg-white border-t border-gray-200 overflow-hidden">
             <div class="mobile-menu-content">
                 <a href="/news" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
-                <a href="/schedule" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
-                <a href="/member" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
-                <a href="/ingames" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">InGames</a>
+                <a href="/schedule"
+                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
+                <a href="/member"
+                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
+                <a href="/ingames"
+                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">InGames</a>
             </div>
         </div>
     </nav>
@@ -66,11 +69,30 @@
     </div>
 
     <div class="container mx-auto px-6 py-12">
-        <div class="flex flex-col space-y-2 text-left md:text-left">
-            <h1 class="text-8xl font-bold">48.</h1>
-            <h1 class="text-6xl font-bold">Intens.</h1>
-            <h1 class="text-6xl font-bold">Website.</h1>
+        <div class="flex flex-col md:flex-row justify-between items-start">
+            <div class="flex flex-col space-y-2 text-left md:text-left">
+                <h1 class="text-8xl font-bold">48.</h1>
+                <h1 class="text-6xl font-bold">Intens.</h1>
+                <h1 class="text-6xl font-bold">Website.</h1>
+            </div>
+            <div class="mt-8 md:mt-0 md:ml-12">
+                <div class="grid grid-cols-3 md:grid-cols-1 gap-6">
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-green-600 counter" data-target="17800">0K</p>
+                        <p class="text-gray-600">TikTok Followers</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-blue-600 counter" data-target="46000">0K</p>
+                        <p class="text-gray-600">Discord Members</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold text-purple-600 counter" data-target="6900">0K</p>
+                        <p class="text-gray-600">Instagram Followers</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="flex justify-left md:justify-between items-center mt-8 space-x-4">
             <p class="text-xl font-semibold hidden md:block">
                 Bringing JKT48 Closer to<br />You Every Day!
@@ -100,6 +122,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="container mx-auto px-6 py-8">
         <div class="relative overflow-hidden rounded-xl aspect-[2/1]">
@@ -147,13 +170,17 @@
             </div>
             <div class="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div class="grid grid-cols-2 gap-2 p-4">
-                    <img src="/assets/image/gate.jpg" alt="JKT48 Theater Performance" class="rounded-lg w-full h-32 object-cover"/>
-                    <img src="/assets/image/1 (1).jpg" alt="JKT48 Theater Interior" class="rounded-lg w-full h-32 object-cover"/>
+                    <img src="/assets/image/gate.jpg" alt="JKT48 Theater Performance"
+                        class="rounded-lg w-full h-32 object-cover" />
+                    <img src="/assets/image/1 (1).jpg" alt="JKT48 Theater Interior"
+                        class="rounded-lg w-full h-32 object-cover" />
                 </div>
                 <div class="p-6">
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Apa itu JKT48 Theater ?</h3>
                     <p class="text-gray-600">
-                        Teater JKT48 adalah sebuah teater eksklusif untuk pertunjukan grup idola Indonesia JKT48 dan grup-grup saudarinya dari AKB48 Group. Teater ini berada di lantai 4 fX Sudirman, Jakarta Pusat, DKI Jakarta, Indonesia.
+                        Teater JKT48 adalah sebuah teater eksklusif untuk pertunjukan grup idola Indonesia JKT48 dan
+                        grup-grup saudarinya dari AKB48 Group. Teater ini berada di lantai 4 fX Sudirman, Jakarta Pusat,
+                        DKI Jakarta, Indonesia.
                     </p>
                 </div>
             </div>
@@ -167,7 +194,7 @@
                 <div id="hot-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 </div>
             </div>
-    
+
             <div class="lg:col-span-1">
                 <div class="bg-yellow-100 shadow-md rounded-3xl p-6">
                     <div class="flex items-center justify-between mb-4">
@@ -180,7 +207,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="container mx-auto px-4 py-6 sm:py-8">
         <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6">
             Theater Upcoming.
@@ -232,7 +259,8 @@
                 </a>
             </div>
             <div class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
-             &copy; 2025 48intens. All rights reserved.<br>All 48Intens servers are under managed by Typicalsleepingboy & RyuuG Dev
+                &copy; 2025 48intens. All rights reserved.<br>All 48Intens servers are under managed by
+                Typicalsleepingboy & RyuuG Dev
             </div>
         </div>
     </footer>
@@ -280,6 +308,33 @@
                 mobileMenu.classList.toggle("active");
             }, 10);
         });
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.counter');
+
+            const formatNumber = (num) => {
+                return num >= 1000 ? (num / 1000).toFixed(1).replace('.0', '') + 'K' : num;
+            };
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                let current = 0;
+                const increment = Math.ceil(target / 100);
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current = Math.min(current + increment, target);
+                        counter.textContent = formatNumber(current);
+
+                        if (current < target) {
+                            requestAnimationFrame(updateCounter);
+                        }
+                    }
+                };
+
+                updateCounter();
+            });
+        });
+
     </script>
 </body>
 
