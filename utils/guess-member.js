@@ -1,72 +1,98 @@
 const quizData = [];
-
-fetch("/data/quiz.json")
-  .then((response) => response.json())
-  .then((data) => {
-    quizData.push(...data);
-    const imageUrls = quizData.map((q) => q.image);
-    preloadImages(imageUrls);
-    initializeQuiz();
-  })
-  .catch((error) => console.error("Error fetching quiz data:", error));
-
 let currentQuestion = 0;
 let correctCount = 0;
 let incorrectCount = 0;
 let quizCompletedFlag = false;
 let quizResults = [];
 let inactivityTimeout;
+let questionTimer;
+let timeLeft = 15; 
 
 function preloadImages(imageUrls) {
-  imageUrls.forEach((url) => {
-    const img = new Image();
-    img.src = url;
-  });
+  return Promise.all(imageUrls.map(url => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = url;
+    });
+  }));
 }
+
+fetch("/data/quiz.json")
+  .then((response) => response.json())
+  .then(async (data) => {
+    quizData.push(...data);
+    const imageUrls = quizData.map((q) => q.image);
+
+    const fotoElement = document.getElementById("foto");
+    fotoElement.style.backgroundColor = "#f0f0f0";
+    fotoElement.src = ""; 
+    
+    await preloadImages(imageUrls);
+    initializeQuiz();
+  })
+  .catch((error) => console.error("Error fetching quiz data:", error));
 
 function initializeQuiz() {
   loadGameState();
   let totalQuestions = parseInt(localStorage.getItem("questionCount")) || 5;
 
+  const timerDisplay = document.createElement('div');
+  timerDisplay.id = 'timer';
+  timerDisplay.className = 'text-xl font-bold mb-4';
+  document.querySelector('#foto').parentElement.insertBefore(timerDisplay, document.querySelector('#foto'));
+
   let duplicatedQuizData = [];
   while (duplicatedQuizData.length < totalQuestions) {
     duplicatedQuizData = [...duplicatedQuizData, ...quizData];
   }
-
-  for (let i = duplicatedQuizData.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [duplicatedQuizData[i], duplicatedQuizData[j]] = [
-      duplicatedQuizData[j],
-      duplicatedQuizData[i],
-    ];
-  }
-
-  duplicatedQuizData = duplicatedQuizData.slice(0, totalQuestions);
+  duplicatedQuizData = duplicatedQuizData
+    .slice(0, totalQuestions)
+    .sort(() => Math.random() - 0.5);
 
   const fotoElement = document.getElementById("foto");
   const choicesElements = document.querySelectorAll(".choice-btn");
   const correctSpan = document.getElementById("correct");
   const incorrectSpan = document.getElementById("incorrect");
 
-  loadQuestion();
+  function updateTimer() {
+    const timerDisplay = document.getElementById('timer');
+    timerDisplay.textContent = `Waktu kamu sisa: ${timeLeft} detik`;
+    
+    if (timeLeft <= 0) {
+        clearInterval(questionTimer);
+        incorrectCount++;
+        currentQuestion++;
+        timeLeft = 15;
+        loadQuestion();
+        updateScore();
+        saveGameState();
+    }
+}
+  function startTimer() {
+    clearInterval(questionTimer);
+    timeLeft = 15;
+    updateTimer();
+    questionTimer = setInterval(() => {
+      timeLeft--;
+      updateTimer();
+    }, 1000);
+  }
 
   function loadQuestion() {
     if (currentQuestion < totalQuestions) {
       const currentQuiz = duplicatedQuizData[currentQuestion];
 
-      fotoElement.src = "";
-      fotoElement.style.backgroundColor = "#f0f0f0";
-      const img = new Image();
-      img.src = currentQuiz.image;
-      img.onload = () => {
-        fotoElement.src = currentQuiz.image;
-        fotoElement.style.backgroundColor = "transparent";
-      };
+      fotoElement.style.backgroundColor = "transparent";
+      fotoElement.src = currentQuiz.image;
 
       const choices = generateRandomChoices(currentQuiz.correctAnswer);
       choicesElements.forEach((btn, index) => {
         btn.textContent = choices[index];
       });
+      
+      startTimer();
       resetInactivityTimer();
     } else {
       quizCompleted();
@@ -94,6 +120,8 @@ function initializeQuiz() {
 
   function checkAnswer(btn) {
     if (currentQuestion < totalQuestions) {
+      clearInterval(questionTimer);
+      
       const selectedAnswer = btn.textContent;
       const correctAnswer = duplicatedQuizData[currentQuestion].correctAnswer;
 
@@ -110,6 +138,7 @@ function initializeQuiz() {
       }
 
       currentQuestion++;
+      timeLeft = 15;
       loadQuestion();
       updateScore();
       saveGameState();
@@ -122,6 +151,7 @@ function initializeQuiz() {
     if (quizCompletedFlag) return;
     quizCompletedFlag = true;
 
+    clearInterval(questionTimer);
     resetQuiz();
     localStorage.setItem("quizResults", JSON.stringify(quizResults));
     localStorage.removeItem("currentQuestion");
@@ -139,12 +169,13 @@ function initializeQuiz() {
     currentQuestion = 0;
     correctCount = 0;
     incorrectCount = 0;
+    timeLeft = 15;
     updateScore();
   }
 
   function resetInactivityTimer() {
     clearTimeout(inactivityTimeout);
-    inactivityTimeout = setTimeout(quizCompleted, 300000); // 5 menit
+    inactivityTimeout = setTimeout(quizCompleted, 300000); 
   }
 
   choicesElements.forEach((btn) => {
@@ -154,6 +185,8 @@ function initializeQuiz() {
       resetInactivityTimer();
     });
   });
+
+  loadQuestion();
 }
 
 function saveGameState() {
