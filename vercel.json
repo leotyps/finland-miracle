@@ -88,10 +88,6 @@
         {
             "source": "/components/page/:slug",
             "destination": "/components/page/:slug.html"
-        },
-        {
-            "source": "/twentysixthsinglemng?lang=id",
-            "destination": "https://jkt48.com/twentysixthsinglemng?lang=id"
         }
     ]
 }

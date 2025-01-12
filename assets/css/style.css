@@ -102,3 +102,9 @@ body.no-scroll {
 #mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.3s; }
 #mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.4s; }
 
+* {
+    transition: background-color 0.3s, color 0.3s;
+}
+.dark .hamburger-line {
+    background-color: white;
+}
