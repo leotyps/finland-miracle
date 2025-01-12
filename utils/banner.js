@@ -21,7 +21,7 @@ fetch('https://intensprotectionexenew.vercel.app/api/banners')
 
             const customBanners = [
                 { url: 'https://48intens.com/discord', img: 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1736313014/cjzknqpzc7eokiwyrufh.webp' },
-                { url: 'https://jkt48.com', img: 'https://cdn.discordapp.com/attachments/1189322953331048558/1327810825775222867/12dc4cbd-32ce-40eb-9111-f3a1ec5f8cef.jpg.webp?ex=67846bb2&is=67831a32&hm=eebc08401439c23eefaff0fa92e98b9fcd554e8c4b7ce4e65059a729ab6b17dc&' },
+                { url: 'https://jkt48.com', img: 'https://cdn.discordapp.com/attachments/1189322953331048558/1327813240331178035/anniv_copy.webp?ex=67846df2&is=67831c72&hm=635aa2b771feabdec755738cf54d1e6eaa30c554b4e625380b3d625e67f47276&' },
                 { url: 'https://cdn.discordapp.com/attachments/1309037991888683018/1316772733211902033/1211_38.mp4?ex=67827f2c&is=67812dac&hm=df80e31b65e9b07288db0d856ddc983c979e15271c9ab30fef221e1514af6f80&', img: 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1736313244/znakglqjkjxzrddah4od.webp' },
                 { url: 'https://48intens.com/discord', img: 'https://cdn.discordapp.com/attachments/1189322953331048558/1327419728029024256/vlcsnap-2025-01-11-06h31m42s166.png?ex=6782ff75&is=6781adf5&hm=cde48addc35f2752c858c4e6ef40f0747102a6ad395f1b6e1deb8c7fad5811e6&' }
             ];
