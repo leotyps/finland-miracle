@@ -26,7 +26,7 @@ function getShowStatus(showInfo) {
         showDateOnly.setHours(0, 0, 0, 0);
 
         if (showDateTime < now) {
-            return { text: "Selesai" };
+            return;
         }
         if (showDateOnly.getTime() === today.getTime()) {
             if (showDateTime <= now) {
