@@ -122,7 +122,6 @@ async function fetchDetailNews() {
       );
       const gambarArray = data.gambar || [];
 
-      // Gambar berjajar ke samping
       const gambarHTML = `
         <div class="image-container">
           ${gambarArray

@@ -6,6 +6,7 @@ body.no-scroll {
     display: none;
 
 }
+
 #progressBar {
     transition: width 0.2s ease-out;
 }
@@ -26,6 +27,7 @@ body.no-scroll {
     height: 100%;
     object-fit: cover;
 }
+
 .menu-icon {
     width: 24px;
     height: 24px;
@@ -66,13 +68,14 @@ body.no-scroll {
 .menu-active .hamburger-line:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
 }
+
 #mobile-menu {
     transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     max-height: 0;
 }
 
 #mobile-menu.active {
-    max-height: 300px; 
+    max-height: 300px;
 }
 
 .mobile-menu-content {
@@ -97,20 +100,31 @@ body.no-scroll {
     transform: translateX(0);
 }
 
-#mobile-menu.active .menu-item:nth-child(1) { transition-delay: 0.1s; }
-#mobile-menu.active .menu-item:nth-child(2) { transition-delay: 0.2s; }
-#mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.3s; }
-#mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.4s; }
+#mobile-menu.active .menu-item:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+#mobile-menu.active .menu-item:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+#mobile-menu.active .menu-item:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+#mobile-menu.active .menu-item:nth-child(4) {
+    transition-delay: 0.4s;
+}
 
 .image-container {
-    display: flex; /* Atur kontainer menjadi flexbox */
-    flex-wrap: wrap; /* Agar gambar turun ke baris berikutnya jika layar terlalu sempit */
-    gap: 10px; /* Jarak antar gambar */
-    justify-content: start; /* Atur gambar ke kiri (atau gunakan 'center' untuk di tengah) */
-  }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: start;
+}
 
-  .news-image {
-    max-width: 150px; /* Lebar maksimum gambar */
-    height: auto; /* Menjaga rasio aspek gambar */
-    border-radius: 10px; /* Opsional: Sudut gambar melengkung */
-  }
+.news-image {
+    max-width: 450px;
+    height: auto;
+    border-radius: 10px;
+}
