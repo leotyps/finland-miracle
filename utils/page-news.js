@@ -120,16 +120,17 @@ async function fetchDetailNews() {
         /\n/g,
         "<br>"
       );
-      const gambar = data.gambar || null;
+      const gambarArray = data.gambar || [];
+
+      const gambarHTML = gambarArray
+        .map((url) => `<img src="${url}" alt="${judul}" class="w-25 h-13 rounded-3xl mb-4">`)
+        .join("");
 
       const detailTemplate = `
         <div class="max-w-10xl mx-auto p-8 ${colorClass} shadow-lg rounded-3xl">
           <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
           <p class="text-white text-base mb-6">${tanggal}</p>
-          ${gambar
-          ? `<img src="${gambar}" alt="${judul}" class="w-25 h-13 rounded-3xl mb-8">`
-          : ""
-        } 
+          ${gambarHTML}
           <div class="text-white leading-relaxed text-sm font-semibold">${konten}</div>
         </div>
       `;
