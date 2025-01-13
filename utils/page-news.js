@@ -123,7 +123,7 @@ async function fetchDetailNews() {
       const gambarArray = data.gambar || [];
 
       const gambarHTML = gambarArray
-        .map((url) => `<img src="${url}" alt="${judul}" class="w-25 h-13 rounded-lg mb-8">`)
+        .map((url) => `<img src="${url}" alt="${judul}" class="news-image mb-4">`)
         .join("");
 
       const detailTemplate = `
