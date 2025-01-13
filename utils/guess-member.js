@@ -8,31 +8,15 @@ let inactivityTimeout;
 let questionTimer;
 let timeLeft = 15;
 
-function preloadImages(imageUrls) {
-  return Promise.all(imageUrls.map(url => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = reject;
-      img.src = url;
-    });
-  }));
-}
-
 fetch("/data/quiz.json")
   .then((response) => response.json())
-  .then(async (data) => {
+  .then((data) => {
     quizData.push(...data);
-    const fotoElement = document.getElementById("foto");
-    fotoElement.style.backgroundColor = "#f0f0f0";
-    fotoElement.src = "";
-    
+
     const shuffledData = [...quizData].sort(() => Math.random() - 0.5);
     quizData.length = 0;
-    quizData.push(...shuffledData); 
-    
-    const imageUrls = quizData.map((q) => q.image);
-    await preloadImages(imageUrls);
+    quizData.push(...shuffledData);
+
     initializeQuiz();
   })
   .catch((error) => console.error("Error fetching quiz data:", error));
@@ -55,9 +39,9 @@ function initializeQuiz() {
   const incorrectSpan = document.getElementById("incorrect");
 
   function updateTimer() {
-    const timerDisplay = document.getElementById('timer');
+    const timerDisplay = document.getElementById("timer");
     timerDisplay.textContent = `Time left: ${timeLeft} seconds`;
-    
+
     if (timeLeft <= 0) {
       clearInterval(questionTimer);
       incorrectCount++;
@@ -79,28 +63,39 @@ function initializeQuiz() {
     }, 1000);
   }
 
-  function loadQuestion() {
+  async function loadQuestion() {
     if (currentQuestion < gameQuestions.length) {
       const currentQuiz = gameQuestions[currentQuestion];
-      
-      fotoElement.style.backgroundColor = "transparent";
-      fotoElement.src = currentQuiz.image;
+
+      fotoElement.style.backgroundColor = "#f0f0f0"; // Placeholder while loading
+      fotoElement.src = ""; // Clear existing image
+
+      try {
+        // Preload the image
+        const img = await preloadImage(currentQuiz.image);
+        fotoElement.style.backgroundColor = "transparent";
+        fotoElement.src = img.src;
+      } catch (error) {
+        console.error("Failed to load image:", error);
+        fotoElement.style.backgroundColor = "#f0f0f0"; // Fallback placeholder
+      }
 
       const otherAnswers = quizData
-        .filter(q => q.correctAnswer !== currentQuiz.correctAnswer)
-        .map(q => q.correctAnswer);
-      
+        .filter((q) => q.correctAnswer !== currentQuiz.correctAnswer)
+        .map((q) => q.correctAnswer);
+
       const wrongAnswers = [...new Set(otherAnswers)]
         .sort(() => Math.random() - 0.5)
         .slice(0, 3);
 
-      const choices = [...wrongAnswers, currentQuiz.correctAnswer]
-        .sort(() => Math.random() - 0.5);
+      const choices = [...wrongAnswers, currentQuiz.correctAnswer].sort(
+        () => Math.random() - 0.5
+      );
 
       choicesElements.forEach((btn, index) => {
         btn.textContent = choices[index];
       });
-      
+
       startTimer();
       resetInactivityTimer();
     } else {
@@ -108,10 +103,19 @@ function initializeQuiz() {
     }
   }
 
+  function preloadImage(url) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = url;
+    });
+  }
+
   function checkAnswer(btn) {
     if (currentQuestion < gameQuestions.length) {
       clearInterval(questionTimer);
-      
+
       const selectedAnswer = btn.textContent;
       const correctAnswer = gameQuestions[currentQuestion].correctAnswer;
 
