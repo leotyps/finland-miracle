@@ -2,44 +2,79 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>48intens Website</title>
-    <meta name="description"
-        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
-    <meta name="keywords" content="48intens, JKT48, jekate48, member, news" />
-    <meta property="og:title" content="48intens Website" />
-    <meta property="og:description"
-        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
-    <meta property="og:image" content="/assets/image/intens.webp" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://48intens.com" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="48intens Website" />
-    <meta name="twitter:description"
-        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
-    <meta name="twitter:image" content="/assets/image/intens.webp" />
-    <meta name="twitter:creator" content="@48intens" />
-    <link rel="icon" href="/assets/image/icon.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/assets/css/style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>48intens Website</title>
+  <meta name="description"
+    content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+  <meta name="keywords" content="48intens, JKT48, jekate48, member, news" />
+  <meta property="og:title" content="48intens Website" />
+  <meta property="og:description"
+    content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+  <meta property="og:image" content="/assets/image/intens.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://48intens.com" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="48intens Website" />
+  <meta name="twitter:description"
+    content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+  <meta name="twitter:image" content="/assets/image/intens.webp" />
+  <meta name="twitter:creator" content="@48intens" />
+  <link rel="icon" href="/assets/image/icon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css" />
 </head>
 
 <body class="bg-gray-800 flex items-center justify-center min-h-screen text-gray-800">
   <div class="p-6 text-center">
-    <img src="/assets/image/logo.png" alt="Maintenance" class="rounded-3xl mx-auto mb-6 w-96" />
+    <img src="/assets/image/logo.png" alt="Maintenance" class="swing-animation rounded-3xl mx-auto mb-6 w-96" />
     <h1 class="text-2xl text-white mb-4">We're Under Maintenance</h1>
     <p class="text-white">
-      Our website is currently undergoing scheduled maintenance. We will be back soon. 
-      Thank you for your patience, <br /> 
+      Our website is currently undergoing scheduled maintenance. We will be back soon.
+      Thank you for your patience, <br />
       best regards from <span class="font-bold">48Intens Dev Team</span>.
     </p>
   </div>
+  <audio id="bgMusic" loop>
+    <source src="/assets/music/mt.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  <div class="music-controls">
+    <button onclick="toggleMusic()" id="musicToggle">
+      <i class="fas fa-play" id="musicIcon"></i>
+    </button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5">
+  </div>
+
+  <script>
+    const audio = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    const volumeSlider = document.getElementById('volumeSlider');
+
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+        musicIcon.className = 'fas fa-pause';
+      } else {
+        audio.pause();
+        musicIcon.className = 'fas fa-play';
+      }
+    }
+
+    volumeSlider.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+    });
+
+    window.addEventListener('load', () => {
+    });
+  </script>
+
   <script src="/middleware/middleware.js"></script>
   <script src="/security/typicalsleepingboy.js"></script>
 </body>

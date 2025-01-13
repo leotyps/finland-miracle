@@ -116,3 +116,37 @@ body.no-scroll {
     transition-delay: 0.4s;
 }
 
+@keyframes swing {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+.swing-animation {
+    animation: swing 2s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+.music-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.music-controls button {
+    background: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.music-controls button:hover {
+    transform: scale(1.1);
+}
