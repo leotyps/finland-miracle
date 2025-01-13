@@ -122,9 +122,14 @@ async function fetchDetailNews() {
       );
       const gambarArray = data.gambar || [];
 
-      const gambarHTML = gambarArray
-        .map((url) => `<img src="${url}" alt="${judul}" class="news-image mb-4">`)
-        .join("");
+      // Gambar berjajar ke samping
+      const gambarHTML = `
+        <div class="image-container">
+          ${gambarArray
+            .map((url) => `<img src="${url}" alt="${judul}" class="news-image">`)
+            .join("")}
+        </div>
+      `;
 
       const detailTemplate = `
         <div class="max-w-10xl mx-auto p-8 ${colorClass} shadow-lg rounded-3xl">

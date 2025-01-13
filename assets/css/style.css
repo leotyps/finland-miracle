@@ -102,11 +102,15 @@ body.no-scroll {
 #mobile-menu.active .menu-item:nth-child(3) { transition-delay: 0.3s; }
 #mobile-menu.active .menu-item:nth-child(4) { transition-delay: 0.4s; }
 
-.news-image {
-    width: 100%; 
-    max-width: 400px; 
-    height: auto; 
-    margin: 0 auto; 
-    border-radius: 15px; 
-    display: block; 
+.image-container {
+    display: flex; /* Atur kontainer menjadi flexbox */
+    flex-wrap: wrap; /* Agar gambar turun ke baris berikutnya jika layar terlalu sempit */
+    gap: 10px; /* Jarak antar gambar */
+    justify-content: start; /* Atur gambar ke kiri (atau gunakan 'center' untuk di tengah) */
+  }
+
+  .news-image {
+    max-width: 150px; /* Lebar maksimum gambar */
+    height: auto; /* Menjaga rasio aspek gambar */
+    border-radius: 10px; /* Opsional: Sudut gambar melengkung */
   }
