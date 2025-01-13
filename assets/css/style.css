@@ -116,15 +116,3 @@ body.no-scroll {
     transition-delay: 0.4s;
 }
 
-.image-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: start;
-}
-
-.news-image {
-    max-width: 450px;
-    height: auto;
-    border-radius: 10px;
-}

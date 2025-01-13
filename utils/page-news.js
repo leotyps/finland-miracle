@@ -123,9 +123,14 @@ async function fetchDetailNews() {
       const gambarArray = data.gambar || [];
 
       const gambarHTML = `
-        <div class="image-container">
+        <div class="flex flex-wrap gap-4">
           ${gambarArray
-            .map((url) => `<img src="${url}" alt="${judul}" class="news-image">`)
+            .map(
+              (url) => `
+              <img src="${url}" alt="${judul}" 
+                   class="w-36 h-auto rounded-lg shadow-md">
+            `
+            )
             .join("")}
         </div>
       `;

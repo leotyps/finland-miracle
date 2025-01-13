@@ -117,7 +117,7 @@ async function fetchTheaterData() {
                         <strong>Time:</strong> ${show.time} WIB
                     </div>
                     <div class="text-sm text-gray-500 mb-3">
-                        <strong>Jumlah Member:</strong> ${show.members.length > 0 ? show.members.length : 'No Members 😭'} member
+                        <strong>Jumlah Member:</strong> ${show.members.length > 0 ? show.members.length : 'No Members 😭'}
                     </div>
                     <button class="w-full bg-blue-300 text-white px-4 py-2 rounded-3xl text-sm hover:bg-blue-400 transition duration-300" 
                         onclick="showPopup(${JSON.stringify(show).replace(/"/g, '&quot;')}, ${JSON.stringify(banner).replace(/"/g, '&quot;')}, ${JSON.stringify(memberData.members.member).replace(/"/g, '&quot;')})">
@@ -182,7 +182,7 @@ async function showPopup(show, banner, members) {
                     <span class="text-xs font-semibold">${member.displayName}</span>
                 </a>
             `).join('')
-            : Array(3).fill(`
+            : Array(6).fill(`
                 <div class="flex flex-col items-center bg-gray-50 p-2 rounded-3xl">
                     <img src="https://jkt48.com/images/logo.svg" alt="Placeholder" class="w-16 h-16 object-cover rounded-full mb-2">
                     <span class="text-xs font-semibold">No Member</span>
