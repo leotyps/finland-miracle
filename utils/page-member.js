@@ -1,7 +1,7 @@
 async function fetchMembers() {
   try {
     const response = await fetch(
-      "https://intensprotectionexenew.vercel.app/api/member"
+      "https://48intensapi.my.id/api/member"
     );
     const data = await response.json();
     const members = data.members.member;

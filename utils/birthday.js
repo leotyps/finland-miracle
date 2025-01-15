@@ -17,7 +17,7 @@ function displayBirthdays() {
             </div>
         `).join('');
 
-    fetch('https://intensprotectionexenew.vercel.app/api/birthdays')
+    fetch('https://48intensapi.my.id/api/birthdays')
         .then(response => response.json())
         .then(data => {
             countElement.textContent = `${data.length} Members`;

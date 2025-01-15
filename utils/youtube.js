@@ -11,7 +11,7 @@ async function fetchYoutubeVideos() {
             </div>
         `.repeat(4);
 
-        const response = await fetch('https://intensprotectionexenew.vercel.app/api/video');
+        const response = await fetch('https://48intensapi.my.id/api/video');
         const data = await response.json();
 
         container.innerHTML = '';

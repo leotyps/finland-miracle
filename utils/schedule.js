@@ -4,7 +4,7 @@ let events = [];
 
 async function fetchEvents(year, month) {
     try {
-        const url = `https://intensprotectionexenew.vercel.app/api/events_jkt48?year=${year}&month=${month + 1}`;
+        const url = `https://48intensapi.my.id/api/events_jkt48?year=${year}&month=${month + 1}`;
         const response = await fetch(url);
         const data = await response.json();
         if (data.success && data.data) {

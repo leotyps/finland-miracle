@@ -42,7 +42,7 @@ async function fetchPageNews() {
 
   try {
     const response = await fetch(
-      "https://intensprotectionexenew.vercel.app/api/news"
+      "https://48intensapi.my.id/api/news"
     );
 
     if (!response.ok) throw new Error("Network response was not ok");
@@ -107,7 +107,7 @@ async function fetchDetailNews() {
 
     try {
       const response = await fetch(
-        `https://intensprotectionexenew.vercel.app/api/news/detail/${beritaId}`
+        `https://48intensapi.my.id/api/news/detail/${beritaId}`
       );
 
       if (!response.ok) throw new Error("Network response was not ok");

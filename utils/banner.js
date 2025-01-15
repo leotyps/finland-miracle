@@ -1,4 +1,4 @@
-fetch('https://intensprotectionexenew.vercel.app/api/banners')
+fetch('https://48intensapi.my.id/api/banners')
     .then(response => response.json())
     .then(data => {
         if (data.success && data.data) {

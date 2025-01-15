@@ -56,7 +56,7 @@ async function fetchTheaterData() {
     container.innerHTML = ''; 
 
     try {
-        const theaterResponse = await fetch('https://intensprotectionexenew.vercel.app/api/theater');
+        const theaterResponse = await fetch('https://48intensapi.my.id/api/theater');
         const theaterData = await theaterResponse.json();
         
         const skeletonCount = theaterData.length || 1;  
@@ -73,7 +73,7 @@ async function fetchTheaterData() {
 
         const [bannerResponse, memberResponse] = await Promise.all([
             fetch('/data/theater.json'),
-            fetch('https://intensprotectionexenew.vercel.app/api/member')
+            fetch('https://48intensapi.my.id/api/member')
         ]);
         
         const [bannerData, memberData] = await Promise.all([

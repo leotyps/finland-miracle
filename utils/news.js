@@ -13,7 +13,7 @@ async function fetchHotNews() {
             </div>
         `).join(''); 
 
-        const response = await fetch('https://intensprotectionexenew.vercel.app/api/news');
+        const response = await fetch('https://48intensapi.my.id/api/news');
         const data = await response.json();
 
         container.innerHTML = '';

@@ -41,7 +41,7 @@ async function fetchDetailMember() {
         </div>
       </div>`;
 
-    const response = await fetch(`https://intensprotectionexenew.vercel.app/api/member/${memberId}`);
+    const response = await fetch(`https://48intensapi.my.id/api/member/${memberId}`);
     if (!response.ok) {
       showNotFoundMessage(container, "Member tidak ditemukan");
       return;
