@@ -78,33 +78,41 @@ function createIDNCard(stream) {
     const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=idn&s=${streamId}`;
 
     return `
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="relative">
-                <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-48 object-cover">
-                <div class="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded-lg text-sm flex items-center">
-                    <span class="inline-block w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-                    LIVE
-                </div>
-                <div class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-sm">
-                    ${stream.view_count} viewers
-                </div>
-            </div>
-            <div class="p-4">
-                <div class="flex items-center mb-3">
-                    <img src="${stream.user.avatar}" alt="Avatar" class="w-10 h-10 rounded-full mr-3">
-                    <div>
-                        <h3 class="font-semibold text-gray-800">${stream.user.name}</h3>
-                        <p class="text-gray-600 text-sm">@${stream.user.username}</p>
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
+            <div class="relative group">
+                <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
+                <div class="absolute inset-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute top-3 left-3 flex items-center space-x-2">
+                    <div class="bg-red-600 text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg">
+                        <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                        <span>LIVE</span>
+                    </div>
+                    <div class="bg-black/75 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                        ${stream.view_count} watching
                     </div>
                 </div>
-                <h4 class="font-medium text-gray-800 mb-2">${stream.title}</h4>
-                <div class="flex justify-between items-center">
-                    <p class="text-gray-600 text-sm">IDN Live</p>
-                    <a href="${watchUrl}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-md hover:bg-purple-700 transition-colors">
-                        <i class="fas fa-play mr-2"></i>
-                        Watch Live
-                    </a>
+                <div class="absolute top-3 right-3">
+                    <div class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                        IDN Live
+                    </div>
                 </div>
+            </div>
+            <div class="p-5">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="relative">
+                        <img src="${stream.user.avatar}" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-purple-100">
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900">${stream.user.name}</h3>
+                        <p class="text-gray-500 text-sm">@${stream.user.username}</p>
+                    </div>
+                </div>
+                <h4 class="font-medium text-gray-800 mb-4 line-clamp-2">${stream.title}</h4>
+                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white font-medium rounded-lg hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                    <i class="fas fa-play mr-2"></i>
+                    Watch Stream
+                </a>
             </div>
         </div>
     `;
@@ -116,39 +124,51 @@ function createShowroomCard(stream) {
     const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=sr&s=${streamId}`;
 
     return `
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="relative">
-                <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-48 object-cover">
-                <div class="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded-lg text-sm flex items-center">
-                    <span class="inline-block w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-                    LIVE
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
+            <div class="relative group">
+                <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
+                <div class="absolute inset-0  group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute top-3 left-3 flex items-center space-x-2">
+                    <div class="bg-red-600 text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg">
+                        <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                        <span>LIVE</span>
+                    </div>
+                    <div class="bg-black/75 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                        ${stream.view_num.toLocaleString()} watching
+                    </div>
                 </div>
-                <div class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-sm">
-                    ${stream.view_num.toLocaleString()} viewers
+                <div class="absolute top-3 right-3">
+                    <div class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                        SHOWROOM
+                    </div>
                 </div>
             </div>
-            <div class="p-4">
-                <div class="flex items-center mb-3">
-                    <img src="${stream.image_square}" alt="Avatar" class="w-10 h-10 rounded-full mr-3">
+            <div class="p-5">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="relative">
+                        <img src="${stream.image_square}" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-purple-100">
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                    </div>
                     <div>
-                        <h3 class="font-semibold text-gray-800">${stream.main_name}</h3>
-                        <p class="text-gray-600 text-sm">SHOWROOM</p>
+                        <h3 class="font-bold text-gray-900">${stream.main_name}</h3>
+                        <p class="text-purple-600 font-medium text-sm">${stream.genre_name}</p>
                     </div>
                 </div>
-                <div class="flex justify-between items-center mt-2">
-                    <div class="text-sm text-gray-600">
-                        <div>Followers: ${stream.follower_num.toLocaleString()}</div>
-                        <div>${stream.genre_name}</div>
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-2 text-gray-500">
+                        <i class="fas fa-users"></i>
+                        <span class="text-sm">${stream.follower_num.toLocaleString()} followers</span>
                     </div>
-                    <a href="${watchUrl}" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white text-sm font-medium rounded-md hover:bg-purple-700 transition-colors">
-                        <i class="fas fa-play mr-2"></i>
-                        Watch Live
-                    </a>
                 </div>
+                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white font-medium rounded-lg hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                    <i class="fas fa-play mr-2"></i>
+                    Watch Stream
+                </a>
             </div>
         </div>
     `;
 }
+
 
 fetchLiveData();
 setInterval(fetchLiveData, 10000);
