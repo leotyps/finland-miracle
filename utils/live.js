@@ -1,6 +1,10 @@
 // live.js
 async function fetchLiveData() {
     try {
+        const container = document.getElementById('liveContainer');
+        container.innerHTML = '';
+        container.className = 'min-h-[24rem] relative';
+
         const [idnResponse, showroomResponse] = await Promise.all([
             fetch('https://48intensapi.my.id/api/idnlive/jkt48'),
             fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan')
@@ -9,44 +13,51 @@ async function fetchLiveData() {
         const idnData = await idnResponse.json();
         const showroomData = await showroomResponse.json();
 
-        const container = document.getElementById('liveContainer');
-        container.innerHTML = '';
+        let hasContent = false;
+
         if (idnData.data && idnData.data.length > 0) {
             idnData.data.forEach(stream => {
                 const card = createIDNCard(stream);
                 container.innerHTML += card;
             });
+            hasContent = true;
         }
+
         if (showroomData && showroomData.length > 0) {
             showroomData.forEach(stream => {
                 const card = createShowroomCard(stream);
                 container.innerHTML += card;
             });
+            hasContent = true;
         }
 
-        if ((!idnData.data || idnData.data.length === 0) && (!showroomData || showroomData.length === 0)) {
-            showNotFoundMessage(container, 'No live streams available at the moment.');
+        if (!hasContent) {
+            showNotFoundMessage(container, 'No live streams available at the moment 😭');
         }
     } catch (error) {
         console.error('Error fetching data:', error);
         const container = document.getElementById('liveContainer');
-        showNotFoundMessage(container, 'Error loading live streams. Please try again later.');
+        showNotFoundMessage(container, 'Error loading live streams. Please try again later 😭');
     }
 }
 
 function showNotFoundMessage(container, message) {
+    container.innerHTML = '';
     container.className = 'min-h-[24rem] relative';
 
-    container.innerHTML = `
+    const notFoundContent = `
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="flex flex-col items-center">
-                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" 
+                        alt="Not Found" 
+                        class="w-32 h-32 mb-4">
                 <p class="text-gray-500 text-lg font-bold">${message}</p>
             </div>
         </div>
     `;
-}
 
+    container.innerHTML = notFoundContent;
+}
 
 function compressStreamData(url, platform) {
     const streamId = generateShortId(url);
@@ -171,4 +182,4 @@ function createShowroomCard(stream) {
 
 
 fetchLiveData();
-setInterval(fetchLiveData, 10000);
+setInterval(fetchLiveData, 30000);
