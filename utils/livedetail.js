@@ -1,3 +1,32 @@
+
+// livedetail.js
+function decodeStreamData(encoded) {
+    try {
+        // Add padding if needed
+        while (encoded.length % 4) {
+            encoded += '=';
+        }
+        
+        // Convert URL-safe characters back
+        const base64 = encoded
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+        
+        // Decode base64
+        const jsonString = atob(base64);
+        const shortData = JSON.parse(jsonString);
+        
+        // Expand shortened data back to full format
+        return {
+            mpath: shortData.u.startsWith('http') ? shortData.u : 'https://' + shortData.u,
+            ptype: shortData.t === 'i' ? 'idnlv' : 'sroom'
+        };
+    } catch (error) {
+        console.error('Decoding error:', error);
+        throw new Error('Invalid stream data');
+    }
+}
+
 async function initializePlayer() {
     try {
         const urlParams = new URLSearchParams(window.location.search);
@@ -9,9 +38,14 @@ async function initializePlayer() {
             throw new Error('Required parameters are missing');
         }
 
-        // Decode stream data dengan format 5 huruf
-        const streamData = JSON.parse(atob(encodedStream + '='.repeat((4 - encodedStream.length % 4) % 4)));
+        // Log the encoded data for debugging
+        console.log('Encoded stream data:', encodedStream);
+
+        const streamData = decodeStreamData(encodedStream);
         const streamUrl = streamData.mpath;
+
+        // Log the decoded URL for debugging
+        console.log('Stream URL:', streamUrl);
 
         // Initialize Video.js player
         const player = videojs('liveStream', {
@@ -168,4 +202,3 @@ function updateShowroomStreamInfo(data) {
 }
 
 document.addEventListener('DOMContentLoaded', initializePlayer);
-

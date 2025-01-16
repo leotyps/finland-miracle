@@ -10,45 +10,81 @@ async function fetchLiveData() {
 
         const container = document.getElementById('liveContainer');
         container.innerHTML = '';
+        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6';
 
-        // Process IDN Live data
+        let hasLiveStreams = false;
+
         if (idnData.data && idnData.data.length > 0) {
+            hasLiveStreams = true;
             idnData.data.forEach(stream => {
                 const card = createIDNCard(stream);
                 container.innerHTML += card;
             });
         }
 
-        // Process Showroom data
         if (showroomData && showroomData.length > 0) {
+            hasLiveStreams = true;
             showroomData.forEach(stream => {
                 const card = createShowroomCard(stream);
                 container.innerHTML += card;
             });
         }
 
-        if (!idnData.data.length && !showroomData.length) {
-            container.innerHTML = '<p class="text-gray-500 text-center col-span-full">No live streams available at the moment.</p>';
+        if (!hasLiveStreams) {
+            showNotFoundMessage(container, 'No one is live right now 😭');
         }
     } catch (error) {
         console.error('Error fetching data:', error);
-        document.getElementById('liveContainer').innerHTML =
-            '<p class="text-red-500 text-center col-span-full">Error loading live streams. Please try again later.</p>';
+        const container = document.getElementById('liveContainer');
+        showNotFoundMessage(container, 'Error loading live streams. Please try again later.');
     }
 }
 
+function showNotFoundMessage(container, message) {
+    container.className = 'flex items-center justify-center min-h-[24rem]';
+    
+    container.innerHTML = `
+        <div class="text-center">
+            <img 
+                src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" 
+                alt="Not Found" 
+                class="w-32 h-32 mx-auto mb-4"
+            >
+            <p class="text-gray-500 text-lg font-medium">${message}</p>
+        </div>
+    `;
+}
+
+
+function encodeStreamData(data) {
+    try {
+        // Use shorter key names
+        const shortData = {
+            u: data.mpath.replace(/^https?:\/\//, ''), // Remove protocol
+            t: data.ptype[0] // Just use first letter of platform type
+        };
+        
+        // Convert to string and encode
+        return btoa(JSON.stringify(shortData))
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=/g, '')
+            .substring(0, 20); // Take only first 20 chars for shorter URL
+    } catch (error) {
+        console.error('Encoding error:', error);
+        return '';
+    }
+}
 function createIDNCard(stream) {
     const memberUsername = stream.user.username.replace('jkt48_', '');
-    // Proxy URL untuk IDN Live
     const proxyStreamUrl = `https://jkt48showroom-api.my.id/proxy?url=${encodeURIComponent(stream.stream_url)}`;
     
-    // Format 5 huruf: mpath untuk path/url, ptype untuk platform type
-    const shortStreamData = {
+    const streamData = {
         mpath: proxyStreamUrl,
-        ptype: "idnlv"    // idnlv untuk IDN Live
+        ptype: "idnlv"
     };
     
-    const encodedStream = btoa(JSON.stringify(shortStreamData)).replace(/=/g, '');
+    const encodedStream = encodeStreamData(streamData);
     const watchUrl = `/components/detail/live.html?member=${memberUsername}&platform=idn&s=${encodedStream}`;
     
     return `
@@ -86,13 +122,13 @@ function createIDNCard(stream) {
 
 function createShowroomCard(stream) {
     const memberUsername = stream.room_url_key.replace('JKT48_', '').toLowerCase();
-    // Format 5 huruf untuk Showroom
-    const shortStreamData = {
+    
+    const streamData = {
         mpath: stream.streaming_url_list[0].url,
-        ptype: "sroom"    // sroom untuk Showroom
+        ptype: "sroom"
     };
     
-    const encodedStream = btoa(JSON.stringify(shortStreamData)).replace(/=/g, '');
+    const encodedStream = encodeStreamData(streamData);
     const watchUrl = `/components/detail/live.html?member=${memberUsername}&platform=showroom&s=${encodedStream}`;
     
     return `
@@ -130,5 +166,6 @@ function createShowroomCard(stream) {
     `;
 }
 
+// Initialize the live stream list and refresh every 10 seconds
 fetchLiveData();
 setInterval(fetchLiveData, 10000);

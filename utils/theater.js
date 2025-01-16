@@ -40,12 +40,9 @@ function getShowStatus(showInfo) {
             return { text: "Hari ini" };
         }
 
-        // Tomorrow's shows
         if (showDateOnly.getTime() === tomorrow.getTime()) {
             return { text: "Besok" };
         }
-
-        // Future shows
         return { text: "Upcoming" };
 
     } catch (error) {
