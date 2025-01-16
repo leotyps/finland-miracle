@@ -123,17 +123,18 @@ async function fetchDetailNews() {
       const gambarArray = data.gambar || [];
 
       const gambarHTML = `
-        <div class="flex flex-wrap gap-4">
-          ${gambarArray
-            .map(
-              (url) => `
-              <img src="${url}" alt="${judul}" 
-                   class="w-36 h-auto rounded-lg shadow-md">
-            `
-            )
-            .join("")}
-        </div>
-      `;
+      <div class="flex flex-wrap gap-4">
+        ${gambarArray
+          .map(
+            (url) => `
+            <img src="${url}" alt="${judul}" 
+                 class="w-64 h-auto rounded-lg shadow-md">
+          `
+          )
+          .join("")}
+      </div>
+    `;
+    
 
       const detailTemplate = `
         <div class="max-w-10xl mx-auto p-8 ${colorClass} shadow-lg rounded-3xl">
