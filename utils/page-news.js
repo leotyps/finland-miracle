@@ -128,13 +128,13 @@ async function fetchDetailNews() {
           .map(
             (url) => `
             <img src="${url}" alt="${judul}" 
-                 class="w-64 h-auto rounded-lg shadow-md">
+                 class="w-80 h-auto rounded-lg">
           `
           )
           .join("")}
       </div>
     `;
-    
+
 
       const detailTemplate = `
         <div class="max-w-10xl mx-auto p-8 ${colorClass} shadow-lg rounded-3xl">
