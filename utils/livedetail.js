@@ -172,6 +172,17 @@ async function updateStreamInfo(platform, memberName) {
     }
 }
 
+function updateMetaTags({ title, description, image }) {
+    document.title = title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+    document.querySelector('meta[property="og:image"]')?.setAttribute('content', image);
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
+    document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', image);
+}
+
 function updateIDNStreamInfo(data) {
     if (!data || !data.user) {
         showErrorState('Invalid stream data received');
@@ -185,10 +196,9 @@ function updateIDNStreamInfo(data) {
         document.getElementById('startTime').textContent = data.live_at ? 
             new Date(data.live_at).toLocaleTimeString() : 'Unknown';
         document.getElementById('streamQuality').textContent = 'HD';
-        document.title = `${data.user.name} - Live Streaming | 48intens`;
         updateMetaTags({
             title: `${data.user.name} - Live Streaming | 48intens`,
-            description: data.title || 'IDN Live Stream',
+            description: `${data.user.name} sedang melakukan live streaming di IDN Live. ${data.title}`,
             image: data.image || data.user.avatar
         });
     } catch (err) {
@@ -211,27 +221,15 @@ function updateShowroomStreamInfo(data) {
             new Date(data.started_at * 1000).toLocaleTimeString() : 'Unknown';
         document.getElementById('streamQuality').textContent = 
             data.streaming_url_list?.[0]?.label || 'Unknown';
-        document.title = `${data.main_name} - Live Streaming | 48intens`;
         updateMetaTags({
             title: `${data.main_name} - Live Streaming | 48intens`,
-            description: data.genre_name || 'Showroom Live Stream',
+            description: `${data.main_name} sedang melakukan live streaming di SHOWROOM. ${data.genre_name}`,
             image: data.image_square || data.image
         });
     } catch (err) {
         console.error('Error updating Showroom stream info:', err);
         showErrorState('Error displaying stream information');
     }
-}
-
-function updateMetaTags({ title, description, image }) {
-
-    document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
-    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
-    document.querySelector('meta[property="og:image"]')?.setAttribute('content', image);
-    
-    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
-    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
-    document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', image);
 }
 
 function showErrorState(message) {
