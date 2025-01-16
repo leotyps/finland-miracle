@@ -1,3 +1,4 @@
+// live.js
 async function fetchLiveData() {
     try {
         const [idnResponse, showroomResponse] = await Promise.all([
@@ -10,28 +11,21 @@ async function fetchLiveData() {
 
         const container = document.getElementById('liveContainer');
         container.innerHTML = '';
-        container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6';
-
-        let hasLiveStreams = false;
-
         if (idnData.data && idnData.data.length > 0) {
-            hasLiveStreams = true;
             idnData.data.forEach(stream => {
                 const card = createIDNCard(stream);
                 container.innerHTML += card;
             });
         }
-
         if (showroomData && showroomData.length > 0) {
-            hasLiveStreams = true;
             showroomData.forEach(stream => {
                 const card = createShowroomCard(stream);
                 container.innerHTML += card;
             });
         }
 
-        if (!hasLiveStreams) {
-            showNotFoundMessage(container, 'No one is live right now 😭');
+        if ((!idnData.data || idnData.data.length === 0) && (!showroomData || showroomData.length === 0)) {
+            showNotFoundMessage(container, 'No live streams available at the moment.');
         }
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -41,50 +35,48 @@ async function fetchLiveData() {
 }
 
 function showNotFoundMessage(container, message) {
-    container.className = 'flex items-center justify-center min-h-[24rem]';
-    
+    container.className = 'min-h-[24rem] relative';
+
     container.innerHTML = `
-        <div class="text-center">
-            <img 
-                src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" 
-                alt="Not Found" 
-                class="w-32 h-32 mx-auto mb-4"
-            >
-            <p class="text-gray-500 text-lg font-medium">${message}</p>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="flex flex-col items-center">
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
+                <p class="text-gray-500 text-lg font-bold">${message}</p>
+            </div>
         </div>
     `;
 }
 
 
-function encodeStreamData(data) {
-    try {
-        const shortData = {
-            u: data.mpath.replace(/^https?:\/\//, ''), // Remove protocol
-            t: data.ptype[0]
-        };
-        
-        return btoa(JSON.stringify(shortData))
-            .replace(/\+/g, '-')
-            .replace(/\//g, '_')
-            .replace(/=/g, '')
-            .substring(0, 20); 
-    } catch (error) {
-        console.error('Encoding error:', error);
-        return '';
-    }
+function compressStreamData(url, platform) {
+    const streamId = generateShortId(url);
+    const streamData = {
+        mpath: url,
+        ptype: platform === 'showroom' ? 'sroom' : 'idnlv',
+        exp: Date.now() + (3 * 60 * 60 * 1000)
+    };
+
+    localStorage.setItem(`stream_${streamId}`, JSON.stringify(streamData));
+    return streamId;
 }
+
+function generateShortId(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return Math.abs(hash).toString(36).slice(-6);
+}
+
+
 function createIDNCard(stream) {
     const memberUsername = stream.user.username.replace('jkt48_', '');
     const proxyStreamUrl = `https://jkt48showroom-api.my.id/proxy?url=${encodeURIComponent(stream.stream_url)}`;
-    
-    const streamData = {
-        mpath: proxyStreamUrl,
-        ptype: "idnlv"
-    };
-    
-    const encodedStream = encodeStreamData(streamData);
-    const watchUrl = `/components/detail/live.html?member=${memberUsername}&platform=idn&s=${encodedStream}`;
-    
+    const streamId = compressStreamData(proxyStreamUrl, 'idn');
+    const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=idn&s=${streamId}`;
+
     return `
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="relative">
@@ -120,15 +112,9 @@ function createIDNCard(stream) {
 
 function createShowroomCard(stream) {
     const memberUsername = stream.room_url_key.replace('JKT48_', '').toLowerCase();
-    
-    const streamData = {
-        mpath: stream.streaming_url_list[0].url,
-        ptype: "sroom"
-    };
-    
-    const encodedStream = encodeStreamData(streamData);
-    const watchUrl = `/components/detail/live.html?member=${memberUsername}&platform=showroom&s=${encodedStream}`;
-    
+    const streamId = compressStreamData(stream.streaming_url_list[0].url, 'showroom');
+    const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=sr&s=${streamId}`;
+
     return `
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="relative">
