@@ -3,11 +3,10 @@ async function fetchLiveData() {
     try {
         const container = document.getElementById('liveContainer');
         container.innerHTML = '';
-        container.className = 'min-h-[24rem] relative';
 
         const [idnResponse, showroomResponse] = await Promise.all([
-            fetch('https://48intensapi.my.id/api/idnlive/jkt48'),
-            fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan')
+            fetch('http://48intensapi.my.id/api/idnlive/jkt48'),
+            fetch('http://48intensapi.my.id/api/showroom/jekatepatlapan')
         ]);
 
         const idnData = await idnResponse.json();
@@ -89,7 +88,7 @@ function createIDNCard(stream) {
     const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=idn&s=${streamId}`;
 
     return `
-        <div class="bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
+        <div class="bg-yellow-100/80 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
             <div class="relative group">
                 <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
                 <div class="absolute inset-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -103,7 +102,7 @@ function createIDNCard(stream) {
                     </div>
                 </div>
                 <div class="absolute top-3 right-3">
-                    <div class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                    <div class="bg-gradient-to-r from-amber-400 to-yellow-500 text-white px-3 py-1.5 rounded-full text-sm font-medium">
                         IDN Live
                     </div>
                 </div>
@@ -115,12 +114,12 @@ function createIDNCard(stream) {
                         <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                     </div>
                     <div>
-                        <h3 class="font-bold text-gray-900">${stream.user.name}</h3>
-                        <p class="text-gray-500 text-sm">@${stream.user.username}</p>
+                        <h3 class="font-bold text-gray-600">${stream.user.name}</h3>
+                        <p class=" text-gray-600 text-sm">@${stream.user.username}</p>
                     </div>
                 </div>
-                <h4 class="font-medium text-gray-800 mb-4 line-clamp-2">${stream.title}</h4>
-                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white font-medium rounded-lg hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                <h4 class="font-medium text-gray-600 mb-4 line-clamp-2">${stream.title}</h4>
+                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
                     <i class="fas fa-play mr-2"></i>
                     Watch Stream
                 </a>
@@ -135,7 +134,7 @@ function createShowroomCard(stream) {
     const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=sr&s=${streamId}`;
 
     return `
-        <div class="bg-white rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
+        <div class="bg-rose-300/80 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
             <div class="relative group">
                 <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
                 <div class="absolute inset-0  group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -149,7 +148,7 @@ function createShowroomCard(stream) {
                     </div>
                 </div>
                 <div class="absolute top-3 right-3">
-                    <div class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                    <div class="bg-gradient-to-r from-rose-400 to-rose-500 text-white px-3 py-1.5 rounded-full text-sm font-medium">
                         SHOWROOM
                     </div>
                 </div>
@@ -161,17 +160,17 @@ function createShowroomCard(stream) {
                         <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                     </div>
                     <div>
-                        <h3 class="font-bold text-gray-900">${stream.main_name}</h3>
-                        <p class="text-purple-600 font-medium text-sm">${stream.genre_name}</p>
+                        <h3 class="font-bold text-white">${stream.main_name}</h3>
+                        <p class="text-white font-medium text-sm">${stream.genre_name}</p>
                     </div>
                 </div>
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center space-x-2 text-gray-500">
-                        <i class="fas fa-users"></i>
-                        <span class="text-sm">${stream.follower_num.toLocaleString()} followers</span>
+                        <i class="text-white fas fa-users"></i>
+                        <span class="text-sm text-white">${stream.follower_num.toLocaleString()} followers</span>
                     </div>
                 </div>
-                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white font-medium rounded-lg hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-rose-400 to-rose-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
                     <i class="fas fa-play mr-2"></i>
                     Watch Stream
                 </a>
