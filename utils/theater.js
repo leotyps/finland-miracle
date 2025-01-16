@@ -6,17 +6,23 @@ function getShowStatus(showInfo) {
 
         const tomorrow = new Date(today);
         tomorrow.setDate(tomorrow.getDate() + 1);
+        
         const showInfoParts = showInfo.split(", ");
         if (showInfoParts.length < 2) {
             console.error("Invalid showInfo format:", showInfo);
             return null;
         }
+        
         const [datePart, timePart] = showInfoParts[1].split(" ");
         if (!datePart || !timePart) {
             console.error("Invalid showInfo format:", showInfo);
             return null;
         }
+
         const showDateTime = new Date(`${datePart.replace(/-/g, "/")} ${timePart}:00`);
+        const showEndDateTime = new Date(showDateTime);
+        showEndDateTime.setHours(showEndDateTime.getHours() + 2);
+        
         if (isNaN(showDateTime.getTime())) {
             console.error("Invalid show date/time:", `${datePart} ${timePart}`);
             return null;
@@ -24,25 +30,24 @@ function getShowStatus(showInfo) {
 
         const showDateOnly = new Date(showDateTime);
         showDateOnly.setHours(0, 0, 0, 0);
-
-        if (showDateTime < now) {
-            return;
+        if (showEndDateTime < now) {
+            return null;
         }
         if (showDateOnly.getTime() === today.getTime()) {
-            if (showDateTime <= now) {
+            if (now >= showDateTime && now <= showEndDateTime) {
                 return { text: "Sedang Berlangsung" };
             }
             return { text: "Hari ini" };
         }
+
+        // Tomorrow's shows
         if (showDateOnly.getTime() === tomorrow.getTime()) {
             return { text: "Besok" };
         }
 
-        if (showDateTime > now) {
-            return { text: "Upcoming" };
-        }
+        // Future shows
+        return { text: "Upcoming" };
 
-        return null;
     } catch (error) {
         console.error("Error in getShowStatus:", error);
         return null;
@@ -50,38 +55,52 @@ function getShowStatus(showInfo) {
 }
 
 
-
 async function fetchTheaterData() {
     const container = document.getElementById('theater-container');
-    container.innerHTML = ''; 
+    container.innerHTML = '';
 
     try {
         const theaterResponse = await fetch('https://48intensapi.my.id/api/theater');
         const theaterData = await theaterResponse.json();
-        
-        const skeletonCount = theaterData.length || 1;  
+
+        const skeletonCount = theaterData.length || 1;
         container.innerHTML = Array(skeletonCount).fill(`
-            <div class="bg-white rounded-3xl shadow-md overflow-hidden skeleton">
-                <div class="relative bg-gray-300 h-48 w-full rounded"></div>
-                <div class="p-4">
-                    <div class="bg-gray-300 h-6 w-3/4 mb-2 rounded"></div>
-                    <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
-                    <div class="bg-gray-200 h-4 w-1/3 mb-2 rounded"></div>
+            <div class="bg-black rounded-xl shadow-md overflow-hidden skeleton max-w-md mx-auto">
+                <div class="relative">
+                    <div class="bg-gray-300 h-64 w-full animate-pulse"></div>
+                    <div class="absolute top-4 right-4">
+                        <div class="bg-gray-300 h-6 w-20 rounded-full animate-pulse"></div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <div class="bg-gray-300 h-7 w-3/4 mb-3 mt-4 rounded animate-pulse"></div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="bg-gray-300 h-4 w-4 rounded animate-pulse"></div>
+                            <div class="bg-gray-300 h-4 w-1/2 rounded animate-pulse"></div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="bg-gray-300 h-4 w-4 rounded animate-pulse"></div>
+                            <div class="bg-gray-300 h-4 w-1/3 rounded animate-pulse"></div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="bg-gray-300 h-5 w-5 rounded-full animate-pulse"></div>
+                            <div class="bg-gray-300 h-4 w-16 rounded animate-pulse"></div>
+                        </div>
+                        <div class="bg-gray-300 h-9 w-full rounded-full animate-pulse"></div>
+                    </div>
                 </div>
             </div>
-        `).join(''); 
-
+        `).join('');
         const [bannerResponse, memberResponse] = await Promise.all([
             fetch('/data/theater.json'),
             fetch('https://48intensapi.my.id/api/member')
         ]);
-        
+
         const [bannerData, memberData] = await Promise.all([
             bannerResponse.json(),
             memberResponse.json()
         ]);
 
-        container.innerHTML = ''; 
+        container.innerHTML = '';
 
         if (theaterData.length === 0) {
             showNotFoundMessage(container, 'Theater Not Found 😭');
@@ -94,39 +113,46 @@ async function fetchTheaterData() {
             const birthdayMembers = show.birthdayMembers.length > 0;
 
             const theaterCard = `
-            <div class="bg-white rounded-3xl shadow-md overflow-hidden max-w-md mx-auto">
+                <div class="bg-black rounded-3xl shadow-md overflow-hidden max-w-md mx-auto">
                 <div class="relative">
-                    <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" 
-                        alt="${show.setlist}" 
-                        class="w-full h-auto max-h-64 object-cover rounded-t-lg">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-t-lg"></div>
-                    ${birthdayMembers 
-                        ? `<span class="absolute top-2 left-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-white text-xs px-3 py-1 rounded-full">Birthday</span>` 
-                        : ''}
-                        ${status 
-                            ? `<span class="absolute top-2 right-2 bg-white/30 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md">${status.text}</span>`
-                            : ''}                                         
-                </div>
-
-                <div class="p-4">
-                    <h3 class="text-base font-bold mb-2">${show.setlist}</h3>
-                    <div class="text-sm text-gray-500 mb-2">
-                        <strong>Date:</strong> ${show.showInfo.split(' ')[0]} ${show.showInfo.split(' ')[1]}
+                <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" 
+                    alt="${show.setlist}" 
+                    class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/60 to-transparent"></div>
+                ${birthdayMembers
+                    ? `<span class="absolute top-4 left-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs px-3 py-1 rounded-full">Birthday</span>`
+                    : ''}
+                ${status
+                    ? `<span class="absolute top-4 right-4 bg-white/30 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md">${status.text}</span>`
+                    : ''}
+                <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
+                    <!-- Show title - increased top margin -->
+                    <h3 class="text-lg font-bold mb-3 mt-4">${show.setlist}</h3>
+                    <div class="flex items-center gap-2 text-sm mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span>${show.showInfo.split(' ')[0]} ${show.showInfo.split(' ')[1]} | ${show.time} WIB</span>
                     </div>
-                    <div class="text-sm text-gray-500 mb-2">
-                        <strong>Time:</strong> ${show.time} WIB
+                    <div class="flex items-center gap-2 text-sm mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span>${show.members.length > 0 ? `${show.members.length} Members yang tampil` : 'No Members 😭'}</span>
                     </div>
-                    <div class="text-sm text-gray-500 mb-3">
-                        <strong>Jumlah Member:</strong> ${show.members.length > 0 ? show.members.length : 'No Members 😭'}
+                    <div class="flex items-center gap-2 mb-3">
+                        <img src="https://jkt48.com/images/logo.svg" alt="JKT48" class="w-5 h-5 rounded-full object-cover">
+                        <span class="text-sm">JKT48</span>
                     </div>
-                    <button class="w-full bg-blue-300 text-white px-4 py-2 rounded-3xl text-sm hover:bg-blue-400 transition duration-300" 
+                    <button class="w-full bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full text-sm transition duration-300 backdrop-blur-sm"
                         onclick="showPopup(${JSON.stringify(show).replace(/"/g, '&quot;')}, ${JSON.stringify(banner).replace(/"/g, '&quot;')}, ${JSON.stringify(memberData.members.member).replace(/"/g, '&quot;')})">
                         Detail
                     </button>
                 </div>
             </div>
+        </div>
         `;
-        container.innerHTML += theaterCard;
+            container.innerHTML += theaterCard;
 
         });
 
