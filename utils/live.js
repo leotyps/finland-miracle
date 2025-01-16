@@ -58,18 +58,16 @@ function showNotFoundMessage(container, message) {
 
 function encodeStreamData(data) {
     try {
-        // Use shorter key names
         const shortData = {
             u: data.mpath.replace(/^https?:\/\//, ''), // Remove protocol
-            t: data.ptype[0] // Just use first letter of platform type
+            t: data.ptype[0]
         };
         
-        // Convert to string and encode
         return btoa(JSON.stringify(shortData))
             .replace(/\+/g, '-')
             .replace(/\//g, '_')
             .replace(/=/g, '')
-            .substring(0, 20); // Take only first 20 chars for shorter URL
+            .substring(0, 20); 
     } catch (error) {
         console.error('Encoding error:', error);
         return '';
@@ -166,6 +164,5 @@ function createShowroomCard(stream) {
     `;
 }
 
-// Initialize the live stream list and refresh every 10 seconds
 fetchLiveData();
 setInterval(fetchLiveData, 10000);

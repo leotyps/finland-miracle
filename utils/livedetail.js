@@ -2,12 +2,9 @@
 // livedetail.js
 function decodeStreamData(encoded) {
     try {
-        // Add padding if needed
         while (encoded.length % 4) {
             encoded += '=';
         }
-        
-        // Convert URL-safe characters back
         const base64 = encoded
             .replace(/-/g, '+')
             .replace(/_/g, '/');
@@ -15,8 +12,6 @@ function decodeStreamData(encoded) {
         // Decode base64
         const jsonString = atob(base64);
         const shortData = JSON.parse(jsonString);
-        
-        // Expand shortened data back to full format
         return {
             mpath: shortData.u.startsWith('http') ? shortData.u : 'https://' + shortData.u,
             ptype: shortData.t === 'i' ? 'idnlv' : 'sroom'
@@ -37,17 +32,8 @@ async function initializePlayer() {
         if (!encodedStream || !memberName || !platform) {
             throw new Error('Required parameters are missing');
         }
-
-        // Log the encoded data for debugging
-        console.log('Encoded stream data:', encodedStream);
-
         const streamData = decodeStreamData(encodedStream);
         const streamUrl = streamData.mpath;
-
-        // Log the decoded URL for debugging
-        console.log('Stream URL:', streamUrl);
-
-        // Initialize Video.js player
         const player = videojs('liveStream', {
             controls: true,
             autoplay: true,
@@ -90,7 +76,6 @@ async function initializePlayer() {
             type: 'application/x-mpegURL'
         });
 
-        // Enhanced keyboard controls
         document.addEventListener('keydown', function(e) {
             if (!player.isInPictureInPicture()) {
                 switch(e.key.toLowerCase()) {
@@ -123,13 +108,10 @@ async function initializePlayer() {
             }
         });
 
-        // Double-click for fullscreen
         const videoElement = document.querySelector('.video-js');
         videoElement.addEventListener('dblclick', () => {
             player.isFullscreen() ? player.exitFullscreen() : player.requestFullscreen();
         });
-
-        // Volume persistence
         const savedVolume = localStorage.getItem('playerVolume');
         const savedMuted = localStorage.getItem('playerMuted');
         
@@ -145,7 +127,6 @@ async function initializePlayer() {
             localStorage.setItem('playerMuted', player.muted());
         });
 
-        // Fetch and update stream info
         updateStreamInfo(platform, memberName);
 
     } catch (error) {
