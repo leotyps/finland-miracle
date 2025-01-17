@@ -54,6 +54,10 @@
             "destination": "/components/page/about"
         },
         {
+            "source": "/livejkt48",
+            "destination": "/components/live/live"
+        },
+        {
             "source": "/notfound",
             "destination": "/components/page/notfound"
         },
@@ -68,6 +72,14 @@
         {
             "source": "/member/:id",
             "destination": "/components/detail/member?id=:id"
+        },
+        {
+            "source": "/live/idn/:memberUsername/:streamId",
+            "destination": "/components/detail/live.html?m=:memberUsername&p=idn&s=:streamId"
+        },
+        {
+            "source": "/live/sr/:memberUsername/:streamId",
+            "destination": "/components/detail/live.html?m=:memberUsername&p=sr&s=:streamId"
         },
         {
             "source": "/:path*/:slug",
