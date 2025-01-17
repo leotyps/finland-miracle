@@ -67,18 +67,33 @@
         <div id="progressBar" class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
             style="width: 0%"></div>
     </div>
+
     <div class="container mx-auto px-6 py-12 flex-grow flex items-center justify-center">
-        <div class="text-center">
-            <h1 class="text-8xl font-bold mb-4">404</h1>
-            <h2 class="text-4xl font-bold mb-8">Page Not Found</h2>
-            <p class="text-xl text-gray-600 mb-8">The page you're looking for doesn't exist or has been moved.</p>
-            <a href="/home"
-                class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-8 py-3 rounded-full inline-flex items-center">
-                Back to Home
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </a>
+        <div class="bg-white rounded-3xl shadow-lg p-8 max-w-2xl w-full">
+            <div class="space-y-4">
+                <h1 class="text-2xl font-bold text-gray-800">Error 404: Halaman Tidak Ditemukan</h1>
+                <p class="text-gray-600">Maaf, halaman yang Anda cari tidak ditemukan.</p>
+
+                <ul class="space-y-2 text-gray-700 list-disc pl-5">
+                    <li class="italic">Tautan yang Anda ikuti mungkin rusak, atau halaman tersebut mungkin telah
+                        dihapus.</li>
+                    <li class="italic">Kembali ke halaman sebelumnya dan coba lagi, atau pergi ke halaman beranda.</li>
+                    <li class="italic">Jika Anda merasa ini adalah kesalahan, silakan <a
+                            href="https://48intens.com/discord" class="text-red-500 hover:underline">hubungi kami</a> di
+                        Discord.</li>
+                </ul>
+
+                <div class="flex gap-3 mt-6">
+                    <a href="/home"
+                        class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-3xl inline-flex items-center transition-opacity">
+                        Beranda
+                    </a>
+                    <a href="https://48intens.com/discord"
+                        class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-3xl inline-flex items-center transition-opacity">
+                        Hubungi Kami
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
