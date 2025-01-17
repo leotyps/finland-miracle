@@ -85,7 +85,11 @@ function createIDNCard(stream) {
     const memberUsername = stream.user.username.replace('jkt48_', '');
     const proxyStreamUrl = `https://jkt48showroom-api.my.id/proxy?url=${encodeURIComponent(stream.stream_url)}`;
     const streamId = compressStreamData(proxyStreamUrl, 'idn');
-    const watchUrl = `/live/idn/${memberUsername}/${streamId}`;
+    const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=idn&s=${streamId}`;
+    const isOfficialAccount = stream.user.username === "jkt48-official";
+    const buttonLabel = isOfficialAccount ? "Get Ticket" : "Watch Stream";
+    const buttonLink = isOfficialAccount ? "https://www.idn.app/jkt48-official" : watchUrl;
+
     return `
         <div class="bg-yellow-100/80 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
             <div class="relative group">
@@ -118,19 +122,20 @@ function createIDNCard(stream) {
                     </div>
                 </div>
                 <h4 class="font-medium text-gray-600 mb-4 line-clamp-2">${stream.title}</h4>
-                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
-                    <i class="fas fa-play mr-2"></i>
-                    Watch Stream
+                <a href="${buttonLink}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                    <i class="fas fa-ticket-alt mr-2"></i>
+                    ${buttonLabel}
                 </a>
             </div>
         </div>
     `;
 }
 
+
 function createShowroomCard(stream) {
     const memberUsername = stream.room_url_key.replace('JKT48_', '').toLowerCase();
     const streamId = compressStreamData(stream.streaming_url_list[0].url, 'showroom');
-    const watchUrl = `/live/sr/${memberUsername}/${streamId}`;
+    const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=sr&s=${streamId}`;
     return `
         <div class="bg-rose-300/80 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
             <div class="relative group">
