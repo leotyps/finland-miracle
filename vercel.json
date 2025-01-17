@@ -86,10 +86,6 @@
             "destination": "/:path*/:slug.html"
         },
         {
-            "source": "/:path*",
-            "destination": "/:path*"
-        },
-        {
             "source": "/components/detail/:slug",
             "destination": "/components/detail/:slug.html"
         },
@@ -103,7 +99,11 @@
         },
         {
             "source": "/:path*",
-            "destination": "/components/page/notfound"
+            "destination": "/:path*"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/components/page/notfound.html"
         }
     ]
 }
