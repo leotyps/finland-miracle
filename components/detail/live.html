@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/assets/image/icon.png" />
@@ -9,143 +8,210 @@
     <link rel="stylesheet" href="/assets/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/video.js@8/dist/video-js.min.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/video.js@8/dist/video-js.min.css"
+      rel="stylesheet" />
     <script src="https://unpkg.com/video.js@8/dist/video.min.js"></script>
     <script src="https://unpkg.com/@videojs/http-streaming@3/dist/videojs-http-streaming.min.js"></script>
-</head>
+  </head>
 
-<body class="bg-gray-50 min-h-screen flex flex-col">
+  <body class="bg-gray-50 min-h-screen flex flex-col">
     <nav class="bg-white border-b border-gray-200">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="/home" class="text-2xl font-bold">48intens</a>
-            <div class="md:hidden">
-                <button id="menu-toggle" class="text-gray-700 focus:outline-none relative w-6 h-6">
-                    <div class="menu-icon">
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                    </div>
-                </button>
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/home" class="text-2xl font-bold">48intens</a>
+        <div class="md:hidden">
+          <button
+            id="menu-toggle"
+            class="text-gray-700 focus:outline-none relative w-6 h-6">
+            <div class="menu-icon">
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
             </div>
-            <div id="menu" class="hidden md:flex space-x-6">
-                <a href="/news" class="font-semibold hover:text-purple-200">News</a>
-                <a href="/schedule" class="font-semibold text-gray-700 hover:text-purple-200">Schedule</a>
-                <a href="/member" class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
-                <a href="/ingames" class="font-semibold text-gray-700 hover:text-purple-200">InGames</a>
-            </div>
+          </button>
         </div>
-        <div id="mobile-menu" class="font-semibold hidden md:hidden bg-white border-t border-gray-200 overflow-hidden">
-            <div class="mobile-menu-content">
-                <a href="/news" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
-                <a href="/schedule"
-                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
-                <a href="/member"
-                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
-                <a href="/ingames"
-                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">InGames</a>
-            </div>
+        <div id="menu" class="hidden md:flex space-x-6">
+          <a href="/news" class="font-semibold hover:text-purple-200">News</a>
+          <a
+            href="/schedule"
+            class="font-semibold text-gray-700 hover:text-purple-200"
+            >Schedule</a
+          >
+          <a
+            href="/member"
+            class="font-semibold text-gray-700 hover:text-purple-200"
+            >Member</a
+          >
+          <a
+            href="/ingames"
+            class="font-semibold text-gray-700 hover:text-purple-200"
+            >InGames</a
+          >
         </div>
+      </div>
+      <div
+        id="mobile-menu"
+        class="font-semibold hidden md:hidden bg-white border-t border-gray-200 overflow-hidden">
+        <div class="mobile-menu-content">
+          <a
+            href="/news"
+            class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            >News</a
+          >
+          <a
+            href="/schedule"
+            class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            >Schedule</a
+          >
+          <a
+            href="/member"
+            class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            >Member</a
+          >
+          <a
+            href="/ingames"
+            class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            >InGames</a
+          >
+        </div>
+      </div>
     </nav>
 
     <div id="progressContainer" class="relative w-full h-1 bg-gray-700">
-        <div id="progressBar" class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
-            style="width: 0%"></div>
+      <div
+        id="progressBar"
+        class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
+        style="width: 0%"></div>
     </div>
 
     <main class="container mx-auto px-4 py-8">
-        <div class="max-w-6xl mx-auto">
-            <div id="streamInfo" class="mb-6">
-                <h1 class="text-3xl font-bold text-gray-900 mb-2" id="memberName">Loading...</h1>
-                <p class="text-xl text-gray-600" id="streamTitle">Loading...</p>
-            </div>
-
-            <div class="relative w-full bg-black rounded-lg overflow-hidden aspect-video mb-6">
-                <video id="liveStream" class="video-js vjs-matrix vjs-big-play-centered w-full h-full" controls preload="auto">
-                    <p class="vjs-no-js">Please enable JavaScript to view this stream</p>
-                </video>
-            </div>
-
-            <div class="bg-white rounded-lg shadow p-6 mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="flex items-center">
-                        <i class="fas fa-eye text-rose-300 text-xl mr-3"></i>
-                        <div>
-                            <p class="text-sm text-gray-500">Viewers</p>
-                            <p class="text-lg font-semibold" id="viewCount">Loading...</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-clock text-rose-300 text-xl mr-3"></i>
-                        <div>
-                            <p class="text-sm text-gray-500">Started</p>
-                            <p class="text-lg font-semibold" id="startTime">Loading...</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-signal text-rose-300 text-xl mr-3"></i>
-                        <div>
-                            <p class="text-sm text-gray-500">Quality</p>
-                            <p class="text-lg font-semibold" id="streamQuality">Loading...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-6xl mx-auto">
+        <div id="streamInfo" class="mb-6">
+          <h1 class="text-3xl font-bold text-gray-900 mb-2" id="memberName">
+            Loading...
+          </h1>
+          <p class="text-xl text-gray-600" id="streamTitle">Loading...</p>
         </div>
+
+        <div
+          class="relative w-full bg-black rounded-lg overflow-hidden aspect-video mb-6">
+          <video
+            id="liveStream"
+            class="video-js vjs-matrix vjs-big-play-centered w-full h-full"
+            controls
+            preload="auto">
+            <p class="vjs-no-js">
+              Please enable JavaScript to view this stream
+            </p>
+          </video>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="flex items-center">
+              <i class="fas fa-eye text-rose-300 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Viewers</p>
+                <p class="text-lg font-semibold" id="viewCount">Loading...</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-clock text-rose-300 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Started</p>
+                <p class="text-lg font-semibold" id="startTime">Loading...</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-signal text-rose-300 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Quality</p>
+                <p class="text-lg font-semibold" id="streamQuality">
+                  Loading...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div class="mb-6 md:mb-0">
-                    <h2 class="text-3xl font-extrabold text-white">48intens</h2>
-                    <p class="text-base text-gray-400 mt-2">
-                        Bringing JKT48 closer to you.
-                    </p>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center gap-4">
-                    <a href="/about" class="text-lg font-medium text-gray-400 hover:text-white transition">About
-                        48intens</a>
-                    <a href="/member" class="text-lg font-medium text-gray-400 hover:text-white transition">Members</a>
-                    <a href="/news" class="text-lg font-medium text-gray-400 hover:text-white transition">News</a>
-                </div>
-            </div>
-
-            <div class="flex justify-center md:justify-end mt-6 space-x-6">
-                <a href="https://48intens.com/discord" target="_blank"
-                    class="text-gray-400 hover:text-white text-2xl transition">
-                    <i class="fab fa-discord"></i>
-                </a>
-                <a href="https://48intens.com/instagram" target="_blank"
-                    class="text-gray-400 hover:text-white text-2xl transition">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://48intens.com/twitter" target="_blank"
-                    class="text-gray-400 hover:text-white text-2xl transition">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </div>
-            <div class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
-                &copy; 2025 48intens. All rights reserved.<br>All 48Intens servers are under managed by
-                Typicalsleepingboy &
-                RyuuG Dev
-            </div>
+      <div class="container mx-auto px-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div class="mb-6 md:mb-0">
+            <h2 class="text-3xl font-extrabold text-white">48intens</h2>
+            <p class="text-base text-gray-400 mt-2">
+              Bringing JKT48 closer to you.
+            </p>
+          </div>
+          <div class="flex flex-col md:flex-row md:items-center gap-4">
+            <a
+              href="/about"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >About 48intens</a
+            >
+            <a
+              href="/member"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >Members</a
+            >
+            <a
+              href="/news"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >News</a
+            >
+            <a
+              href="/devintens"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >TeamDev</a
+            >
+          </div>
         </div>
+
+        <div class="flex justify-center md:justify-end mt-6 space-x-6">
+          <a
+            href="https://48intens.com/discord"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-discord"></i>
+          </a>
+          <a
+            href="https://48intens.com/instagram"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://48intens.com/twitter"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        <div
+          class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
+          &copy; 2025 48intens. All rights reserved.<br />All 48Intens servers
+          are under managed by Typicalsleepingboy & RyuuG Dev
+        </div>
+      </div>
     </footer>
 
     <script src="/progress.js"></script>
     <script src="/utils/livedetail.js"></script>
     <script>
-        const menuToggle = document.getElementById("menu-toggle");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const menuIcon = document.querySelector(".menu-icon");
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.querySelector(".menu-icon");
 
-        menuToggle.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
-            menuIcon.classList.toggle("menu-active");
-            setTimeout(() => {
-                mobileMenu.classList.toggle("active");
-            }, 10);
-        });
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        menuIcon.classList.toggle("menu-active");
+        setTimeout(() => {
+          mobileMenu.classList.toggle("active");
+        }, 10);
+      });
     </script>
-</body>
-
+  </body>
 </html>

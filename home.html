@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>48intens Website</title>
-    <meta name="description"
-        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta
+      name="description"
+      content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta name="keywords" content="48intens, JKT48, jekate48, member, news" />
     <meta property="og:title" content="48intens Website" />
-    <meta property="og:description"
-        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta
+      property="og:description"
+      content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta property="og:image" content="/assets/image/intens.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -18,8 +19,9 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="48intens Website" />
-    <meta name="twitter:description"
-        content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+    <meta
+      name="twitter:description"
+      content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
     <meta name="twitter:image" content="/assets/image/intens.webp" />
     <meta name="twitter:creator" content="@48intens" />
     <link rel="icon" href="/assets/image/icon.png" />
@@ -27,262 +29,389 @@
     <link rel="stylesheet" href="/assets/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css" />
+  </head>
 
-<body class="bg-white min-h-screen flex flex-col">
+  <body class="bg-white min-h-screen flex flex-col">
     <nav class="bg-white border-b border-gray-200">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="/home" class="text-2xl font-bold">48intens</a>
-            <div class="md:hidden">
-                <button id="menu-toggle" class="text-gray-700 focus:outline-none relative w-6 h-6">
-                    <div class="menu-icon">
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                    </div>
-                </button>
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/home" class="text-2xl font-bold">48intens</a>
+        <div class="md:hidden">
+          <button
+            id="menu-toggle"
+            class="text-gray-700 focus:outline-none relative w-6 h-6">
+            <div class="menu-icon">
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
             </div>
-            <div id="menu" class="hidden md:flex space-x-6">
-                <a href="/news" class="font-semibold hover:text-purple-200">News</a>
-                <a href="/schedule" class="font-semibold text-gray-700 hover:text-purple-200">Schedule</a>
-                <a href="/member" class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
-                <a href="/ingames" class="font-semibold text-gray-700 hover:text-purple-200">InGames</a>
-            </div>
+          </button>
         </div>
-        <div id="mobile-menu" class="font-semibold hidden md:hidden bg-white border-t border-gray-200 overflow-hidden">
-            <div class="mobile-menu-content">
-                <a href="/news" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
-                <a href="/schedule"
-                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
-                <a href="/member"
-                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
-                <a href="/ingames"
-                    class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">InGames</a>
-            </div>
+        <div id="menu" class="hidden md:flex space-x-6">
+          <a href="/news" class="font-semibold hover:text-purple-200">News</a>
+          <a
+            href="/schedule"
+            class="font-semibold text-gray-700 hover:text-purple-200"
+            >Schedule</a
+          >
+          <a
+            href="/member"
+            class="font-semibold text-gray-700 hover:text-purple-200"
+            >Member</a
+          >
+          <a
+            href="/ingames"
+            class="font-semibold text-gray-700 hover:text-purple-200"
+            >InGames</a
+          >
         </div>
+      </div>
+      <div
+        id="mobile-menu"
+        class="font-semibold hidden md:hidden bg-white border-t border-gray-200 overflow-hidden">
+        <div class="mobile-menu-content">
+          <a
+            href="/news"
+            class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            >News</a
+          >
+          <a
+            href="/schedule"
+            class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            >Schedule</a
+          >
+          <a
+            href="/member"
+            class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            >Member</a
+          >
+          <a
+            href="/ingames"
+            class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100"
+            >InGames</a
+          >
+        </div>
+      </div>
     </nav>
 
     <div id="progressContainer" class="relative w-full h-1 bg-gray-700">
-        <div id="progressBar" class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
-            style="width: 0%"></div>
+      <div
+        id="progressBar"
+        class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
+        style="width: 0%"></div>
     </div>
 
     <div class="container mx-auto px-6 py-12">
-        <div class="flex flex-col md:flex-row justify-between items-start">
-            <div class="flex flex-col space-y-2 text-left md:text-left">
-                <h1
-                    class="text-8xl font-bold bg-gradient-to-r from-[#d176d8] via-[#80dba8] to-[#71c5da] inline-block text-transparent bg-clip-text">
-                    48.</h1>
-                <h1 class="text-6xl font-bold">Intens.</h1>
-                <h1
-                    class="text-6xl font-bold bg-gradient-to-r from-[#ccdd66] via-[#80dba8] to-[#71c5da] inline-block text-transparent bg-clip-text">
-                    Website.</h1>
-            </div>
-            <div class="mt-8 md:mt-0 md:ml-12">
-                <div class="grid grid-cols-3 md:grid-cols-1 gap-6">
-                    <div class="text-center">
-                        <p class="text-3xl font-bold counter" data-target="17800">0K</p>
-                        <p class="text-gray-600">TikTok Followers</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-3xl font-bold counter" data-target="46000">0K</p>
-                        <p class="text-gray-600">Discord Members</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-3xl font-bold counter" data-target="6900">0K</p>
-                        <p class="text-gray-600">Instagram Followers</p>
-                    </div>
-                </div>
-            </div>
+      <div class="flex flex-col md:flex-row justify-between items-start">
+        <div class="flex flex-col space-y-2 text-left md:text-left">
+          <h1
+            class="text-8xl font-bold bg-gradient-to-r from-[#d176d8] via-[#80dba8] to-[#71c5da] inline-block text-transparent bg-clip-text">
+            48.
+          </h1>
+          <h1 class="text-6xl font-bold">Intens.</h1>
+          <h1
+            class="text-6xl font-bold bg-gradient-to-r from-[#ccdd66] via-[#80dba8] to-[#71c5da] inline-block text-transparent bg-clip-text">
+            Website.
+          </h1>
         </div>
-        <div class="flex flex-col md:flex-row justify-between items-center mt-8 space-y-4 md:space-y-0">
-            <p class="text-xl font-semibold text-center md:text-left ">
-                Bringing JKT48 Closer to<br />You Every Day!
-            </p>
-            <div class="flex space-x-4">
-                <a href="/mypage" class="inline-block">
-                    <button
-                        class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-full flex items-center">
-                        MyPage
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                            </path>
-                        </svg>
-                    </button>
-                </a>
+        <div class="mt-8 md:mt-0 md:ml-12">
+          <div class="grid grid-cols-3 md:grid-cols-1 gap-6">
+            <div class="text-center">
+              <p class="text-3xl font-bold counter" data-target="17800">0K</p>
+              <p class="text-gray-600">TikTok Followers</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-bold counter" data-target="46000">0K</p>
+              <p class="text-gray-600">Discord Members</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-bold counter" data-target="6900">0K</p>
+              <p class="text-gray-600">Instagram Followers</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex flex-col md:flex-row justify-between items-center mt-8 space-y-4 md:space-y-0">
+        <p class="text-xl font-semibold text-center md:text-left">
+          Bringing JKT48 Closer to<br />You Every Day!
+        </p>
+        <div class="flex space-x-4">
+          <a href="/mypage" class="inline-block">
+            <button
+              class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-full flex items-center">
+              MyPage
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </a>
 
-                <a href="/login" class="inline-block">
-                    <button
-                        class="border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center">
-                        Login
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-5-5 5-5">
-                            </path>
-                        </svg>
-                    </button>
-                </a>
-            </div>
+          <a href="/login" class="inline-block">
+            <button
+              class="border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center">
+              Login
+              <svg
+                class="w-4 h-4 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 17l-5-5 5-5"></path>
+              </svg>
+            </button>
+          </a>
         </div>
+      </div>
     </div>
 
-
     <div class="container mx-auto px-6 py-8">
-        <div class="relative overflow-hidden rounded-xl aspect-[2/1]">
-            <div class="banner-slider h-full flex items-center justify-center"></div>
-        </div>
+      <div class="relative overflow-hidden rounded-xl aspect-[2/1]">
+        <div
+          class="banner-slider h-full flex items-center justify-center"></div>
+      </div>
     </div>
 
     <div class="container mx-auto px-6 py-8">
-        <div class="relative overflow-hidden rounded-md">
-            <div class="image-carousel flex space-x-3 rounded-md">
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akb.png" alt="AKB48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/ske.png" alt="SKE48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/nmb.png" alt="NMB48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/hkt.png" alt="HKT48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/ngt.png" alt="NGT48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/stu.png" alt="STU48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/bnk.png" alt="BNK48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/mnl.png" alt="MNL48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akbsh.png" alt="AKB48 Team SH"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akbtp.png" alt="AKB48 Team TP"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/cgm.png" alt="CGM48"
-                    class="rounded-md" loading="lazy" />
-                <img src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/klp.png" alt="KLP48"
-                    class="rounded-md" loading="lazy" />
-            </div>
+      <div class="relative overflow-hidden rounded-md">
+        <div class="image-carousel flex space-x-3 rounded-md">
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akb.png"
+            alt="AKB48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/ske.png"
+            alt="SKE48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/nmb.png"
+            alt="NMB48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/hkt.png"
+            alt="HKT48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/ngt.png"
+            alt="NGT48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/stu.png"
+            alt="STU48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/bnk.png"
+            alt="BNK48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/mnl.png"
+            alt="MNL48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akbsh.png"
+            alt="AKB48 Team SH"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/akbtp.png"
+            alt="AKB48 Team TP"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948757/cgm.png"
+            alt="CGM48"
+            class="rounded-md"
+            loading="lazy" />
+          <img
+            src="https://res.cloudinary.com/dbim4qou7/image/upload/v1718948758/klp.png"
+            alt="KLP48"
+            class="rounded-md"
+            loading="lazy" />
         </div>
+      </div>
     </div>
 
     <div class="container mx-auto px-6 pt-6 pb-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div>
-                <h2 class="text-4xl font-bold leading-tight ml-4 lg:ml-6">
-                    <span
-                        class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
-                        48intens introduces you to the
-                    </span>
-                    <br />
-                    <span class="text-gray-900">
-                        world of JKT48 more closely.
-                    </span>
-                </h2>
-            </div>
-            <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
-                <div class="grid grid-cols-2 gap-2 p-4">
-                    <img src="/assets/image/gate.jpg" alt="JKT48 Theater Performance"
-                        class="rounded-3xl w-full h-32 object-cover" loading="lazy" />
-                    <img src="/assets/image/1 (1).jpg" alt="JKT48 Theater Interior"
-                        class="rounded-3xl w-full h-32 object-cover" loading="lazy" />
-                </div>
-                <div class="p-6">
-                    <h3
-                        class="text-2xl font-bold bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text">
-                        Apa itu JKT48 Theater ?</h3>
-                    <p class="text-gray-600">
-                        Teater JKT48 adalah sebuah teater eksklusif untuk pertunjukan grup idola Indonesia JKT48 dan
-                        grup-grup saudarinya dari AKB48 Group. Teater ini berada di lantai 4 fX Sudirman, Jakarta Pusat,
-                        DKI Jakarta, Indonesia.
-                    </p>
-                </div>
-            </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div>
+          <h2 class="text-4xl font-bold leading-tight ml-4 lg:ml-6">
+            <span
+              class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+              48intens introduces you to the
+            </span>
+            <br />
+            <span class="text-gray-900"> world of JKT48 more closely. </span>
+          </h2>
         </div>
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+          <div class="grid grid-cols-2 gap-2 p-4">
+            <img
+              src="/assets/image/gate.jpg"
+              alt="JKT48 Theater Performance"
+              class="rounded-3xl w-full h-32 object-cover"
+              loading="lazy" />
+            <img
+              src="/assets/image/1 (1).jpg"
+              alt="JKT48 Theater Interior"
+              class="rounded-3xl w-full h-32 object-cover"
+              loading="lazy" />
+          </div>
+          <div class="p-6">
+            <h3
+              class="text-2xl font-bold bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text">
+              Apa itu JKT48 Theater ?
+            </h3>
+            <p class="text-gray-600">
+              Teater JKT48 adalah sebuah teater eksklusif untuk pertunjukan grup
+              idola Indonesia JKT48 dan grup-grup saudarinya dari AKB48 Group.
+              Teater ini berada di lantai 4 fX Sudirman, Jakarta Pusat, DKI
+              Jakarta, Indonesia.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div class="lg:col-span-3">
-                <h1
-                    class="text-4xl font-bold mb-6 bg-gradient-to-r from-[#ccdd66] via-[#80dba8] to-[#71c5da] inline-block text-transparent bg-clip-text">
-                    Hot News.</h1>
-                <div id="hot-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                </div>
-            </div>
-
-            <div class="lg:col-span-1">
-                <div class="bg-yellow-100 shadow-md rounded-3xl p-9">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-xl font-bold">Upcoming Birthdays</h2>
-                        <div id="birthdayCount" class="text-sm text-gray-500">0 Members</div>
-                    </div>
-                    <div id="birthdayContainer" class="space-y-4 mt-9">
-                    </div>
-                </div>
-            </div>
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div class="lg:col-span-3">
+          <h1
+            class="text-4xl font-bold mb-6 bg-gradient-to-r from-[#ccdd66] via-[#80dba8] to-[#71c5da] inline-block text-transparent bg-clip-text">
+            Hot News.
+          </h1>
+          <div
+            id="hot-news-container"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>
+
+        <div class="lg:col-span-1">
+          <div class="bg-yellow-100 shadow-md rounded-3xl p-9">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-bold">Upcoming Birthdays</h2>
+              <div id="birthdayCount" class="text-sm text-gray-500">
+                0 Members
+              </div>
+            </div>
+            <div id="birthdayContainer" class="space-y-4 mt-9"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="container mx-auto px-4 py-6 sm:py-8">
-        <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6">
-            <span class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text">
-                Theater Upcoming.
-            </span>
-        </h1>
-        <div id="theater-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6">
+        <span
+          class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text">
+          Theater Upcoming.
+        </span>
+      </h1>
+      <div
+        id="theater-container"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </div>
 
-    <div id="popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="relative bg-white rounded-3xl shadow-lg max-w-lg w-full">
-            <div id="popup-content"></div>
-        </div>
+    <div
+      id="popup"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+      <div class="relative bg-white rounded-3xl shadow-lg max-w-lg w-full">
+        <div id="popup-content"></div>
+      </div>
     </div>
 
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6">
-            <span class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text">
-                JKT48 Youtube.
-            </span>
-        </h1>
-        <div id="youtube-container" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"></div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6">
+        <span
+          class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text">
+          JKT48 Youtube.
+        </span>
+      </h1>
+      <div
+        id="youtube-container"
+        class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"></div>
     </div>
 
     <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div class="mb-6 md:mb-0">
-                    <h2 class="text-3xl font-extrabold text-white">48intens</h2>
-                    <p class="text-base text-gray-400 mt-2">
-                        Bringing JKT48 closer to you.
-                    </p>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-center gap-4">
-                    <a href="/about" class="text-lg font-medium text-gray-400 hover:text-white transition">About
-                        48intens</a>
-                    <a href="/member" class="text-lg font-medium text-gray-400 hover:text-white transition">Members</a>
-                    <a href="/news" class="text-lg font-medium text-gray-400 hover:text-white transition">News</a>
-                </div>
-            </div>
-
-
-            <div class="flex justify-center md:justify-end mt-6 space-x-6">
-                <a href="https://48intens.com/discord" target="_blank"
-                    class="text-gray-400 hover:text-white text-2xl transition">
-                    <i class="fab fa-discord"></i>
-                </a>
-                <a href="https://48intens.com/instagram" target="_blank"
-                    class="text-gray-400 hover:text-white text-2xl transition">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://48intens.com/twitter" target="_blank"
-                    class="text-gray-400 hover:text-white text-2xl transition">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </div>
-            <div class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
-                &copy; 2025 48intens. All rights reserved.<br>All 48Intens servers are under managed by
-                Typicalsleepingboy & RyuuG Dev
-            </div>
+      <div class="container mx-auto px-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div class="mb-6 md:mb-0">
+            <h2 class="text-3xl font-extrabold text-white">48intens</h2>
+            <p class="text-base text-gray-400 mt-2">
+              Bringing JKT48 closer to you.
+            </p>
+          </div>
+          <div class="flex flex-col md:flex-row md:items-center gap-4">
+            <a
+              href="/about"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >About 48intens</a
+            >
+            <a
+              href="/member"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >Members</a
+            >
+            <a
+              href="/news"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >News</a
+            >
+            <a
+              href="/devintens"
+              class="text-lg font-medium text-gray-400 hover:text-white transition"
+              >TeamDev</a
+            >
+          </div>
         </div>
+
+        <div class="flex justify-center md:justify-end mt-6 space-x-6">
+          <a
+            href="https://48intens.com/discord"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-discord"></i>
+          </a>
+          <a
+            href="https://48intens.com/instagram"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a
+            href="https://48intens.com/twitter"
+            target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        <div
+          class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
+          &copy; 2025 48intens. All rights reserved.<br />All 48Intens servers
+          are under managed by Typicalsleepingboy & RyuuG Dev
+        </div>
+      </div>
     </footer>
 
     <script src="/progress.js"></script>
@@ -295,67 +424,67 @@
     <script src="/utils/theater.js"></script>
     <script src="/utils/birthday.js"></script>
     <script>
-        tns({
-            container: ".image-carousel",
+      tns({
+        container: ".image-carousel",
+        items: 7,
+        slideBy: 1,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayButtonOutput: false,
+        controls: false,
+        nav: false,
+        mouseDrag: true,
+        speed: 800,
+        loop: true,
+        responsive: {
+          0: {
+            items: 3,
+          },
+          1024: {
             items: 7,
-            slideBy: 1,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayButtonOutput: false,
-            controls: false,
-            nav: false,
-            mouseDrag: true,
-            speed: 800,
-            loop: true,
-            responsive: {
-                0: {
-                    items: 3,
-                },
-                1024: {
-                    items: 7,
-                },
-            },
+          },
+        },
+      });
+
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.querySelector(".menu-icon");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        menuIcon.classList.toggle("menu-active");
+        setTimeout(() => {
+          mobileMenu.classList.toggle("active");
+        }, 10);
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll(".counter");
+
+        const formatNumber = (num) => {
+          return num >= 1000
+            ? (num / 1000).toFixed(1).replace(".0", "") + "K"
+            : num;
+        };
+
+        counters.forEach((counter) => {
+          const target = parseInt(counter.getAttribute("data-target"));
+          let current = 0;
+          const increment = Math.ceil(target / 100);
+
+          const updateCounter = () => {
+            if (current < target) {
+              current = Math.min(current + increment, target);
+              counter.textContent = formatNumber(current);
+
+              if (current < target) {
+                requestAnimationFrame(updateCounter);
+              }
+            }
+          };
+
+          updateCounter();
         });
-
-        const menuToggle = document.getElementById("menu-toggle");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const menuIcon = document.querySelector(".menu-icon");
-
-        menuToggle.addEventListener("click", () => {
-            mobileMenu.classList.toggle("hidden");
-            menuIcon.classList.toggle("menu-active");
-            setTimeout(() => {
-                mobileMenu.classList.toggle("active");
-            }, 10);
-        });
-        document.addEventListener('DOMContentLoaded', () => {
-            const counters = document.querySelectorAll('.counter');
-
-            const formatNumber = (num) => {
-                return num >= 1000 ? (num / 1000).toFixed(1).replace('.0', '') + 'K' : num;
-            };
-
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                let current = 0;
-                const increment = Math.ceil(target / 100);
-
-                const updateCounter = () => {
-                    if (current < target) {
-                        current = Math.min(current + increment, target);
-                        counter.textContent = formatNumber(current);
-
-                        if (current < target) {
-                            requestAnimationFrame(updateCounter);
-                        }
-                    }
-                };
-
-                updateCounter();
-            });
-        });
-
+      });
     </script>
-</body>
-
+  </body>
 </html>
