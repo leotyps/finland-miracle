@@ -74,6 +74,10 @@
             "destination": "/components/detail/member?id=:id"
         },
         {
+            "source": "/devintens",
+            "destination": "/components/dev/dev"
+        },
+        {
             "source": "/live/idn/:memberUsername/:streamId",
             "destination": "/components/detail/live.html?m=:memberUsername&p=idn&s=:streamId"
         },
