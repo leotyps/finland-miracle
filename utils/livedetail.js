@@ -1,4 +1,3 @@
-// livedetail.js
 function decompressStreamData(streamId) {
     const data = localStorage.getItem(`stream_${streamId}`);
     if (!data) return null;
@@ -14,14 +13,15 @@ function decompressStreamData(streamId) {
 
 async function initializePlayer() {
     try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const memberName = urlParams.get('m');
-        const platform = urlParams.get('p');
-        const streamId = urlParams.get('s');
+        const pathSegments = window.location.pathname.split('/');
+        const platform = pathSegments[2]; // Platform: 'idn' atau 'sr'
+        const memberName = pathSegments[3]; // Nama member
+        const streamId = pathSegments[4]; // Stream ID
 
         if (!streamId || !memberName || !platform) {
             throw new Error('Required parameters are missing');
         }
+
         const streamData = decompressStreamData(streamId);
         if (!streamData) {
             throw new Error('Stream data not found or expired');
@@ -106,6 +106,7 @@ async function initializePlayer() {
         videoElement.addEventListener('dblclick', () => {
             player.isFullscreen() ? player.exitFullscreen() : player.requestFullscreen();
         });
+
         const savedVolume = localStorage.getItem('playerVolume');
         const savedMuted = localStorage.getItem('playerMuted');
 
@@ -120,8 +121,8 @@ async function initializePlayer() {
             localStorage.setItem('playerVolume', player.volume());
             localStorage.setItem('playerMuted', player.muted());
         });
-        updateStreamInfo(platform, memberName);
 
+        updateStreamInfo(platform, memberName);
     } catch (error) {
         console.error('Error initializing player:', error);
         document.getElementById('streamInfo').innerHTML = '<div class="error">Failed to load stream</div>';
@@ -148,7 +149,6 @@ async function updateStreamInfo(platform, memberName) {
             } else {
                 throw new Error('Stream not found');
             }
-
         } else if (platform === 'showroom' || platform === 'sr') {
             const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
             if (!response.ok) throw new Error('Failed to fetch Showroom data');
@@ -165,7 +165,6 @@ async function updateStreamInfo(platform, memberName) {
                 throw new Error('Stream not found');
             }
         }
-
     } catch (error) {
         console.error('Error updating stream info:', error);
         showErrorState(`Failed to load stream data: ${error.message}`);
@@ -182,8 +181,9 @@ function updateIDNStreamInfo(data) {
         document.getElementById('memberName').textContent = data.user.name || 'Unknown Member';
         document.getElementById('streamTitle').textContent = data.title || 'No Title';
         document.getElementById('viewCount').textContent = `${data.view_count || 0} viewers`;
-        document.getElementById('startTime').textContent = data.live_at ? 
-            new Date(data.live_at).toLocaleTimeString() : 'Unknown';
+        document.getElementById('startTime').textContent = data.live_at
+            ? new Date(data.live_at).toLocaleTimeString()
+            : 'Unknown';
         document.getElementById('streamQuality').textContent = 'HD';
         document.title = `${data.user.name} - Live Streaming | 48intens`;
         updateMetaTags({
@@ -207,9 +207,10 @@ function updateShowroomStreamInfo(data) {
         document.getElementById('memberName').textContent = data.main_name || 'Unknown Member';
         document.getElementById('streamTitle').textContent = data.genre_name || 'No Title';
         document.getElementById('viewCount').textContent = `${(data.view_num || 0).toLocaleString()} viewers`;
-        document.getElementById('startTime').textContent = data.started_at ? 
-            new Date(data.started_at * 1000).toLocaleTimeString() : 'Unknown';
-        document.getElementById('streamQuality').textContent = 
+        document.getElementById('startTime').textContent = data.started_at
+            ? new Date(data.started_at * 1000).toLocaleTimeString()
+            : 'Unknown';
+        document.getElementById('streamQuality').textContent =
             data.streaming_url_list?.[0]?.label || 'Unknown';
         document.title = `${data.main_name} - Live Streaming | 48intens`;
         updateMetaTags({
@@ -224,11 +225,10 @@ function updateShowroomStreamInfo(data) {
 }
 
 function updateMetaTags({ title, description, image }) {
-
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
     document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
     document.querySelector('meta[property="og:image"]')?.setAttribute('content', image);
-    
+
     document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
     document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
     document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', image);
@@ -240,13 +240,12 @@ function showErrorState(message) {
     document.getElementById('viewCount').textContent = '-';
     document.getElementById('startTime').textContent = '-';
     document.getElementById('streamQuality').textContent = '-';
-    
+
     updateMetaTags({
         title: '48intens - Stream Error',
         description: message || 'Failed to load stream data',
-        image: './assets/image/icon.png' 
+        image: './assets/image/icon.png'
     });
 }
 
 document.addEventListener('DOMContentLoaded', initializePlayer);
-

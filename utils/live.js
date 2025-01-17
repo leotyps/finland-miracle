@@ -85,7 +85,7 @@ function createIDNCard(stream) {
     const memberUsername = stream.user.username.replace('jkt48_', '');
     const proxyStreamUrl = `https://jkt48showroom-api.my.id/proxy?url=${encodeURIComponent(stream.stream_url)}`;
     const streamId = compressStreamData(proxyStreamUrl, 'idn');
-    const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=idn&s=${streamId}`;
+    const watchUrl = `/live/idn/${memberUsername}/${streamId}`;
     const isOfficialAccount = stream.user.username === "jkt48-official";
     const buttonLabel = isOfficialAccount ? "Get Ticket" : "Watch Stream";
     const buttonLink = isOfficialAccount ? "https://www.idn.app/jkt48-official" : watchUrl;
@@ -135,7 +135,8 @@ function createIDNCard(stream) {
 function createShowroomCard(stream) {
     const memberUsername = stream.room_url_key.replace('JKT48_', '').toLowerCase();
     const streamId = compressStreamData(stream.streaming_url_list[0].url, 'showroom');
-    const watchUrl = `/components/detail/live.html?m=${memberUsername}&p=sr&s=${streamId}`;
+    const watchUrl = `/live/sr/${memberUsername}/${streamId}`;
+
     return `
         <div class="bg-rose-300/80 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
             <div class="relative group">
