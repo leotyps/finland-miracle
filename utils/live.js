@@ -2,7 +2,9 @@
 async function fetchLiveData() {
     try {
         const container = document.getElementById('liveContainer');
-        container.innerHTML = '';
+        const fragment = document.createDocumentFragment(); 
+
+        container.innerHTML = ''; 
 
         const [idnResponse, showroomResponse] = await Promise.all([
             fetch('https://48intensapi.my.id/api/idnlive/jkt48'),
@@ -17,7 +19,9 @@ async function fetchLiveData() {
         if (idnData.data && idnData.data.length > 0) {
             idnData.data.forEach(stream => {
                 const card = createIDNCard(stream);
-                container.innerHTML += card;
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = card;
+                fragment.appendChild(wrapper.firstElementChild); 
             });
             hasContent = true;
         }
@@ -25,13 +29,17 @@ async function fetchLiveData() {
         if (showroomData && showroomData.length > 0) {
             showroomData.forEach(stream => {
                 const card = createShowroomCard(stream);
-                container.innerHTML += card;
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = card;
+                fragment.appendChild(wrapper.firstElementChild);
             });
             hasContent = true;
         }
 
         if (!hasContent) {
             showNotFoundMessage(container, 'No live streams available at the moment 😭');
+        } else {
+            container.appendChild(fragment);
         }
     } catch (error) {
         console.error('Error fetching data:', error);
