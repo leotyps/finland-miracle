@@ -1,3 +1,7 @@
+
+let hls = null;
+let video = null;
+
 function decompressStreamData(streamId) {
     const data = localStorage.getItem(`stream_${streamId}`);
     if (!data) return null;
@@ -11,121 +15,91 @@ function decompressStreamData(streamId) {
     return streamData;
 }
 
-async function initializePlayer() {
-    try {
-        const pathSegments = window.location.pathname.split('/');
-        const platform = pathSegments[2]; // Platform: 'idn' atau 'sr'
-        const memberName = pathSegments[3]; // Nama member
-        const streamId = pathSegments[4]; // Stream ID
+function playM3u8(url) {
+    if (!video) {
+        console.error('Video element not initialized');
+        return;
+    }
 
-        if (!streamId || !memberName || !platform) {
-            throw new Error('Required parameters are missing');
-        }
-
-        const streamData = decompressStreamData(streamId);
-        if (!streamData) {
-            throw new Error('Stream data not found or expired');
-        }
-
-        const streamUrl = streamData.mpath;
-        const player = videojs('liveStream', {
-            controls: true,
-            autoplay: true,
-            fluid: true,
-            liveui: true,
-            playbackRates: [0.5, 1, 1.5, 2],
-            controlBar: {
-                children: [
-                    'playToggle',
-                    'volumePanel',
-                    'currentTimeDisplay',
-                    'timeDivider',
-                    'durationDisplay',
-                    'progressControl',
-                    'liveDisplay',
-                    'customControlSpacer',
-                    'playbackRateMenuButton',
-                    'pictureInPictureToggle',
-                    'qualitySelector',
-                    'fullscreenToggle'
-                ],
-                volumePanel: {
-                    inline: false,
-                    volumeControl: {
-                        vertical: true
-                    }
-                }
-            },
-            html5: {
-                vhs: {
-                    overrideNative: true,
-                    enableLowInitialPlaylist: true,
-                    smoothQualityChange: true
-                }
-            }
-        });
-
-        player.src({
-            src: streamUrl,
-            type: 'application/x-mpegURL'
-        });
-
-        document.addEventListener('keydown', function (e) {
-            if (!player.isInPictureInPicture()) {
-                switch (e.key.toLowerCase()) {
-                    case 'f':
-                        player.isFullscreen() ? player.exitFullscreen() : player.requestFullscreen();
-                        break;
-                    case 'm':
-                        player.muted(!player.muted());
-                        break;
-                    case ' ':
-                    case 'k':
-                        if (e.target === document.body) {
-                            e.preventDefault();
-                            player.paused() ? player.play() : player.pause();
-                        }
-                        break;
-                    case 'arrowup':
-                        if (e.target === document.body) {
-                            e.preventDefault();
-                            player.volume(Math.min(1, player.volume() + 0.1));
-                        }
-                        break;
-                    case 'arrowdown':
-                        if (e.target === document.body) {
-                            e.preventDefault();
-                            player.volume(Math.max(0, player.volume() - 0.1));
-                        }
-                        break;
-                }
-            }
-        });
-
-        const videoElement = document.querySelector('.video-js');
-        videoElement.addEventListener('dblclick', () => {
-            player.isFullscreen() ? player.exitFullscreen() : player.requestFullscreen();
-        });
-
+    if (Hls.isSupported()) {
         const savedVolume = localStorage.getItem('playerVolume');
-        const savedMuted = localStorage.getItem('playerMuted');
-
-        if (savedVolume !== null) {
-            player.volume(parseFloat(savedVolume));
-        }
-        if (savedMuted === 'true') {
-            player.muted(true);
+        video.volume = savedVolume ? parseFloat(savedVolume) : 0.3;
+        if (hls) {
+            hls.destroy();
         }
 
-        player.on('volumechange', () => {
-            localStorage.setItem('playerVolume', player.volume());
-            localStorage.setItem('playerMuted', player.muted());
+        hls = new Hls({
+            enableWorker: true,
+            lowLatencyMode: true,
+            backBufferLength: 90
         });
 
-        updateStreamInfo(platform, memberName);
-    } catch (error) {
-        console.error('Error initializing player:', error);
-        document.getElementById('streamInfo').innerHTML = '<div class="error">Failed to load stream</div>';
+        const m3u8Url = decodeURIComponent(url);
+        hls.loadSource(m3u8Url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play().catch(e => console.error('Error autoplaying:', e));
+        });
+
+        // Error handling
+        hls.on(Hls.Events.ERROR, function(event, data) {
+            if (data.fatal) {
+                switch (data.type) {
+                    case Hls.ErrorTypes.NETWORK_ERROR:
+                        console.error('Network error, trying to recover...');
+                        hls.startLoad();
+                        break;
+                    case Hls.ErrorTypes.MEDIA_ERROR:
+                        console.error('Media error, trying to recover...');
+                        hls.recoverMediaError();
+                        break;
+                    default:
+                        console.error('Fatal error, streaming cannot continue:', data);
+                        hls.destroy();
+                        break;
+                }
+            }
+        });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+        video.addEventListener('canplay', function() {
+            video.play().catch(e => console.error('Error autoplaying:', e));
+        });
+        const savedVolume = localStorage.getItem('playerVolume');
+        video.volume = savedVolume ? parseFloat(savedVolume) : 0.3;
+    }
+}
+
+// Player controls
+function playPause() {
+    if (!video) return;
+    video.paused ? video.play() : video.pause();
+}
+
+function volumeUp() {
+    if (!video) return;
+    if (video.volume <= 0.9) {
+        video.volume += 0.1;
+        localStorage.setItem('playerVolume', video.volume);
+    }
+}
+
+function volumeDown() {
+    if (!video) return;
+    if (video.volume >= 0.1) {
+        video.volume -= 0.1;
+        localStorage.setItem('playerVolume', video.volume);
+    }
+}
+
+function vidFullscreen() {
+    if (!video) return;
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
     }
 }
 
@@ -139,7 +113,6 @@ async function updateStreamInfo(platform, memberName) {
             if (!response.ok) throw new Error('Failed to fetch IDN data');
 
             const data = await response.json();
-
             streamData = data.data.find(stream =>
                 stream.user.username.replace('jkt48_', '').toLowerCase() === normalizedMemberName
             );
@@ -154,7 +127,6 @@ async function updateStreamInfo(platform, memberName) {
             if (!response.ok) throw new Error('Failed to fetch Showroom data');
 
             const data = await response.json();
-
             streamData = data.find(stream =>
                 stream.room_url_key.replace('JKT48_', '').toLowerCase() === normalizedMemberName
             );
@@ -189,7 +161,8 @@ function updateIDNStreamInfo(data) {
         updateMetaTags({
             title: `${data.user.name} - Live Streaming | 48intens`,
             description: data.title || 'IDN Live Stream',
-            image: data.image || data.user.avatar
+            image: data.image || data.user.avatar,
+            url: window.location.href
         });
     } catch (err) {
         console.error('Error updating IDN stream info:', err);
@@ -220,32 +193,31 @@ function updateShowroomStreamInfo(data) {
             : 'Unknown';
         document.getElementById('streamQuality').textContent = originalQuality.label || 'Unknown';
 
-        const player = videojs('liveStream'); 
-        player.src({
-            src: originalQuality.url,
-            type: 'application/x-mpegURL',
-        });
-
         document.title = `${data.main_name} - Live Streaming | 48intens`;
         updateMetaTags({
             title: `${data.main_name} - Live Streaming | 48intens`,
             description: data.genre_name || 'Showroom Live Stream',
             image: data.image_square || data.image,
+            url: window.location.href
         });
+        playM3u8(originalQuality.url);
     } catch (err) {
         console.error('Error updating Showroom stream info:', err);
         showErrorState('Error displaying stream information');
     }
 }
 
-function updateMetaTags({ title, description, image }) {
+function updateMetaTags({ title, description, image, url }) {
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
     document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
     document.querySelector('meta[property="og:image"]')?.setAttribute('content', image);
-
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
     document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
     document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
     document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', image);
+    document.querySelector('meta[name="twitter:url"]')?.setAttribute('content', url);
+
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
 }
 
 function showErrorState(message) {
@@ -258,9 +230,47 @@ function showErrorState(message) {
     updateMetaTags({
         title: '48intens - Stream Error',
         description: message || 'Failed to load stream data',
-        image: './assets/image/icon.png',
+        image: '/assets/image/icon.png',
+        url: window.location.href
     });
 }
 
+async function initializePlayer() {
+    try {
+        video = document.getElementById('liveStream');
+        if (!video) {
+            throw new Error('Video element not found');
+        }
+
+        const pathSegments = window.location.pathname.split('/');
+        const platform = pathSegments[2]; // Platform: 'idn' atau 'sr'
+        const memberName = pathSegments[3]; // Nama member
+        const streamId = pathSegments[4]; // Stream ID
+
+        if (!streamId || !memberName || !platform) {
+            throw new Error('Required parameters are missing');
+        }
+
+        const streamData = decompressStreamData(streamId);
+        if (!streamData) {
+            throw new Error('Stream data not found or expired');
+        }
+        Mousetrap.bind('space', playPause);
+        Mousetrap.bind('up', volumeUp);
+        Mousetrap.bind('down', volumeDown);
+        Mousetrap.bind('f', vidFullscreen);
+        video.addEventListener('click', playPause);
+        video.addEventListener('error', function(e) {
+            console.error('Video error:', e);
+            showErrorState('Error playing video stream');
+        });
+        playM3u8(streamData.mpath);
+
+        await updateStreamInfo(platform, memberName);
+    } catch (error) {
+        console.error('Error initializing player:', error);
+        showErrorState(error.message);
+    }
+}
 
 document.addEventListener('DOMContentLoaded', initializePlayer);
