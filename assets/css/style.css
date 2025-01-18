@@ -115,6 +115,9 @@ body.no-scroll {
 #mobile-menu.active .menu-item:nth-child(4) {
     transition-delay: 0.4s;
 }
+#mobile-menu.active .menu-item:nth-child(5) {
+    transition-delay: 0.5s;
+}
 
 @keyframes swing {
     0%, 100% { transform: rotate(-5deg); }
