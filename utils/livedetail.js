@@ -188,7 +188,7 @@ async function updateStreamInfo(platform, memberName) {
         const normalizedMemberName = memberName.toLowerCase();
 
         if (platform === 'idn') {
-            const response = await fetch('http://localhost:3000/api/idnlive/jkt48');
+            const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
             if (!response.ok) throw new Error('Failed to fetch IDN data');
 
             const data = await response.json();
@@ -202,7 +202,7 @@ async function updateStreamInfo(platform, memberName) {
                 throw new Error('Stream not found');
             }
         } else if (platform === 'showroom' || platform === 'sr') {
-            const response = await fetch('http://localhost:3000/api/showroom/jekatepatlapan');
+            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
             if (!response.ok) throw new Error('Failed to fetch Showroom data');
 
             const data = await response.json();
