@@ -157,11 +157,13 @@ function updateIDNStreamInfo(data) {
             ? new Date(data.live_at).toLocaleTimeString()
             : 'Unknown';
         document.getElementById('streamQuality').textContent = 'HD';
-        document.title = `${data.user.name} - Live Streaming | 48intens`;
+
+        const streamDescription = `${data.user.name} is live streaming on IDN Live - ${data.title || 'Live Stream'}`;
+        
         updateMetaTags({
-            title: `${data.user.name} - Live Streaming | 48intens`,
-            description: data.title || 'IDN Live Stream',
-            image: data.image || data.user.avatar,
+            title: `${data.user.name} Live Streaming | 48intens`,
+            description: streamDescription,
+            image: data.image || data.user.avatar || '/assets/image/intens.webp',
             url: window.location.href
         });
     } catch (err) {
@@ -193,13 +195,15 @@ function updateShowroomStreamInfo(data) {
             : 'Unknown';
         document.getElementById('streamQuality').textContent = originalQuality.label || 'Unknown';
 
-        document.title = `${data.main_name} - Live Streaming | 48intens`;
+        const streamDescription = `${data.main_name} is live streaming on Showroom - ${data.genre_name || 'Live Stream'}`;
+
         updateMetaTags({
-            title: `${data.main_name} - Live Streaming | 48intens`,
-            description: data.genre_name || 'Showroom Live Stream',
-            image: data.image_square || data.image,
+            title: `${data.main_name} Live Streaming | 48intens`,
+            description: streamDescription,
+            image: data.image_square || data.image || '/assets/image/intens.webp',
             url: window.location.href
         });
+
         playM3u8(originalQuality.url);
     } catch (err) {
         console.error('Error updating Showroom stream info:', err);
@@ -208,18 +212,67 @@ function updateShowroomStreamInfo(data) {
 }
 
 function updateMetaTags({ title, description, image, url }) {
+    // Update page title
+    document.title = title;
+
+    // Basic meta tags
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+    document.querySelector('meta[name="keywords"]')?.setAttribute('content', 'JKT48, live streaming, 48intens');
+
+    // Open Graph meta tags
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
     document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
     document.querySelector('meta[property="og:image"]')?.setAttribute('content', image);
+    document.querySelector('meta[property="og:image:width"]')?.setAttribute('content', '1200');
+    document.querySelector('meta[property="og:image:height"]')?.setAttribute('content', '630');
     document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
+    document.querySelector('meta[property="og:type"]')?.setAttribute('content', 'website');
+
+    // Twitter Card meta tags
+    document.querySelector('meta[name="twitter:card"]')?.setAttribute('content', 'summary_large_image');
     document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
     document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
     document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', image);
-    document.querySelector('meta[name="twitter:url"]')?.setAttribute('content', url);
+    document.querySelector('meta[name="twitter:creator"]')?.setAttribute('content', '@48intens');
 
-    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+    // Create missing meta tags if they don't exist
+    const metaTags = [
+        { name: 'description', content: description },
+        { name: 'keywords', content: 'JKT48, live streaming, 48intens' },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:image', content: image },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:url', content: url },
+        { property: 'og:type', content: 'website' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: description },
+        { name: 'twitter:image', content: image },
+        { name: 'twitter:creator', content: '@48intens' }
+    ];
+
+    metaTags.forEach(tag => {
+        const selector = tag.name ? 
+            `meta[name="${tag.name}"]` : 
+            `meta[property="${tag.property}"]`;
+        
+        let element = document.querySelector(selector);
+        
+        if (!element) {
+            element = document.createElement('meta');
+            if (tag.name) {
+                element.setAttribute('name', tag.name);
+            } else {
+                element.setAttribute('property', tag.property);
+            }
+            document.head.appendChild(element);
+        }
+        
+        element.setAttribute('content', tag.content);
+    });
 }
-
 function showErrorState(message) {
     document.getElementById('memberName').textContent = 'Error';
     document.getElementById('streamTitle').textContent = message || 'Failed to load stream data';
