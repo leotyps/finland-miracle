@@ -204,19 +204,33 @@ function updateShowroomStreamInfo(data) {
     }
 
     try {
+        const originalQuality = data.streaming_url_list?.find(
+            (stream) => stream.label === 'original quality'
+        );
+
+        if (!originalQuality) {
+            throw new Error('Original quality stream not found');
+        }
+
         document.getElementById('memberName').textContent = data.main_name || 'Unknown Member';
         document.getElementById('streamTitle').textContent = data.genre_name || 'No Title';
         document.getElementById('viewCount').textContent = `${(data.view_num || 0).toLocaleString()} viewers`;
         document.getElementById('startTime').textContent = data.started_at
             ? new Date(data.started_at * 1000).toLocaleTimeString()
             : 'Unknown';
-        document.getElementById('streamQuality').textContent =
-            data.streaming_url_list?.[0]?.label || 'Unknown';
+        document.getElementById('streamQuality').textContent = originalQuality.label || 'Unknown';
+
+        const player = videojs('liveStream'); 
+        player.src({
+            src: originalQuality.url,
+            type: 'application/x-mpegURL',
+        });
+
         document.title = `${data.main_name} - Live Streaming | 48intens`;
         updateMetaTags({
             title: `${data.main_name} - Live Streaming | 48intens`,
             description: data.genre_name || 'Showroom Live Stream',
-            image: data.image_square || data.image
+            image: data.image_square || data.image,
         });
     } catch (err) {
         console.error('Error updating Showroom stream info:', err);
@@ -244,8 +258,9 @@ function showErrorState(message) {
     updateMetaTags({
         title: '48intens - Stream Error',
         description: message || 'Failed to load stream data',
-        image: './assets/image/icon.png'
+        image: './assets/image/icon.png',
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', initializePlayer);
