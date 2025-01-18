@@ -162,11 +162,14 @@ function updateIDNStreamInfo(data) {
             `🎥 ${data.user.name} sedang live streaming di IDN Live! ${data.title || ''}\n` +
             `👥 ${data.view_count || 0} viewers\n` +
             `📺 Nonton sekarang di 48intens!`;
+        const thumbnailUrl = data.user.avatar || data.image || data.user.profile_pic || '/assets/image/intens.webp';
         
         updateMetaTags({
             title: `${data.user.name} Live Streaming | 48intens`,
             description: streamDescription,
-            image: data.image || data.user.avatar || '/assets/image/intens.webp',
+            image: thumbnailUrl,
+            imageWidth: '500',
+            imageHeight: '500',
             url: window.location.href
         });
     } catch (err) {
@@ -204,10 +207,14 @@ function updateShowroomStreamInfo(data) {
             `👥 ${data.view_num?.toLocaleString() || 0} viewers\n` +
             `📺 Nonton sekarang di 48intens!`;
 
+        const thumbnailUrl = data.image_square || data.image || data.room_url_key || '/assets/image/intens.webp';
+        
         updateMetaTags({
             title: `${data.main_name} Live Streaming | 48intens`,
             description: streamDescription,
-            image: data.image_square || data.image || '/assets/image/intens.webp',
+            image: thumbnailUrl,
+            imageWidth: '320',
+            imageHeight: '320',
             url: window.location.href
         });
 
@@ -218,7 +225,7 @@ function updateShowroomStreamInfo(data) {
     }
 }
 
-function updateMetaTags({ title, description, image, url }) {
+function updateMetaTags({ title, description, image, imageWidth, imageHeight, url }) {
     const baseUrl = 'https://48intens.com';
     const absoluteImageUrl = image.startsWith('http') ? 
         image : 
@@ -239,8 +246,9 @@ function updateMetaTags({ title, description, image, url }) {
         { tag: 'meta', attrs: { property: 'og:url', content: absoluteUrl }},
         { tag: 'meta', attrs: { property: 'og:image', content: absoluteImageUrl }},
         { tag: 'meta', attrs: { property: 'og:image:secure_url', content: absoluteImageUrl }},
-        { tag: 'meta', attrs: { property: 'og:image:width', content: '1200' }},
-        { tag: 'meta', attrs: { property: 'og:image:height', content: '630' }},
+        { tag: 'meta', attrs: { property: 'og:image:width', content: imageWidth }},
+        { tag: 'meta', attrs: { property: 'og:image:height', content: imageHeight }},
+        { tag: 'meta', attrs: { property: 'og:image:type', content: 'image/jpeg' }},
         { tag: 'meta', attrs: { property: 'og:image:alt', content: title }},
         
         // Twitter Card
