@@ -219,24 +219,31 @@ function updateShowroomStreamInfo(data) {
 }
 
 function updateMetaTags({ title, description, image, url }) {
+    const baseUrl = 'https://48intens.com';
     const absoluteImageUrl = image.startsWith('http') ? 
         image : 
-        `${window.location.protocol}//${window.location.host}${image}`;
+        `${baseUrl}${image.startsWith('/') ? '' : '/'}${image}`;
+    const absoluteUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
 
     const metaTags = [
+        // Basic Meta
         { tag: 'title', content: title },
         { tag: 'meta', attrs: { name: 'description', content: description }},
         { tag: 'meta', attrs: { name: 'keywords', content: 'JKT48, live streaming, 48intens, idol, live' }},
+        
+        // Open Graph
         { tag: 'meta', attrs: { property: 'og:site_name', content: '48intens' }},
         { tag: 'meta', attrs: { property: 'og:title', content: title }},
         { tag: 'meta', attrs: { property: 'og:description', content: description }},
+        { tag: 'meta', attrs: { property: 'og:type', content: 'website' }},
+        { tag: 'meta', attrs: { property: 'og:url', content: absoluteUrl }},
         { tag: 'meta', attrs: { property: 'og:image', content: absoluteImageUrl }},
         { tag: 'meta', attrs: { property: 'og:image:secure_url', content: absoluteImageUrl }},
         { tag: 'meta', attrs: { property: 'og:image:width', content: '1200' }},
         { tag: 'meta', attrs: { property: 'og:image:height', content: '630' }},
         { tag: 'meta', attrs: { property: 'og:image:alt', content: title }},
-        { tag: 'meta', attrs: { property: 'og:url', content: url }},
-        { tag: 'meta', attrs: { property: 'og:type', content: 'website' }},
+        
+        // Twitter Card
         { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' }},
         { tag: 'meta', attrs: { name: 'twitter:site', content: '@48intens' }},
         { tag: 'meta', attrs: { name: 'twitter:creator', content: '@48intens' }},
@@ -272,7 +279,6 @@ function updateMetaTags({ title, description, image, url }) {
         }
     });
 }
-
 
 function showErrorState(message) {
     document.getElementById('memberName').textContent = 'Error';
