@@ -1,7 +1,7 @@
 async function fetchMembers() {
   try {
     const response = await fetch(
-      "https://48intensapi.my.id/api/member"
+      "https://48intensapi.my.id/api/members"
     );
     const data = await response.json();
     const members = data.members.member;
@@ -27,7 +27,7 @@ async function fetchMembers() {
         container.innerHTML = `
           <div class="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-9 flex justify-center items-center">
             <div class="flex flex-col items-center">
-              <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
+              <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737172859/g0dwuucxo21skti64uls.png" alt="Not Found" class="w-64 h-64 mb-4">
               <p class="text-gray-500 text-lg font-bold">Member tidak ditemukan 😭</p>
             </div>
           </div>
@@ -94,7 +94,7 @@ function showNotFoundMessage(container, message) {
   container.innerHTML = `
     <div class="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-9 flex justify-center items-center">
       <div class="flex flex-col items-center">
-        <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
+        <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737172859/g0dwuucxo21skti64uls.png" alt="Not Found" class="w-64 h-64 mb-4">
         <p class="text-gray-500 text-lg font-bold">${message}</p>
       </div>
     </div>

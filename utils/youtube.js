@@ -1,6 +1,7 @@
 async function fetchYoutubeVideos() {
     try {
         const container = document.getElementById('youtube-container');
+
         container.innerHTML = `
             <div class="bg-white rounded-3xl shadow-md overflow-hidden skeleton">
                 <div class="relative bg-gray-300 h-48 w-full rounded"></div>
@@ -15,6 +16,7 @@ async function fetchYoutubeVideos() {
         const data = await response.json();
 
         container.innerHTML = '';
+
         if (!data || data.length === 0) {
             showNotFoundMessage(container, 'Videos Not Found 😭');
             return;
@@ -55,15 +57,15 @@ async function fetchYoutubeVideos() {
 }
 
 function showNotFoundMessage(container, message) {
-    container.className = 'min-h-[24rem] relative';
     container.innerHTML = `
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="flex flex-col items-center">
-                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1733508715/allactkiuu9tmtrqfumi.png" alt="Not Found" class="w-32 h-32 mb-4">
-                <p class="text-gray-500 text-lg font-bold">${message}</p>
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737172859/g0dwuucxo21skti64uls.png" alt="Not Found" class="w-32 h-32 md:w-64 md:h-64 mb-4">
+                <p class="text-gray-500 text-center text-lg font-bold">${message}</p>
             </div>
         </div>
     `;
+    container.classList.add('relative', 'min-h-[24rem]'); 
 }
 
 fetchYoutubeVideos();
