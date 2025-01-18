@@ -1,5 +1,5 @@
-
 let hls = null;
+let player = null;
 let video = null;
 
 function decompressStreamData(streamId) {
@@ -103,13 +103,92 @@ function vidFullscreen() {
     }
 }
 
+function initializePlyr() {
+    const plyrOptions = {
+        controls: [
+            'play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'
+        ],
+        settings: ['quality', 'speed'],
+        keyboard: { focused: true, global: true },
+        tooltips: { controls: true, seek: true },
+        quality: {
+            default: 720,
+            options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]
+        }
+    };
+
+    player = new Plyr('#liveStream', plyrOptions);
+    player.on('volumechange', () => {
+        localStorage.setItem('playerVolume', player.volume);
+    });
+    player.on('error', (error) => {
+        console.error('Plyr error:', error);
+        showErrorState('Error playing video stream');
+    });
+
+    return player.elements.container.querySelector('video');
+}
+
+function updateStageUsersList(stageUsers) {
+    const stageUsersList = document.getElementById('stageUsersList');
+    const container = document.getElementById('stageUsersContainer');
+    if (!stageUsers || stageUsers.length === 0) {
+        stageUsersList.classList.add('hidden');
+        return;
+    }
+    stageUsersList.classList.remove('hidden');
+    container.innerHTML = '';
+    stageUsers.forEach(stageUser => {
+        const userDiv = document.createElement('div');
+        userDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'flex-shrink-0 relative';
+
+        const userImage = document.createElement('img');
+        userImage.className = 'w-12 h-12 rounded-full object-cover';
+        userImage.src = stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg';
+        userImage.alt = stageUser.user.name;
+
+        const rankBadge = document.createElement('span');
+        rankBadge.className = 'absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center';
+        rankBadge.textContent = stageUser.rank;
+
+        imageContainer.appendChild(userImage);
+        imageContainer.appendChild(rankBadge);
+
+        const userInfo = document.createElement('div');
+        userInfo.className = 'flex-grow min-w-0';
+
+        const userName = document.createElement('p');
+        userName.className = 'text-sm font-medium text-gray-900 truncate';
+        userName.textContent = stageUser.user.name;
+
+        const avatarContainer = document.createElement('div');
+        avatarContainer.className = 'flex items-center space-x-1';
+
+        const avatarImage = document.createElement('img');
+        avatarImage.className = 'w-4 h-4';
+        avatarImage.src = stageUser.user.avatar_url || '';
+        avatarImage.alt = 'Avatar';
+
+        avatarContainer.appendChild(avatarImage);
+        userInfo.appendChild(userName);
+        userInfo.appendChild(avatarContainer);
+        userDiv.appendChild(imageContainer);
+        userDiv.appendChild(userInfo);
+
+        container.appendChild(userDiv);
+    });
+}
+
+
 async function updateStreamInfo(platform, memberName) {
     try {
         let streamData;
         const normalizedMemberName = memberName.toLowerCase();
 
         if (platform === 'idn') {
-            const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
+            const response = await fetch('http://localhost:3000/api/idnlive/jkt48');
             if (!response.ok) throw new Error('Failed to fetch IDN data');
 
             const data = await response.json();
@@ -123,7 +202,7 @@ async function updateStreamInfo(platform, memberName) {
                 throw new Error('Stream not found');
             }
         } else if (platform === 'showroom' || platform === 'sr') {
-            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
+            const response = await fetch('http://localhost:3000/api/showroom/jekatepatlapan');
             if (!response.ok) throw new Error('Failed to fetch Showroom data');
 
             const data = await response.json();
@@ -184,45 +263,58 @@ function updateShowroomStreamInfo(data) {
         return;
     }
 
-    try {
-        const originalQuality = data.streaming_url_list?.find(
-            (stream) => stream.label === 'original quality'
-        );
-
-        if (!originalQuality) {
-            throw new Error('Original quality stream not found');
-        }
-
-        document.getElementById('memberName').textContent = data.main_name || 'Unknown Member';
-        document.getElementById('streamTitle').textContent = data.genre_name || 'No Title';
-        document.getElementById('viewCount').textContent = `${(data.view_num || 0).toLocaleString()} viewers`;
-        document.getElementById('startTime').textContent = data.started_at
-            ? new Date(data.started_at * 1000).toLocaleTimeString()
-            : 'Unknown';
-        document.getElementById('streamQuality').textContent = originalQuality.label || 'Unknown';
-
-        const streamDescription = 
-            `🎥 ${data.main_name} sedang live streaming di SHOWROOM!\n` +
-            `${data.genre_name || ''}\n` +
-            `👥 ${data.view_num?.toLocaleString() || 0} viewers\n` +
-            `📺 Nonton sekarang di 48intens!`;
-
-        const thumbnailUrl = data.image_square || data.image || data.room_url_key || '/assets/image/intens.webp';
-        
-        updateMetaTags({
-            title: `${data.main_name} Live Streaming | 48intens`,
-            description: streamDescription,
-            image: thumbnailUrl,
-            imageWidth: '320',
-            imageHeight: '320',
-            url: window.location.href
-        });
-
-        playM3u8(originalQuality.url);
-    } catch (err) {
-        console.error('Error updating Showroom stream info:', err);
-        showErrorState('Error displaying stream information');
+    const originalQuality = data.streaming_url_list?.find(stream => stream.label === 'original quality');
+    if (!originalQuality) {
+        throw new Error('Original quality stream not found');
     }
+
+    document.getElementById('memberName').textContent = data.main_name || 'Unknown Member';
+    document.getElementById('streamTitle').textContent = data.genre_name || 'No Title';
+    document.getElementById('viewCount').textContent = `${(data.view_num || 0).toLocaleString()} viewers`;
+    document.getElementById('startTime').textContent = data.started_at
+        ? new Date(data.started_at * 1000).toLocaleTimeString()
+        : 'Unknown';
+    document.getElementById('streamQuality').textContent = originalQuality.label || 'Unknown';
+
+    const streamDescription = 
+        `🎥 ${data.main_name} sedang live streaming di SHOWROOM!\n` +
+        `${data.genre_name || ''}\n` +
+        `👥 ${data.view_num?.toLocaleString() || 0} viewers\n` +
+        `📺 Nonton sekarang di 48intens!`;
+
+    const thumbnailUrl = data.image_square || data.image || data.room_url_key || '/assets/image/intens.webp';
+    
+    updateMetaTags({
+        title: `${data.main_name} Live Streaming | 48intens`,
+        description: streamDescription,
+        image: thumbnailUrl,
+        imageWidth: '320',
+        imageHeight: '320',
+        url: window.location.href
+    });
+    if (data.stage_users) {
+        updateStageUsersList(data.stage_users);
+    }
+
+    playM3u8(originalQuality.url);
+}
+
+
+function showErrorState(message) {
+    document.getElementById('memberName').textContent = 'Error';
+    document.getElementById('streamTitle').textContent = message || 'Failed to load stream data';
+    document.getElementById('viewCount').textContent = '-';
+    document.getElementById('startTime').textContent = '-';
+    document.getElementById('streamQuality').textContent = '-';
+    
+    document.getElementById('stageUsersList').classList.add('hidden');
+
+    updateMetaTags({
+        title: '48intens - Stream Error',
+        description: message || 'Failed to load stream data',
+        image: '/assets/image/icon.png',
+        url: window.location.href
+    });
 }
 
 function updateMetaTags({ title, description, image, imageWidth, imageHeight, url }) {
@@ -303,6 +395,7 @@ function showErrorState(message) {
     });
 }
 
+
 async function initializePlayer() {
     try {
         video = document.getElementById('liveStream');
@@ -315,8 +408,10 @@ async function initializePlayer() {
         const memberName = pathSegments[3]; // Nama member
         const streamId = pathSegments[4]; // Stream ID
 
-        if (!streamId || !memberName || !platform) {
-            throw new Error('Required parameters are missing');
+        if (platform === 'showroom' || platform === 'sr') {
+            video = initializePlyr();
+        } else if (platform === 'idn') {
+            video = document.getElementById('liveStream');
         }
 
         const streamData = decompressStreamData(streamId);

@@ -8,7 +8,7 @@ async function fetchLiveData() {
 
         const [idnResponse, showroomResponse] = await Promise.all([
             fetch('https://48intensapi.my.id/api/idnlive/jkt48'),
-            fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan')
+            fetch('http://localhost:3000/api/showroom/jekatepatlapan')
         ]);
 
         const idnData = await idnResponse.json();

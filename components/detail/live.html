@@ -30,6 +30,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/mousetrap@1.6.5/mousetrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 </head>
 
 <body class="bg-white min-h-screen flex flex-col">
@@ -70,51 +72,63 @@
   </div>
 
   <main class="container mx-auto px-4 py-8">
-    <div class="max-w-6xl mx-auto">
-      <div id="streamInfo" class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-900 mb-2" id="memberName">
-          Loading...
-        </h1>
-        <p class="text-xl text-gray-600" id="streamTitle">Loading...</p>
-      </div>
-
-      <div class="relative w-full bg-black rounded-lg overflow-hidden aspect-video mb-6">
-        <video id="liveStream" class="video-js vjs-matrix vjs-big-play-centered w-full h-full" controls preload="auto">
-          <p class="vjs-no-js">
-            Please enable JavaScript to view this stream
-          </p>
-        </video>
-      </div>
-
-      <div class="bg-white rounded-lg shadow p-6 mb-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="flex items-center">
-            <i class="fas fa-eye text-rose-300 text-xl mr-3"></i>
-            <div>
-              <p class="text-sm text-gray-500">Viewers</p>
-              <p class="text-lg font-semibold" id="viewCount">Loading...</p>
-            </div>
-          </div>
-          <div class="flex items-center">
-            <i class="fas fa-clock text-rose-300 text-xl mr-3"></i>
-            <div>
-              <p class="text-sm text-gray-500">Started</p>
-              <p class="text-lg font-semibold" id="startTime">Loading...</p>
-            </div>
-          </div>
-          <div class="flex items-center">
-            <i class="fas fa-signal text-rose-300 text-xl mr-3"></i>
-            <div>
-              <p class="text-sm text-gray-500">Quality</p>
-              <p class="text-lg font-semibold" id="streamQuality">
+    <div class="max-w-7xl mx-auto">
+        <div id="streamInfo" class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2" id="memberName">
                 Loading...
-              </p>
-            </div>
-          </div>
+            </h1>
+            <p class="text-xl text-gray-600" id="streamTitle">Loading...</p>
         </div>
-      </div>
+
+        <div class="flex flex-col lg:flex-row gap-6">
+            <div class="flex-grow">
+                <div class="relative w-full bg-black rounded-lg overflow-hidden aspect-video mb-6">
+                    <video id="liveStream" class="w-full h-full" controls crossorigin playsinline>
+                        <p>Please enable JavaScript to view this stream</p>
+                    </video>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow p-6 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-eye text-rose-300 text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm text-gray-500">Viewers</p>
+                                <p class="text-lg font-semibold" id="viewCount">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-rose-300 text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm text-gray-500">Started</p>
+                                <p class="text-lg font-semibold" id="startTime">Loading...</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-signal text-rose-300 text-xl mr-3"></i>
+                            <div>
+                                <p class="text-sm text-gray-500">Quality</p>
+                                <p class="text-lg font-semibold" id="streamQuality">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="stageUsersList" class="lg:w-80 hidden">
+                <div class="bg-white rounded-3xl shadow p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-bold text-gray-900">Top 10 Podium</h2>
+                        <span class="bg-rose-300 text-gray-900 text-xs font-medium px-2.5 py-0.5 rounded-3xl">Now Live</span>
+                    </div>
+                    <div id="stageUsersContainer" class="space-y-4">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </main>
+</main>
+
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6">
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
@@ -167,6 +181,17 @@
         mobileMenu.classList.toggle("active");
       }, 10);
     });
+
+     if (window.location.pathname.includes('/live/sr/')) {
+            const plyrCSS = document.createElement('link');
+            plyrCSS.rel = 'stylesheet';
+            plyrCSS.href = 'https://cdn.plyr.io/3.7.8/plyr.css';
+            document.head.appendChild(plyrCSS);
+
+            const plyrScript = document.createElement('script');
+            plyrScript.src = 'https://cdn.plyr.io/3.7.8/plyr.polyfilled.js';
+            document.head.appendChild(plyrScript);
+        }
   </script>
 </body>
 
