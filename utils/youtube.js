@@ -30,7 +30,7 @@ async function fetchYoutubeVideos() {
             const channelThumbnail = "https://yt3.googleusercontent.com/wBipLZF1IVqYGuYsZc0xxj5ist11fQMHWkN6vtBDCojWd8QTTlJLB8tOCOtoh7IRdmGHDn6I=s160-c-k-c0x00ffffff-no-rj";
             
             const videoCard = `
-                <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full max-w-sm">
+                <div class="bg-white border-4 border-gray-50 rounded-3xl  overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full max-w-sm">
                     <div class="p-4">
                         <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="block">
                             <div class="mb-4">
