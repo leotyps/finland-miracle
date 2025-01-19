@@ -197,6 +197,21 @@ async function updateStreamInfo(platform, memberName) {
             );
 
             if (streamData) {
+                const streamDescription = 
+                    `🎥 ${streamData.user.name} sedang live streaming di IDN Live! ${streamData.title || ''}\n` +
+                    `👥 ${streamData.view_count || 0} viewers\n` +
+                    `📺 Nonton sekarang di 48intens!`;
+                const thumbnailUrl = streamData.user.avatar || streamData.image || streamData.user.profile_pic || '/assets/image/intens.webp';
+                
+                updateMetaTags({
+                    title: `${streamData.user.name} Live Streaming | 48intens`,
+                    description: streamDescription,
+                    image: thumbnailUrl,
+                    imageWidth: '500',
+                    imageHeight: '500',
+                    url: window.location.href
+                });
+                
                 updateIDNStreamInfo(streamData);
             } else {
                 throw new Error('Stream not found');
@@ -211,6 +226,22 @@ async function updateStreamInfo(platform, memberName) {
             );
 
             if (streamData) {
+                const streamDescription = 
+                    `🎥 ${streamData.main_name} sedang live streaming di SHOWROOM!\n` +
+                    `${streamData.genre_name || ''}\n` +
+                    `👥 ${streamData.view_num?.toLocaleString() || 0} viewers\n` +
+                    `📺 Nonton sekarang di 48intens!`;
+                const thumbnailUrl = streamData.image_square || streamData.image || '/assets/image/intens.webp';
+                
+                updateMetaTags({
+                    title: `${streamData.main_name} Live Streaming | 48intens`,
+                    description: streamDescription,
+                    image: thumbnailUrl,
+                    imageWidth: '320',
+                    imageHeight: '320',
+                    url: window.location.href
+                });
+                
                 updateShowroomStreamInfo(streamData);
             } else {
                 throw new Error('Stream not found');
@@ -325,73 +356,35 @@ function updateMetaTags({ title, description, image, imageWidth, imageHeight, ur
     const absoluteUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
 
     const metaTags = [
-        // Basic Meta
-        { tag: 'title', content: title },
-        { tag: 'meta', attrs: { name: 'description', content: description }},
-        { tag: 'meta', attrs: { name: 'keywords', content: 'JKT48, live streaming, 48intens, idol, live' }},
-        
-        // Open Graph
-        { tag: 'meta', attrs: { property: 'og:site_name', content: '48intens' }},
-        { tag: 'meta', attrs: { property: 'og:title', content: title }},
-        { tag: 'meta', attrs: { property: 'og:description', content: description }},
-        { tag: 'meta', attrs: { property: 'og:type', content: 'website' }},
-        { tag: 'meta', attrs: { property: 'og:url', content: absoluteUrl }},
-        { tag: 'meta', attrs: { property: 'og:image', content: absoluteImageUrl }},
-        { tag: 'meta', attrs: { property: 'og:image:secure_url', content: absoluteImageUrl }},
-        { tag: 'meta', attrs: { property: 'og:image:width', content: imageWidth }},
-        { tag: 'meta', attrs: { property: 'og:image:height', content: imageHeight }},
-        { tag: 'meta', attrs: { property: 'og:image:type', content: 'image/jpeg' }},
-        { tag: 'meta', attrs: { property: 'og:image:alt', content: title }},
-        
-        // Twitter Card
-        { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' }},
-        { tag: 'meta', attrs: { name: 'twitter:site', content: '@48intens' }},
-        { tag: 'meta', attrs: { name: 'twitter:creator', content: '@48intens' }},
-        { tag: 'meta', attrs: { name: 'twitter:title', content: title }},
-        { tag: 'meta', attrs: { name: 'twitter:description', content: description }},
-        { tag: 'meta', attrs: { name: 'twitter:image', content: absoluteImageUrl }},
-        { tag: 'meta', attrs: { name: 'twitter:image:alt', content: title }}
+        { selector: 'title', content: title },
+        { selector: 'meta[name="description"]', attrs: { name: 'description', content: description }},
+        { selector: 'meta[property="og:title"]', attrs: { property: 'og:title', content: title }},
+        { selector: 'meta[property="og:description"]', attrs: { property: 'og:description', content: description }},
+        { selector: 'meta[property="og:url"]', attrs: { property: 'og:url', content: absoluteUrl }},
+        { selector: 'meta[property="og:image"]', attrs: { property: 'og:image', content: absoluteImageUrl }},
+        { selector: 'meta[property="og:image:secure_url"]', attrs: { property: 'og:image:secure_url', content: absoluteImageUrl }},
+        { selector: 'meta[property="og:image:width"]', attrs: { property: 'og:image:width', content: imageWidth }},
+        { selector: 'meta[property="og:image:height"]', attrs: { property: 'og:image:height', content: imageHeight }},
+        { selector: 'meta[name="twitter:title"]', attrs: { name: 'twitter:title', content: title }},
+        { selector: 'meta[name="twitter:description"]', attrs: { name: 'twitter:description', content: description }},
+        { selector: 'meta[name="twitter:image"]', attrs: { name: 'twitter:image', content: absoluteImageUrl }}
     ];
 
-    metaTags.forEach(tagInfo => {
-        if (tagInfo.tag === 'title') {
-            document.title = tagInfo.content;
-            return;
+    metaTags.forEach(({ selector, content, attrs }) => {
+        const existingTag = document.querySelector(selector);
+        if (existingTag) {
+            existingTag.remove();
         }
 
-        let selector = Object.entries(tagInfo.attrs)
-            .filter(([key]) => key === 'name' || key === 'property')
-            .map(([key, value]) => `[${key}="${value}"]`)
-            .join('');
-
-        let element = document.querySelector(`${tagInfo.tag}${selector}`);
-
-        if (!element) {
-            element = document.createElement(tagInfo.tag);
-            Object.entries(tagInfo.attrs).forEach(([key, value]) => {
-                element.setAttribute(key, value);
+        if (selector === 'title') {
+            document.title = content;
+        } else {
+            const newTag = document.createElement('meta');
+            Object.entries(attrs).forEach(([key, value]) => {
+                newTag.setAttribute(key, value);
             });
-            document.head.appendChild(element);
+            document.head.appendChild(newTag);
         }
-
-        if (tagInfo.attrs.content) {
-            element.setAttribute('content', tagInfo.attrs.content);
-        }
-    });
-}
-
-function showErrorState(message) {
-    document.getElementById('memberName').textContent = 'Error';
-    document.getElementById('streamTitle').textContent = message || 'Failed to load stream data';
-    document.getElementById('viewCount').textContent = '-';
-    document.getElementById('startTime').textContent = '-';
-    document.getElementById('streamQuality').textContent = '-';
-
-    updateMetaTags({
-        title: '48intens - Stream Error',
-        description: message || 'Failed to load stream data',
-        image: '/assets/image/icon.png',
-        url: window.location.href
     });
 }
 
@@ -404,9 +397,9 @@ async function initializePlayer() {
         }
 
         const pathSegments = window.location.pathname.split('/');
-        const platform = pathSegments[2]; // Platform: 'idn' atau 'sr'
-        const memberName = pathSegments[3]; // Nama member
-        const streamId = pathSegments[4]; // Stream ID
+        const platform = pathSegments[2]; 
+        const memberName = pathSegments[3];
+        const streamId = pathSegments[4];
 
         if (platform === 'showroom' || platform === 'sr') {
             video = initializePlyr();
@@ -416,7 +409,7 @@ async function initializePlayer() {
 
         const streamData = decompressStreamData(streamId);
         if (!streamData) {
-            throw new Error('Stream data not found or expired');
+            throw new Error('Stream has been finished');
         }
         Mousetrap.bind('space', playPause);
         Mousetrap.bind('up', volumeUp);
