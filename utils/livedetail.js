@@ -201,7 +201,7 @@ async function updateStreamInfo(platform, memberName) {
                     `🎥 ${streamData.user.name} sedang live streaming di IDN Live! ${streamData.title || ''}\n` +
                     `👥 ${streamData.view_count || 0} viewers\n` +
                     `📺 Nonton sekarang di 48intens!`;
-                const thumbnailUrl = streamData.user.avatar || streamData.image || streamData.user.profile_pic || '/assets/image/intens.webp';
+                const thumbnailUrl = streamData.user.avatar || streamData.image || streamData.user.profile_pic || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
                 
                 updateMetaTags({
                     title: `${streamData.user.name} Live Streaming | 48intens`,
@@ -231,7 +231,7 @@ async function updateStreamInfo(platform, memberName) {
                     `${streamData.genre_name || ''}\n` +
                     `👥 ${streamData.view_num?.toLocaleString() || 0} viewers\n` +
                     `📺 Nonton sekarang di 48intens!`;
-                const thumbnailUrl = streamData.image_square || streamData.image || '/assets/image/intens.webp';
+                const thumbnailUrl = streamData.image_square || streamData.image || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
                 
                 updateMetaTags({
                     title: `${streamData.main_name} Live Streaming | 48intens`,
@@ -272,7 +272,7 @@ function updateIDNStreamInfo(data) {
             `🎥 ${data.user.name} sedang live streaming di IDN Live! ${data.title || ''}\n` +
             `👥 ${data.view_count || 0} viewers\n` +
             `📺 Nonton sekarang di 48intens!`;
-        const thumbnailUrl = data.user.avatar || data.image || data.user.profile_pic || '/assets/image/intens.webp';
+        const thumbnailUrl = data.user.avatar || data.image || data.user.profile_pic || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
         
         updateMetaTags({
             title: `${data.user.name} Live Streaming | 48intens`,
@@ -313,7 +313,7 @@ function updateShowroomStreamInfo(data) {
         `👥 ${data.view_num?.toLocaleString() || 0} viewers\n` +
         `📺 Nonton sekarang di 48intens!`;
 
-    const thumbnailUrl = data.image_square || data.image || data.room_url_key || '/assets/image/intens.webp';
+    const thumbnailUrl = data.image_square || data.image || data.room_url_key || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
     
     updateMetaTags({
         title: `${data.main_name} Live Streaming | 48intens`,
