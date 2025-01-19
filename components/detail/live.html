@@ -12,8 +12,10 @@
   <meta property="og:description" content="Watch JKT48 members live streaming on 48intens" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://48intens.com" />
-  <meta property="og:image" content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
-  <meta property="og:image:secure_url" content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
+  <meta property="og:image"
+    content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
+  <meta property="og:image:secure_url"
+    content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="48intens Live Streaming" />
@@ -22,7 +24,8 @@
   <meta name="twitter:creator" content="@48intens" />
   <meta name="twitter:title" content="Live Streaming | 48intens" />
   <meta name="twitter:description" content="Watch JKT48 members live streaming on 48intens" />
-  <meta name="twitter:image" content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
+  <meta name="twitter:image"
+    content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
   <meta name="twitter:image:alt" content="48intens Live Streaming" />
   <link rel="icon" href="/assets/image/icon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -31,7 +34,7 @@
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/mousetrap@1.6.5/mousetrap.min.js"></script>
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 </head>
 
 <body class="bg-white min-h-screen flex flex-col">
@@ -60,7 +63,8 @@
         <a href="/news" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
         <a href="/schedule" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
         <a href="/member" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
-        <a href="/livejkt48" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Live JKT48</a>
+        <a href="/livejkt48" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Live
+          JKT48</a>
         <a href="/ingames" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">InGames</a>
       </div>
     </div>
@@ -73,61 +77,61 @@
 
   <main class="container mx-auto px-4 py-8 flex-grow">
     <div class="max-w-7xl mx-auto">
-        <div id="streamInfo" class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2" id="memberName">
-                Loading...
-            </h1>
-            <p class="text-xl text-gray-600" id="streamTitle">Loading...</p>
+      <div id="streamInfo" class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2" id="memberName">
+          Loading...
+        </h1>
+        <p class="text-xl text-gray-600" id="streamTitle">Loading...</p>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-6">
+        <div class="flex-grow">
+          <div class="relative w-full bg-black rounded-lg overflow-hidden aspect-video mb-6">
+            <video id="liveStream" class="w-full h-full" controls crossorigin playsinline>
+              <p>Please enable JavaScript to view this stream</p>
+            </video>
+          </div>
+
+          <div class="bg-white rounded-3xl shadow p-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="flex items-center">
+                <i class="fas fa-eye text-rose-300 text-xl mr-3"></i>
+                <div>
+                  <p class="text-sm text-gray-500">Viewers</p>
+                  <p class="text-lg font-semibold" id="viewCount">Loading...</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-clock text-rose-300 text-xl mr-3"></i>
+                <div>
+                  <p class="text-sm text-gray-500">Started</p>
+                  <p class="text-lg font-semibold" id="startTime">Loading...</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-signal text-rose-300 text-xl mr-3"></i>
+                <div>
+                  <p class="text-sm text-gray-500">Quality</p>
+                  <p class="text-lg font-semibold" id="streamQuality">Loading...</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="flex flex-col lg:flex-row gap-6">
-            <div class="flex-grow">
-                <div class="relative w-full bg-black rounded-lg overflow-hidden aspect-video mb-6">
-                    <video id="liveStream" class="w-full h-full" controls crossorigin playsinline>
-                        <p>Please enable JavaScript to view this stream</p>
-                    </video>
-                </div>
-
-                <div class="bg-white rounded-3xl shadow p-6 mb-6">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-eye text-rose-300 text-xl mr-3"></i>
-                            <div>
-                                <p class="text-sm text-gray-500">Viewers</p>
-                                <p class="text-lg font-semibold" id="viewCount">Loading...</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-clock text-rose-300 text-xl mr-3"></i>
-                            <div>
-                                <p class="text-sm text-gray-500">Started</p>
-                                <p class="text-lg font-semibold" id="startTime">Loading...</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-signal text-rose-300 text-xl mr-3"></i>
-                            <div>
-                                <p class="text-sm text-gray-500">Quality</p>
-                                <p class="text-lg font-semibold" id="streamQuality">Loading...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div id="stageUsersList" class="lg:w-80 hidden">
+          <div class="bg-white rounded-3xl shadow p-4">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-bold text-gray-900">Top 10 Podium</h2>
+              <span class="bg-rose-300 text-gray-900 text-xs font-medium px-2.5 py-0.5 rounded-3xl">Now Live</span>
             </div>
-
-            <div id="stageUsersList" class="lg:w-80 hidden">
-                <div class="bg-white rounded-3xl shadow p-4">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-bold text-gray-900">Top 10 Podium</h2>
-                        <span class="bg-rose-300 text-gray-900 text-xs font-medium px-2.5 py-0.5 rounded-3xl">Now Live</span>
-                    </div>
-                    <div id="stageUsersContainer" class="space-y-4">
-                    </div>
-                </div>
+            <div id="stageUsersContainer" class="space-y-4">
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</main>
+  </main>
 
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6">
@@ -142,7 +146,7 @@
           <a href="/about" class="text-lg font-medium text-gray-400 hover:text-white transition">About 48intens</a>
           <a href="/member" class="text-lg font-medium text-gray-400 hover:text-white transition">Members</a>
           <a href="/news" class="text-lg font-medium text-gray-400 hover:text-white transition">News</a>
-          <a href="/devintens" class="text-lg font-medium text-gray-400 hover:text-white transition">TeamDev</a>
+
         </div>
       </div>
 
@@ -158,6 +162,9 @@
         <a href="https://48intens.com/twitter" target="_blank"
           class="text-gray-400 hover:text-white text-2xl transition">
           <i class="fab fa-twitter"></i>
+        </a>
+        <a href="/devintens" target="_blank" class="text-gray-400 hover:text-white text-2xl transition">
+          <i class="fas fa-laptop-code"></i>
         </a>
       </div>
       <div class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
@@ -182,16 +189,16 @@
       }, 10);
     });
 
-     if (window.location.pathname.includes('/live/sr/')) {
-            const plyrCSS = document.createElement('link');
-            plyrCSS.rel = 'stylesheet';
-            plyrCSS.href = 'https://cdn.plyr.io/3.7.8/plyr.css';
-            document.head.appendChild(plyrCSS);
+    if (window.location.pathname.includes('/live/sr/')) {
+      const plyrCSS = document.createElement('link');
+      plyrCSS.rel = 'stylesheet';
+      plyrCSS.href = 'https://cdn.plyr.io/3.7.8/plyr.css';
+      document.head.appendChild(plyrCSS);
 
-            const plyrScript = document.createElement('script');
-            plyrScript.src = 'https://cdn.plyr.io/3.7.8/plyr.polyfilled.js';
-            document.head.appendChild(plyrScript);
-        }
+      const plyrScript = document.createElement('script');
+      plyrScript.src = 'https://cdn.plyr.io/3.7.8/plyr.polyfilled.js';
+      document.head.appendChild(plyrScript);
+    }
   </script>
 </body>
 

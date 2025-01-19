@@ -1,52 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>48intens - Login</title>
-    <meta
-      name="description"
-      content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
-    <meta name="keywords" content="48intens, JKT48, jekate48, member, news" />
-    <meta property="og:title" content="48intens Website" />
-    <meta
-      property="og:description"
-      content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
-    <meta property="og:image" content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:url" content="https://48intens.com" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="48intens Website" />
-    <meta
-      name="twitter:description"
-      content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
-    <meta name="twitter:image" content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
-    <meta name="twitter:creator" content="@48intens" />
-    <link rel="icon" href="/assets/image/icon.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/assets/css/style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-  </head>
 
-  <body class="bg-white min-h-screen flex flex-col">
-    <nav class="bg-white border-b border-gray-200">
-      <div
-        class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="/home" class="text-2xl font-bold">48intens</a>
-        <div class="md:hidden">
-          <button
-            id="menu-toggle"
-            class="text-gray-700 focus:outline-none relative w-6 h-6">
-            <div class="menu-icon">
-              <span class="hamburger-line"></span>
-              <span class="hamburger-line"></span>
-              <span class="hamburger-line"></span>
-            </div>
-          </button>
-        </div>
-        <div id="menu" class="hidden md:flex space-x-6">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>48intens - Login</title>
+  <meta name="description"
+    content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+  <meta name="keywords" content="48intens, JKT48, jekate48, member, news" />
+  <meta property="og:title" content="48intens Website" />
+  <meta property="og:description"
+    content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+  <meta property="og:image"
+    content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://48intens.com" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="48intens Website" />
+  <meta name="twitter:description"
+    content="48Intens Official - 48Intens adalah fanbase besar dan aktif untuk JKT48 dengan lebih dari 45,000 member. Kami selalu memberikan informasi terbaru seputar JKT48 setiap hari, termasuk berita, event, dan masih banyak lagi." />
+  <meta name="twitter:image"
+    content="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp" />
+  <meta name="twitter:creator" content="@48intens" />
+  <link rel="icon" href="/assets/image/icon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</head>
+
+<body class="bg-white min-h-screen flex flex-col">
+  <nav class="bg-white border-b border-gray-200">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="/home" class="text-2xl font-bold">48intens</a>
+      <div class="md:hidden">
+        <button id="menu-toggle" class="text-gray-700 focus:outline-none relative w-6 h-6">
+          <div class="menu-icon">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </div>
+        </button>
+      </div>
+      <div id="menu" class="hidden md:flex space-x-6">
         <a href="/news" class="font-semibold hover:text-purple-200">News</a>
         <a href="/schedule" class="font-semibold text-gray-700 hover:text-purple-200">Schedule</a>
         <a href="/member" class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
@@ -59,139 +56,106 @@
         <a href="/news" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
         <a href="/schedule" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
         <a href="/member" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
-        <a href="/livejkt48" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Live JKT48</a>
+        <a href="/livejkt48" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Live
+          JKT48</a>
         <a href="/ingames" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">InGames</a>
       </div>
     </div>
-    </nav>
+  </nav>
 
-    <div id="progressContainer" class="relative w-full h-1 bg-gray-700">
-      <div
-        id="progressBar"
-        class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
-        style="width: 0%"></div>
+  <div id="progressContainer" class="relative w-full h-1 bg-gray-700">
+    <div id="progressBar" class="absolute h-1 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300"
+      style="width: 0%"></div>
+  </div>
+
+  <div class="flex flex-col items-center justify-center min-h-screen px-4">
+    <div class="w-full max-w-sm p-6 bg-gray-800 rounded-3xl shadow-lg">
+      <h2 class="text-3xl font-bold text-center mb-4 text-white">Login</h2>
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-300">Your Name</label>
+          <input type="text" id="name" name="name" required
+            class="w-full p-2 mt-1 text-gray-900 bg-gray-200 rounded focus:outline-none focus:ring focus:ring-pink-300" />
+        </div>
+        <div>
+          <label for="oshimen" class="block text-sm font-medium text-gray-300">Select Your Oshimen</label>
+          <select id="oshimen" name="oshimen" required
+            class="w-full p-2 mt-1 text-gray-900 bg-gray-200 rounded focus:outline-none focus:ring focus:ring-pink-300">
+            <option value="" disabled selected>Select an Oshimen</option>
+          </select>
+        </div>
+        <div>
+          <button type="submit"
+            class="w-full px-4 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-gray-800 rounded-3xl hover:opacity-90">
+            Login
+          </button>
+        </div>
+      </form>
+      <div class="text-center mt-6">
+        <p class="text-sm text-gray-400">
+          Note: This login is only for showcasing the MyPage. Your data won't
+          be saved 😁
+        </p>
+      </div>
     </div>
+  </div>
 
-    <div class="flex flex-col items-center justify-center min-h-screen px-4">
-      <div class="w-full max-w-sm p-6 bg-gray-800 rounded-3xl shadow-lg">
-        <h2 class="text-3xl font-bold text-center mb-4 text-white">Login</h2>
-        <form id="loginForm" class="space-y-4">
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-300"
-              >Your Name</label
-            >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              class="w-full p-2 mt-1 text-gray-900 bg-gray-200 rounded focus:outline-none focus:ring focus:ring-pink-300" />
-          </div>
-          <div>
-            <label for="oshimen" class="block text-sm font-medium text-gray-300"
-              >Select Your Oshimen</label
-            >
-            <select
-              id="oshimen"
-              name="oshimen"
-              required
-              class="w-full p-2 mt-1 text-gray-900 bg-gray-200 rounded focus:outline-none focus:ring focus:ring-pink-300">
-              <option value="" disabled selected>Select an Oshimen</option>
-            </select>
-          </div>
-          <div>
-            <button
-              type="submit"
-              class="w-full px-4 py-2 bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 text-gray-800 rounded-3xl hover:opacity-90">
-              Login
-            </button>
-          </div>
-        </form>
-        <div class="text-center mt-6">
-          <p class="text-sm text-gray-400">
-            Note: This login is only for showcasing the MyPage. Your data won't
-            be saved 😁
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+        <div class="mb-6 md:mb-0">
+          <h2 class="text-3xl font-extrabold text-white">48intens</h2>
+          <p class="text-base text-gray-400 mt-2">
+            Bringing JKT48 closer to you.
           </p>
         </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-4">
+          <a href="/about" class="text-lg font-medium text-gray-400 hover:text-white transition">About 48intens</a>
+          <a href="/member" class="text-lg font-medium text-gray-400 hover:text-white transition">Members</a>
+          <a href="/news" class="text-lg font-medium text-gray-400 hover:text-white transition">News</a>
+
+        </div>
+      </div>
+
+      <div class="flex justify-center md:justify-end mt-6 space-x-6">
+        <a href="https://48intens.com/discord" target="_blank"
+          class="text-gray-400 hover:text-white text-2xl transition">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a href="https://48intens.com/instagram" target="_blank"
+          class="text-gray-400 hover:text-white text-2xl transition">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://48intens.com/twitter" target="_blank"
+          class="text-gray-400 hover:text-white text-2xl transition">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="/devintens" target="_blank" class="text-gray-400 hover:text-white text-2xl transition">
+          <i class="fas fa-laptop-code"></i>
+        </a>
+      </div>
+      <div class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
+        &copy; 2025 48intens. All rights reserved.<br />All 48Intens servers
+        are under managed by Typicalsleepingboy & RyuuG Dev
       </div>
     </div>
+  </footer>
 
-    <footer class="bg-gray-900 text-white py-8">
-      <div class="container mx-auto px-6">
-        <div
-          class="flex flex-col md:flex-row justify-between items-start md:items-center">
-          <div class="mb-6 md:mb-0">
-            <h2 class="text-3xl font-extrabold text-white">48intens</h2>
-            <p class="text-base text-gray-400 mt-2">
-              Bringing JKT48 closer to you.
-            </p>
-          </div>
-          <div class="flex flex-col md:flex-row md:items-center gap-4">
-            <a
-              href="/about"
-              class="text-lg font-medium text-gray-400 hover:text-white transition"
-              >About 48intens</a
-            >
-            <a
-              href="/member"
-              class="text-lg font-medium text-gray-400 hover:text-white transition"
-              >Members</a
-            >
-            <a
-              href="/news"
-              class="text-lg font-medium text-gray-400 hover:text-white transition"
-              >News</a
-            >
-            <a
-              href="/devintens"
-              class="text-lg font-medium text-gray-400 hover:text-white transition"
-              >TeamDev</a
-            >
-          </div>
-        </div>
+  <script src="/progress.js"></script>
+  <script src="/utils/login.js"></script>
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = document.querySelector(".menu-icon");
 
-        <div class="flex justify-center md:justify-end mt-6 space-x-6">
-          <a
-            href="https://48intens.com/discord"
-            target="_blank"
-            class="text-gray-400 hover:text-white text-2xl transition">
-            <i class="fab fa-discord"></i>
-          </a>
-          <a
-            href="https://48intens.com/instagram"
-            target="_blank"
-            class="text-gray-400 hover:text-white text-2xl transition">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a
-            href="https://48intens.com/twitter"
-            target="_blank"
-            class="text-gray-400 hover:text-white text-2xl transition">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </div>
-        <div
-          class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
-          &copy; 2025 48intens. All rights reserved.<br />All 48Intens servers
-          are under managed by Typicalsleepingboy & RyuuG Dev
-        </div>
-      </div>
-    </footer>
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      menuIcon.classList.toggle("menu-active");
+      setTimeout(() => {
+        mobileMenu.classList.toggle("active");
+      }, 10);
+    });
+  </script>
+</body>
 
-    <script src="/progress.js"></script>
-    <script src="/utils/login.js"></script>
-    <script>
-      const menuToggle = document.getElementById("menu-toggle");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const menuIcon = document.querySelector(".menu-icon");
-
-      menuToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-        menuIcon.classList.toggle("menu-active");
-        setTimeout(() => {
-          mobileMenu.classList.toggle("active");
-        }, 10);
-      });
-    </script>
-  </body>
 </html>
