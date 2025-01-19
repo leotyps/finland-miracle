@@ -1,50 +1,58 @@
 async function fetchYoutubeVideos() {
     try {
         const container = document.getElementById('youtube-container');
-
         container.innerHTML = `
-            <div class="bg-white rounded-3xl shadow-md overflow-hidden skeleton">
-                <div class="relative bg-gray-300 h-48 w-full rounded"></div>
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden skeleton w-full max-w-sm">
                 <div class="p-4">
-                    <div class="bg-gray-300 h-6 w-3/4 mb-2 rounded"></div>
-                    <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
+                    <div class="bg-gray-300 h-48 w-full rounded-2xl mb-4"></div>
+                    <div class="flex items-center mb-2">
+                        <div class="bg-gray-300 h-6 w-6 rounded-full mr-2"></div>
+                        <div class="bg-gray-300 h-4 w-32 rounded"></div>
+                    </div>
+                    <div class="bg-gray-300 h-6 w-full rounded"></div>
                 </div>
             </div>
         `.repeat(4);
 
         const response = await fetch('https://48intensapi.my.id/api/video');
         const data = await response.json();
-
         container.innerHTML = '';
-
+        
         if (!data || data.length === 0) {
             showNotFoundMessage(container, 'Videos Not Found 😭');
             return;
         }
 
         const limitedData = data.slice(0, 4);
-
         limitedData.forEach(video => {
             const videoId = video.url.split('/embed/')[1];
             const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
             const channelThumbnail = "https://yt3.googleusercontent.com/wBipLZF1IVqYGuYsZc0xxj5ist11fQMHWkN6vtBDCojWd8QTTlJLB8tOCOtoh7IRdmGHDn6I=s160-c-k-c0x00ffffff-no-rj";
-
+            
             const videoCard = `
-                <div class="bg-white rounded-3xl shadow-md overflow-hidden max-w-md mx-auto">
-                    <div class="relative bg-white px-2">
-                        <img 
-                            src="${thumbnailUrl}" 
-                            alt="${video.title} thumbnail" 
-                            class="w-full h-auto max-h-64 object-cover rounded-t-3xl">
-                    </div>
+                <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full max-w-sm">
                     <div class="p-4">
-                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="text-lg font-bold mb-2 block">
-                            ${video.title}
+                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="block">
+                            <div class="mb-4">
+                                <img 
+                                    src="${thumbnailUrl}" 
+                                    alt="${video.title}"
+                                    class="w-full h-48 object-cover rounded-2xl"
+                                    onerror="this.onerror=null; this.src='https://via.placeholder.com/640x360.png?text=Thumbnail+Not+Available'"
+                                >
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <img 
+                                    src="${channelThumbnail}" 
+                                    alt="JKT48"
+                                    class="w-6 h-6 rounded-full mr-2"
+                                >
+                                <span class="text-sm text-gray-600">JKT48</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 line-clamp-2">
+                                ${video.title}
+                            </h3>
                         </a>
-                        <div class="flex items-center">
-                            <img src="${channelThumbnail}" alt="JKT48" class="w-8 h-8 rounded-full mr-2">
-                            <span class="text-sm text-gray-500">JKT48</span>
-                        </div>
                     </div>
                 </div>
             `;
@@ -65,7 +73,7 @@ function showNotFoundMessage(container, message) {
             </div>
         </div>
     `;
-    container.classList.add('relative', 'min-h-[24rem]'); 
+    container.classList.add('relative', 'min-h-[24rem]');
 }
 
 fetchYoutubeVideos();
