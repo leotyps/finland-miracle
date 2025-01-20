@@ -348,7 +348,7 @@ function showErrorState(message) {
     });
 }
 
-function updateMetaTags({ title, description, image, imageWidth = 1200, imageHeight = 630, url }) {
+function updateMetaTags({ title, description, image, url }) {
     const baseUrl = 'https://finland-miracle.vercel.app/';
     const absoluteImageUrl = image.startsWith('http') ? 
         image : 
