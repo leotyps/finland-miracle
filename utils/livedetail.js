@@ -348,7 +348,7 @@ function showErrorState(message) {
     });
 }
 
-function updateMetaTags({ title, description, image, imageWidth, imageHeight, url }) {
+function updateMetaTags({ title, description, image, imageWidth = 1200, imageHeight = 630, url }) {
     const baseUrl = 'https://48intens.com';
     const absoluteImageUrl = image.startsWith('http') ? 
         image : 
@@ -356,8 +356,11 @@ function updateMetaTags({ title, description, image, imageWidth, imageHeight, ur
     const absoluteUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
 
     const metaTags = [
+        // Meta untuk SEO umum
         { selector: 'title', content: title },
         { selector: 'meta[name="description"]', attrs: { name: 'description', content: description }},
+
+        // Open Graph (OG) untuk media sosial
         { selector: 'meta[property="og:title"]', attrs: { property: 'og:title', content: title }},
         { selector: 'meta[property="og:description"]', attrs: { property: 'og:description', content: description }},
         { selector: 'meta[property="og:url"]', attrs: { property: 'og:url', content: absoluteUrl }},
@@ -365,6 +368,9 @@ function updateMetaTags({ title, description, image, imageWidth, imageHeight, ur
         { selector: 'meta[property="og:image:secure_url"]', attrs: { property: 'og:image:secure_url', content: absoluteImageUrl }},
         { selector: 'meta[property="og:image:width"]', attrs: { property: 'og:image:width', content: imageWidth }},
         { selector: 'meta[property="og:image:height"]', attrs: { property: 'og:image:height', content: imageHeight }},
+
+        // Twitter Cards
+        { selector: 'meta[name="twitter:card"]', attrs: { name: 'twitter:card', content: 'summary_large_image' }},
         { selector: 'meta[name="twitter:title"]', attrs: { name: 'twitter:title', content: title }},
         { selector: 'meta[name="twitter:description"]', attrs: { name: 'twitter:description', content: description }},
         { selector: 'meta[name="twitter:image"]', attrs: { name: 'twitter:image', content: absoluteImageUrl }}
@@ -387,6 +393,7 @@ function updateMetaTags({ title, description, image, imageWidth, imageHeight, ur
         }
     });
 }
+
 
 
 async function initializePlayer() {
