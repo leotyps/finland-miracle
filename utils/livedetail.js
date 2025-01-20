@@ -37,12 +37,12 @@ function playM3u8(url) {
         const m3u8Url = decodeURIComponent(url);
         hls.loadSource(m3u8Url);
         hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
             video.play().catch(e => console.error('Error autoplaying:', e));
         });
 
         // Error handling
-        hls.on(Hls.Events.ERROR, function(event, data) {
+        hls.on(Hls.Events.ERROR, function (event, data) {
             if (data.fatal) {
                 switch (data.type) {
                     case Hls.ErrorTypes.NETWORK_ERROR:
@@ -62,7 +62,7 @@ function playM3u8(url) {
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = url;
-        video.addEventListener('canplay', function() {
+        video.addEventListener('canplay', function () {
             video.play().catch(e => console.error('Error autoplaying:', e));
         });
         const savedVolume = localStorage.getItem('playerVolume');
@@ -197,12 +197,12 @@ async function updateStreamInfo(platform, memberName) {
             );
 
             if (streamData) {
-                const streamDescription = 
+                const streamDescription =
                     `🎥 ${streamData.user.name} sedang live streaming di IDN Live! ${streamData.title || ''}\n` +
                     `👥 ${streamData.view_count || 0} viewers\n` +
                     `📺 Nonton sekarang di 48intens!`;
                 const thumbnailUrl = streamData.user.avatar || streamData.image || streamData.user.profile_pic || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
-                
+
                 updateMetaTags({
                     title: `${streamData.user.name} Live Streaming | 48intens`,
                     description: streamDescription,
@@ -211,7 +211,7 @@ async function updateStreamInfo(platform, memberName) {
                     imageHeight: '500',
                     url: window.location.href
                 });
-                
+
                 updateIDNStreamInfo(streamData);
             } else {
                 throw new Error('Stream not found');
@@ -226,13 +226,13 @@ async function updateStreamInfo(platform, memberName) {
             );
 
             if (streamData) {
-                const streamDescription = 
+                const streamDescription =
                     `🎥 ${streamData.main_name} sedang live streaming di SHOWROOM!\n` +
                     `${streamData.genre_name || ''}\n` +
                     `👥 ${streamData.view_num?.toLocaleString() || 0} viewers\n` +
                     `📺 Nonton sekarang di 48intens!`;
                 const thumbnailUrl = streamData.image_square || streamData.image || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
-                
+
                 updateMetaTags({
                     title: `${streamData.main_name} Live Streaming | 48intens`,
                     description: streamDescription,
@@ -241,7 +241,7 @@ async function updateStreamInfo(platform, memberName) {
                     imageHeight: '320',
                     url: window.location.href
                 });
-                
+
                 updateShowroomStreamInfo(streamData);
             } else {
                 throw new Error('Stream not found');
@@ -268,12 +268,12 @@ function updateIDNStreamInfo(data) {
             : 'Unknown';
         document.getElementById('streamQuality').textContent = 'HD';
 
-        const streamDescription = 
+        const streamDescription =
             `🎥 ${data.user.name} sedang live streaming di IDN Live! ${data.title || ''}\n` +
             `👥 ${data.view_count || 0} viewers\n` +
             `📺 Nonton sekarang di 48intens!`;
         const thumbnailUrl = data.user.avatar || data.image || data.user.profile_pic || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
-        
+
         updateMetaTags({
             title: `${data.user.name} Live Streaming | 48intens`,
             description: streamDescription,
@@ -307,14 +307,14 @@ function updateShowroomStreamInfo(data) {
         : 'Unknown';
     document.getElementById('streamQuality').textContent = originalQuality.label || 'Unknown';
 
-    const streamDescription = 
+    const streamDescription =
         `🎥 ${data.main_name} sedang live streaming di SHOWROOM!\n` +
         `${data.genre_name || ''}\n` +
         `👥 ${data.view_num?.toLocaleString() || 0} viewers\n` +
         `📺 Nonton sekarang di 48intens!`;
 
     const thumbnailUrl = data.image_square || data.image || data.room_url_key || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
-    
+
     updateMetaTags({
         title: `${data.main_name} Live Streaming | 48intens`,
         description: streamDescription,
@@ -337,7 +337,7 @@ function showErrorState(message) {
     document.getElementById('viewCount').textContent = '-';
     document.getElementById('startTime').textContent = '-';
     document.getElementById('streamQuality').textContent = '-';
-    
+
     document.getElementById('stageUsersList').classList.add('hidden');
 
     updateMetaTags({
@@ -348,50 +348,68 @@ function showErrorState(message) {
     });
 }
 
-function updateMetaTags({ title, description, image, url }) {
+function updateMetaTags({ title, description, image, imageWidth, imageHeight, url }) {
     const baseUrl = 'https://finland-miracle.vercel.app/';
-    const absoluteImageUrl = image.startsWith('http') ? 
-        image : 
+    const absoluteImageUrl = image.startsWith('http') ?
+        image :
         `${baseUrl}${image.startsWith('/') ? '' : '/'}${image}`;
     const absoluteUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
 
+    // Update page title
+    document.title = title;
+
+    // Define all meta tags to be updated/created
     const metaTags = [
-        // Meta untuk SEO umum
-        { selector: 'title', content: title },
-        { selector: 'meta[name="description"]', attrs: { name: 'description', content: description }},
+        // Basic meta tags
+        { selector: 'meta[name="description"]', attrs: { name: 'description', content: description } },
+        { selector: 'meta[name="format-detection"]', attrs: { name: 'format-detection', content: 'telephone=no' } },
+        { selector: 'meta[name="theme-color"]', attrs: { name: 'theme-color', content: '#0f1e36' } },
 
-        // Open Graph (OG) untuk media sosial
-        { selector: 'meta[property="og:title"]', attrs: { property: 'og:title', content: title }},
-        { selector: 'meta[property="og:description"]', attrs: { property: 'og:description', content: description }},
-        { selector: 'meta[property="og:url"]', attrs: { property: 'og:url', content: absoluteUrl }},
-        { selector: 'meta[property="og:image"]', attrs: { property: 'og:image', content: absoluteImageUrl }},
-        { selector: 'meta[property="og:image:secure_url"]', attrs: { property: 'og:image:secure_url', content: absoluteImageUrl }},
-        { selector: 'meta[property="og:image:width"]', attrs: { property: 'og:image:width', content: imageWidth }},
-        { selector: 'meta[property="og:image:height"]', attrs: { property: 'og:image:height', content: imageHeight }},
+        // Open Graph tags
+        { selector: 'meta[property="og:title"]', attrs: { property: 'og:title', content: title } },
+        { selector: 'meta[property="og:description"]', attrs: { property: 'og:description', content: description } },
+        { selector: 'meta[property="og:url"]', attrs: { property: 'og:url', content: absoluteUrl } },
+        { selector: 'meta[property="og:type"]', attrs: { property: 'og:type', content: 'article' } },
+        { selector: 'meta[property="og:image"]', attrs: { property: 'og:image', content: absoluteImageUrl } },
+        { selector: 'meta[property="og:image:secure_url"]', attrs: { property: 'og:image:secure_url', content: absoluteImageUrl } },
+        { selector: 'meta[property="og:image:width"]', attrs: { property: 'og:image:width', content: imageWidth } },
+        { selector: 'meta[property="og:image:height"]', attrs: { property: 'og:image:height', content: imageHeight } },
+        { selector: 'meta[property="og:site_name"]', attrs: { property: 'og:site_name', content: '48intens' } },
 
-        // Twitter Cards
-        { selector: 'meta[name="twitter:card"]', attrs: { name: 'twitter:card', content: 'summary_large_image' }},
-        { selector: 'meta[name="twitter:title"]', attrs: { name: 'twitter:title', content: title }},
-        { selector: 'meta[name="twitter:description"]', attrs: { name: 'twitter:description', content: description }},
-        { selector: 'meta[name="twitter:image"]', attrs: { name: 'twitter:image', content: absoluteImageUrl }}
+        // Twitter Card tags
+        { selector: 'meta[name="twitter:card"]', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+        { selector: 'meta[name="twitter:site"]', attrs: { name: 'twitter:site', content: '@48intens' } },
+        { selector: 'meta[name="twitter:title"]', attrs: { name: 'twitter:title', content: title } },
+        { selector: 'meta[name="twitter:description"]', attrs: { name: 'twitter:description', content: description } },
+        { selector: 'meta[name="twitter:image"]', attrs: { name: 'twitter:image', content: absoluteImageUrl } },
+        { selector: 'meta[name="twitter:image:alt"]', attrs: { name: 'twitter:image:alt', content: title } }
     ];
 
-    metaTags.forEach(({ selector, content, attrs }) => {
+    // Remove existing meta tags before adding new ones
+    metaTags.forEach(({ selector }) => {
         const existingTag = document.querySelector(selector);
         if (existingTag) {
             existingTag.remove();
         }
-
-        if (selector === 'title') {
-            document.title = content;
-        } else {
-            const newTag = document.createElement('meta');
-            Object.entries(attrs).forEach(([key, value]) => {
-                newTag.setAttribute(key, value);
-            });
-            document.head.appendChild(newTag);
-        }
     });
+
+    // Add new meta tags
+    metaTags.forEach(({ attrs }) => {
+        const newTag = document.createElement('meta');
+        Object.entries(attrs).forEach(([key, value]) => {
+            newTag.setAttribute(key, value);
+        });
+        document.head.appendChild(newTag);
+    });
+
+    // Update favicon if needed
+    let favicon = document.querySelector('link[rel="icon"]');
+    if (!favicon) {
+        favicon = document.createElement('link');
+        favicon.rel = 'icon';
+        document.head.appendChild(favicon);
+    }
+    favicon.href = '/assets/image/icon.png';
 }
 
 
@@ -404,7 +422,7 @@ async function initializePlayer() {
         }
 
         const pathSegments = window.location.pathname.split('/');
-        const platform = pathSegments[2]; 
+        const platform = pathSegments[2];
         const memberName = pathSegments[3];
         const streamId = pathSegments[4];
 
@@ -423,7 +441,7 @@ async function initializePlayer() {
         Mousetrap.bind('down', volumeDown);
         Mousetrap.bind('f', vidFullscreen);
         video.addEventListener('click', playPause);
-        video.addEventListener('error', function(e) {
+        video.addEventListener('error', function (e) {
             console.error('Video error:', e);
             showErrorState('Error playing video stream');
         });
