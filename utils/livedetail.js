@@ -15,6 +15,47 @@ function decompressStreamData(streamId) {
     return streamData;
 }
 
+function showOfflineState() {
+    const offlineContainer = document.createElement('div');
+    offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
+    
+    const offlineIcon = document.createElement('div');
+    offlineIcon.className = 'text-gray-400 mb-4';
+    offlineIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+    `;
+
+    const offlineText = document.createElement('h3');
+    offlineText.className = 'text-lg font-medium text-gray-900 mb-2';
+    offlineText.textContent = 'Room is Offline';
+
+    const offlineDescription = document.createElement('p');
+    offlineDescription.className = 'text-sm text-gray-500';
+    offlineDescription.textContent = 'This room is currently not streaming. Please check back later.';
+
+    offlineContainer.appendChild(offlineIcon);
+    offlineContainer.appendChild(offlineText);
+    offlineContainer.appendChild(offlineDescription);
+    const videoContainer = document.getElementById('liveStream').parentElement;
+    videoContainer.innerHTML = '';
+    videoContainer.appendChild(offlineContainer);
+    document.getElementById('memberName').textContent = 'Room Offline';
+    document.getElementById('streamTitle').textContent = 'No active stream';
+    document.getElementById('viewCount').textContent = '-';
+    document.getElementById('startTime').textContent = '-';
+    document.getElementById('streamQuality').textContent = '-';
+    document.getElementById('stageUsersList').classList.add('hidden');
+    updateMetaTags({
+        title: '48intens - Room Offline',
+        description: 'This room is currently not streaming. Please check back later.',
+        image: 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp',
+        url: window.location.href
+    });
+}
+
+
 function playM3u8(url) {
     if (!video) {
         console.error('Video element not initialized');
@@ -395,53 +436,7 @@ function updateMetaTags({ title, description, image, imageWidth, imageHeight, ur
 }
 
 
-function showOfflineState() {
-    const offlineContainer = document.createElement('div');
-    offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
-    
-    const offlineIcon = document.createElement('div');
-    offlineIcon.className = 'text-gray-400 mb-4';
-    offlineIcon.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-        </svg>
-    `;
 
-    const offlineText = document.createElement('h3');
-    offlineText.className = 'text-lg font-medium text-gray-900 mb-2';
-    offlineText.textContent = 'Room is Offline';
-
-    const offlineDescription = document.createElement('p');
-    offlineDescription.className = 'text-sm text-gray-500';
-    offlineDescription.textContent = 'This room is currently not streaming. Please check back later.';
-
-    offlineContainer.appendChild(offlineIcon);
-    offlineContainer.appendChild(offlineText);
-    offlineContainer.appendChild(offlineDescription);
-
-    // Replace video player with offline state
-    const videoContainer = document.getElementById('liveStream').parentElement;
-    videoContainer.innerHTML = '';
-    videoContainer.appendChild(offlineContainer);
-
-    // Update stream info
-    document.getElementById('memberName').textContent = 'Room Offline';
-    document.getElementById('streamTitle').textContent = 'No active stream';
-    document.getElementById('viewCount').textContent = '-';
-    document.getElementById('startTime').textContent = '-';
-    document.getElementById('streamQuality').textContent = '-';
-
-    // Hide stage users list
-    document.getElementById('stageUsersList').classList.add('hidden');
-
-    // Update meta tags
-    updateMetaTags({
-        title: '48intens - Room Offline',
-        description: 'This room is currently not streaming. Please check back later.',
-        image: 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp',
-        url: window.location.href
-    });
-}
 
 
 async function initializePlayer() {
