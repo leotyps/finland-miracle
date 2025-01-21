@@ -98,6 +98,7 @@ function createIDNCard(stream) {
     const freeStreamTitles = [
         'TEMEN NGOBROL',
         'TEMEN MAIN',
+        'TEMAN MASAK',
         'TEMEN MAKAN',
         'TRIAL'
     ];
