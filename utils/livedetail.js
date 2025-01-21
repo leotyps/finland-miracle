@@ -57,53 +57,62 @@ function showOfflineState() {
 
 
 function playM3u8(url) {
-    if (!video) {
-        console.error('Video element not initialized');
-        showOfflineState();
-        return;
-    }
-
-    if (Hls.isSupported()) {
-        const savedVolume = localStorage.getItem('playerVolume');
-        video.volume = savedVolume ? parseFloat(savedVolume) : 0.3;
-        if (hls) {
-            hls.destroy();
+    return new Promise((resolve, reject) => {
+        if (!video) {
+            reject(new Error('Video element not initialized'));
+            return;
         }
 
-        hls = new Hls({
-            enableWorker: true,
-            lowLatencyMode: true,
-            backBufferLength: 90
-        });
-
-        const m3u8Url = decodeURIComponent(url);
-        hls.loadSource(m3u8Url);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play().catch(e => {
-                console.error('Error autoplaying:', e);
-                showOfflineState();
-            });
-        });
-
-        hls.on(Hls.Events.ERROR, function (event, data) {
-            if (data.fatal) {
-                console.error('Fatal HLS error:', data);
-                showOfflineState();
+        if (Hls.isSupported()) {
+            const savedVolume = localStorage.getItem('playerVolume');
+            video.volume = savedVolume ? parseFloat(savedVolume) : 0.3;
+            
+            if (hls) {
                 hls.destroy();
             }
-        });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
-        video.addEventListener('canplay', function () {
-            video.play().catch(e => {
-                console.error('Error autoplaying:', e);
-                showOfflineState();
+
+            hls = new Hls({
+                enableWorker: true,
+                lowLatencyMode: true,
+                backBufferLength: 90
             });
-        });
-        const savedVolume = localStorage.getItem('playerVolume');
-        video.volume = savedVolume ? parseFloat(savedVolume) : 0.3;
-    }
+
+            const m3u8Url = decodeURIComponent(url);
+            hls.loadSource(m3u8Url);
+            hls.attachMedia(video);
+
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play()
+                    .then(() => resolve())
+                    .catch(e => {
+                        console.error('Error autoplaying:', e);
+                        reject(e);
+                    });
+            });
+
+            hls.on(Hls.Events.ERROR, function (event, data) {
+                if (data.fatal) {
+                    console.error('Fatal HLS error:', data);
+                    hls.destroy();
+                    reject(new Error('Fatal HLS error'));
+                }
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = url;
+            video.addEventListener('canplay', function () {
+                video.play()
+                    .then(() => resolve())
+                    .catch(e => {
+                        console.error('Error autoplaying:', e);
+                        reject(e);
+                    });
+            });
+            const savedVolume = localStorage.getItem('playerVolume');
+            video.volume = savedVolume ? parseFloat(savedVolume) : 0.3;
+        } else {
+            reject(new Error('HLS not supported'));
+        }
+    });
 }
 
 // Player controls
@@ -245,7 +254,84 @@ async function refreshPodiumData() {
         console.error('Error refreshing podium data:', error);
     }
 }
+async function checkAndHandleStreamStatus(platform, memberName, streamId) {
+    try {
+        let apiEndpoint = '';
+        let streamData = null;
+        const normalizedMemberName = memberName.toLowerCase();
 
+        // Determine API endpoint based on platform
+        if (platform === 'idn') {
+            apiEndpoint = 'https://48intensapi.my.id/api/idnlive/jkt48';
+        } else if (platform === 'showroom' || platform === 'sr') {
+            apiEndpoint = 'https://48intensapi.my.id/api/showroom/jekatepatlapan';
+        }
+
+        // Fetch current stream data
+        const response = await fetch(apiEndpoint);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${platform} data`);
+        }
+
+        const data = await response.json();
+        
+        if (platform === 'idn') {
+            streamData = data.data.find(stream =>
+                stream.user.username.replace('jkt48_', '').toLowerCase() === normalizedMemberName
+            );
+        } else {
+            streamData = data.find(stream =>
+                stream.room_url_key.replace('JKT48_', '').toLowerCase() === normalizedMemberName
+            );
+        }
+
+        // If stream is found in API response, it's live
+        if (streamData) {
+            if (platform === 'idn') {
+                await updateIDNStreamInfo(streamData);
+            } else {
+                await updateShowroomStreamInfo(streamData);
+            }
+            
+            // Use stored stream data if available
+            const storedData = streamId ? decompressStreamData(streamId) : null;
+            if (storedData && storedData.mpath) {
+                playM3u8(storedData.mpath);
+            }
+        } else {
+            // Double check with stored data before showing offline
+            const storedData = streamId ? decompressStreamData(streamId) : null;
+            if (storedData && storedData.mpath) {
+                try {
+                    await playM3u8(storedData.mpath);
+                    // If playback succeeds, try updating stream info again
+                    await updateStreamInfo(platform, memberName);
+                } catch (error) {
+                    console.error('Failed to play stored stream:', error);
+                    showOfflineState();
+                }
+            } else {
+                showOfflineState();
+            }
+        }
+    } catch (error) {
+        console.error('Error checking stream status:', error);
+        
+        // Last attempt with stored data
+        const storedData = streamId ? decompressStreamData(streamId) : null;
+        if (storedData && storedData.mpath) {
+            try {
+                await playM3u8(storedData.mpath);
+                await updateStreamInfo(platform, memberName);
+            } catch (playError) {
+                console.error('Failed to play stored stream:', playError);
+                showOfflineState();
+            }
+        } else {
+            showOfflineState();
+        }
+    }
+}
 async function checkStreamStatus(platform, memberName) {
     try {
         if (platform === 'idn') {
@@ -485,6 +571,7 @@ async function initializePlayer() {
             video = document.getElementById('liveStream');
         }
 
+        // Set up video controls
         Mousetrap.bind('space', playPause);
         Mousetrap.bind('up', volumeUp);
         Mousetrap.bind('down', volumeDown);
@@ -492,29 +579,12 @@ async function initializePlayer() {
         video.addEventListener('click', playPause);
         video.addEventListener('error', function (e) {
             console.error('Video error:', e);
-            showOfflineState();
+            checkAndHandleStreamStatus(platform, memberName, streamId);
         });
 
-        try {
-            await updateStreamInfo(platform, memberName);
-            const streamData = streamId ? decompressStreamData(streamId) : null;
-            if (streamData && streamData.mpath) {
-                playM3u8(streamData.mpath);
-            }
-        } catch (error) {
-            console.error('Error loading stream:', error);
-            const streamData = streamId ? decompressStreamData(streamId) : null;
-            if (streamData && streamData.mpath) {
-                try {
-                    playM3u8(streamData.mpath);
-                } catch (playError) {
-                    console.error('Error playing stored stream:', playError);
-                    showOfflineState();
-                }
-            } else {    
-                showOfflineState();
-            }
-        }
+        // Check stream status and handle accordingly
+        await checkAndHandleStreamStatus(platform, memberName, streamId);
+
     } catch (error) {
         console.error('Error initializing player:', error);
         showOfflineState();
