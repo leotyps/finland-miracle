@@ -126,6 +126,67 @@ const playerControls = {
     }
 };
 
+async function checkAndHandleStreamStatus(platform, memberName, streamId) {
+    try {
+        const apiEndpoint = platform === 'idn' 
+            ? 'https://48intensapi.my.id/api/idnlive/jkt48'
+            : 'https://48intensapi.my.id/api/showroom/jekatepatlapan';
+
+        const response = await fetch(apiEndpoint);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${platform} data`);
+        }
+
+        const data = await response.json();
+        const normalizedMemberName = memberName.toLowerCase();
+        
+        const streamData = platform === 'idn'
+            ? data.data.find(stream => stream.user.username.replace('jkt48_', '').toLowerCase() === normalizedMemberName)
+            : data.find(stream => stream.room_url_key.replace('JKT48_', '').toLowerCase() === normalizedMemberName);
+
+        if (streamData) {
+            if (platform === 'idn') {
+                await updateIDNStreamInfo(streamData);
+            } else {
+                await updateShowroomStreamInfo(streamData);
+            }
+            
+            const storedData = streamId ? decompressStreamData(streamId) : null;
+            if (storedData?.mpath) {
+                await playM3u8(storedData.mpath);
+            }
+        } else {
+            const storedData = streamId ? decompressStreamData(streamId) : null;
+            if (storedData?.mpath) {
+                try {
+                    await playM3u8(storedData.mpath);
+                    await updateStreamInfo(platform, memberName);
+                } catch (error) {
+                    console.error('Failed to play stored stream:', error);
+                    showOfflineState();
+                }
+            } else {
+                showOfflineState();
+            }
+        }
+    } catch (error) {
+        console.error('Error checking stream status:', error);
+        
+        const storedData = streamId ? decompressStreamData(streamId) : null;
+        if (storedData?.mpath) {
+            try {
+                await playM3u8(storedData.mpath);
+                await updateStreamInfo(platform, memberName);
+            } catch (playError) {
+                console.error('Failed to play stored stream:', playError);
+                showOfflineState();
+            }
+        } else {
+            showOfflineState();
+        }
+    }
+}
+
 async function updateStreamInfo(platform, memberName) {
     try {
         const apiEndpoint = platform === 'idn' 
