@@ -95,6 +95,33 @@ function createIDNCard(stream) {
     const streamId = compressStreamData(proxyStreamUrl, 'idn');
     const watchUrl = `/live/idn/${memberUsername}/${streamId}`;
 
+    const freeStreamTitles = [
+        'TEMEN NGOBROL JKT48',
+        'TEMEN MAIN JKT48',
+        'TEMEN MAKAN JKT48'
+    ];
+    
+    const isFreeStream = freeStreamTitles.some(title => 
+        stream.title && stream.title.toUpperCase().includes(title)
+    );
+    
+
+    let buttonProps = {
+        label: "Get Ticket",
+        link: "https://www.idn.app/jkt48-official",
+        icon: "fa-ticket-alt",
+        gradient: "from-amber-400 to-yellow-500"
+    };
+    
+    if (isFreeStream) {
+        buttonProps = {
+            label: "Watch Stream",
+            link: watchUrl,
+            icon: "fa-play",
+            gradient: "from-amber-400 to-yellow-500"
+        };
+    }
+
     return `
         <div class="bg-yellow-100/80 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
             <div class="relative group">
@@ -123,13 +150,13 @@ function createIDNCard(stream) {
                     </div>
                     <div>
                         <h3 class="font-bold text-gray-600">${stream.user.name}</h3>
-                        <p class=" text-gray-600 text-sm">@${stream.user.username}</p>
+                        <p class="text-gray-600 text-sm">@${stream.user.username}</p>
                     </div>
                 </div>
                 <h4 class="font-medium text-gray-600 mb-4 line-clamp-2">${stream.title}</h4>
-                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
-                    <i class="fas fa-play mr-2"></i>
-                    Watch Stream
+                <a href="${buttonProps.link}" class="block w-full text-center px-6 py-3 bg-gradient-to-r ${buttonProps.gradient} text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                    <i class="fas ${buttonProps.icon} mr-2"></i>
+                    ${buttonProps.label}
                 </a>
             </div>
         </div>
