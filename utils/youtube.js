@@ -68,7 +68,7 @@ function showNotFoundMessage(container, message) {
     container.innerHTML = `
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="flex flex-col items-center">
-                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737172859/g0dwuucxo21skti64uls.png" alt="Not Found" class="w-32 h-32 md:w-64 md:h-64 mb-4">
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" alt="Not Found" class="w-32 h-32 md:w-64 md:h-64 mb-4">
                 <p class="text-gray-500 text-center text-lg font-bold">${message}</p>
             </div>
         </div>
