@@ -43,14 +43,37 @@
                     </div>
                 </button>
             </div>
-            <div id="menu" class="hidden md:flex space-x-6">
+            <div id="menu" class="hidden md:flex items-center space-x-6">
                 <a href="/news" class="font-semibold hover:text-purple-200">News</a>
                 <a href="/schedule" class="font-semibold text-gray-700 hover:text-purple-200">Schedule</a>
                 <a href="/member" class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
                 <a href="/livejkt48" class="font-semibold text-gray-700 hover:text-purple-200">Stream</a>
+
+                <div class="flex space-x-4">
+                    <a href="/mypage" class="inline-block">
+                        <button
+                            class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-full flex items-center">
+                            MyPage
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </button>
+                    </a>
+                    <a href="/login" class="inline-block">
+                        <button
+                            class="border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center">
+                            Login
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17l-5-5 5-5"></path>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
-        <div id="mobile-menu" class="font-semibold hidden md:hidden bg-white border-t border-gray-200 overflow-hidden">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 overflow-hidden">
             <div class="mobile-menu-content">
                 <a href="/news" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">News</a>
                 <a href="/schedule"
@@ -59,6 +82,29 @@
                     class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
                 <a href="/livejkt48"
                     class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Stream</a>
+
+                <div class="px-4 py-2 space-y-2">
+                    <a href="/mypage" class="block">
+                        <button
+                            class="w-full bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-full flex items-center justify-center">
+                            MyPage
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </button>
+                    </a>
+                    <a href="/login" class="block">
+                        <button
+                            class="w-full border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center justify-center">
+                            Login
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 17l-5-5 5-5"></path>
+                            </svg>
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
