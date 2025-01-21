@@ -96,15 +96,17 @@ function createIDNCard(stream) {
     const watchUrl = `/live/idn/${memberUsername}/${streamId}`;
 
     const freeStreamTitles = [
-        'TEMEN NGOBROL JKT48',
-        'TEMEN MAIN JKT48',
-        'TEMEN MAKAN JKT48'
+        'TEMEN NGOBROL',
+        'TEMEN MAIN',
+        'TEMEN MAKAN',
+        'TRIAL'
     ];
     
     const isFreeStream = freeStreamTitles.some(title => 
         stream.title && stream.title.toUpperCase().includes(title)
     );
     
+    const isMemberAccount = stream.user.username.startsWith('jkt48_');
 
     let buttonProps = {
         label: "Get Ticket",
@@ -113,7 +115,7 @@ function createIDNCard(stream) {
         gradient: "from-amber-400 to-yellow-500"
     };
     
-    if (isFreeStream) {
+    if (isFreeStream || isMemberAccount) {
         buttonProps = {
             label: "Watch Stream",
             link: watchUrl,
@@ -162,7 +164,6 @@ function createIDNCard(stream) {
         </div>
     `;
 }
-
 
 function createShowroomCard(stream) {
     const memberUsername = stream.room_url_key.replace('JKT48_', '').toLowerCase();

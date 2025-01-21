@@ -246,8 +246,39 @@ async function refreshPodiumData() {
     }
 }
 
+async function checkStreamStatus(platform, memberName) {
+    try {
+        if (platform === 'idn') {
+            const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
+            if (!response.ok) throw new Error('Failed to fetch IDN data');
+
+            const data = await response.json();
+            return data.data.some(stream => 
+                stream.user.username.replace('jkt48_', '').toLowerCase() === memberName.toLowerCase()
+            );
+        } else if (platform === 'showroom' || platform === 'sr') {
+            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
+            if (!response.ok) throw new Error('Failed to fetch Showroom data');
+
+            const data = await response.json();
+            return data.some(stream => 
+                stream.room_url_key.replace('JKT48_', '').toLowerCase() === memberName.toLowerCase()
+            );
+        }
+        return false;
+    } catch (error) {
+        console.error('Error checking stream status:', error);
+        return false;
+    }
+}
+
 async function updateStreamInfo(platform, memberName) {
     try {
+        const isStreamLive = await checkStreamStatus(platform, memberName);
+        if (!isStreamLive) {
+            throw new Error('Stream is offline');
+        }
+
         let streamData;
         const normalizedMemberName = memberName.toLowerCase();
 
@@ -281,7 +312,7 @@ async function updateStreamInfo(platform, memberName) {
     } catch (error) {
         console.error('Error updating stream info:', error);
         showOfflineState();
-        throw error; 
+        throw error;
     }
 }
 
@@ -436,9 +467,6 @@ function updateMetaTags({ title, description, image, imageWidth, imageHeight, ur
 }
 
 
-
-
-
 async function initializePlayer() {
     try {
         video = document.getElementById('liveStream');
@@ -457,12 +485,6 @@ async function initializePlayer() {
             video = document.getElementById('liveStream');
         }
 
-        const streamData = decompressStreamData(streamId);
-        if (!streamData) {
-            showOfflineState();
-            return;
-        }
-
         Mousetrap.bind('space', playPause);
         Mousetrap.bind('up', volumeUp);
         Mousetrap.bind('down', volumeDown);
@@ -472,13 +494,26 @@ async function initializePlayer() {
             console.error('Video error:', e);
             showOfflineState();
         });
-        
+
         try {
             await updateStreamInfo(platform, memberName);
-            playM3u8(streamData.mpath);
+            const streamData = streamId ? decompressStreamData(streamId) : null;
+            if (streamData && streamData.mpath) {
+                playM3u8(streamData.mpath);
+            }
         } catch (error) {
             console.error('Error loading stream:', error);
-            showOfflineState();
+            const streamData = streamId ? decompressStreamData(streamId) : null;
+            if (streamData && streamData.mpath) {
+                try {
+                    playM3u8(streamData.mpath);
+                } catch (playError) {
+                    console.error('Error playing stored stream:', playError);
+                    showOfflineState();
+                }
+            } else {    
+                showOfflineState();
+            }
         }
     } catch (error) {
         console.error('Error initializing player:', error);
