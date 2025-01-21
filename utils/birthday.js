@@ -53,7 +53,7 @@ function displayBirthdays() {
             }).join('');
         })
         .catch(error => {
-            container.innerHTML = '<div class="text-center py-3 text-sm text-gray-500">Failed to load birthday data</div>';
+            container.innerHTML = '<div class="text-center py-3 text-sm text-gray-500">Failed to load birthday data 😭</div>';
             console.error('Error:', error);
         });
 }
