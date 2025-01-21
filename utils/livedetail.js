@@ -187,8 +187,6 @@ async function refreshPodiumData() {
         const pathSegments = window.location.pathname.split('/');
         const platform = pathSegments[2];
         const memberName = pathSegments[3];
-
-        // Only proceed if it's a Showroom stream
         if (platform === 'showroom' || platform === 'sr') {
             const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
             if (!response.ok) throw new Error('Failed to fetch Showroom data');
@@ -200,8 +198,6 @@ async function refreshPodiumData() {
 
             if (streamData && streamData.stage_users) {
                 updateStageUsersList(streamData.stage_users);
-                
-                // Add a subtle animation to show the refresh was successful
                 const container = document.getElementById('stageUsersContainer');
                 container.style.opacity = '0';
                 setTimeout(() => {
@@ -381,60 +377,51 @@ function showErrorState(message) {
 }
 
 function updateMetaTags({ title, description, image, imageWidth, imageHeight, url }) {
-    const baseUrl = 'https://finland-miracle.vercel.app/';
-    const absoluteImageUrl = image.startsWith('http') ?
-        image :
-        `${baseUrl}${image.startsWith('/') ? '' : '/'}${image}`;
-    const absoluteUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
-
-    // Update page title
     document.title = title;
 
-    // Define all meta tags to be updated/created
-    const metaTags = [
-        // Basic meta tags
-        { selector: 'meta[name="description"]', attrs: { name: 'description', content: description } },
-        { selector: 'meta[name="format-detection"]', attrs: { name: 'format-detection', content: 'telephone=no' } },
-        { selector: 'meta[name="theme-color"]', attrs: { name: 'theme-color', content: '#0f1e36' } },
-
-        // Open Graph tags
-        { selector: 'meta[property="og:title"]', attrs: { property: 'og:title', content: title } },
-        { selector: 'meta[property="og:description"]', attrs: { property: 'og:description', content: description } },
-        { selector: 'meta[property="og:url"]', attrs: { property: 'og:url', content: absoluteUrl } },
-        { selector: 'meta[property="og:type"]', attrs: { property: 'og:type', content: 'article' } },
-        { selector: 'meta[property="og:image"]', attrs: { property: 'og:image', content: absoluteImageUrl } },
-        { selector: 'meta[property="og:image:secure_url"]', attrs: { property: 'og:image:secure_url', content: absoluteImageUrl } },
-        { selector: 'meta[property="og:image:width"]', attrs: { property: 'og:image:width', content: imageWidth } },
-        { selector: 'meta[property="og:image:height"]', attrs: { property: 'og:image:height', content: imageHeight } },
-        { selector: 'meta[property="og:site_name"]', attrs: { property: 'og:site_name', content: '48intens' } },
-
-        // Twitter Card tags
-        { selector: 'meta[name="twitter:card"]', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
-        { selector: 'meta[name="twitter:site"]', attrs: { name: 'twitter:site', content: '@48intens' } },
-        { selector: 'meta[name="twitter:title"]', attrs: { name: 'twitter:title', content: title } },
-        { selector: 'meta[name="twitter:description"]', attrs: { name: 'twitter:description', content: description } },
-        { selector: 'meta[name="twitter:image"]', attrs: { name: 'twitter:image', content: absoluteImageUrl } },
-        { selector: 'meta[name="twitter:image:alt"]', attrs: { name: 'twitter:image:alt', content: title } }
-    ];
-
-    // Remove existing meta tags before adding new ones
-    metaTags.forEach(({ selector }) => {
-        const existingTag = document.querySelector(selector);
-        if (existingTag) {
-            existingTag.remove();
+    function updateMetaTag(attrs) {
+        let tag = document.querySelector(
+            attrs.property ? 
+            `meta[property="${attrs.property}"]` : 
+            `meta[name="${attrs.name}"]`
+        );
+        
+        if (!tag) {
+            tag = document.createElement('meta');
+            document.head.appendChild(tag);
         }
-    });
-
-    // Add new meta tags
-    metaTags.forEach(({ attrs }) => {
-        const newTag = document.createElement('meta');
+        
         Object.entries(attrs).forEach(([key, value]) => {
-            newTag.setAttribute(key, value);
+            tag.setAttribute(key, value);
         });
-        document.head.appendChild(newTag);
-    });
+    }
 
-    // Update favicon if needed
+    // Basic meta tags
+    updateMetaTag({ name: 'description', content: description });
+    updateMetaTag({ name: 'keywords', content: 'JKT48, live streaming, 48intens, idol, live' });
+
+    // Open Graph tags
+    updateMetaTag({ property: 'og:site_name', content: '48intens' });
+    updateMetaTag({ property: 'og:title', content: title });
+    updateMetaTag({ property: 'og:description', content: description });
+    updateMetaTag({ property: 'og:type', content: 'website' });
+    updateMetaTag({ property: 'og:url', content: url });
+    updateMetaTag({ property: 'og:image', content: image });
+    updateMetaTag({ property: 'og:image:secure_url', content: image });
+    updateMetaTag({ property: 'og:image:width', content: imageWidth });
+    updateMetaTag({ property: 'og:image:height', content: imageHeight });
+    updateMetaTag({ property: 'og:image:alt', content: title });
+
+    // Twitter Card tags
+    updateMetaTag({ name: 'twitter:card', content: 'summary_large_image' });
+    updateMetaTag({ name: 'twitter:site', content: '@48intens' });
+    updateMetaTag({ name: 'twitter:creator', content: '@48intens' });
+    updateMetaTag({ name: 'twitter:title', content: title });
+    updateMetaTag({ name: 'twitter:description', content: description });
+    updateMetaTag({ name: 'twitter:image', content: image });
+    updateMetaTag({ name: 'twitter:image:alt', content: title });
+
+    // Update favicon
     let favicon = document.querySelector('link[rel="icon"]');
     if (!favicon) {
         favicon = document.createElement('link');
@@ -443,7 +430,6 @@ function updateMetaTags({ title, description, image, imageWidth, imageHeight, ur
     }
     favicon.href = '/assets/image/icon.png';
 }
-
 
 
 async function initializePlayer() {
