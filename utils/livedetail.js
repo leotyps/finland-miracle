@@ -206,39 +206,23 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
                 await updateShowroomStreamInfo(streamData);
             }
             
+            updateMetaTags({
+                title: `${streamData.user.name} Live Streaming | 48intens`,
+                description: `🎥 ${streamData.user.name} sedang live streaming! ${streamData.title || ''} Nonton sekarang di 48intens!`,
+                image: streamData.user.avatar || streamData.image || 'https://default-image-url.com/default.jpg',
+                url: window.location.href
+            });
+
             const storedData = streamId ? decompressStreamData(streamId) : null;
             if (storedData?.mpath) {
                 await playM3u8(storedData.mpath);
-            }
-        } else {
-            const storedData = streamId ? decompressStreamData(streamId) : null;
-            if (storedData?.mpath) {
-                try {
-                    await playM3u8(storedData.mpath);
-                    await updateStreamInfo(platform, memberName);
-                } catch (error) {
-                    console.error('Failed to play stored stream:', error);
-                    showOfflineState();
-                }
-            } else {
-                showOfflineState();
-            }
-        }
-    } catch (error) {
-        console.error('Error checking stream status:', error);
-        
-        const storedData = streamId ? decompressStreamData(streamId) : null;
-        if (storedData?.mpath) {
-            try {
-                await playM3u8(storedData.mpath);
-                await updateStreamInfo(platform, memberName);
-            } catch (playError) {
-                console.error('Failed to play stored stream:', playError);
-                showOfflineState();
             }
         } else {
             showOfflineState();
         }
+    } catch (error) {
+        console.error('Error checking stream status:', error);
+        showOfflineState();
     }
 }
 
