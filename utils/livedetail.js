@@ -181,6 +181,38 @@ function updateStageUsersList(stageUsers) {
     });
 }
 
+// Add this function to handle podium data refresh
+async function refreshPodiumData() {
+    try {
+        const pathSegments = window.location.pathname.split('/');
+        const platform = pathSegments[2];
+        const memberName = pathSegments[3];
+
+        // Only proceed if it's a Showroom stream
+        if (platform === 'showroom' || platform === 'sr') {
+            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
+            if (!response.ok) throw new Error('Failed to fetch Showroom data');
+
+            const data = await response.json();
+            const streamData = data.find(stream =>
+                stream.room_url_key.replace('JKT48_', '').toLowerCase() === memberName.toLowerCase()
+            );
+
+            if (streamData && streamData.stage_users) {
+                updateStageUsersList(streamData.stage_users);
+                
+                // Add a subtle animation to show the refresh was successful
+                const container = document.getElementById('stageUsersContainer');
+                container.style.opacity = '0';
+                setTimeout(() => {
+                    container.style.opacity = '1';
+                }, 150);
+            }
+        }
+    } catch (error) {
+        console.error('Error refreshing podium data:', error);
+    }
+}
 
 async function updateStreamInfo(platform, memberName) {
     try {
