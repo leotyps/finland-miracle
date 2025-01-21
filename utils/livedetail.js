@@ -18,6 +18,7 @@ function decompressStreamData(streamId) {
 function playM3u8(url) {
     if (!video) {
         console.error('Video element not initialized');
+        showOfflineState();
         return;
     }
 
@@ -38,32 +39,26 @@ function playM3u8(url) {
         hls.loadSource(m3u8Url);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play().catch(e => console.error('Error autoplaying:', e));
+            video.play().catch(e => {
+                console.error('Error autoplaying:', e);
+                showOfflineState();
+            });
         });
 
-        // Error handling
         hls.on(Hls.Events.ERROR, function (event, data) {
             if (data.fatal) {
-                switch (data.type) {
-                    case Hls.ErrorTypes.NETWORK_ERROR:
-                        console.error('Network error, trying to recover...');
-                        hls.startLoad();
-                        break;
-                    case Hls.ErrorTypes.MEDIA_ERROR:
-                        console.error('Media error, trying to recover...');
-                        hls.recoverMediaError();
-                        break;
-                    default:
-                        console.error('Fatal error, streaming cannot continue:', data);
-                        hls.destroy();
-                        break;
-                }
+                console.error('Fatal HLS error:', data);
+                showOfflineState();
+                hls.destroy();
             }
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = url;
         video.addEventListener('canplay', function () {
-            video.play().catch(e => console.error('Error autoplaying:', e));
+            video.play().catch(e => {
+                console.error('Error autoplaying:', e);
+                showOfflineState();
+            });
         });
         const savedVolume = localStorage.getItem('playerVolume');
         video.volume = savedVolume ? parseFloat(savedVolume) : 0.3;
@@ -181,7 +176,7 @@ function updateStageUsersList(stageUsers) {
     });
 }
 
-// Add this function to handle podium data refresh
+
 async function refreshPodiumData() {
     try {
         const pathSegments = window.location.pathname.split('/');
@@ -224,26 +219,10 @@ async function updateStreamInfo(platform, memberName) {
                 stream.user.username.replace('jkt48_', '').toLowerCase() === normalizedMemberName
             );
 
-            if (streamData) {
-                const streamDescription =
-                    `🎥 ${streamData.user.name} sedang live streaming di IDN Live! ${streamData.title || ''}\n` +
-                    `👥 ${streamData.view_count || 0} viewers\n` +
-                    `📺 Nonton sekarang di 48intens!`;
-                const thumbnailUrl = streamData.user.avatar || streamData.image || streamData.user.profile_pic || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
-
-                updateMetaTags({
-                    title: `${streamData.user.name} Live Streaming | 48intens`,
-                    description: streamDescription,
-                    image: thumbnailUrl,
-                    imageWidth: '500',
-                    imageHeight: '500',
-                    url: window.location.href
-                });
-
-                updateIDNStreamInfo(streamData);
-            } else {
+            if (!streamData) {
                 throw new Error('Stream not found');
             }
+            updateIDNStreamInfo(streamData);
         } else if (platform === 'showroom' || platform === 'sr') {
             const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
             if (!response.ok) throw new Error('Failed to fetch Showroom data');
@@ -253,31 +232,15 @@ async function updateStreamInfo(platform, memberName) {
                 stream.room_url_key.replace('JKT48_', '').toLowerCase() === normalizedMemberName
             );
 
-            if (streamData) {
-                const streamDescription =
-                    `🎥 ${streamData.main_name} sedang live streaming di SHOWROOM!\n` +
-                    `${streamData.genre_name || ''}\n` +
-                    `👥 ${streamData.view_num?.toLocaleString() || 0} viewers\n` +
-                    `📺 Nonton sekarang di 48intens!`;
-                const thumbnailUrl = streamData.image_square || streamData.image || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
-
-                updateMetaTags({
-                    title: `${streamData.main_name} Live Streaming | 48intens`,
-                    description: streamDescription,
-                    image: thumbnailUrl,
-                    imageWidth: '320',
-                    imageHeight: '320',
-                    url: window.location.href
-                });
-
-                updateShowroomStreamInfo(streamData);
-            } else {
+            if (!streamData) {
                 throw new Error('Stream not found');
             }
+            updateShowroomStreamInfo(streamData);
         }
     } catch (error) {
         console.error('Error updating stream info:', error);
-        showErrorState(`Failed to load stream data: ${error.message}`);
+        showOfflineState();
+        throw error; 
     }
 }
 
@@ -432,6 +395,55 @@ function updateMetaTags({ title, description, image, imageWidth, imageHeight, ur
 }
 
 
+function showOfflineState() {
+    const offlineContainer = document.createElement('div');
+    offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
+    
+    const offlineIcon = document.createElement('div');
+    offlineIcon.className = 'text-gray-400 mb-4';
+    offlineIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+    `;
+
+    const offlineText = document.createElement('h3');
+    offlineText.className = 'text-lg font-medium text-gray-900 mb-2';
+    offlineText.textContent = 'Room is Offline';
+
+    const offlineDescription = document.createElement('p');
+    offlineDescription.className = 'text-sm text-gray-500';
+    offlineDescription.textContent = 'This room is currently not streaming. Please check back later.';
+
+    offlineContainer.appendChild(offlineIcon);
+    offlineContainer.appendChild(offlineText);
+    offlineContainer.appendChild(offlineDescription);
+
+    // Replace video player with offline state
+    const videoContainer = document.getElementById('liveStream').parentElement;
+    videoContainer.innerHTML = '';
+    videoContainer.appendChild(offlineContainer);
+
+    // Update stream info
+    document.getElementById('memberName').textContent = 'Room Offline';
+    document.getElementById('streamTitle').textContent = 'No active stream';
+    document.getElementById('viewCount').textContent = '-';
+    document.getElementById('startTime').textContent = '-';
+    document.getElementById('streamQuality').textContent = '-';
+
+    // Hide stage users list
+    document.getElementById('stageUsersList').classList.add('hidden');
+
+    // Update meta tags
+    updateMetaTags({
+        title: '48intens - Room Offline',
+        description: 'This room is currently not streaming. Please check back later.',
+        image: 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp',
+        url: window.location.href
+    });
+}
+
+
 async function initializePlayer() {
     try {
         video = document.getElementById('liveStream');
@@ -452,8 +464,10 @@ async function initializePlayer() {
 
         const streamData = decompressStreamData(streamId);
         if (!streamData) {
-            throw new Error('Stream has been finished');
+            showOfflineState();
+            return;
         }
+
         Mousetrap.bind('space', playPause);
         Mousetrap.bind('up', volumeUp);
         Mousetrap.bind('down', volumeDown);
@@ -461,14 +475,19 @@ async function initializePlayer() {
         video.addEventListener('click', playPause);
         video.addEventListener('error', function (e) {
             console.error('Video error:', e);
-            showErrorState('Error playing video stream');
+            showOfflineState();
         });
-        playM3u8(streamData.mpath);
-
-        await updateStreamInfo(platform, memberName);
+        
+        try {
+            await updateStreamInfo(platform, memberName);
+            playM3u8(streamData.mpath);
+        } catch (error) {
+            console.error('Error loading stream:', error);
+            showOfflineState();
+        }
     } catch (error) {
         console.error('Error initializing player:', error);
-        showErrorState(error.message);
+        showOfflineState();
     }
 }
 
