@@ -127,7 +127,7 @@ function createIDNCard(stream) {
                     </div>
                 </div>
                 <h4 class="font-medium text-gray-600 mb-4 line-clamp-2">${stream.title}</h4>
-                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-rose-400 to-rose-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
                     <i class="fas fa-play mr-2"></i>
                     Watch Stream
                 </a>
