@@ -278,7 +278,7 @@ async function initializePlayer() {
     }
 }
 
-unction updateMetaTags({ title, description, image, imageWidth = '1200', imageHeight = '630', url }) {
+function updateMetaTags({ title, description, image, imageWidth = '1200', imageHeight = '630', url }) {
     // Update document title
     document.title = title;
 
