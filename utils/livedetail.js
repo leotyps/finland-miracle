@@ -260,74 +260,72 @@ function vidFullscreen() {
 }
 
 
+async function fetchStreamingData() {
+    try {
+        const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
+        const data = await response.json();
+
+        if (data && data.streaming_url_list) {
+            initializePlyr(data.streaming_url_list);
+        } else {
+            console.error('No streaming URL list found.');
+        }
+    } catch (error) {
+        console.error('Error fetching streaming data:', error);
+    }
+}
+
 async function initializePlyr(streamingUrlList) {
-    // Validasi streamingUrlList
     if (!Array.isArray(streamingUrlList) || streamingUrlList.length === 0) {
         console.error('Invalid streamingUrlList:', streamingUrlList);
         return;
     }
 
-    // Select the video element
     const video = document.getElementById('video-player');
-
     if (!video) {
         console.error('Video element not found!');
         return;
     }
 
-    // Check if HLS is supported
     if (Hls.isSupported()) {
         const hls = new Hls();
+        const qualityLevels = streamingUrlList.map((stream) => ({
+            label: stream.label,
+            url: stream.url,
+            quality: stream.quality,
+            is_default: stream.is_default || false,
+        }));
 
-        // Set up quality options from streamingUrlList
-        const qualityLevels = streamingUrlList.map((stream) => {
-            return {
-                label: stream.label,
-                url: stream.url,
-                quality: stream.quality,
-                is_default: stream.is_default || false,
-            };
-        });
-
-        // Sort qualities by quality level (low to high)
         qualityLevels.sort((a, b) => a.quality - b.quality);
 
-        // Load default (highest quality or specified default)
         const defaultStream = qualityLevels.find(q => q.is_default) || qualityLevels[qualityLevels.length - 1];
         hls.loadSource(defaultStream.url);
         hls.attachMedia(video);
 
-        // Initialize Plyr
         const player = new Plyr(video, {
             controls: ['play', 'progress', 'volume', 'settings', 'fullscreen'],
             settings: ['quality'],
         });
 
-        // Add quality control to Plyr settings
         player.on('ready', () => {
             const settingsMenu = document.querySelector('.plyr__menu__container [data-plyr="settings"]');
-
             if (settingsMenu) {
-                qualityLevels.forEach((quality, index) => {
+                qualityLevels.forEach((quality) => {
                     const qualityItem = document.createElement('button');
                     qualityItem.type = 'button';
                     qualityItem.className = 'plyr__control';
                     qualityItem.dataset.plyr = 'quality';
                     qualityItem.textContent = quality.label;
-
-                    // Handle click to change quality
                     qualityItem.addEventListener('click', () => {
                         hls.loadSource(quality.url);
                         hls.attachMedia(video);
-                        player.play(); // Resume playing after quality change
+                        player.play();
                     });
-
                     settingsMenu.appendChild(qualityItem);
                 });
             }
         });
 
-        // Handle autoplay issues
         hls.on(Hls.Events.MEDIA_ATTACHED, () => {
             video.play().catch(() => {
                 const playButton = document.getElementById('manual-play');
@@ -340,15 +338,12 @@ async function initializePlyr(streamingUrlList) {
                 }
             });
         });
-
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        // Native HLS support (Safari, etc.)
         video.src = streamingUrlList.find(q => q.is_default)?.url || streamingUrlList[0].url;
     } else {
         console.error('HLS is not supported in this browser.');
     }
 }
-
 
 
 async function updateStreamInfo(platform, memberName) {
