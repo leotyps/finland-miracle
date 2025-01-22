@@ -292,36 +292,70 @@ function initializePlyr() {
 
 async function checkAndHandleStreamStatus(platform, memberName, streamId) {
     try {
+        if (!platform || !memberName) {
+            throw new Error('Platform and member name are required');
+        }
+
         const apiEndpoint = platform === 'idn' 
             ? 'https://48intensapi.my.id/api/idnlive/jkt48'
             : 'https://48intensapi.my.id/api/showroom/jekatepatlapan';
 
         const response = await fetch(apiEndpoint);
         if (!response.ok) {
-            throw new Error(`Failed to fetch ${platform} data`);
+            throw new Error(`Failed to fetch ${platform} data: ${response.statusText}`);
         }
 
         const data = await response.json();
+        if (!data) {
+            throw new Error('No data received from API');
+        }
+
         const normalizedMemberName = memberName.toLowerCase();
         
-        const streamData = platform === 'idn'
-            ? data.data.find(stream => stream.user.username.replace('jkt48_', '').toLowerCase() === normalizedMemberName)
-            : data.find(stream => stream.room_url_key.replace('JKT48_', '').toLowerCase() === normalizedMemberName);
+        // Handle different data structures for IDN and Showroom
+        let streamData;
+        if (platform === 'idn') {
+            // Check if data.data exists for IDN
+            if (!Array.isArray(data.data)) {
+                throw new Error('Invalid IDN data structure');
+            }
+            streamData = data.data.find(stream => 
+                stream?.user?.username?.replace('jkt48_', '').toLowerCase() === normalizedMemberName
+            );
+        } else {
+            // For Showroom
+            if (!Array.isArray(data)) {
+                throw new Error('Invalid Showroom data structure');
+            }
+            streamData = data.find(stream => 
+                stream?.room_url_key?.replace('JKT48_', '').toLowerCase() === normalizedMemberName
+            );
+        }
 
         if (streamData) {
+            // Update stream info based on platform
             if (platform === 'idn') {
+                if (!streamData.user) {
+                    throw new Error('Invalid IDN stream data: missing user information');
+                }
                 await updateIDNStreamInfo(streamData);
             } else {
                 await updateShowroomStreamInfo(streamData);
             }
             
-            updateMetaTags({
-                title: `${streamData.user.name} Live Streaming | 48intens`,
-                description: `🎥 ${streamData.user.name} sedang live streaming! ${streamData.title || ''} Nonton sekarang di 48intens!`,
-                image: streamData.user.avatar || streamData.image || 'https://jkt48.com/images/logo.svg',
+            // Update meta tags with proper null checks
+            const metaData = {
+                title: streamData.user?.name 
+                    ? `${streamData.user.name} Live Streaming | 48intens`
+                    : 'Live Streaming | 48intens',
+                description: `🎥 ${streamData.user?.name || 'Member'} sedang live streaming! ${streamData.title || ''} Nonton sekarang di 48intens!`,
+                image: streamData.user?.avatar || streamData.image || 'https://jkt48.com/images/logo.svg',
                 url: window.location.href
-            });
+            };
+            
+            updateMetaTags(metaData);
 
+            // Handle stream playback if stream ID exists
             const storedData = streamId ? decompressStreamData(streamId) : null;
             if (storedData?.mpath) {
                 await playM3u8(storedData.mpath);
