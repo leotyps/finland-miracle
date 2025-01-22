@@ -27,7 +27,7 @@ function handleAutoplayError(error, videoElement) {
                 await videoElement.play();
                 playButton.remove();
             } catch (err) {
-                console.error('Error playing video after click:', err);
+                showOfflineState();
             }
         });
         return true;
@@ -38,7 +38,7 @@ function handleAutoplayError(error, videoElement) {
 function showOfflineState() {
     const offlineContainer = document.createElement('div');
     offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
-    
+
     const offlineIcon = document.createElement('div');
     offlineIcon.className = 'text-gray-400 mb-4';
     offlineIcon.innerHTML = `
@@ -56,11 +56,11 @@ function showOfflineState() {
     offlineDescription.textContent = 'This room is currently not streaming. Please check back later.';
 
     offlineContainer.append(offlineIcon, offlineText, offlineDescription);
-    
+
     const videoContainer = document.getElementById('liveStream').parentElement;
     videoContainer.innerHTML = '';
     videoContainer.appendChild(offlineContainer);
-    
+
     // Update UI elements
     const elements = {
         'memberName': 'Room Offline',
@@ -69,11 +69,11 @@ function showOfflineState() {
         'startTime': '-',
         'streamQuality': '-'
     };
-    
+
     Object.entries(elements).forEach(([id, text]) => {
         document.getElementById(id).textContent = text;
     });
-    
+
     document.getElementById('stageUsersList').classList.add('hidden');
 }
 
@@ -87,7 +87,7 @@ async function playM3u8(url) {
         if (Hls.isSupported()) {
             const savedVolume = localStorage.getItem('playerVolume') || 0.3;
             video.volume = parseFloat(savedVolume);
-            
+
             if (hls) hls.destroy();
 
             hls = new Hls({
@@ -106,7 +106,7 @@ async function playM3u8(url) {
                     resolve();
                 } catch (error) {
                     if (handleAutoplayError(error, video)) {
-                        resolve(); 
+                        resolve();
                     } else {
                         reject(error);
                     }
@@ -115,7 +115,7 @@ async function playM3u8(url) {
 
             hls.on(Hls.Events.ERROR, (event, data) => {
                 if (data.fatal) {
-                    console.error('Fatal HLS error:', data);
+                    showOfflineState();
                     hls.destroy();
                     reject(new Error('Fatal HLS error'));
                 }
@@ -128,7 +128,7 @@ async function playM3u8(url) {
                     resolve();
                 } catch (error) {
                     if (handleAutoplayError(error, video)) {
-                        resolve(); 
+                        resolve();
                     } else {
                         reject(error);
                     }
@@ -212,7 +212,7 @@ async function refreshPodiumData() {
 
             if (streamData && streamData.stage_users) {
                 updateStageUsersList(streamData.stage_users);
-                
+
                 // Add a subtle animation to show the refresh was successful
                 const container = document.getElementById('stageUsersContainer');
                 container.style.opacity = '0';
@@ -222,7 +222,7 @@ async function refreshPodiumData() {
             }
         }
     } catch (error) {
-        console.error('Error refreshing podium data:', error);
+        showOfflineState();
     }
 }
 
@@ -279,8 +279,7 @@ function initializePlyr() {
         localStorage.setItem('playerVolume', player.volume);
     });
     player.on('error', (error) => {
-        console.error('Plyr error:', error);
-        showErrorState('Error playing video stream');
+        showOfflineState();
     });
 
     return player.elements.container.querySelector('video');
@@ -353,8 +352,7 @@ async function updateStreamInfo(platform, memberName) {
             }
         }
     } catch (error) {
-        console.error('Error updating stream info:', error);
-        showErrorState(`Failed to load stream data: ${error.message}`);
+        showOfflineState();
     }
 }
 
@@ -387,20 +385,18 @@ async function initializePlayer() {
         Mousetrap.bind('f', vidFullscreen);
         video.addEventListener('click', playPause);
         video.addEventListener('error', function (e) {
-            console.error('Video error:', e);
-            showErrorState('Error playing video stream');
+            showOfflineState();
         });
         playM3u8(streamData.mpath);
 
         await updateStreamInfo(platform, memberName);
     } catch (error) {
-        console.error('Error initializing player:', error);
-        showErrorState(error.message);
+        showOfflineState();
     }
 }
 
 
-function updateMetaTags({ 
+function updateMetaTags({
     title = 'Live Streaming | 48intens',
     description = 'Watch JKT48 members live streaming on 48intens',
     image = 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp',
@@ -421,7 +417,7 @@ function updateMetaTags({
         { name: 'keywords', content: 'JKT48, IDN Live, Showroom, Live Streaming, 48intens, idol, JKT48 Live' },
         { name: 'author', content: '48intens' },
         { name: 'robots', content: 'index, follow' },
-        
+
         // Open Graph tags
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: '48intens' },
@@ -435,7 +431,7 @@ function updateMetaTags({
         { property: 'og:image:alt', content: title },
         { property: 'og:locale', content: 'id_ID' },
         { property: 'og:updated_time', content: timestamp.toString() },
-        
+
         // Twitter Card tags
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:site', content: '@48intens' },
@@ -444,7 +440,7 @@ function updateMetaTags({
         { name: 'twitter:description', content: safeDescription },
         { name: 'twitter:image', content: image },
         { name: 'twitter:image:alt', content: title },
-        
+
         // Additional tags for SEO and sharing
         { name: 'application-name', content: '48intens' },
         { name: 'theme-color', content: '#ffffff' }
@@ -454,12 +450,12 @@ function updateMetaTags({
 
     function updateMetaTag(tagData) {
         const { name, property, content } = tagData;
-        const selector = property ? 
-            `meta[property="${property}"]` : 
+        const selector = property ?
+            `meta[property="${property}"]` :
             `meta[name="${name}"]`;
-        
+
         let tag = document.querySelector(selector);
-        
+
         if (!tag) {
             tag = document.createElement('meta');
             if (property) {
@@ -469,7 +465,7 @@ function updateMetaTags({
             }
             document.head.appendChild(tag);
         }
-        
+
         tag.setAttribute('content', content);
     }
 
@@ -500,7 +496,6 @@ function updateMetaTags({
 
 function updateIDNStreamInfo(data) {
     if (!data?.user) {
-        showErrorState('Invalid stream data received');
         return;
     }
 
@@ -525,7 +520,7 @@ function updateIDNStreamInfo(data) {
             '📺 Nonton sekarang di 48intens!'
         ].filter(Boolean).join('\n');
 
-        const thumbnailUrl = data.user.avatar || data.image || data.user.profile_pic || 
+        const thumbnailUrl = data.user.avatar || data.image || data.user.profile_pic ||
             'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
 
         updateMetaTags({
@@ -537,14 +532,12 @@ function updateIDNStreamInfo(data) {
             url: window.location.href
         });
     } catch (err) {
-        console.error('Error updating IDN stream info:', err);
-        showErrorState('Error displaying stream information');
+        showOfflineState();
     }
 }
 
 function updateShowroomStreamInfo(data) {
     if (!data) {
-        showErrorState('Invalid stream data received');
         return;
     }
 
@@ -585,22 +578,6 @@ function updateShowroomStreamInfo(data) {
 }
 
 
-function showErrorState(message) {
-    document.getElementById('memberName').textContent = 'Error';
-    document.getElementById('streamTitle').textContent = message || 'Failed to load stream data';
-    document.getElementById('viewCount').textContent = '-';
-    document.getElementById('startTime').textContent = '-';
-    document.getElementById('streamQuality').textContent = '-';
-
-    document.getElementById('stageUsersList').classList.add('hidden');
-
-    updateMetaTags({
-        title: '48intens - Stream Error',
-        description: message || 'Failed to load stream data',
-        image: '/assets/image/icon.png',
-        url: window.location.href
-    });
-}
 
 
 

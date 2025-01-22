@@ -98,13 +98,14 @@ function createIDNCard(stream) {
     const freeStreamTitles = [
         'TEMEN NGOBROL',
         'TEMEN MAIN',
-        'TEMAN MASAK',
+        'TEMEN MASAK',
         'TEMEN MAKAN',
         'TRIAL'
     ];
     
+    // Use case-insensitive comparison and check for substrings
     const isFreeStream = freeStreamTitles.some(title => 
-        stream.title && stream.title.toUpperCase().includes(title)
+        stream.title && stream.title.toUpperCase().includes(title.toUpperCase())
     );
     
     const isMemberAccount = stream.user.username.startsWith('jkt48_');
@@ -165,6 +166,7 @@ function createIDNCard(stream) {
         </div>
     `;
 }
+
 
 function createShowroomCard(stream) {
     const memberUsername = stream.room_url_key.replace('JKT48_', '').toLowerCase();
