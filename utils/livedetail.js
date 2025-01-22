@@ -227,26 +227,38 @@ async function refreshPodiumData() {
 }
 
 
-const playerControls = {
-    playPause: () => video?.paused ? video.play() : video.pause(),
-    volumeUp: () => {
-        if (video && video.volume <= 0.9) {
-            video.volume += 0.1;
-            localStorage.setItem('playerVolume', video.volume);
-        }
-    },
-    volumeDown: () => {
-        if (video && video.volume >= 0.1) {
-            video.volume -= 0.1;
-            localStorage.setItem('playerVolume', video.volume);
-        }
-    },
-    fullscreen: () => {
-        if (!video) return;
-        const fullscreenFunc = video.requestFullscreen || video.mozRequestFullScreen || video.webkitRequestFullscreen;
-        fullscreenFunc?.call(video);
+function playPause() {
+    if (!video) return;
+    video.paused ? video.play() : video.pause();
+}
+
+function volumeUp() {
+    if (!video) return;
+    if (video.volume <= 0.9) {
+        video.volume += 0.1;
+        localStorage.setItem('playerVolume', video.volume);
     }
-};
+}
+
+function volumeDown() {
+    if (!video) return;
+    if (video.volume >= 0.1) {
+        video.volume -= 0.1;
+        localStorage.setItem('playerVolume', video.volume);
+    }
+}
+
+function vidFullscreen() {
+    if (!video) return;
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+    }
+}
+
 
 function initializePlyr() {
     const plyrOptions = {
