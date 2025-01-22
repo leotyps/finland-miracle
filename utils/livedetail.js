@@ -158,6 +158,91 @@ async function playM3u8(url) {
 }
 
 
+function updateStageUsersList(stageUsers) {
+    const stageUsersList = document.getElementById('stageUsersList');
+    const container = document.getElementById('stageUsersContainer');
+    if (!stageUsers || stageUsers.length === 0) {
+        stageUsersList.classList.add('hidden');
+        return;
+    }
+    stageUsersList.classList.remove('hidden');
+    container.innerHTML = '';
+    stageUsers.forEach(stageUser => {
+        const userDiv = document.createElement('div');
+        userDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'flex-shrink-0 relative';
+
+        const userImage = document.createElement('img');
+        userImage.className = 'w-12 h-12 rounded-full object-cover';
+        userImage.src = stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg';
+        userImage.alt = stageUser.user.name;
+
+        const rankBadge = document.createElement('span');
+        rankBadge.className = 'absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center';
+        rankBadge.textContent = stageUser.rank;
+
+        imageContainer.appendChild(userImage);
+        imageContainer.appendChild(rankBadge);
+
+        const userInfo = document.createElement('div');
+        userInfo.className = 'flex-grow min-w-0';
+
+        const userName = document.createElement('p');
+        userName.className = 'text-sm font-medium text-gray-900 truncate';
+        userName.textContent = stageUser.user.name;
+
+        const avatarContainer = document.createElement('div');
+        avatarContainer.className = 'flex items-center space-x-1';
+
+        const avatarImage = document.createElement('img');
+        avatarImage.className = 'w-4 h-4';
+        avatarImage.src = stageUser.user.avatar_url || '';
+        avatarImage.alt = 'Avatar';
+
+        avatarContainer.appendChild(avatarImage);
+        userInfo.appendChild(userName);
+        userInfo.appendChild(avatarContainer);
+        userDiv.appendChild(imageContainer);
+        userDiv.appendChild(userInfo);
+
+        container.appendChild(userDiv);
+    });
+}
+
+// Add this function to handle podium data refresh
+async function refreshPodiumData() {
+    try {
+        const pathSegments = window.location.pathname.split('/');
+        const platform = pathSegments[2];
+        const memberName = pathSegments[3];
+        // Only proceed if it's a Showroom stream
+        if (platform === 'showroom' || platform === 'sr') {
+            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
+            if (!response.ok) throw new Error('Failed to fetch Showroom data');
+
+            const data = await response.json();
+            const streamData = data.find(stream =>
+                stream.room_url_key.replace('JKT48_', '').toLowerCase() === memberName.toLowerCase()
+            );
+
+            if (streamData && streamData.stage_users) {
+                updateStageUsersList(streamData.stage_users);
+                
+                // Add a subtle animation to show the refresh was successful
+                const container = document.getElementById('stageUsersContainer');
+                container.style.opacity = '0';
+                setTimeout(() => {
+                    container.style.opacity = '1';
+                }, 150);
+            }
+        }
+    } catch (error) {
+        console.error('Error refreshing podium data:', error);
+    }
+}
+
+
 const playerControls = {
     playPause: () => video?.paused ? video.play() : video.pause(),
     volumeUp: () => {
@@ -192,6 +277,7 @@ function initializePlyr() {
             options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]
         }
     };
+
     player = new Plyr('#liveStream', plyrOptions);
     player.on('volumechange', () => {
         localStorage.setItem('playerVolume', player.volume);
@@ -200,9 +286,9 @@ function initializePlyr() {
         console.error('Plyr error:', error);
         showErrorState('Error playing video stream');
     });
+
     return player.elements.container.querySelector('video');
 }
-
 
 async function checkAndHandleStreamStatus(platform, memberName, streamId) {
     try {
@@ -498,4 +584,24 @@ function updateShowroomStreamInfo(data) {
         showErrorState('Error displaying stream information');
     }
 }
+
+function showErrorState(message) {
+    document.getElementById('memberName').textContent = 'Error';
+    document.getElementById('streamTitle').textContent = message || 'Failed to load stream data';
+    document.getElementById('viewCount').textContent = '-';
+    document.getElementById('startTime').textContent = '-';
+    document.getElementById('streamQuality').textContent = '-';
+
+    document.getElementById('stageUsersList').classList.add('hidden');
+
+    updateMetaTags({
+        title: '48intens - Stream Error',
+        description: message || 'Failed to load stream data',
+        image: '/assets/image/icon.png',
+        url: window.location.href
+    });
+}
+
+
+
 document.addEventListener('DOMContentLoaded', initializePlayer);

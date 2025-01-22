@@ -30,8 +30,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <!-- Add this before your multiviewer.js script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mousetrap@1.6.5/mousetrap.min.js"></script>
 </head>
 
@@ -119,29 +117,35 @@
             style="width: 0%"></div>
     </div>
 
-    <main class="container mx-auto px-2 sm:px-4 py-4 sm:py-6 flex-grow relative">
-        <!-- Row Controls -->
-        <div class="absolute top-2 right-2 z-10 flex items-center bg-gray-800/90 rounded-full px-2 py-1 gap-1.5 backdrop-blur-sm">
-            <span class="text-white text-xs sm:text-sm">Row</span>
-            <div class="flex items-center gap-1">
-                <button id="decreaseRow" class="text-white hover:text-blue-400 w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
-                    <i class="fas fa-minus text-[10px] sm:text-xs"></i>
-                </button>
-                <span id="rowCount" class="text-white text-xs sm:text-sm w-3 sm:w-4 text-center">2</span>
-                <button id="increaseRow" class="text-white hover:text-blue-400 w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
-                    <i class="fas fa-plus text-[10px] sm:text-xs"></i>
-                </button>
+    <main class="container mx-auto px-4 py-6 flex-grow relative">
+        <div class="absolute top-3 right-3 flex items-center bg-gray-800/90 rounded-full px-3 py-1.5 gap-3 backdrop-blur-sm z-10">
+            <div class="flex items-center gap-2">
+                <span class="text-white text-sm">Row</span>
+                <div class="flex items-center gap-1">
+                    <button id="decreaseRow" class="text-white hover:text-blue-400 w-6 h-6 flex items-center justify-center">
+                        <i class="fas fa-minus text-xs"></i>
+                    </button>
+                    <span id="rowCount" class="text-white text-sm w-4 text-center">2</span>
+                    <button id="increaseRow" class="text-white hover:text-blue-400 w-6 h-6 flex items-center justify-center">
+                        <i class="fas fa-plus text-xs"></i>
+                    </button>
+                </div>
             </div>
         </div>
     
-        <!-- Video Grid -->
-        <div id="videoGrid" class="flex justify-center items-center min-h-[75vh] transition-all duration-300"></div>
+        <div id="videoGrid" class="flex justify-center items-center min-h-[70vh] transition-all duration-300">
+            <div class="text-center">
+                <i class="fas fa-plus-circle text-xl text-blue-600/50"></i>
+                <p class="text-xl mt-1 text-blue-600/50">Click button icon + to add </br> multi streams view</p>
+            </div>
+        </div>
     
-        <!-- Add Stream Button -->
-        <button id="addStreamBtn" class="fixed sm:absolute bottom-6 right-4 bg-blue-600 text-white w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center transition-all">
-            <i class="fas fa-plus text-xl sm:text-2xl"></i>
+        <button id="addStreamBtn" 
+            class="absolute bottom-10 right-3 bg-blue-600 text-white w-16 h-16 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center transition-all">
+            <i class="fas fa-plus text-2xl"></i>
         </button>
     </main>
+
     <div id="streamListModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
         <div class="bg-white rounded-xl w-full max-w-md max-h-[80vh] mx-4 overflow-hidden">
             <div class="p-4 border-b border-gray-200 flex justify-between items-center">
