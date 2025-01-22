@@ -179,6 +179,31 @@ const playerControls = {
     }
 };
 
+function initializePlyr() {
+    const plyrOptions = {
+        controls: [
+            'play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'
+        ],
+        settings: ['quality', 'speed'],
+        keyboard: { focused: true, global: true },
+        tooltips: { controls: true, seek: true },
+        quality: {
+            default: 720,
+            options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]
+        }
+    };
+    player = new Plyr('#liveStream', plyrOptions);
+    player.on('volumechange', () => {
+        localStorage.setItem('playerVolume', player.volume);
+    });
+    player.on('error', (error) => {
+        console.error('Plyr error:', error);
+        showErrorState('Error playing video stream');
+    });
+    return player.elements.container.querySelector('video');
+}
+
+
 async function checkAndHandleStreamStatus(platform, memberName, streamId) {
     try {
         const apiEndpoint = platform === 'idn' 
