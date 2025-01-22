@@ -278,37 +278,46 @@ async function initializePlayer() {
     }
 }
 
-function updateMetaTags({ title, description, image, imageWidth = '500', imageHeight = '500', url }) {
+unction updateMetaTags({ title, description, image, imageWidth = '1200', imageHeight = '630', url }) {
+    // Update document title
     document.title = title;
 
+    // Define all required meta tags
     const metaTags = {
-        // Basic meta
+        // Basic Meta Tags
         'description': { name: 'description', content: description },
-        'keywords': { name: 'keywords', content: 'JKT48, live streaming, 48intens, idol, live' },
+        'keywords': { name: 'keywords', content: 'JKT48, IDN Live, Showroom, Live Streaming, 48intens, idol' },
         
-        // Open Graph
+        // OpenGraph Tags
+        'og:type': { property: 'og:type', content: 'website' },
         'og:site_name': { property: 'og:site_name', content: '48intens' },
         'og:title': { property: 'og:title', content: title },
         'og:description': { property: 'og:description', content: description },
-        'og:type': { property: 'og:type', content: 'website' },
         'og:url': { property: 'og:url', content: url },
         'og:image': { property: 'og:image', content: image },
         'og:image:secure_url': { property: 'og:image:secure_url', content: image },
         'og:image:width': { property: 'og:image:width', content: imageWidth },
         'og:image:height': { property: 'og:image:height', content: imageHeight },
         'og:image:alt': { property: 'og:image:alt', content: title },
+        'og:locale': { property: 'og:locale', content: 'id_ID' },
         
-        // Twitter Card
+        // Twitter Card Tags
         'twitter:card': { name: 'twitter:card', content: 'summary_large_image' },
         'twitter:site': { name: 'twitter:site', content: '@48intens' },
         'twitter:creator': { name: 'twitter:creator', content: '@48intens' },
         'twitter:title': { name: 'twitter:title', content: title },
         'twitter:description': { name: 'twitter:description', content: description },
         'twitter:image': { name: 'twitter:image', content: image },
-        'twitter:image:alt': { name: 'twitter:image:alt', content: title }
+        'twitter:image:alt': { name: 'twitter:image:alt', content: title },
+        
+        // Additional Meta Tags for SEO
+        'robots': { name: 'robots', content: 'index, follow' },
+        'author': { name: 'author', content: '48intens' },
+        'application-name': { name: 'application-name', content: '48intens' }
     };
 
-    Object.values(metaTags).forEach(attrs => {
+    // Update or create meta tags
+    Object.entries(metaTags).forEach(([key, attrs]) => {
         let selector = attrs.property ? 
             `meta[property="${attrs.property}"]` : 
             `meta[name="${attrs.name}"]`;
@@ -317,13 +326,26 @@ function updateMetaTags({ title, description, image, imageWidth = '500', imageHe
         
         if (!tag) {
             tag = document.createElement('meta');
+            if (attrs.property) {
+                tag.setAttribute('property', attrs.property);
+            }
+            if (attrs.name) {
+                tag.setAttribute('name', attrs.name);
+            }
             document.head.appendChild(tag);
         }
         
-        Object.entries(attrs).forEach(([key, value]) => {
-            tag.setAttribute(key, value);
-        });
+        tag.setAttribute('content', attrs.content);
     });
+
+    // Update canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.rel = 'canonical';
+        document.head.appendChild(canonical);
+    }
+    canonical.href = url;
 
     // Update favicon
     let favicon = document.querySelector('link[rel="icon"]');
@@ -333,6 +355,15 @@ function updateMetaTags({ title, description, image, imageWidth = '500', imageHe
         document.head.appendChild(favicon);
     }
     favicon.href = '/assets/image/icon.png';
+    
+    // Add Apple touch icon
+    let appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
+    if (!appleIcon) {
+        appleIcon = document.createElement('link');
+        appleIcon.rel = 'apple-touch-icon';
+        document.head.appendChild(appleIcon);
+    }
+    appleIcon.href = '/assets/image/icon.png';
 }
 
 function updateIDNStreamInfo(data) {
