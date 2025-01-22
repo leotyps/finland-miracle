@@ -17,7 +17,6 @@ function decompressStreamData(streamId) {
 
 function handleAutoplayError(error, videoElement) {
     if (error.name === 'NotAllowedError') {
-        const playButton = createPlayButton();
         const videoContainer = videoElement.parentElement;
         videoContainer.style.position = 'relative';
         videoContainer.appendChild(playButton);
