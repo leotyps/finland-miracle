@@ -15,24 +15,6 @@ function decompressStreamData(streamId) {
 }
 
 
-function handleAutoplayError(error, videoElement) {
-    if (error.name === 'NotAllowedError') {
-        const videoContainer = videoElement.parentElement;
-        videoContainer.style.position = 'relative';
-        videoContainer.appendChild(playButton);
-
-        playButton.addEventListener('click', async () => {
-            try {
-                await videoElement.play();
-                playButton.remove();
-            } catch (err) {
-                showOfflineState();
-            }
-        });
-        return true;
-    }
-    return false;
-}
 
 function showOfflineState() {
     const offlineContainer = document.createElement('div');
