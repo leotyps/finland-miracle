@@ -286,78 +286,6 @@ function initializePlyr() {
     return player.elements.container.querySelector('video');
 }
 
-async function checkAndHandleStreamStatus(platform, memberName, streamId) {
-    try {
-        if (!platform || !memberName) {
-            throw new Error('Platform and member name are required');
-        }
-
-        const apiEndpoint = platform === 'idn' 
-            ? 'https://48intensapi.my.id/api/idnlive/jkt48'
-            : 'https://48intensapi.my.id/api/showroom/jekatepatlapan';
-
-        const response = await fetch(apiEndpoint);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${platform} data: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        if (!data) {
-            throw new Error('No data received from API');
-        }
-
-        const normalizedMemberName = memberName.toLowerCase();
-        
-        let streamData;
-        if (platform === 'idn') {
-            if (!Array.isArray(data.data)) {
-                throw new Error('Invalid IDN data structure');
-            }
-            streamData = data.data.find(stream => 
-                stream?.user?.username?.replace('jkt48_', '').toLowerCase() === normalizedMemberName
-            );
-        } else {
-            if (!Array.isArray(data)) {
-                throw new Error('Invalid Showroom data structure');
-            }
-            streamData = data.find(stream => 
-                stream?.room_url_key?.replace('JKT48_', '').toLowerCase() === normalizedMemberName
-            );
-        }
-
-        if (streamData) {
-            if (platform === 'idn') {
-                if (!streamData.user) {
-                    throw new Error('Invalid IDN stream data: missing user information');
-                }
-                await updateIDNStreamInfo(streamData);
-            } else {
-                await updateShowroomStreamInfo(streamData);
-            }
-            
-            const metaData = {
-                title: streamData.user?.name 
-                    ? `${streamData.user.name} Live Streaming | 48intens`
-                    : 'Live Streaming | 48intens',
-                description: `🎥 ${streamData.user?.name || 'Member'} sedang live streaming! ${streamData.title || ''} Nonton sekarang di 48intens!`,
-                image: streamData.user?.avatar || streamData.image || 'https://jkt48.com/images/logo.svg',
-                url: window.location.href
-            };
-            
-            updateMetaTags(metaData);
-
-            const storedData = streamId ? decompressStreamData(streamId) : null;
-            if (storedData?.mpath) {
-                await playM3u8(storedData.mpath);
-            }
-        } else {
-            showOfflineState();
-        }
-    } catch (error) {
-        console.error('Error checking stream status:', error);
-        showOfflineState();
-    }
-}
 
 async function updateStreamInfo(platform, memberName) {
     try {
@@ -430,55 +358,6 @@ async function updateStreamInfo(platform, memberName) {
     }
 }
 
-
-function updateShowroomStreamInfo(data) {
-    if (!data) {
-        showErrorState('Invalid stream data received');
-        return;
-    }
-
-    const originalQuality = data.streaming_url_list?.find(stream => stream.label === 'original quality');
-    if (!originalQuality) {
-        throw new Error('Original quality stream not found');
-    }
-
-    const elements = {
-        'memberName': data.main_name || 'Unknown Member',
-        'streamTitle': data.genre_name || 'No Title',
-        'viewCount': `${(data.view_num || 0).toLocaleString()} viewers`,
-        'startTime': data.started_at ? new Date(data.started_at * 1000).toLocaleTimeString() : 'Unknown',
-        'streamQuality': originalQuality.label || 'Unknown'
-    };
-
-    Object.entries(elements).forEach(([id, text]) => {
-        document.getElementById(id).textContent = text;
-    });
-
-    const streamDescription = [
-        `🎥 ${data.main_name} sedang live streaming di SHOWROOM!`,
-        data.genre_name || '',
-        `👥 ${data.view_num?.toLocaleString() || 0} viewers`,
-        `📺 Nonton sekarang di 48intens!`
-    ].join('\n');
-
-    const thumbnailUrl = data.image_square || data.image || data.room_url_key || 
-        'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
-
-    updateMetaTags({
-        title: `${data.main_name} Live Streaming | 48intens`,
-        description: streamDescription,
-        image: thumbnailUrl,
-        imageWidth: '320',
-        imageHeight: '320',
-        url: window.location.href
-    });
-
-    if (data.stage_users) {
-        updateStageUsersList(data.stage_users);
-    }
-
-    playM3u8(originalQuality.url);
-}
 
 async function initializePlayer() {
     try {
