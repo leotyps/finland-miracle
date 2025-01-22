@@ -208,3 +208,7 @@ body.no-scroll {
 .animate-bounce {
     animation: custom-bounce 2s infinite;
 }
+
+#addStreamInsideModal {
+    z-index: 10; /* Pastikan tombol berada di atas konten lain */
+}

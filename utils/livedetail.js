@@ -174,9 +174,7 @@ const playerControls = {
     },
     fullscreen: () => {
         if (!video) return;
-        const fullscreenFunc = video.requestFullscreen || 
-                                video.mozRequestFullScreen || 
-                                video.webkitRequestFullscreen;
+        const fullscreenFunc = video.requestFullscreen || video.mozRequestFullScreen || video.webkitRequestFullscreen;
         fullscreenFunc?.call(video);
     }
 };
@@ -209,7 +207,7 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
             updateMetaTags({
                 title: `${streamData.user.name} Live Streaming | 48intens`,
                 description: `🎥 ${streamData.user.name} sedang live streaming! ${streamData.title || ''} Nonton sekarang di 48intens!`,
-                image: streamData.user.avatar || streamData.image || 'https://default-image-url.com/default.jpg',
+                image: streamData.user.avatar || streamData.image || 'https://jkt48.com/images/logo.svg',
                 url: window.location.href
             });
 
@@ -328,10 +326,8 @@ function updateMetaTags({
         { name: 'theme-color', content: '#ffffff' }
     ];
 
-    // Update document title
     document.title = title;
 
-    // Function to create or update a meta tag
     function updateMetaTag(tagData) {
         const { name, property, content } = tagData;
         const selector = property ? 
@@ -353,10 +349,8 @@ function updateMetaTags({
         tag.setAttribute('content', content);
     }
 
-    // Update all meta tags
     metaTags.forEach(updateMetaTag);
 
-    // Update canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
         canonical = document.createElement('link');
@@ -364,8 +358,6 @@ function updateMetaTags({
         document.head.appendChild(canonical);
     }
     canonical.href = currentUrl;
-
-    // Update favicon and apple touch icon
     const icons = [
         { rel: 'icon', href: '/assets/image/icon.png' },
         { rel: 'apple-touch-icon', href: '/assets/image/icon.png' }

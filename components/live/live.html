@@ -48,10 +48,11 @@
         <a href="/schedule" class="font-semibold text-gray-700 hover:text-purple-200">Schedule</a>
         <a href="/member" class="font-semibold text-gray-700 hover:text-purple-200">Member</a>
         <a href="/livejkt48" class="font-semibold text-gray-700 hover:text-purple-200">Stream</a>
-        
+
         <div class="flex space-x-4">
           <a href="/mypage" class="inline-block">
-            <button class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-full flex items-center">
+            <button
+              class="bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-full flex items-center">
               MyPage
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -59,7 +60,8 @@
             </button>
           </a>
           <a href="/login" class="inline-block">
-            <button class="border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center">
+            <button
+              class="border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center">
               Login
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-5-5 5-5"></path>
@@ -75,10 +77,11 @@
         <a href="/schedule" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Schedule</a>
         <a href="/member" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Member</a>
         <a href="/livejkt48" class="menu-item font-semibold block px-4 py-2 text-gray-700 hover:bg-gray-100">Stream</a>
-        
+
         <div class="px-4 py-2 space-y-2">
           <a href="/mypage" class="block">
-            <button class="w-full bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-full flex items-center justify-center">
+            <button
+              class="w-full bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300 hover:opacity-80 text-white px-6 py-2 rounded-full flex items-center justify-center">
               MyPage
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -86,7 +89,8 @@
             </button>
           </a>
           <a href="/login" class="block">
-            <button class="w-full border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center justify-center">
+            <button
+              class="w-full border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center justify-center">
               Login
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-5-5 5-5"></path>
@@ -110,13 +114,16 @@
           Now Live JKT48
         </span>
       </h1>
-      <button class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-3xl hover:bg-blue-700 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
+      <a href="/components/live/multiviewer.html"
+        class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-3xl hover:bg-blue-700 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
         </svg>
         <span class="hidden sm:inline">Multi Viewer</span>
         <span class="sm:hidden">Multi</span>
-      </button>
+      </a>
     </div>
     <div id="liveContainer"
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[24rem] relative">
@@ -179,7 +186,7 @@
         mobileMenu.classList.toggle("active");
       }, 10);
     });
-    
+
   </script>
 </body>
 
