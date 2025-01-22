@@ -15,8 +15,6 @@ function decompressStreamData(streamId) {
     return streamData;
 }
 
-// WebSocket connection and chat handling
-let wsConnection = null;
 
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
