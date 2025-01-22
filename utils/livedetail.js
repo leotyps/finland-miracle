@@ -260,89 +260,29 @@ function vidFullscreen() {
 }
 
 
-async function fetchStreamingData() {
-    try {
-        const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
-        const data = await response.json();
-
-        if (data && data.streaming_url_list) {
-            initializePlyr(data.streaming_url_list);
-        } else {
-            console.error('No streaming URL list found.');
+function initializePlyr() {
+    const plyrOptions = {
+        controls: [
+            'play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'
+        ],
+        settings: ['quality', 'speed'],
+        keyboard: { focused: true, global: true },
+        tooltips: { controls: true, seek: true },
+        quality: {
+            default: 720,
+            options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]
         }
-    } catch (error) {
-        console.error('Error fetching streaming data:', error);
-    }
-}
+    };
 
-async function initializePlyr(streamingUrlList) {
-    if (!Array.isArray(streamingUrlList) || streamingUrlList.length === 0) {
-        console.error('Invalid streamingUrlList:', streamingUrlList);
-        return;
-    }
+    player = new Plyr('#liveStream', plyrOptions);
+    player.on('volumechange', () => {
+        localStorage.setItem('playerVolume', player.volume);
+    });
+    player.on('error', (error) => {
+        showOfflineState();
+    });
 
-    const video = document.getElementById('video-player');
-    if (!video) {
-        console.error('Video element not found!');
-        return;
-    }
-
-    if (Hls.isSupported()) {
-        const hls = new Hls();
-        const qualityLevels = streamingUrlList.map((stream) => ({
-            label: stream.label,
-            url: stream.url,
-            quality: stream.quality,
-            is_default: stream.is_default || false,
-        }));
-
-        qualityLevels.sort((a, b) => a.quality - b.quality);
-
-        const defaultStream = qualityLevels.find(q => q.is_default) || qualityLevels[qualityLevels.length - 1];
-        hls.loadSource(defaultStream.url);
-        hls.attachMedia(video);
-
-        const player = new Plyr(video, {
-            controls: ['play', 'progress', 'volume', 'settings', 'fullscreen'],
-            settings: ['quality'],
-        });
-
-        player.on('ready', () => {
-            const settingsMenu = document.querySelector('.plyr__menu__container [data-plyr="settings"]');
-            if (settingsMenu) {
-                qualityLevels.forEach((quality) => {
-                    const qualityItem = document.createElement('button');
-                    qualityItem.type = 'button';
-                    qualityItem.className = 'plyr__control';
-                    qualityItem.dataset.plyr = 'quality';
-                    qualityItem.textContent = quality.label;
-                    qualityItem.addEventListener('click', () => {
-                        hls.loadSource(quality.url);
-                        hls.attachMedia(video);
-                        player.play();
-                    });
-                    settingsMenu.appendChild(qualityItem);
-                });
-            }
-        });
-
-        hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-            video.play().catch(() => {
-                const playButton = document.getElementById('manual-play');
-                if (playButton) {
-                    playButton.style.display = 'block';
-                    playButton.addEventListener('click', () => {
-                        video.play();
-                        playButton.style.display = 'none';
-                    });
-                }
-            });
-        });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = streamingUrlList.find(q => q.is_default)?.url || streamingUrlList[0].url;
-    } else {
-        console.error('HLS is not supported in this browser.');
-    }
+    return player.elements.container.querySelector('video');
 }
 
 
