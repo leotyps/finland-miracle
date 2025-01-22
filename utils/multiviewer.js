@@ -43,7 +43,9 @@ const streamList = document.getElementById('streamList');
 
 let activeStreams = new Set();
 let activeHlsPlayers = new Map();
-
+let currentRow = 2;
+const minRow = 2;
+const maxRow = 4;
 
 addStreamBtn.addEventListener('click', () => {
     streamListModal.style.display = 'flex';
@@ -266,7 +268,7 @@ function addStreamToList(stream, platform) {
 
 function addVideoPlayer(streamId, platform, streamData) {
     const videoContainer = document.createElement('div');
-    videoContainer.className = 'relative aspect-video rounded overflow-hidden';
+    videoContainer.className = 'relative aspect-video rounded-lg sm:rounded-xl overflow-hidden';
     
     const video = document.createElement('video');
     video.className = 'w-full h-full';
@@ -278,8 +280,8 @@ function addVideoPlayer(streamId, platform, streamData) {
     if (savedVolume) video.volume = parseFloat(savedVolume);
 
     const closeBtn = document.createElement('button');
-    closeBtn.className = 'absolute top-1 right-1 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center hover:bg-red-600 z-10';
-    closeBtn.innerHTML = '<i class="fas fa-times text-xs"></i>';
+    closeBtn.className = 'absolute top-1 right-1 bg-red-500 text-white w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center hover:bg-red-600 z-10';
+    closeBtn.innerHTML = '<i class="fas fa-times text-[10px] sm:text-xs"></i>';
     closeBtn.onclick = () => {
         const hls = activeHlsPlayers.get(video.id);
         if (hls) {
@@ -300,7 +302,7 @@ function addVideoPlayer(streamId, platform, streamData) {
     videoGrid.appendChild(videoContainer);
 
     activeStreams.add(streamId);
-
+    
     const streamUrl = platform === 'showroom' 
         ? streamData.streaming_url_list.find(s => s.label === 'original quality')?.url
         : `https://jkt48showroom-api.my.id/proxy?url=${encodeURIComponent(streamData.stream_url)}`;
@@ -322,21 +324,46 @@ function rearrangeGrid() {
     
     if (streamCount === 0) {
         videoGrid.innerHTML = `
-            <div class="text-center">
-                <i class="fas fa-plus-circle text-xl text-blue-600/50"></i>
-                <p class="text-xl mt-1 text-blue-600/50">Click button icon + to add </br> multi streams view</p>
+            <div class="text-center px-4">
+                <i class="fas fa-plus-circle text-lg sm:text-xl text-blue-600/50"></i>
+                <p class="text-sm sm:text-lg mt-1 text-blue-600/50">Click button icon + to add<br>multi streams view</p>
             </div>`;
         return;
     }
 
-    videoGrid.className = `grid gap-2 p-2 ${
-        streamCount === 1 ? 'grid-cols-1' :
-        streamCount === 2 ? 'grid-cols-2' :
-        streamCount <= 4 ? 'grid-cols-2' :
-        streamCount <= 6 ? 'grid-cols-3' :
+    const isMobile = window.innerWidth < 640;
+    const columns = isMobile ? 1 : Math.ceil(streamCount / currentRow);
+    
+    videoGrid.className = `grid gap-1.5 sm:gap-2 p-1.5 sm:p-2 ${
+        isMobile ? 'grid-cols-1' :
+        columns === 1 ? 'grid-cols-1' :
+        columns === 2 ? 'grid-cols-2' :
+        columns === 3 ? 'grid-cols-3' :
         'grid-cols-4'
     }`;
+
+    const gridItems = videoGrid.querySelectorAll('.aspect-video');
+    gridItems.forEach(item => {
+        const heightPercentage = isMobile ? 30 : (100 / currentRow) - (2 * currentRow);
+        item.style.height = `calc(${heightPercentage}vh - ${isMobile ? 10 : 20/currentRow}px)`;
+    });
 }
+
+document.getElementById('increaseRow').addEventListener('click', () => {
+    if (currentRow < maxRow) {
+        currentRow++;
+        document.getElementById('rowCount').textContent = currentRow;
+        rearrangeGrid();
+    }
+});
+
+document.getElementById('decreaseRow').addEventListener('click', () => {
+    if (currentRow > minRow) {
+        currentRow--;
+        document.getElementById('rowCount').textContent = currentRow;
+        rearrangeGrid();
+    }
+});
 
 function playStream(streamId, videoElement) {
     const streamData = JSON.parse(localStorage.getItem(`stream_${streamId}`));
