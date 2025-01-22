@@ -347,51 +347,115 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
     }
 }
 
-async function updateStreamInfo(platform, memberName) {
+function updateShowroomStreamInfo(data) {
+    if (!data) {
+        showErrorState('Invalid stream data received');
+        return;
+    }
+
     try {
-        const apiEndpoint = platform === 'idn' 
-            ? 'https://48intensapi.my.id/api/idnlive/jkt48'
-            : 'https://48intensapi.my.id/api/showroom/jekatepatlapan';
-            
-        const response = await fetch(apiEndpoint);
-        if (!response.ok) throw new Error(`Failed to fetch ${platform} data`);
+        // Check if streaming_url_list exists and is an array
+        if (!Array.isArray(data.streaming_url_list)) {
+            throw new Error('No streaming URLs available');
+        }
 
-        const data = await response.json();
-        const normalizedMemberName = memberName.toLowerCase();
-        
-        const streamData = platform === 'idn'
-            ? data.data.find(stream => stream.user.username.replace('jkt48_', '').toLowerCase() === normalizedMemberName)
-            : data.find(stream => stream.room_url_key.replace('JKT48_', '').toLowerCase() === normalizedMemberName);
+        // Find the original quality stream
+        const originalQuality = data.streaming_url_list.find(
+            stream => stream.label === 'original quality' && stream.type === 'hls'
+        );
 
-        if (!streamData) throw new Error('Stream not found');
-        
-        platform === 'idn' ? updateIDNStreamInfo(streamData) : updateShowroomStreamInfo(streamData);
+        // If original quality is not found, look for any HLS stream
+        if (!originalQuality) {
+            console.warn('Original quality stream not found, checking for alternative streams');
+            const alternativeStream = data.streaming_url_list.find(stream => stream.type === 'hls');
+            if (!alternativeStream) {
+                throw new Error('No compatible stream found');
+            }
+            console.log('Using alternative stream quality:', alternativeStream.label);
+            originalQuality = alternativeStream;
+        }
+
+        // Update UI elements with stream information
+        const elements = {
+            'memberName': data.main_name || 'Unknown Member',
+            'streamTitle': data.genre_name || 'No Title',
+            'viewCount': `${(data.view_num || 0).toLocaleString()} viewers`,
+            'startTime': data.started_at 
+                ? new Date(data.started_at * 1000).toLocaleTimeString()
+                : 'Unknown',
+            'streamQuality': originalQuality.label || 'Unknown'
+        };
+
+        Object.entries(elements).forEach(([id, text]) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = text;
+        });
+
+        // Update meta information
+        const streamDescription = [
+            `🎥 ${data.main_name} sedang live streaming di SHOWROOM!`,
+            data.genre_name || '',
+            `👥 ${data.view_num?.toLocaleString() || 0} viewers sedang menonton`,
+            '📺 Nonton sekarang di 48intens!'
+        ].filter(Boolean).join('\n');
+
+        const thumbnailUrl = data.image_square || data.image || 
+            'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
+
+        updateMetaTags({
+            title: `${data.main_name} Live Streaming | 48intens`,
+            description: streamDescription,
+            image: thumbnailUrl,
+            imageWidth: '1200',
+            imageHeight: '630',
+            url: window.location.href
+        });
+
+        // Update stage users if available
+        if (data.stage_users) {
+            updateStageUsersList(data.stage_users);
+        }
+
+        // Start playing the stream with the selected quality
+        if (!originalQuality.url) {
+            throw new Error('Stream URL is missing');
+        }
+
+        console.log(`Playing stream with quality: ${originalQuality.label} (${originalQuality.quality}kbps)`);
+        playM3u8(originalQuality.url);
+
     } catch (error) {
-        console.error('Error updating stream info:', error);
-        showOfflineState();
-        throw error;
+        console.error('Error updating Showroom stream info:', error);
+        showErrorState(`Error loading stream: ${error.message}`);
     }
 }
 
 async function initializePlayer() {
     try {
         video = document.getElementById('liveStream');
-        if (!video) throw new Error('Video element not found');
-
-        const [, , platform, memberName, streamId] = window.location.pathname.split('/');
-
+        if (!video) {
+            throw new Error('Video element not found');
+        }
+        const pathSegments = window.location.pathname.split('/');
+        const platform = pathSegments[2];
+        const memberName = pathSegments[3];
+        const streamId = pathSegments[4];
         if (platform === 'showroom' || platform === 'sr') {
             video = initializePlyr();
+        } else if (platform === 'idn') {
+            video = document.getElementById('liveStream');
         }
-
-        Mousetrap.bind('space', playerControls.playPause);
-        Mousetrap.bind('up', playerControls.volumeUp);
-        Mousetrap.bind('down', playerControls.volumeDown);
-        Mousetrap.bind('f', playerControls.fullscreen);
-        
-        video.addEventListener('click', playerControls.playPause);
-        video.addEventListener('error', () => checkAndHandleStreamStatus(platform, memberName, streamId));
-
+        // Set up video controls
+        Mousetrap.bind('space', playPause);
+        Mousetrap.bind('up', volumeUp);
+        Mousetrap.bind('down', volumeDown);
+        Mousetrap.bind('f', vidFullscreen);
+        video.addEventListener('click', playPause);
+        video.addEventListener('error', function (e) {
+            console.error('Video error:', e);
+            checkAndHandleStreamStatus(platform, memberName, streamId);
+        });
+        // Check stream status and handle accordingly
         await checkAndHandleStreamStatus(platform, memberName, streamId);
     } catch (error) {
         console.error('Error initializing player:', error);
