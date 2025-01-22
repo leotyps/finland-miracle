@@ -359,6 +359,78 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
     }
 }
 
+async function updateStreamInfo(platform, memberName) {
+    try {
+        let streamData;
+        const normalizedMemberName = memberName.toLowerCase();
+
+        if (platform === 'idn') {
+            const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
+            if (!response.ok) throw new Error('Failed to fetch IDN data');
+
+            const data = await response.json();
+            streamData = data.data.find(stream =>
+                stream.user.username.replace('jkt48_', '').toLowerCase() === normalizedMemberName
+            );
+
+            if (streamData) {
+                const streamDescription =
+                    `🎥 ${streamData.user.name} sedang live streaming di IDN Live! ${streamData.title || ''}\n` +
+                    `👥 ${streamData.view_count || 0} viewers\n` +
+                    `📺 Nonton sekarang di 48intens!`;
+                const thumbnailUrl = streamData.user.avatar || streamData.image || streamData.user.profile_pic || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
+
+                updateMetaTags({
+                    title: `${streamData.user.name} Live Streaming | 48intens`,
+                    description: streamDescription,
+                    image: thumbnailUrl,
+                    imageWidth: '500',
+                    imageHeight: '500',
+                    url: window.location.href
+                });
+
+                updateIDNStreamInfo(streamData);
+            } else {
+                throw new Error('Stream not found');
+            }
+        } else if (platform === 'showroom' || platform === 'sr') {
+            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
+            if (!response.ok) throw new Error('Failed to fetch Showroom data');
+
+            const data = await response.json();
+            streamData = data.find(stream =>
+                stream.room_url_key.replace('JKT48_', '').toLowerCase() === normalizedMemberName
+            );
+
+            if (streamData) {
+                const streamDescription =
+                    `🎥 ${streamData.main_name} sedang live streaming di SHOWROOM!\n` +
+                    `${streamData.genre_name || ''}\n` +
+                    `👥 ${streamData.view_num?.toLocaleString() || 0} viewers\n` +
+                    `📺 Nonton sekarang di 48intens!`;
+                const thumbnailUrl = streamData.image_square || streamData.image || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
+
+                updateMetaTags({
+                    title: `${streamData.main_name} Live Streaming | 48intens`,
+                    description: streamDescription,
+                    image: thumbnailUrl,
+                    imageWidth: '320',
+                    imageHeight: '320',
+                    url: window.location.href
+                });
+
+                updateShowroomStreamInfo(streamData);
+            } else {
+                throw new Error('Stream not found');
+            }
+        }
+    } catch (error) {
+        console.error('Error updating stream info:', error);
+        showErrorState(`Failed to load stream data: ${error.message}`);
+    }
+}
+
+
 function updateShowroomStreamInfo(data) {
     if (!data) {
         showErrorState('Invalid stream data received');
