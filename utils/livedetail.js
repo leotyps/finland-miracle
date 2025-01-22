@@ -15,6 +15,42 @@ function decompressStreamData(streamId) {
 }
 
 
+function createPlayButton() {
+    const playContainer = document.createElement('div');
+    playContainer.className = 'absolute inset-0 flex items-center justify-center bg-black bg-opacity-50';
+
+    const playButton = document.createElement('button');
+    playButton.className = 'p-4 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors';
+    playButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+    `;
+
+    playContainer.appendChild(playButton);
+    return playContainer;
+}
+
+function handleAutoplayError(error, videoElement) {
+    if (error.name === 'NotAllowedError') {
+        const playButton = createPlayButton();
+        const videoContainer = videoElement.parentElement;
+        videoContainer.style.position = 'relative';
+        videoContainer.appendChild(playButton);
+
+        playButton.addEventListener('click', async () => {
+            try {
+                await videoElement.play();
+                playButton.remove();
+            } catch (err) {
+                console.error('Error playing video after click:', err);
+            }
+        });
+        return true;
+    }
+    return false;
+}
 
 function showOfflineState() {
     const offlineContainer = document.createElement('div');
