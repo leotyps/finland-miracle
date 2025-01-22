@@ -278,65 +278,83 @@ async function initializePlayer() {
     }
 }
 
-function updateMetaTags({ title, description, image, imageWidth = '1200', imageHeight = '630', url }) {
+function updateMetaTags({ 
+    title = 'Live Streaming | 48intens',
+    description = 'Watch JKT48 members live streaming on 48intens',
+    image = 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp',
+    imageWidth = '1200',
+    imageHeight = '630',
+    url = window.location.href
+}) {
+    // Ensure we have default values
+    const baseUrl = 'https://finland-miracle.vercel.app';
+    const currentUrl = url.startsWith('http') ? url : `${baseUrl}${url}`;
+    const safeDescription = description || 'Watch JKT48 members live streaming on 48intens';
+    const timestamp = Math.floor(Date.now() / 1000);
+
+    // Create meta tags configuration
+    const metaTags = [
+        // Basic meta tags
+        { name: 'description', content: safeDescription },
+        { name: 'keywords', content: 'JKT48, IDN Live, Showroom, Live Streaming, 48intens, idol, JKT48 Live' },
+        { name: 'author', content: '48intens' },
+        { name: 'robots', content: 'index, follow' },
+        
+        // Open Graph tags
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: '48intens' },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: safeDescription },
+        { property: 'og:url', content: currentUrl },
+        { property: 'og:image', content: image },
+        { property: 'og:image:secure_url', content: image },
+        { property: 'og:image:width', content: imageWidth },
+        { property: 'og:image:height', content: imageHeight },
+        { property: 'og:image:alt', content: title },
+        { property: 'og:locale', content: 'id_ID' },
+        { property: 'og:updated_time', content: timestamp.toString() },
+        
+        // Twitter Card tags
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site', content: '@48intens' },
+        { name: 'twitter:creator', content: '@48intens' },
+        { name: 'twitter:title', content: title },
+        { name: 'twitter:description', content: safeDescription },
+        { name: 'twitter:image', content: image },
+        { name: 'twitter:image:alt', content: title },
+        
+        // Additional tags for SEO and sharing
+        { name: 'application-name', content: '48intens' },
+        { name: 'theme-color', content: '#ffffff' }
+    ];
+
     // Update document title
     document.title = title;
 
-    // Define all required meta tags
-    const metaTags = {
-        // Basic Meta Tags
-        'description': { name: 'description', content: description },
-        'keywords': { name: 'keywords', content: 'JKT48, IDN Live, Showroom, Live Streaming, 48intens, idol' },
+    // Function to create or update a meta tag
+    function updateMetaTag(tagData) {
+        const { name, property, content } = tagData;
+        const selector = property ? 
+            `meta[property="${property}"]` : 
+            `meta[name="${name}"]`;
         
-        // OpenGraph Tags
-        'og:type': { property: 'og:type', content: 'website' },
-        'og:site_name': { property: 'og:site_name', content: '48intens' },
-        'og:title': { property: 'og:title', content: title },
-        'og:description': { property: 'og:description', content: description },
-        'og:url': { property: 'og:url', content: url },
-        'og:image': { property: 'og:image', content: image },
-        'og:image:secure_url': { property: 'og:image:secure_url', content: image },
-        'og:image:width': { property: 'og:image:width', content: imageWidth },
-        'og:image:height': { property: 'og:image:height', content: imageHeight },
-        'og:image:alt': { property: 'og:image:alt', content: title },
-        'og:locale': { property: 'og:locale', content: 'id_ID' },
-        
-        // Twitter Card Tags
-        'twitter:card': { name: 'twitter:card', content: 'summary_large_image' },
-        'twitter:site': { name: 'twitter:site', content: '@48intens' },
-        'twitter:creator': { name: 'twitter:creator', content: '@48intens' },
-        'twitter:title': { name: 'twitter:title', content: title },
-        'twitter:description': { name: 'twitter:description', content: description },
-        'twitter:image': { name: 'twitter:image', content: image },
-        'twitter:image:alt': { name: 'twitter:image:alt', content: title },
-        
-        // Additional Meta Tags for SEO
-        'robots': { name: 'robots', content: 'index, follow' },
-        'author': { name: 'author', content: '48intens' },
-        'application-name': { name: 'application-name', content: '48intens' }
-    };
-
-    // Update or create meta tags
-    Object.entries(metaTags).forEach(([key, attrs]) => {
-        let selector = attrs.property ? 
-            `meta[property="${attrs.property}"]` : 
-            `meta[name="${attrs.name}"]`;
-            
         let tag = document.querySelector(selector);
         
         if (!tag) {
             tag = document.createElement('meta');
-            if (attrs.property) {
-                tag.setAttribute('property', attrs.property);
-            }
-            if (attrs.name) {
-                tag.setAttribute('name', attrs.name);
+            if (property) {
+                tag.setAttribute('property', property);
+            } else {
+                tag.setAttribute('name', name);
             }
             document.head.appendChild(tag);
         }
         
-        tag.setAttribute('content', attrs.content);
-    });
+        tag.setAttribute('content', content);
+    }
+
+    // Update all meta tags
+    metaTags.forEach(updateMetaTag);
 
     // Update canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -345,25 +363,23 @@ function updateMetaTags({ title, description, image, imageWidth = '1200', imageH
         canonical.rel = 'canonical';
         document.head.appendChild(canonical);
     }
-    canonical.href = url;
+    canonical.href = currentUrl;
 
-    // Update favicon
-    let favicon = document.querySelector('link[rel="icon"]');
-    if (!favicon) {
-        favicon = document.createElement('link');
-        favicon.rel = 'icon';
-        document.head.appendChild(favicon);
-    }
-    favicon.href = '/assets/image/icon.png';
-    
-    // Add Apple touch icon
-    let appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
-    if (!appleIcon) {
-        appleIcon = document.createElement('link');
-        appleIcon.rel = 'apple-touch-icon';
-        document.head.appendChild(appleIcon);
-    }
-    appleIcon.href = '/assets/image/icon.png';
+    // Update favicon and apple touch icon
+    const icons = [
+        { rel: 'icon', href: '/assets/image/icon.png' },
+        { rel: 'apple-touch-icon', href: '/assets/image/icon.png' }
+    ];
+
+    icons.forEach(({ rel, href }) => {
+        let link = document.querySelector(`link[rel="${rel}"]`);
+        if (!link) {
+            link = document.createElement('link');
+            link.rel = rel;
+            document.head.appendChild(link);
+        }
+        link.href = href;
+    });
 }
 
 function updateIDNStreamInfo(data) {
@@ -382,14 +398,16 @@ function updateIDNStreamInfo(data) {
         };
 
         Object.entries(elements).forEach(([id, text]) => {
-            document.getElementById(id).textContent = text;
+            const element = document.getElementById(id);
+            if (element) element.textContent = text;
         });
 
         const streamDescription = [
-            `🎥 ${data.user.name} sedang live streaming di IDN Live! ${data.title || ''}`,
-            `👥 ${data.view_count || 0} viewers`,
-            `📺 Nonton sekarang di 48intens!`
-        ].join('\n');
+            `🎥 ${data.user.name} sedang live streaming di IDN Live!`,
+            data.title || '',
+            `👥 ${data.view_count || 0} viewers sedang menonton`,
+            '📺 Nonton sekarang di 48intens!'
+        ].filter(Boolean).join('\n');
 
         const thumbnailUrl = data.user.avatar || data.image || data.user.profile_pic || 
             'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
@@ -398,6 +416,8 @@ function updateIDNStreamInfo(data) {
             title: `${data.user.name} Live Streaming | 48intens`,
             description: streamDescription,
             image: thumbnailUrl,
+            imageWidth: '1200',
+            imageHeight: '630',
             url: window.location.href
         });
     } catch (err) {
@@ -417,42 +437,48 @@ function updateShowroomStreamInfo(data) {
         throw new Error('Original quality stream not found');
     }
 
-    const elements = {
-        'memberName': data.main_name || 'Unknown Member',
-        'streamTitle': data.genre_name || 'No Title',
-        'viewCount': `${(data.view_num || 0).toLocaleString()} viewers`,
-        'startTime': data.started_at ? new Date(data.started_at * 1000).toLocaleTimeString() : 'Unknown',
-        'streamQuality': originalQuality.label || 'Unknown'
-    };
+    try {
+        const elements = {
+            'memberName': data.main_name || 'Unknown Member',
+            'streamTitle': data.genre_name || 'No Title',
+            'viewCount': `${(data.view_num || 0).toLocaleString()} viewers`,
+            'startTime': data.started_at ? new Date(data.started_at * 1000).toLocaleTimeString() : 'Unknown',
+            'streamQuality': originalQuality.label || 'Unknown'
+        };
 
-    Object.entries(elements).forEach(([id, text]) => {
-        document.getElementById(id).textContent = text;
-    });
+        Object.entries(elements).forEach(([id, text]) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = text;
+        });
 
-    const streamDescription = [
-        `🎥 ${data.main_name} sedang live streaming di SHOWROOM!`,
-        data.genre_name || '',
-        `👥 ${data.view_num?.toLocaleString() || 0} viewers`,
-        `📺 Nonton sekarang di 48intens!`
-    ].join('\n');
+        const streamDescription = [
+            `🎥 ${data.main_name} sedang live streaming di SHOWROOM!`,
+            data.genre_name || '',
+            `👥 ${data.view_num?.toLocaleString() || 0} viewers sedang menonton`,
+            '📺 Nonton sekarang di 48intens!'
+        ].filter(Boolean).join('\n');
+        const thumbnailUrl = data.image_square || data.image || 
+            'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
 
-    const thumbnailUrl = data.image_square || data.image || data.room_url_key || 
-        'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
+        const pageTitle = `${data.main_name} Live Streaming | 48intens`;
 
-    updateMetaTags({
-        title: `${data.main_name} Live Streaming | 48intens`,
-        description: streamDescription,
-        image: thumbnailUrl,
-        imageWidth: '320',
-        imageHeight: '320',
-        url: window.location.href
-    });
+        updateMetaTags({
+            title: pageTitle,
+            description: streamDescription,
+            image: thumbnailUrl,
+            imageWidth: '1200',
+            imageHeight: '630',
+            url: window.location.href
+        });
 
-    if (data.stage_users) {
-        updateStageUsersList(data.stage_users);
+        if (data.stage_users?.length > 0) {
+            updateStageUsersList(data.stage_users);
+        }
+
+        playM3u8(originalQuality.url);
+    } catch (err) {
+        console.error('Error updating Showroom stream info:', err);
+        showErrorState('Error displaying stream information');
     }
-
-    playM3u8(originalQuality.url);
 }
-
 document.addEventListener('DOMContentLoaded', initializePlayer);
