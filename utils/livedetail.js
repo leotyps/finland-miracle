@@ -1,6 +1,7 @@
 let hls = null;
 let player = null;
 let video = null;
+let wsConnection = null;
 
 function decompressStreamData(streamId) {
     const data = localStorage.getItem(`stream_${streamId}`);
@@ -14,7 +15,146 @@ function decompressStreamData(streamId) {
     return streamData;
 }
 
+function setupIDNChat(username, slug) {
+    const chatContainer = document.getElementById('stageUsersList');
+    chatContainer.classList.remove('hidden');
+    
+    // Update the title and header
+    const header = chatContainer.querySelector('h2');
+    if (header) header.textContent = 'Live Chat';
 
+    // Modify the container to better suit chat messages
+    const messagesContainer = document.getElementById('stageUsersContainer');
+    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
+    
+    async function getChannelId() {
+        try {
+            const response = await fetch(`https://web-api.idn.app/api/v1/live/${username}/${slug}/chat`);
+            const data = await response.json();
+            return data.chatId;
+        } catch (error) {
+            console.error("Failed to get channel ID:", error);
+            throw error;
+        }
+    }
+
+    function addChatMessage(messageData) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'flex items-start space-x-2 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+
+        const userImage = document.createElement('img');
+        userImage.className = 'w-8 h-8 rounded-full object-cover flex-shrink-0';
+        userImage.src = messageData.user?.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg';
+        userImage.alt = messageData.user?.name || 'Anonymous';
+
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'flex-grow min-w-0';
+
+        const userName = document.createElement('span');
+        userName.className = 'text-sm font-medium text-gray-900';
+        userName.textContent = messageData.user?.name || 'Anonymous';
+
+        const messageText = document.createElement('p');
+        messageText.className = 'text-sm text-gray-600 break-words';
+        messageText.textContent = messageData.comment || '';
+
+        contentDiv.appendChild(userName);
+        contentDiv.appendChild(messageText);
+
+        messageDiv.appendChild(userImage);
+        messageDiv.appendChild(contentDiv);
+
+        messagesContainer.insertBefore(messageDiv, messagesContainer.firstChild);
+
+        // Keep only the last 100 messages
+        while (messagesContainer.children.length > 100) {
+            messagesContainer.removeChild(messagesContainer.lastChild);
+        }
+    }
+
+    async function connectWebSocket() {
+        try {
+            const channelId = await getChannelId();
+            const ws = new WebSocket('wss://chat.idn.app');
+            wsConnection = ws;
+
+            const nickname = `user_${Math.random().toString(36).substring(2, 8)}`;
+            let registered = false;
+            let joined = false;
+
+            ws.onopen = () => {
+                console.log("WebSocket connected");
+                ws.send(`NICK ${nickname}`);
+                ws.send("USER websocket 0 * :WebSocket User");
+            };
+
+            ws.onmessage = (event) => {
+                const rawMessage = event.data;
+
+                if (rawMessage.startsWith("PING")) {
+                    ws.send("PONG" + rawMessage.substring(4));
+                    return;
+                }
+
+                if (rawMessage.includes("001") && !registered) {
+                    registered = true;
+                    ws.send(`JOIN #${channelId}`);
+                    return;
+                }
+
+                if (rawMessage.includes("JOIN") && !joined) {
+                    joined = true;
+                    return;
+                }
+
+                if (rawMessage.includes("PRIVMSG")) {
+                    const jsonMatch = rawMessage.match(/PRIVMSG #[^ ]+ :(.*)/);
+                    if (jsonMatch) {
+                        try {
+                            const data = JSON.parse(jsonMatch[1]);
+                            if (data?.chat) {
+                                addChatMessage({
+                                    user: data.user,
+                                    comment: data.chat.message,
+                                    timestamp: data.timestamp || Date.now()
+                                });
+                            }
+                        } catch (error) {
+                            console.error("Failed to parse message:", error);
+                        }
+                    }
+                }
+            };
+
+            ws.onclose = () => {
+                console.log("WebSocket disconnected");
+                wsConnection = null;
+                setTimeout(() => connectWebSocket(), 5000);
+            };
+
+            ws.onerror = (error) => {
+                console.error("WebSocket error:", error);
+            };
+        } catch (error) {
+            console.error("Failed to set up WebSocket:", error);
+            setTimeout(() => connectWebSocket(), 5000);
+        }
+    }
+
+    // Start the WebSocket connection
+    connectWebSocket();
+
+    // Update the refresh button to reconnect WebSocket
+    const refreshButton = chatContainer.querySelector('button');
+    if (refreshButton) {
+        refreshButton.onclick = () => {
+            if (wsConnection) {
+                wsConnection.close();
+            }
+            connectWebSocket();
+        };
+    }
+}
 function showOfflineState() {
     const offlineContainer = document.createElement('div');
     offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
@@ -274,6 +414,7 @@ async function updateStreamInfo(platform, memberName) {
             );
 
             if (streamData) {
+                
                 const streamDescription =
                     `🎥 ${streamData.user.name} sedang live streaming di IDN Live! ${streamData.title || ''}\n` +
                     `👥 ${streamData.view_count || 0} viewers\n` +
@@ -288,6 +429,7 @@ async function updateStreamInfo(platform, memberName) {
                     imageHeight: '500',
                     url: window.location.href
                 });
+                setupIDNChat(streamData.user.username, streamData.slug);
 
                 updateIDNStreamInfo(streamData);
             } else {
