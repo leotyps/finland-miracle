@@ -15,6 +15,9 @@ function decompressStreamData(streamId) {
     return streamData;
 }
 
+// WebSocket connection and chat handling
+let wsConnection = null;
+
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     chatContainer.classList.remove('hidden');
@@ -29,8 +32,13 @@ function setupIDNChat(username, slug) {
     
     async function getChannelId() {
         try {
-            const response = await fetch(`https://web-api.idn.app/api/v1/live/${username}/${slug}/chat`);
+            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
             const data = await response.json();
+            
+            if (!data.chatId) {
+                throw new Error('Chat ID not found in response');
+            }
+            
             return data.chatId;
         } catch (error) {
             console.error("Failed to get channel ID:", error);
@@ -155,6 +163,8 @@ function setupIDNChat(username, slug) {
         };
     }
 }
+
+
 function showOfflineState() {
     const offlineContainer = document.createElement('div');
     offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
