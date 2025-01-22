@@ -433,29 +433,22 @@ function updateShowroomStreamInfo(data) {
 async function initializePlayer() {
     try {
         video = document.getElementById('liveStream');
-        if (!video) {
-            throw new Error('Video element not found');
-        }
-        const pathSegments = window.location.pathname.split('/');
-        const platform = pathSegments[2];
-        const memberName = pathSegments[3];
-        const streamId = pathSegments[4];
+        if (!video) throw new Error('Video element not found');
+
+        const [, , platform, memberName, streamId] = window.location.pathname.split('/');
+
         if (platform === 'showroom' || platform === 'sr') {
             video = initializePlyr();
-        } else if (platform === 'idn') {
-            video = document.getElementById('liveStream');
         }
-        // Set up video controls
-        Mousetrap.bind('space', playPause);
-        Mousetrap.bind('up', volumeUp);
-        Mousetrap.bind('down', volumeDown);
-        Mousetrap.bind('f', vidFullscreen);
-        video.addEventListener('click', playPause);
-        video.addEventListener('error', function (e) {
-            console.error('Video error:', e);
-            checkAndHandleStreamStatus(platform, memberName, streamId);
-        });
-        // Check stream status and handle accordingly
+
+        Mousetrap.bind('space', playerControls.playPause);
+        Mousetrap.bind('up', playerControls.volumeUp);
+        Mousetrap.bind('down', playerControls.volumeDown);
+        Mousetrap.bind('f', playerControls.fullscreen);
+        
+        video.addEventListener('click', playerControls.playPause);
+        video.addEventListener('error', () => checkAndHandleStreamStatus(platform, memberName, streamId));
+
         await checkAndHandleStreamStatus(platform, memberName, streamId);
     } catch (error) {
         console.error('Error initializing player:', error);
