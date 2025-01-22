@@ -261,19 +261,31 @@ function vidFullscreen() {
 
 
 async function initializePlyr(streamingUrlList) {
+    // Validasi streamingUrlList
+    if (!Array.isArray(streamingUrlList) || streamingUrlList.length === 0) {
+        console.error('Invalid streamingUrlList:', streamingUrlList);
+        return;
+    }
+
     // Select the video element
     const video = document.getElementById('video-player');
+
+    if (!video) {
+        console.error('Video element not found!');
+        return;
+    }
 
     // Check if HLS is supported
     if (Hls.isSupported()) {
         const hls = new Hls();
-        
+
         // Set up quality options from streamingUrlList
         const qualityLevels = streamingUrlList.map((stream) => {
             return {
                 label: stream.label,
                 url: stream.url,
                 quality: stream.quality,
+                is_default: stream.is_default || false,
             };
         });
 
@@ -336,6 +348,7 @@ async function initializePlyr(streamingUrlList) {
         console.error('HLS is not supported in this browser.');
     }
 }
+
 
 
 async function updateStreamInfo(platform, memberName) {
