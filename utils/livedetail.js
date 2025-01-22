@@ -260,29 +260,81 @@ function vidFullscreen() {
 }
 
 
-function initializePlyr() {
-    const plyrOptions = {
-        controls: [
-            'play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'
-        ],
-        settings: ['quality', 'speed'],
-        keyboard: { focused: true, global: true },
-        tooltips: { controls: true, seek: true },
-        quality: {
-            default: 720,
-            options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240]
-        }
-    };
+async function initializePlyr(streamingUrlList) {
+    // Select the video element
+    const video = document.getElementById('video-player');
 
-    player = new Plyr('#liveStream', plyrOptions);
-    player.on('volumechange', () => {
-        localStorage.setItem('playerVolume', player.volume);
-    });
-    player.on('error', (error) => {
-        showOfflineState();
-    });
+    // Check if HLS is supported
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        
+        // Set up quality options from streamingUrlList
+        const qualityLevels = streamingUrlList.map((stream) => {
+            return {
+                label: stream.label,
+                url: stream.url,
+                quality: stream.quality,
+            };
+        });
 
-    return player.elements.container.querySelector('video');
+        // Sort qualities by quality level (low to high)
+        qualityLevels.sort((a, b) => a.quality - b.quality);
+
+        // Load default (highest quality or specified default)
+        const defaultStream = qualityLevels.find(q => q.is_default) || qualityLevels[qualityLevels.length - 1];
+        hls.loadSource(defaultStream.url);
+        hls.attachMedia(video);
+
+        // Initialize Plyr
+        const player = new Plyr(video, {
+            controls: ['play', 'progress', 'volume', 'settings', 'fullscreen'],
+            settings: ['quality'],
+        });
+
+        // Add quality control to Plyr settings
+        player.on('ready', () => {
+            const settingsMenu = document.querySelector('.plyr__menu__container [data-plyr="settings"]');
+
+            if (settingsMenu) {
+                qualityLevels.forEach((quality, index) => {
+                    const qualityItem = document.createElement('button');
+                    qualityItem.type = 'button';
+                    qualityItem.className = 'plyr__control';
+                    qualityItem.dataset.plyr = 'quality';
+                    qualityItem.textContent = quality.label;
+
+                    // Handle click to change quality
+                    qualityItem.addEventListener('click', () => {
+                        hls.loadSource(quality.url);
+                        hls.attachMedia(video);
+                        player.play(); // Resume playing after quality change
+                    });
+
+                    settingsMenu.appendChild(qualityItem);
+                });
+            }
+        });
+
+        // Handle autoplay issues
+        hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+            video.play().catch(() => {
+                const playButton = document.getElementById('manual-play');
+                if (playButton) {
+                    playButton.style.display = 'block';
+                    playButton.addEventListener('click', () => {
+                        video.play();
+                        playButton.style.display = 'none';
+                    });
+                }
+            });
+        });
+
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // Native HLS support (Safari, etc.)
+        video.src = streamingUrlList.find(q => q.is_default)?.url || streamingUrlList[0].url;
+    } else {
+        console.error('HLS is not supported in this browser.');
+    }
 }
 
 
