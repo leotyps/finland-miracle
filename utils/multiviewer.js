@@ -167,7 +167,7 @@ function rearrangeGrid() {
         videoGrid.innerHTML = `
             <div class="text-center">
                 <i class="fas fa-plus-circle text-xl text-blue-600/50"></i>
-                <p class="text-xl mt-1 text-blue-600/50">Click button icon + to add multi streams view</p>
+                <p class="text-xl mt-1 text-blue-600/50">Click button icon + to add </br> multi streams view</p>
             </div>`;
         return;
     }

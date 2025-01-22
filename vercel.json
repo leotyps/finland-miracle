@@ -18,6 +18,10 @@
             "destination": "/components/page/schedule"
         },
         {
+            "source": "/multiviewer",
+            "destination": "/components/live/multiviewer"
+        },
+        {
             "source": "/sorter",
             "destination": "/components/game/sorter"
         },
