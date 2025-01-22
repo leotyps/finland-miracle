@@ -14,22 +14,6 @@ function decompressStreamData(streamId) {
     return streamData;
 }
 
-function createPlayButton() {
-    const playContainer = document.createElement('div');
-    playContainer.className = 'absolute inset-0 flex items-center justify-center bg-black bg-opacity-50';
-    
-    const playButton = document.createElement('button');
-    playButton.className = 'p-4 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors';
-    playButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-    `;
-
-    playContainer.appendChild(playButton);
-    return playContainer;
-}
 
 function handleAutoplayError(error, videoElement) {
     if (error.name === 'NotAllowedError') {
@@ -210,7 +194,7 @@ function updateStageUsersList(stageUsers) {
     });
 }
 
-// Add this function to handle podium data refresh
+
 async function refreshPodiumData() {
     try {
         const pathSegments = window.location.pathname.split('/');
@@ -312,10 +296,8 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
 
         const normalizedMemberName = memberName.toLowerCase();
         
-        // Handle different data structures for IDN and Showroom
         let streamData;
         if (platform === 'idn') {
-            // Check if data.data exists for IDN
             if (!Array.isArray(data.data)) {
                 throw new Error('Invalid IDN data structure');
             }
@@ -323,7 +305,6 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
                 stream?.user?.username?.replace('jkt48_', '').toLowerCase() === normalizedMemberName
             );
         } else {
-            // For Showroom
             if (!Array.isArray(data)) {
                 throw new Error('Invalid Showroom data structure');
             }
@@ -333,7 +314,6 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
         }
 
         if (streamData) {
-            // Update stream info based on platform
             if (platform === 'idn') {
                 if (!streamData.user) {
                     throw new Error('Invalid IDN stream data: missing user information');
@@ -343,7 +323,6 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
                 await updateShowroomStreamInfo(streamData);
             }
             
-            // Update meta tags with proper null checks
             const metaData = {
                 title: streamData.user?.name 
                     ? `${streamData.user.name} Live Streaming | 48intens`
@@ -355,7 +334,6 @@ async function checkAndHandleStreamStatus(platform, memberName, streamId) {
             
             updateMetaTags(metaData);
 
-            // Handle stream playback if stream ID exists
             const storedData = streamId ? decompressStreamData(streamId) : null;
             if (storedData?.mpath) {
                 await playM3u8(storedData.mpath);
@@ -574,50 +552,37 @@ function updateShowroomStreamInfo(data) {
         throw new Error('Original quality stream not found');
     }
 
-    try {
-        const elements = {
-            'memberName': data.main_name || 'Unknown Member',
-            'streamTitle': data.genre_name || 'No Title',
-            'viewCount': `${(data.view_num || 0).toLocaleString()} viewers`,
-            'startTime': data.started_at ? new Date(data.started_at * 1000).toLocaleTimeString() : 'Unknown',
-            'streamQuality': originalQuality.label || 'Unknown'
-        };
+    document.getElementById('memberName').textContent = data.main_name || 'Unknown Member';
+    document.getElementById('streamTitle').textContent = data.genre_name || 'No Title';
+    document.getElementById('viewCount').textContent = `${(data.view_num || 0).toLocaleString()} viewers`;
+    document.getElementById('startTime').textContent = data.started_at
+        ? new Date(data.started_at * 1000).toLocaleTimeString()
+        : 'Unknown';
+    document.getElementById('streamQuality').textContent = originalQuality.label || 'Unknown';
 
-        Object.entries(elements).forEach(([id, text]) => {
-            const element = document.getElementById(id);
-            if (element) element.textContent = text;
-        });
+    const streamDescription =
+        `🎥 ${data.main_name} sedang live streaming di SHOWROOM!\n` +
+        `${data.genre_name || ''}\n` +
+        `👥 ${data.view_num?.toLocaleString() || 0} viewers\n` +
+        `📺 Nonton sekarang di 48intens!`;
 
-        const streamDescription = [
-            `🎥 ${data.main_name} sedang live streaming di SHOWROOM!`,
-            data.genre_name || '',
-            `👥 ${data.view_num?.toLocaleString() || 0} viewers sedang menonton`,
-            '📺 Nonton sekarang di 48intens!'
-        ].filter(Boolean).join('\n');
-        const thumbnailUrl = data.image_square || data.image || 
-            'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
+    const thumbnailUrl = data.image_square || data.image || data.room_url_key || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
 
-        const pageTitle = `${data.main_name} Live Streaming | 48intens`;
-
-        updateMetaTags({
-            title: pageTitle,
-            description: streamDescription,
-            image: thumbnailUrl,
-            imageWidth: '1200',
-            imageHeight: '630',
-            url: window.location.href
-        });
-
-        if (data.stage_users?.length > 0) {
-            updateStageUsersList(data.stage_users);
-        }
-
-        playM3u8(originalQuality.url);
-    } catch (err) {
-        console.error('Error updating Showroom stream info:', err);
-        showErrorState('Error displaying stream information');
+    updateMetaTags({
+        title: `${data.main_name} Live Streaming | 48intens`,
+        description: streamDescription,
+        image: thumbnailUrl,
+        imageWidth: '320',
+        imageHeight: '320',
+        url: window.location.href
+    });
+    if (data.stage_users) {
+        updateStageUsersList(data.stage_users);
     }
+
+    playM3u8(originalQuality.url);
 }
+
 
 function showErrorState(message) {
     document.getElementById('memberName').textContent = 'Error';
