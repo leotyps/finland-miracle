@@ -353,81 +353,47 @@ function updateShowroomStreamInfo(data) {
         return;
     }
 
-    try {
-        // Check if streaming_url_list exists and is an array
-        if (!Array.isArray(data.streaming_url_list)) {
-            throw new Error('No streaming URLs available');
-        }
-
-        // Find the original quality stream
-        const originalQuality = data.streaming_url_list.find(
-            stream => stream.label === 'original quality' && stream.type === 'hls'
-        );
-
-        // If original quality is not found, look for any HLS stream
-        if (!originalQuality) {
-            console.warn('Original quality stream not found, checking for alternative streams');
-            const alternativeStream = data.streaming_url_list.find(stream => stream.type === 'hls');
-            if (!alternativeStream) {
-                throw new Error('No compatible stream found');
-            }
-            console.log('Using alternative stream quality:', alternativeStream.label);
-            originalQuality = alternativeStream;
-        }
-
-        // Update UI elements with stream information
-        const elements = {
-            'memberName': data.main_name || 'Unknown Member',
-            'streamTitle': data.genre_name || 'No Title',
-            'viewCount': `${(data.view_num || 0).toLocaleString()} viewers`,
-            'startTime': data.started_at 
-                ? new Date(data.started_at * 1000).toLocaleTimeString()
-                : 'Unknown',
-            'streamQuality': originalQuality.label || 'Unknown'
-        };
-
-        Object.entries(elements).forEach(([id, text]) => {
-            const element = document.getElementById(id);
-            if (element) element.textContent = text;
-        });
-
-        // Update meta information
-        const streamDescription = [
-            `🎥 ${data.main_name} sedang live streaming di SHOWROOM!`,
-            data.genre_name || '',
-            `👥 ${data.view_num?.toLocaleString() || 0} viewers sedang menonton`,
-            '📺 Nonton sekarang di 48intens!'
-        ].filter(Boolean).join('\n');
-
-        const thumbnailUrl = data.image_square || data.image || 
-            'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
-
-        updateMetaTags({
-            title: `${data.main_name} Live Streaming | 48intens`,
-            description: streamDescription,
-            image: thumbnailUrl,
-            imageWidth: '1200',
-            imageHeight: '630',
-            url: window.location.href
-        });
-
-        // Update stage users if available
-        if (data.stage_users) {
-            updateStageUsersList(data.stage_users);
-        }
-
-        // Start playing the stream with the selected quality
-        if (!originalQuality.url) {
-            throw new Error('Stream URL is missing');
-        }
-
-        console.log(`Playing stream with quality: ${originalQuality.label} (${originalQuality.quality}kbps)`);
-        playM3u8(originalQuality.url);
-
-    } catch (error) {
-        console.error('Error updating Showroom stream info:', error);
-        showErrorState(`Error loading stream: ${error.message}`);
+    const originalQuality = data.streaming_url_list?.find(stream => stream.label === 'original quality');
+    if (!originalQuality) {
+        throw new Error('Original quality stream not found');
     }
+
+    const elements = {
+        'memberName': data.main_name || 'Unknown Member',
+        'streamTitle': data.genre_name || 'No Title',
+        'viewCount': `${(data.view_num || 0).toLocaleString()} viewers`,
+        'startTime': data.started_at ? new Date(data.started_at * 1000).toLocaleTimeString() : 'Unknown',
+        'streamQuality': originalQuality.label || 'Unknown'
+    };
+
+    Object.entries(elements).forEach(([id, text]) => {
+        document.getElementById(id).textContent = text;
+    });
+
+    const streamDescription = [
+        `🎥 ${data.main_name} sedang live streaming di SHOWROOM!`,
+        data.genre_name || '',
+        `👥 ${data.view_num?.toLocaleString() || 0} viewers`,
+        `📺 Nonton sekarang di 48intens!`
+    ].join('\n');
+
+    const thumbnailUrl = data.image_square || data.image || data.room_url_key || 
+        'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
+
+    updateMetaTags({
+        title: `${data.main_name} Live Streaming | 48intens`,
+        description: streamDescription,
+        image: thumbnailUrl,
+        imageWidth: '320',
+        imageHeight: '320',
+        url: window.location.href
+    });
+
+    if (data.stage_users) {
+        updateStageUsersList(data.stage_users);
+    }
+
+    playM3u8(originalQuality.url);
 }
 
 async function initializePlayer() {
