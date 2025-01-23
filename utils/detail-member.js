@@ -9,6 +9,31 @@ async function fetchDetailMember() {
   try {
     const pathSegments = window.location.pathname.split('/');
     const memberId = pathSegments[pathSegments.length - 1];
+
+    const updateMetaTags = (memberData, jikoMember) => {
+      document.title = `${memberData.name} - 48intens`;
+      
+      document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(tag => tag.remove());
+      
+      const metaTags = [
+        { property: 'og:title', content: `${memberData.name} - 48intens` },
+        { property: 'og:description', content: jikoMember?.jikosokai || `${memberData.name} 48intens` },
+        { property: 'og:image', content: memberData.profileImage },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: `${memberData.name} - 48intens` },
+        { name: 'twitter:description', content: jikoMember?.jikosokai || `${memberData.name} 48intens` },
+        { name: 'twitter:image', content: memberData.profileImage }
+      ];
+
+      metaTags.forEach(tag => {
+        const meta = document.createElement('meta');
+        if (tag.property) meta.setAttribute('property', tag.property);
+        if (tag.name) meta.setAttribute('name', tag.name);
+        meta.setAttribute('content', tag.content);
+        document.head.appendChild(meta);
+      });
+    };
+
     if (!memberId) {
       container.innerHTML =
         `<div class="flex items-center justify-center h-96">
@@ -150,8 +175,8 @@ async function fetchDetailMember() {
     const rankingContainer = container.querySelector('#ranking-container');
     const summaryRanking = memberData.summaryRanking || [];
 
-    rankingContainer.innerHTML =
-      `<div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg p-6">
+    rankingContainer.innerHTML = 
+  `<div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg p-6">
     <div class="flex items-center justify-center gap-2 mb-4">
       <i class="fas fa-trophy text-yellow-400"></i>
       <h2 class="text-2xl font-bold text-center">Visit Showroom Ranking</h2>
@@ -160,12 +185,13 @@ async function fetchDetailMember() {
       ${summaryRanking.length > 0 ? summaryRanking.slice(0, 10).map((ranking, index) => `
         <div class="flex items-center bg-gray-100 rounded-lg p-3 ${ranking.name === memberData.name ? 'border-2 border-blue-500' : ''}">
           <div class="flex items-center justify-center mr-4 w-8">
-            ${ranking.rank <= 3 ?
-          `<i class="fas fa-crown text-lg ${ranking.rank === 1 ? 'text-yellow-400' :
-            ranking.rank === 2 ? 'text-gray-400' : 'text-yellow-600'
-          }"></i>` :
-          `<span class="font-bold text-center">${ranking.rank}</span>`
-        }
+            ${ranking.rank <= 3 ? 
+              `<i class="fas fa-crown text-lg ${
+                ranking.rank === 1 ? 'text-yellow-400' : 
+                ranking.rank === 2 ? 'text-gray-400' : 'text-yellow-600'
+              }"></i>` : 
+              `<span class="font-bold text-center">${ranking.rank}</span>`
+            }
           </div>
           <img src="${ranking.avatar_url}" alt="${ranking.name}" class="w-10 h-10 rounded-full mr-4">
           <div class="flex-grow">
