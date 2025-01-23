@@ -252,56 +252,103 @@ async function playM3u8(url) {
 
 
 
-function updateStageUsersList(stageUsers) {
+function updateStageUsersList(stageUsers, giftLogs) {
     const stageUsersList = document.getElementById('stageUsersList');
     const container = document.getElementById('stageUsersContainer');
-    if (!stageUsers || stageUsers.length === 0) {
+
+    if ((!stageUsers || stageUsers.length === 0) && (!giftLogs || giftLogs.length === 0)) {
         stageUsersList.classList.add('hidden');
         return;
     }
+
     stageUsersList.classList.remove('hidden');
-    container.innerHTML = '';
-    stageUsers.forEach(stageUser => {
-        const userDiv = document.createElement('div');
-        userDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'flex-shrink-0 relative';
+    container.innerHTML = `
+      <div class="mb-4">
+        <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
+          <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">User Rank</button>
+          <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gift Log</button>
+        </div>
+      </div>
+      <div id="rankContent" class="space-y-4"></div>
+      <div id="giftContent" class="space-y-4 hidden"></div>
+    `;
 
-        const userImage = document.createElement('img');
-        userImage.className = 'w-12 h-12 rounded-full object-cover';
-        userImage.src = stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg';
-        userImage.alt = stageUser.user.name;
+    const rankContent = document.getElementById('rankContent');
+    const giftContent = document.getElementById('giftContent');
 
-        const rankBadge = document.createElement('span');
-        rankBadge.className = 'absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center';
-        rankBadge.textContent = stageUser.rank;
+    // Populate rank content
+    if (stageUsers && stageUsers.length > 0) {
+        stageUsers.forEach(stageUser => {
+            const userDiv = document.createElement('div');
+            userDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+            userDiv.innerHTML = `
+          <div class="flex-shrink-0 relative">
+            <img class="w-12 h-12 rounded-full object-cover" 
+                 src="${stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                 alt="${stageUser.user.name}">
+            <span class="absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              ${stageUser.rank}
+            </span>
+          </div>
+          <div class="flex-grow min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate">${stageUser.user.name}</p>
+            <div class="flex items-center space-x-1">
+              <img class="w-4 h-4" src="${stageUser.user.avatar_url || ''}" alt="Avatar">
+            </div>
+          </div>
+        `;
+            rankContent.appendChild(userDiv);
+        });
+    }
 
-        imageContainer.appendChild(userImage);
-        imageContainer.appendChild(rankBadge);
+    // Populate gift content
+    if (giftLogs && giftLogs.length > 0) {
+        giftLogs.forEach(gift => {
+            const giftDiv = document.createElement('div');
+            giftDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+            giftDiv.innerHTML = `
+          <div class="flex-shrink-0">
+            <img class="w-12 h-12 rounded-full object-cover" 
+                 src="${gift.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                 alt="${gift.name}">
+          </div>
+          <div class="flex-grow min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate">${gift.name}</p>
+            <div class="flex items-center space-x-2">
+              <img class="w-5 h-5" src="${gift.image}" alt="Gift">
+              <span class="text-xs text-gray-500">×${gift.num}</span>
+            </div>
+          </div>
+          <div class="text-xs text-gray-500">
+            ${new Date(gift.created_at * 1000).toLocaleTimeString()}
+          </div>
+        `;
+            giftContent.appendChild(giftDiv);
+        });
+    }
 
-        const userInfo = document.createElement('div');
-        userInfo.className = 'flex-grow min-w-0';
+    // Add tab switching functionality
+    window.showTab = function (tabName) {
+        const rankTab = document.getElementById('rankTab');
+        const giftTab = document.getElementById('giftTab');
+        const rankContent = document.getElementById('rankContent');
+        const giftContent = document.getElementById('giftContent');
 
-        const userName = document.createElement('p');
-        userName.className = 'text-sm font-medium text-gray-900 truncate';
-        userName.textContent = stageUser.user.name;
+        if (tabName === 'rank') {
+            rankTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            giftTab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+            rankContent.classList.remove('hidden');
+            giftContent.classList.add('hidden');
+        } else {
+            giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            rankTab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+            giftContent.classList.remove('hidden');
+            rankContent.classList.add('hidden');
+        }
+    };
 
-        const avatarContainer = document.createElement('div');
-        avatarContainer.className = 'flex items-center space-x-1';
-
-        const avatarImage = document.createElement('img');
-        avatarImage.className = 'w-4 h-4';
-        avatarImage.src = stageUser.user.avatar_url || '';
-        avatarImage.alt = 'Avatar';
-
-        avatarContainer.appendChild(avatarImage);
-        userInfo.appendChild(userName);
-        userInfo.appendChild(avatarContainer);
-        userDiv.appendChild(imageContainer);
-        userDiv.appendChild(userInfo);
-
-        container.appendChild(userDiv);
-    });
+    // Initialize first tab
+    window.showTab('rank');
 }
 
 
@@ -668,7 +715,7 @@ function updateShowroomStreamInfo(data) {
         `👥 ${data.view_num?.toLocaleString() || 0} viewers\n` +
         `📺 Nonton sekarang di 48intens!`;
 
-    const thumbnailUrl = data.image_square || data.image || data.room_url_key || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
+    const thumbnailUrl = data.image_square || data.image || 'https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737299881/intens_iwwo2a.webp';
 
     updateMetaTags({
         title: `${data.main_name} Live Streaming | 48intens`,
@@ -678,9 +725,9 @@ function updateShowroomStreamInfo(data) {
         imageHeight: '320',
         url: window.location.href
     });
-    if (data.stage_users) {
-        updateStageUsersList(data.stage_users);
-    }
+
+
+    updateStageUsersList(data.stage_users, data.gift_log);
 
     playM3u8(originalQuality.url);
 }
