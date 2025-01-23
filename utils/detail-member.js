@@ -108,6 +108,8 @@ async function fetchDetailMember() {
     const memberJsonData = await memberJsonResponse.json();
     const jikoMember = memberJsonData.find(member => member.name === memberData.name);
 
+    updateMetaTags(memberData, jikoMember);
+    
     const generateSocialMediaIcons = (socialMedia) => {
       if (!socialMedia) return '';
 
