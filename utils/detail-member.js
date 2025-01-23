@@ -152,20 +152,30 @@ async function fetchDetailMember() {
 
     rankingContainer.innerHTML =
       `<div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg p-6">
-        <h2 class="text-2xl font-bold mb-4 text-center">Visit Showroom Ranking</h2>
-        <div class="space-y-4">
-          ${summaryRanking.length > 0 ? summaryRanking.slice(0, 10).map((ranking, index) => `
-            <div class="flex items-center bg-gray-100 rounded-lg p-3 ${ranking.name === memberData.name ? 'border-2 border-blue-500' : ''}">
-              <span class="font-bold mr-4 w-8 text-center">${ranking.rank}</span>
-              <img src="${ranking.avatar_url}" alt="${ranking.name}" class="w-10 h-10 rounded-full mr-4">
-              <div class="flex-grow">
-                <p class="font-semibold">${ranking.name}</p>
-                <p class="text-sm text-gray-500">${ranking.point} pts | ${ranking.visit_count} visits</p>
-              </div>
-            </div>
-          `).join('') : `<p class="text-center text-gray-500">No ranking data available 😭</p>`}
+    <div class="flex items-center justify-center gap-2 mb-4">
+      <i class="fas fa-trophy text-yellow-400"></i>
+      <h2 class="text-2xl font-bold text-center">Visit Showroom Ranking</h2>
+    </div>
+    <div class="space-y-4">
+      ${summaryRanking.length > 0 ? summaryRanking.slice(0, 10).map((ranking, index) => `
+        <div class="flex items-center bg-gray-100 rounded-lg p-3 ${ranking.name === memberData.name ? 'border-2 border-blue-500' : ''}">
+          <div class="flex items-center justify-center mr-4 w-8">
+            ${ranking.rank <= 3 ?
+          `<i class="fas fa-crown text-lg ${ranking.rank === 1 ? 'text-yellow-400' :
+            ranking.rank === 2 ? 'text-gray-400' : 'text-yellow-600'
+          }"></i>` :
+          `<span class="font-bold text-center">${ranking.rank}</span>`
+        }
+          </div>
+          <img src="${ranking.avatar_url}" alt="${ranking.name}" class="w-10 h-10 rounded-full mr-4">
+          <div class="flex-grow">
+            <p class="font-semibold">${ranking.name}</p>
+            <p class="text-sm text-gray-500">${ranking.point} pts | ${ranking.visit_count} visits</p>
+          </div>
         </div>
-      </div>`;
+      `).join('') : `<p class="text-center text-gray-500">No ranking data available 😭</p>`}
+    </div>
+  </div>`;
 
   } catch (error) {
     console.error("Error fetching member details:", error);
