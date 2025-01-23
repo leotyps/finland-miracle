@@ -82,21 +82,33 @@ async function fetchDetailMember() {
       </div>
     </div>
 
-          ${jikoMember?.video_perkenalan ? `
-          <div class="mt-8 px-6 pb-6">
-            <h2 class="text-2xl font-bold mb-4">Introduction Video</h2>
-            <iframe class="w-full aspect-video rounded-3xl shadow-lg"
-              src="https://www.youtube.com/embed/${jikoMember.video_perkenalan}" 
-              title="Introduction Video" frameborder="0" allowfullscreen>
-            </iframe>
-          </div>` : ''}
-        </div>
-      </div>`;
+    ${memberData.socialMedia ? `
+    <div class="mt-6 px-6">
+      <h2 class="text-xl font-bold mb-4">Social Media</h2>
+      <div class="flex gap-4">
+        ${memberData.socialMedia.twitter ? `<a href="${memberData.socialMedia.twitter}" target="_blank" class="text-blue-500 hover:underline">Twitter</a>` : ''}
+        ${memberData.socialMedia.instagram ? `<a href="${memberData.socialMedia.instagram}" target="_blank" class="text-pink-500 hover:underline">Instagram</a>` : ''}
+        ${memberData.socialMedia.tiktok ? `<a href="${memberData.socialMedia.tiktok}" target="_blank" class="text-gray-800 hover:underline">TikTok</a>` : ''}
+      </div>
+    </div>` : ''}
+
+    ${jikoMember?.video_perkenalan ? `
+    <div class="mt-8 px-6 pb-6">
+      <h2 class="text-2xl font-bold mb-4">Introduction Video</h2>
+      <iframe class="w-full aspect-video rounded-3xl shadow-lg"
+        src="https://www.youtube.com/embed/${jikoMember.video_perkenalan}" 
+        title="Introduction Video" frameborder="0" allowfullscreen>
+      </iframe>
+    </div>` : ''}
+
+  </div>
+</div>`;
   } catch (error) {
     console.error("Error fetching member details:", error);
     showNotFoundMessage(container, "Gagal memuat detail member");
   }
 }
+
 
 function showNotFoundMessage(container, message) {
   container.className = 'flex items-center justify-center min-h-[24rem]';

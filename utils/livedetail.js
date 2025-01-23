@@ -19,24 +19,20 @@ function decompressStreamData(streamId) {
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     chatContainer.classList.remove('hidden');
-    
-    // Update the title and header
     const header = chatContainer.querySelector('h2');
     if (header) header.textContent = 'Live Chat';
-
-    // Modify the container to better suit chat messages
     const messagesContainer = document.getElementById('stageUsersContainer');
     messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
-    
+
     async function getChannelId() {
         try {
             const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
             const data = await response.json();
-            
+
             if (!data.chatId) {
                 throw new Error('Chat ID not found in response');
             }
-            
+
             return data.chatId;
         } catch (error) {
             console.error("Failed to get channel ID:", error);
@@ -72,7 +68,6 @@ function setupIDNChat(username, slug) {
 
         messagesContainer.insertBefore(messageDiv, messagesContainer.firstChild);
 
-        // Keep only the last 100 messages
         while (messagesContainer.children.length > 100) {
             messagesContainer.removeChild(messagesContainer.lastChild);
         }
@@ -146,11 +141,7 @@ function setupIDNChat(username, slug) {
             setTimeout(() => connectWebSocket(), 5000);
         }
     }
-
-    // Start the WebSocket connection
     connectWebSocket();
-
-    // Update the refresh button to reconnect WebSocket
     const refreshButton = chatContainer.querySelector('button');
     if (refreshButton) {
         refreshButton.onclick = () => {
@@ -188,8 +179,6 @@ function showOfflineState() {
     const videoContainer = document.getElementById('liveStream').parentElement;
     videoContainer.innerHTML = '';
     videoContainer.appendChild(offlineContainer);
-
-    // Update UI elements
     const elements = {
         'memberName': 'Room Offline',
         'streamTitle': 'No active stream',
@@ -321,7 +310,6 @@ async function refreshPodiumData() {
         const pathSegments = window.location.pathname.split('/');
         const platform = pathSegments[2];
         const memberName = pathSegments[3];
-        // Only proceed if it's a Showroom stream
         if (platform === 'showroom' || platform === 'sr') {
             const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
             if (!response.ok) throw new Error('Failed to fetch Showroom data');
@@ -333,8 +321,6 @@ async function refreshPodiumData() {
 
             if (streamData && streamData.stage_users) {
                 updateStageUsersList(streamData.stage_users);
-
-                // Add a subtle animation to show the refresh was successful
                 const container = document.getElementById('stageUsersContainer');
                 container.style.opacity = '0';
                 setTimeout(() => {
@@ -422,7 +408,7 @@ async function updateStreamInfo(platform, memberName) {
             );
 
             if (streamData) {
-                
+
                 const streamDescription =
                     `🎥 ${streamData.user.name} sedang live streaming di IDN Live! ${streamData.title || ''}\n` +
                     `👥 ${streamData.view_count || 0} viewers\n` +
@@ -517,7 +503,6 @@ async function initializePlayer() {
         showOfflineState();
     }
 }
-
 
 function updateMetaTags({
     title = 'Live Streaming | 48intens',
@@ -699,9 +684,6 @@ function updateShowroomStreamInfo(data) {
 
     playM3u8(originalQuality.url);
 }
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', initializePlayer);
