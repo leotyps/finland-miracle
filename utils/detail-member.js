@@ -13,7 +13,7 @@ async function fetchDetailMember() {
     const updateMetaTags = (memberData, jikoMember) => {
       document.title = `${memberData.name} - 48intens`;
       
-      document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(tag => tag.remove());
+      document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"], meta[property="og:image"], meta[name="twitter:image"], meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]').forEach(tag => tag.remove());
       
       const metaTags = [
         { property: 'og:title', content: `${memberData.name} - 48intens` },
@@ -109,7 +109,7 @@ async function fetchDetailMember() {
     const jikoMember = memberJsonData.find(member => member.name === memberData.name);
 
     updateMetaTags(memberData, jikoMember);
-    
+
     const generateSocialMediaIcons = (socialMedia) => {
       if (!socialMedia) return '';
 
