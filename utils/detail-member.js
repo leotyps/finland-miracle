@@ -83,47 +83,27 @@ async function fetchDetailMember() {
     const memberJsonResponse = await fetch("/data/member.json");
     const memberJsonData = await memberJsonResponse.json();
     const jikoMember = memberJsonData.find(member => member.name === memberData.name);
+    const head = `
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${memberData.name} - 48intens</title>
+    <meta name="description" content="${jikoMember?.jikosokai || `${memberData.name} 48intens`}" />
+    <meta name="keywords" content="48intens, JKT48, jekate48, member, news" />
+    <meta property="og:title" content="${memberData.name} - 48intens" />
+    <meta property="og:description" content="${jikoMember?.jikosokai || `${memberData.name} 48intens`}" />
+    <meta property="og:image" content="${memberData.profileImage}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="${window.location.href}" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${memberData.name} - 48intens" />
+    <meta name="twitter:description" content="${jikoMember?.jikosokai || `${memberData.name} 48intens`}" />
+    <meta name="twitter:image" content="${memberData.profileImage}" />
+    <meta name="twitter:creator" content="@48intens" />
+  `;
 
-    document.title = `${memberData.name} - 48intens`;
-    
-    // Remove all existing meta tags first
-    const removeMetaTags = () => {
-      const metaSelectors = [
-        'meta[name="description"]',
-        'meta[property="og:title"]',
-        'meta[property="og:description"]',
-        'meta[property="og:image"]',
-        'meta[property="og:url"]',
-        'meta[name="twitter:title"]',
-        'meta[name="twitter:description"]',
-        'meta[name="twitter:image"]'
-      ].join(',');
-      document.querySelectorAll(metaSelectors).forEach(tag => tag.remove());
-    };
-
-    removeMetaTags();
-    
-    // Create new meta elements and add them directly to head
-    const headElement = document.head || document.getElementsByTagName('head')[0];
-    
-    const metaTags = [
-      { property: 'og:title', content: `${memberData.name} - 48intens` },
-      { property: 'og:description', content: jikoMember?.jikosokai || `${memberData.name} 48intens` },
-      { property: 'og:image', content: memberData.profileImage },
-      { property: 'og:url', content: window.location.href },
-      { name: 'twitter:title', content: `${memberData.name} - 48intens` },
-      { name: 'twitter:description', content: jikoMember?.jikosokai || `${memberData.name} 48intens` },
-      { name: 'twitter:image', content: memberData.profileImage },
-      { name: 'description', content: jikoMember?.jikosokai || `${memberData.name} 48intens` }
-    ];
-
-    metaTags.forEach(tag => {
-      const meta = document.createElement('meta');
-      if (tag.property) meta.setAttribute('property', tag.property);
-      if (tag.name) meta.setAttribute('name', tag.name);
-      meta.setAttribute('content', tag.content);
-      headElement.appendChild(meta);
-    });
+  document.head.innerHTML = head;
 
     const generateSocialMediaIcons = (socialMedia) => {
       if (!socialMedia) return '';
