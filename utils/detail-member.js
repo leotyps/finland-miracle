@@ -7,8 +7,8 @@ async function fetchDetailMember() {
   const container = document.getElementById("member-detail-container");
 
   try {
-    const pathSegments = window.location.pathname.split('/');
-    const memberId = pathSegments[pathSegments.length - 1];
+    const urlParams = new URLSearchParams(window.location.search);
+    const memberId = urlParams.get('id');
     if (!memberId) {
       container.innerHTML =
         `<div class="flex items-center justify-center h-96">
@@ -117,7 +117,7 @@ async function fetchDetailMember() {
                 <p class="font-semibold text-blue-300 mt-2 text-base">${jikoMember ? jikoMember.nicknames : 'Tidak tersedia'}</p>
               </div>
               ${memberData.socialMedia ? `
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center">
                   ${generateSocialMediaIcons(memberData.socialMedia)}
                 </div>
               ` : ''}
