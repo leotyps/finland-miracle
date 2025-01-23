@@ -7,10 +7,10 @@ async function fetchDetailMember() {
   const container = document.getElementById("member-detail-container");
 
   try {
-    const pathSegments = window.location.pathname.split('/');
-    const memberId = pathSegments[pathSegments.length - 1];
+    const urlParams = new URLSearchParams(window.location.search);
+    const memberId = urlParams.get('id');
     if (!memberId) {
-      container.innerHTML = 
+      container.innerHTML =
         `<div class="flex items-center justify-center h-96">
           <div class="text-center text-gray-500">
             <h2 class="text-2xl font-bold">Member tidak ditemukan</h2>
@@ -55,7 +55,7 @@ async function fetchDetailMember() {
         </div>
       </div>
     </div>
-    <div class="w-full md:w-1/3">
+    <div id="ranking-container" class="w-full md:w-1/3">
       <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg p-6 animate-pulse">
         <div class="h-6 bg-gray-300 rounded w-3/4 mx-auto mb-6"></div>
         <div class="space-y-4">
@@ -73,7 +73,6 @@ async function fetchDetailMember() {
       </div>
     </div>
   </div>`;
-
     const response = await fetch(`https://48intensapi.my.id/api/member/${memberId}`);
     if (!response.ok) {
       showNotFoundMessage(container, "Member tidak ditemukan");
@@ -103,7 +102,7 @@ async function fetchDetailMember() {
     };
 
     const memberDetailsContainer = container.querySelector('[class*="md:w-2/3"]');
-    memberDetailsContainer.innerHTML = 
+    memberDetailsContainer.innerHTML =
       `<div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden">
         <div class="flex flex-col sm:flex-row">
           <div class="w-full sm:w-1/3 p-6">
@@ -148,10 +147,10 @@ async function fetchDetailMember() {
         </div>` : ''}
       </div>`;
 
-      const rankingContainer = container.querySelector('#ranking-container');
+    const rankingContainer = container.querySelector('#ranking-container');
     const summaryRanking = memberData.summaryRanking || [];
 
-    rankingContainer.innerHTML = 
+    rankingContainer.innerHTML =
       `<div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg p-6">
         <h2 class="text-2xl font-bold mb-4 text-center">Visit Showroom Ranking</h2>
         <div class="space-y-4">
