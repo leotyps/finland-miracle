@@ -7,8 +7,8 @@ async function fetchDetailMember() {
   const container = document.getElementById("member-detail-container");
 
   try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const memberId = urlParams.get('id');
+    const pathSegments = window.location.pathname.split('/');
+    const memberId = pathSegments[pathSegments.length - 1];
     if (!memberId) {
       container.innerHTML =
         `<div class="flex items-center justify-center h-96">
@@ -18,8 +18,8 @@ async function fetchDetailMember() {
         </div>`;
       return;
     }
-    container.innerHTML = 
-  `<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
+    container.innerHTML =
+      `<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
     <div class="w-full md:w-2/3">
       <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
         <div class="flex flex-col sm:flex-row">
