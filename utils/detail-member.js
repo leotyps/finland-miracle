@@ -11,15 +11,9 @@ async function fetchDetailMember() {
     const memberId = urlParams.get('id');
 
     if (!memberId) {
-      container.innerHTML =
-        `<div class="flex items-center justify-center h-96">
-          <div class="text-center text-gray-500">
-            <h2 class="text-2xl font-bold">Member tidak ditemukan</h2>
-          </div>
-        </div>`;
+      showNotFoundMessage(container, "Member tidak ditemukan");
       return;
     }
-    container.innerHTML =
     container.innerHTML = `
     <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
       <div class="w-full md:w-2/3">
