@@ -263,71 +263,68 @@ function updateStageUsersList(stageUsers, giftLogs) {
 
     stageUsersList.classList.remove('hidden');
     container.innerHTML = `
-      <div class="mb-4">
-        <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
-          <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">User Rank</button>
-          <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gift Log</button>
+        <div class="mb-4">
+            <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
+            <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">User Rank</button>
+            <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gift Log</button>
+            </div>
         </div>
-      </div>
-      <div id="rankContent" class="space-y-4"></div>
-      <div id="giftContent" class="space-y-4 hidden"></div>
-    `;
+        <div id="rankContent" class="space-y-4"></div>
+        <div id="giftContent" class="space-y-4 hidden"></div>
+        `;
 
     const rankContent = document.getElementById('rankContent');
     const giftContent = document.getElementById('giftContent');
 
-    // Populate rank content
     if (stageUsers && stageUsers.length > 0) {
         stageUsers.forEach(stageUser => {
             const userDiv = document.createElement('div');
             userDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
             userDiv.innerHTML = `
-          <div class="flex-shrink-0 relative">
-            <img class="w-12 h-12 rounded-full object-cover" 
-                 src="${stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
-                 alt="${stageUser.user.name}">
-            <span class="absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-              ${stageUser.rank}
-            </span>
-          </div>
-          <div class="flex-grow min-w-0">
-            <p class="text-sm font-medium text-gray-900 truncate">${stageUser.user.name}</p>
-            <div class="flex items-center space-x-1">
-              <img class="w-4 h-4" src="${stageUser.user.avatar_url || ''}" alt="Avatar">
+            <div class="flex-shrink-0 relative">
+                <img class="w-12 h-12 rounded-full object-cover" 
+                    src="${stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                    alt="${stageUser.user.name}">
+                <span class="absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                ${stageUser.rank}
+                </span>
             </div>
-          </div>
+            <div class="flex-grow min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate">${stageUser.user.name}</p>
+                <div class="flex items-center space-x-1">
+                <img class="w-4 h-4" src="${stageUser.user.avatar_url || ''}" alt="Avatar">
+                </div>
+            </div>
         `;
             rankContent.appendChild(userDiv);
         });
     }
 
-    // Populate gift content
     if (giftLogs && giftLogs.length > 0) {
         giftLogs.forEach(gift => {
             const giftDiv = document.createElement('div');
             giftDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
             giftDiv.innerHTML = `
-          <div class="flex-shrink-0">
-            <img class="w-12 h-12 rounded-full object-cover" 
-                 src="${gift.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
-                 alt="${gift.name}">
-          </div>
-          <div class="flex-grow min-w-0">
-            <p class="text-sm font-medium text-gray-900 truncate">${gift.name}</p>
-            <div class="flex items-center space-x-2">
-              <img class="w-5 h-5" src="${gift.image}" alt="Gift">
-              <span class="text-xs text-gray-500">×${gift.num}</span>
+            <div class="flex-shrink-0">
+                <img class="w-12 h-12 rounded-full object-cover" 
+                    src="${gift.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                    alt="${gift.name}">
             </div>
-          </div>
-          <div class="text-xs text-gray-500">
-            ${new Date(gift.created_at * 1000).toLocaleTimeString()}
-          </div>
+            <div class="flex-grow min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate">${gift.name}</p>
+                <div class="flex items-center space-x-2">
+                <img class="w-5 h-5" src="${gift.image}" alt="Gift">
+                <span class="text-xs text-gray-500">×${gift.num}</span>
+                </div>
+            </div>
+            <div class="text-xs text-gray-500">
+                ${new Date(gift.created_at * 1000).toLocaleTimeString()}
+            </div>
         `;
             giftContent.appendChild(giftDiv);
         });
     }
 
-    // Add tab switching functionality
     window.showTab = function (tabName) {
         const rankTab = document.getElementById('rankTab');
         const giftTab = document.getElementById('giftTab');
@@ -347,7 +344,6 @@ function updateStageUsersList(stageUsers, giftLogs) {
         }
     };
 
-    // Initialize first tab
     window.showTab('rank');
 }
 
