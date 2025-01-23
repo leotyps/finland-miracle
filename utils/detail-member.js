@@ -20,7 +20,7 @@ async function fetchDetailMember() {
       return;
     }
     container.innerHTML =
-  `<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
+      `<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
     <div class="w-full md:w-2/3">
       <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
         <div class="flex flex-col sm:flex-row">
@@ -168,75 +168,80 @@ async function fetchDetailMember() {
     const memberDetailsContainer = container.querySelector('[class*="md:w-2/3"]');
     memberDetailsContainer.innerHTML =
       `<div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden">
-    <div class="flex flex-col sm:flex-row">
-      <div class="w-full sm:w-1/3 p-6">
-        <img src="${memberData.profileImage}" alt="${memberData.name}" 
-            class="w-full h-[400px] sm:h-auto rounded-3xl shadow-md object-cover" loading="lazy">
-      </div>
-
-      <div class="w-full sm:w-2/3 p-6">
-        <div class="flex items-center justify-between mb-6">
-          <div>
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">${memberData.name}</h1>
-            <p class="font-semibold text-blue-300 mt-2 text-base">${jikoMember ? jikoMember.nicknames : 'Tidak tersedia'}</p>
-          </div>
-          ${memberData.socialMedia ? `
-            <div class="flex items-center">
-              ${generateSocialMediaIcons(memberData.socialMedia)}
-            </div>
-          ` : ''}
+        <div class="w-full h-48 sm:h-64">
+          <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737654318/banner_i51agc.jpg" alt="Banner" 
+              class="w-full h-full object-cover" loading="lazy">
         </div>
-
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <div class="space-y-4">
-            <p class="text-gray-700 text-base"><span class="font-semibold">Tanggal Lahir:</span> ${memberData.birthdate || 'Tidak tersedia'}</p>
-            <p class="text-gray-700 text-base"><span class="font-semibold">Golongan Darah:</span> ${memberData.bloodType || 'Tidak tersedia'}</p>
-            <p class="text-gray-700 text-base"><span class="font-semibold">Zodiak:</span> ${memberData.zodiac || 'Tidak tersedia'}</p>
-            <p class="text-gray-700 text-base"><span class="font-semibold">Tinggi:</span> ${memberData.height || 'Tidak tersedia'}</p>
+        
+        <div class="flex flex-col sm:flex-row">
+          <div class="w-full sm:w-1/3 p-6">
+            <img src="${memberData.profileImage}" alt="${memberData.name}" 
+                class="w-full h-[400px] sm:h-auto rounded-3xl shadow-md object-cover" loading="lazy">
           </div>
-          <div class="bg-blue-200/30 p-4 rounded-3xl">
-            <p class="text-gray-700 italic text-base">${jikoMember ? jikoMember.jikosokai : 'Tidak tersedia'}</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    ${memberData.recommendComments ? `
-      <div class="p-6 border-t border-gray-200">
-        <div class="flex items-center gap-2 mb-4">
-          <i class="fas fa-envelope text-rose-300"></i>
-          <h2 class="text-2xl font-bold">Fan Letters</h2>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          ${memberData.recommendComments.map(comment => `
-            <div class="bg-gray-50 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
-              <div class="flex items-center space-x-3 mb-3">
-                <img src="${comment.user.image}" alt="${comment.user.name}" 
-                      class="w-10 h-10 rounded-full object-cover">
-                <div>
-                  <p class="font-medium text-gray-900">${comment.user.name}</p>
-                  <p class="text-sm text-gray-500">${new Date(comment.created_at * 1000).toLocaleDateString()}</p>
-                </div>
+          <div class="w-full sm:w-2/3 p-6">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">${memberData.name}</h1>
+                <p class="font-semibold text-blue-300 mt-2 text-base">${jikoMember ? jikoMember.nicknames : 'Tidak tersedia'}</p>
               </div>
-              <p class="text-gray-600">${comment.comment}</p>
+              ${memberData.socialMedia ? `
+                <div class="flex items-center">
+                  ${generateSocialMediaIcons(memberData.socialMedia)}
+                </div>
+              ` : ''}
             </div>
-          `).join('')}
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div class="space-y-4">
+                <p class="text-gray-700 text-base"><span class="font-semibold">Tanggal Lahir:</span> ${memberData.birthdate || 'Tidak tersedia'}</p>
+                <p class="text-gray-700 text-base"><span class="font-semibold">Golongan Darah:</span> ${memberData.bloodType || 'Tidak tersedia'}</p>
+                <p class="text-gray-700 text-base"><span class="font-semibold">Zodiak:</span> ${memberData.zodiac || 'Tidak tersedia'}</p>
+                <p class="text-gray-700 text-base"><span class="font-semibold">Tinggi:</span> ${memberData.height || 'Tidak tersedia'}</p>
+              </div>
+              <div class="bg-blue-200/30 p-4 rounded-3xl">
+                <p class="text-gray-700 italic text-base">${jikoMember ? jikoMember.jikosokai : 'Tidak tersedia'}</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    ` : ''}
-    
-    ${jikoMember?.video_perkenalan ?
-        `<div class="mt-8 px-6 pb-6">
-      <div class="flex items-center gap-2 mb-4">
-        <i class="fas fa-video text-rose-300"></i>
-        <h2 class="text-2xl font-bold">Introduction Video</h2>
-      </div>
-      <iframe class="w-full aspect-video rounded-3xl shadow-lg"
-        src="https://www.youtube.com/embed/${jikoMember.video_perkenalan}" 
-        title="Introduction Video" frameborder="0" allowfullscreen>
-      </iframe>
-    </div>` : ''}
-  </div>`;
+
+        ${memberData.recommendComments ? `
+          <div class="p-6 border-t border-gray-200">
+            <div class="flex items-center gap-2 mb-4">
+              <i class="fas fa-envelope text-rose-300"></i>
+              <h2 class="text-2xl font-bold">Fan Letters</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              ${memberData.recommendComments.map(comment => `
+                <div class="bg-gray-50 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                  <div class="flex items-center space-x-3 mb-3">
+                    <img src="${comment.user.image}" alt="${comment.user.name}" 
+                          class="w-10 h-10 rounded-full object-cover">
+                    <div>
+                      <p class="font-medium text-gray-900">${comment.user.name}</p>
+                      <p class="text-sm text-gray-500">${new Date(comment.created_at * 1000).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                  <p class="text-gray-600">${comment.comment}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${jikoMember?.video_perkenalan ?
+              `<div class="mt-8 px-6 pb-6">
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fas fa-video text-rose-300"></i>
+            <h2 class="text-2xl font-bold">Introduction Video</h2>
+          </div>
+          <iframe class="w-full aspect-video rounded-3xl shadow-lg"
+            src="https://www.youtube.com/embed/${jikoMember.video_perkenalan}" 
+            title="Introduction Video" frameborder="0" allowfullscreen>
+          </iframe>
+        </div>` : ''}
+      </div>`;
 
     const rankingContainer = container.querySelector('#ranking-container');
     const summaryRanking = memberData.summaryRanking || [];
@@ -248,7 +253,7 @@ async function fetchDetailMember() {
       <h2 class="text-2xl font-bold text-center">Visit Showroom Ranking</h2>
     </div>
     <div class="space-y-4">
-      ${summaryRanking.length > 0 ? summaryRanking.slice(0, 12 ).map((ranking, index) => `
+      ${summaryRanking.length > 0 ? summaryRanking.slice(0, 12).map((ranking, index) => `
         <div class="flex items-center bg-gray-100 rounded-lg p-3 ${ranking.name === memberData.name ? 'border-2 border-blue-500' : ''}">
           <div class="flex items-center justify-center mr-4 w-8">
             ${ranking.rank <= 3 ?
