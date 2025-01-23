@@ -4,77 +4,75 @@ function getQueryParam(param) {
 }
 
 async function fetchDetailMember() {
-  const container = document.querySelector("#member-detail-container");
-  
-  if (!container) {
-    console.error("Container element not found");
-    return;
-  }
+  const container = document.getElementById("member-detail-container");
 
   try {
     const pathSegments = window.location.pathname.split('/');
     const memberId = pathSegments[pathSegments.length - 1];
-    
     if (!memberId) {
-      showNotFoundMessage(container, "Member tidak ditemukan");
+      container.innerHTML = 
+        `<div class="flex items-center justify-center h-96">
+          <div class="text-center text-gray-500">
+            <h2 class="text-2xl font-bold">Member tidak ditemukan</h2>
+          </div>
+        </div>`;
       return;
     }
-
     container.innerHTML = 
-      `<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
-        <div class="w-full md:w-2/3">
-          <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
-            <div class="flex flex-col sm:flex-row">
-              <div class="w-full sm:w-1/3 p-6">
-                <div class="bg-gray-300 w-full h-[400px] rounded-3xl"></div>
+  `<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
+    <div class="w-full md:w-2/3">
+      <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
+        <div class="flex flex-col sm:flex-row">
+          <div class="w-full sm:w-1/3 p-6">
+            <div class="bg-gray-300 w-full h-[400px] rounded-3xl"></div>
+          </div>
+          <div class="w-full sm:w-2/3 p-6">
+            <div class="flex items-center justify-between mb-6">
+              <div class="space-y-3">
+                <div class="h-8 bg-gray-300 rounded w-1/2"></div>
+                <div class="h-4 bg-gray-300 rounded w-1/3"></div>
               </div>
-              <div class="w-full sm:w-2/3 p-6">
-                <div class="flex items-center justify-between mb-6">
-                  <div class="space-y-3">
-                    <div class="h-8 bg-gray-300 rounded w-1/2"></div>
-                    <div class="h-4 bg-gray-300 rounded w-1/3"></div>
-                  </div>
-                  <div class="flex space-x-3">
-                    <div class="h-6 w-6 bg-gray-300 rounded-full"></div>
-                    <div class="h-6 w-6 bg-gray-300 rounded-full"></div>
-                    <div class="h-6 w-6 bg-gray-300 rounded-full"></div>
-                  </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div class="space-y-4">
-                    <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                    <div class="h-4 bg-gray-300 rounded w-2/3"></div>
-                    <div class="h-4 bg-gray-300 rounded w-3/4"></div>
-                    <div class="h-4 bg-gray-300 rounded w-1/2"></div>
-                  </div>
-                  <div class="h-32 bg-gray-300 rounded-3xl"></div>
-                </div>
+              <div class="flex space-x-3">
+                <div class="h-6 w-6 bg-gray-300 rounded-full"></div>
+                <div class="h-6 w-6 bg-gray-300 rounded-full"></div>
+                <div class="h-6 w-6 bg-gray-300 rounded-full"></div>
               </div>
             </div>
-            <div class="mt-8 px-6 pb-6">
-              <div class="h-6 bg-gray-300 rounded w-1/4 mb-4"></div>
-              <div class="bg-gray-300 w-full aspect-video rounded-3xl"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                <div class="h-4 bg-gray-300 rounded w-2/3"></div>
+                <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+                <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+              </div>
+              <div class="h-32 bg-gray-300 rounded-3xl"></div>
             </div>
           </div>
         </div>
-        <div class="w-full md:w-1/3">
-          <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg p-6 animate-pulse">
-            <div class="h-6 bg-gray-300 rounded w-3/4 mx-auto mb-6"></div>
-            <div class="space-y-4">
-              ${Array(5).fill().map(() => `
-                <div class="flex items-center bg-gray-100 rounded-lg p-3">
-                  <div class="h-4 w-8 bg-gray-300 rounded mr-4"></div>
-                  <div class="h-10 w-10 bg-gray-300 rounded-full mr-4"></div>
-                  <div class="flex-grow space-y-2">
-                    <div class="h-4 bg-gray-300 rounded w-2/3"></div>
-                    <div class="h-3 bg-gray-300 rounded w-1/2"></div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
+        <div class="mt-8 px-6 pb-6">
+          <div class="h-6 bg-gray-300 rounded w-1/4 mb-4"></div>
+          <div class="bg-gray-300 w-full aspect-video rounded-3xl"></div>
         </div>
-      </div>`;
+      </div>
+    </div>
+    <div class="w-full md:w-1/3">
+      <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg p-6 animate-pulse">
+        <div class="h-6 bg-gray-300 rounded w-3/4 mx-auto mb-6"></div>
+        <div class="space-y-4">
+          ${Array(5).fill().map(() => `
+            <div class="flex items-center bg-gray-100 rounded-lg p-3">
+              <div class="h-4 w-8 bg-gray-300 rounded mr-4"></div>
+              <div class="h-10 w-10 bg-gray-300 rounded-full mr-4"></div>
+              <div class="flex-grow space-y-2">
+                <div class="h-4 bg-gray-300 rounded w-2/3"></div>
+                <div class="h-3 bg-gray-300 rounded w-1/2"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  </div>`;
 
     const response = await fetch(`https://48intensapi.my.id/api/member/${memberId}`);
     if (!response.ok) {
@@ -105,7 +103,7 @@ async function fetchDetailMember() {
     };
 
     const memberDetailsContainer = container.querySelector('[class*="md:w-2/3"]');
-    memberDetailsContainer.innerHTML =
+    memberDetailsContainer.innerHTML = 
       `<div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden">
         <div class="flex flex-col sm:flex-row">
           <div class="w-full sm:w-1/3 p-6">
@@ -150,10 +148,10 @@ async function fetchDetailMember() {
         </div>` : ''}
       </div>`;
 
-    const rankingContainer = container.querySelector('#ranking-container');
+      const rankingContainer = container.querySelector('#ranking-container');
     const summaryRanking = memberData.summaryRanking || [];
 
-    rankingContainer.innerHTML =
+    rankingContainer.innerHTML = 
       `<div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg p-6">
         <h2 class="text-2xl font-bold mb-4 text-center">Visit Showroom Ranking</h2>
         <div class="space-y-4">
