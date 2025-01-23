@@ -20,7 +20,7 @@ async function fetchDetailMember() {
       return;
     }
     container.innerHTML =
-      `<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
+  `<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row gap-6">
     <div class="w-full md:w-2/3">
       <div class="border-2 border-gray-200 bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
         <div class="flex flex-col sm:flex-row">
@@ -50,8 +50,33 @@ async function fetchDetailMember() {
             </div>
           </div>
         </div>
+
+        <div class="p-6 border-t border-gray-200">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="h-6 w-6 bg-gray-300 rounded"></div>
+            <div class="h-8 bg-gray-300 rounded w-1/4"></div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            ${Array(3).fill().map(() => `
+              <div class="bg-gray-50 rounded-xl p-4">
+                <div class="flex items-center space-x-3 mb-3">
+                  <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+                  <div class="space-y-2">
+                    <div class="h-4 bg-gray-300 rounded w-24"></div>
+                    <div class="h-3 bg-gray-300 rounded w-20"></div>
+                  </div>
+                </div>
+                <div class="h-16 bg-gray-300 rounded"></div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
         <div class="mt-8 px-6 pb-6">
-          <div class="h-6 bg-gray-300 rounded w-1/4 mb-4"></div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="h-6 w-6 bg-gray-300 rounded"></div>
+            <div class="h-8 bg-gray-300 rounded w-1/4"></div>
+          </div>
           <div class="bg-gray-300 w-full aspect-video rounded-3xl"></div>
         </div>
       </div>
@@ -223,7 +248,7 @@ async function fetchDetailMember() {
       <h2 class="text-2xl font-bold text-center">Visit Showroom Ranking</h2>
     </div>
     <div class="space-y-4">
-      ${summaryRanking.length > 0 ? summaryRanking.slice(0, 10).map((ranking, index) => `
+      ${summaryRanking.length > 0 ? summaryRanking.slice(0, 12 ).map((ranking, index) => `
         <div class="flex items-center bg-gray-100 rounded-lg p-3 ${ranking.name === memberData.name ? 'border-2 border-blue-500' : ''}">
           <div class="flex items-center justify-center mr-4 w-8">
             ${ranking.rank <= 3 ?
