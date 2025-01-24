@@ -265,9 +265,9 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
     container.innerHTML = `
         <div class="mb-4">
             <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
-                <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Podium</button>
-                <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gift Log</button>
                 <button onclick="showTab('comment')" id="commentTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Comments</button>
+                <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Podium</button>
+                <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gift</button>
             </div>
         </div>
         <div id="rankContent" class="space-y-4"></div>
@@ -283,7 +283,6 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
 
     rankContent.innerHTML = '';
     giftContent.innerHTML = '';
-    commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>';
 
     if (stageUsers?.length > 0) {
         stageUsers.forEach(stageUser => {
@@ -335,25 +334,32 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
     }
 
     if (commentLogs?.length > 0) {
+        commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>';
+        const commentsDiv = document.createElement('div');
+        commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
+        
         commentLogs.forEach(comment => {
             const commentDiv = document.createElement('div');
-            commentDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+            commentDiv.className = 'flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg';
             commentDiv.innerHTML = `
                 <div class="flex-shrink-0">
-                    <img class="w-12 h-12 rounded-full object-cover" 
+                    <img class="w-8 h-8 rounded-full" 
                         src="${comment.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
                         alt="${comment.name}">
                 </div>
                 <div class="flex-grow min-w-0">
-                    <p class="text-sm font-medium text-gray-900 truncate">${comment.name}</p>
-                    <p class="text-sm text-gray-600">${comment.comment}</p>
-                </div>
-                <div class="text-xs text-gray-500">
-                    ${new Date(comment.created_at * 1000).toLocaleTimeString()}
+                    <div class="flex items-baseline space-x-2">
+                        <span class="text-sm font-medium text-gray-900">${comment.name}</span>
+                        <span class="text-xs text-gray-500">${new Date(comment.created_at * 1000).toLocaleTimeString()}</span>
+                    </div>
+                    <p class="text-sm text-gray-700 break-words">${comment.comment}</p>
                 </div>
             `;
-            commentContent.appendChild(commentDiv);
+            commentsDiv.appendChild(commentDiv);
         });
+        
+        commentContent.appendChild(commentsDiv);
+        commentsDiv.scrollTop = commentsDiv.scrollHeight;
     }
 
     window.showTab = function (tabName) {
@@ -412,9 +418,63 @@ async function refreshPodiumData() {
     }
 }
 
-setInterval(() => {
-    refreshPodiumData();
-}, 5000);
+async function refreshComments() {
+    try {
+        const pathSegments = window.location.pathname.split('/');
+        const platform = pathSegments[2];
+        const memberName = pathSegments[3];
+        if (platform === 'showroom' || platform === 'sr') {
+            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
+            if (!response.ok) throw new Error('Failed to fetch Showroom data');
+
+            const data = await response.json();
+            const streamData = data.find(stream =>
+                stream.room_url_key.replace('JKT48_', '').toLowerCase() === memberName.toLowerCase()
+            );
+
+            if (streamData) {
+                const commentContent = document.getElementById('commentContent');
+                if (commentContent && commentContent.classList.contains('hidden')) {
+                    return;
+                }
+                
+                commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>';
+                
+                if (streamData.comment_log?.length > 0) {
+                    const commentsDiv = document.createElement('div');
+                    commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
+                    
+                    streamData.comment_log.forEach(comment => {
+                        const commentDiv = document.createElement('div');
+                        commentDiv.className = 'flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg';
+                        commentDiv.innerHTML = `
+                            <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" 
+                                    src="${comment.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                                    alt="${comment.name}">
+                            </div>
+                            <div class="flex-grow min-w-0">
+                                <div class="flex items-baseline space-x-2">
+                                    <span class="text-sm font-medium text-gray-900">${comment.name}</span>
+                                    <span class="text-xs text-gray-500">${new Date(comment.created_at * 1000).toLocaleTimeString()}</span>
+                                </div>
+                                <p class="text-sm text-gray-700 break-words">${comment.comment}</p>
+                            </div>
+                        `;
+                        commentsDiv.appendChild(commentDiv);
+                    });
+                    
+                    commentContent.appendChild(commentsDiv);
+                    commentsDiv.scrollTop = commentsDiv.scrollHeight;
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error refreshing comments:', error);
+    }
+}
+
+setInterval(refreshComments, 5000);
 
 function playPause() {
     if (!video) return;
