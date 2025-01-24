@@ -20,11 +20,15 @@ function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     chatContainer.classList.remove('hidden');
 
-    const header = chatContainer.querySelector('h2');
-    if (header) header.textContent = 'Live Chat & Gift Log';
+    const cardContainer = document.createElement('div');
+    cardContainer.className = 'bg-white rounded-lg shadow-md';
+
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'px-4 py-3 border-b border-gray-200 flex justify-between items-center';
+    cardHeader.innerHTML = '<h2 class="text-lg font-semibold text-gray-900">Information</h2>';
 
     const buttonsContainer = document.createElement('div');
-    buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1 mb-4';
+    buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1';
 
     const liveChatButton = document.createElement('button');
     liveChatButton.textContent = 'Live Chat';
@@ -38,10 +42,17 @@ function setupIDNChat(username, slug) {
 
     buttonsContainer.appendChild(liveChatButton);
     buttonsContainer.appendChild(giftLogButton);
-    chatContainer.prepend(buttonsContainer);
+    cardHeader.appendChild(buttonsContainer);
 
-    const messagesContainer = document.getElementById('stageUsersContainer');
-    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
+    const messagesContainer = document.createElement('div');
+    messagesContainer.id = 'stageUsersContainer';
+    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh] p-4';
+
+    cardContainer.appendChild(cardHeader);
+    cardContainer.appendChild(messagesContainer);
+
+    chatContainer.innerHTML = '';
+    chatContainer.appendChild(cardContainer);
 
     const liveChatContent = document.createElement('div');
     liveChatContent.id = 'liveChatContent';
@@ -53,6 +64,8 @@ function setupIDNChat(username, slug) {
 
     messagesContainer.appendChild(liveChatContent);
     messagesContainer.appendChild(giftLogContent);
+
+    let wsConnection = null;
 
     async function getChannelId() {
         try {
@@ -208,10 +221,10 @@ function setupIDNChat(username, slug) {
     async function fetchGiftLogs() {
         try {
             const response = await fetch(`https://48intensapi.my.id/api/idnlive/jkt48`);
-            const data = await response.json();
+            const responseData = await response.json();
 
-            if (data?.gift_log) {
-                displayGiftLogs(data.gift_log);
+            if (responseData?.data && responseData.data.length > 0 && responseData.data[0].gift_log) {
+                displayGiftLogs(responseData.data[0].gift_log);
             } else {
                 throw new Error('Gift logs not found in response');
             }
