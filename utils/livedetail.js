@@ -120,37 +120,41 @@ function setupIDNChat(username, slug) {
     }
 
     window.showTab = function (tabName) {
-        console.log(`Switching to tab: ${tabName}`);
+        console.log(`Switching to tab: ${tabName}`); // Debugging log
     
         const chatTab = document.getElementById('chatTab');
         const giftTab = document.getElementById('giftTab');
         const chatContent = document.getElementById('chatContent');
         const giftContent = document.getElementById('giftContent');
     
+        // Reset tab classes
         [chatTab, giftTab].forEach(tab => {
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
             tab.classList.add('text-gray-500');
         });
     
+        // Hide all contents
         [chatContent, giftContent].forEach(content => {
             content.classList.add('hidden');
         });
     
         if (tabName === 'chat') {
-            console.log('Switching to Live Chat tab');
+            console.log('Activating Live Chat tab and content'); // Debugging log
             chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            chatContent.classList.remove('hidden');
+            chatContent.classList.remove('hidden'); // Ensure Live Chat content is shown
     
+            // Reconnect WebSocket
             if (wsConnection) {
                 console.log('Closing existing WebSocket connection');
                 wsConnection.close();
             }
             connectWebSocket();
         } else if (tabName === 'gift') {
-            console.log('Switching to Gift Log tab');
+            console.log('Activating Gift Log tab and content'); // Debugging log
             giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            giftContent.classList.remove('hidden');
+            giftContent.classList.remove('hidden'); // Ensure Gift Log content is shown
     
+            // Close WebSocket and refresh Gift Logs
             if (wsConnection) {
                 console.log('Closing existing WebSocket connection');
                 wsConnection.close();
@@ -159,6 +163,7 @@ function setupIDNChat(username, slug) {
             refreshGiftLogs();
         }
     };
+    
     
 
     connectWebSocket();
