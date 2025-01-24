@@ -125,24 +125,26 @@ function setupIDNChat(username, slug) {
         const chatContent = document.getElementById('chatContent');
         const giftContent = document.getElementById('giftContent');
     
-        // Hapus semua kelas aktif dari tab dan konten
-        chatTab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
-        giftTab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
-        chatContent.classList.add('hidden');
-        giftContent.classList.add('hidden');
+        // Reset semua tab dan konten
+        [chatTab, giftTab].forEach(tab =>
+            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm')
+        );
+        [chatContent, giftContent].forEach(content =>
+            content.classList.add('hidden')
+        );
     
-        // Tambahkan kelas aktif pada tab yang dipilih
+        // Tampilkan tab yang dipilih
         if (tabName === 'chat') {
             chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             chatContent.classList.remove('hidden');
         } else if (tabName === 'gift') {
             giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             giftContent.classList.remove('hidden');
-            refreshGiftLogs(); // Refresh gift logs saat pindah ke tab gift
+            refreshGiftLogs(); // Refresh gift logs jika pindah ke tab gift
         }
     };
     
-
+    
     window.showTab('chat');
 
     refreshGiftLogs();
