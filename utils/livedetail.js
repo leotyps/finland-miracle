@@ -224,9 +224,9 @@ function setupIDNChat(username, slug) {
         const liveChatContent = document.getElementById('liveChatContent');
         const giftLogContent = document.getElementById('giftLogContent');
 
-        [liveChatTab, giftLogTab].forEach(tab => 
+        [liveChatTab, giftLogTab].forEach(tab =>
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
-        [liveChatContent, giftLogContent].forEach(content => 
+        [liveChatContent, giftLogContent].forEach(content =>
             content.classList.add('hidden'));
 
         if (tabName === 'liveChat') {
@@ -435,7 +435,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>';
         const commentsDiv = document.createElement('div');
         commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
-        
+
         commentLogs.forEach(comment => {
             const commentDiv = document.createElement('div');
             commentDiv.className = 'flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg';
@@ -455,7 +455,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
             `;
             commentsDiv.appendChild(commentDiv);
         });
-        
+
         commentContent.appendChild(commentsDiv);
         commentsDiv.scrollTop = commentsDiv.scrollHeight;
     }
@@ -468,9 +468,9 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         const giftContent = document.getElementById('giftContent');
         const commentContent = document.getElementById('commentContent');
 
-        [rankTab, giftTab, commentTab].forEach(tab => 
+        [rankTab, giftTab, commentTab].forEach(tab =>
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
-        [rankContent, giftContent, commentContent].forEach(content => 
+        [rankContent, giftContent, commentContent].forEach(content =>
             content.classList.add('hidden'));
 
         if (tabName === 'rank') {
@@ -535,13 +535,13 @@ async function refreshComments() {
                 if (commentContent && commentContent.classList.contains('hidden')) {
                     return;
                 }
-                
+
                 commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>';
-                
+
                 if (streamData.comment_log?.length > 0) {
                     const commentsDiv = document.createElement('div');
                     commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
-                    
+
                     streamData.comment_log.forEach(comment => {
                         const commentDiv = document.createElement('div');
                         commentDiv.className = 'flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg';
@@ -561,7 +561,7 @@ async function refreshComments() {
                         `;
                         commentsDiv.appendChild(commentDiv);
                     });
-                    
+
                     commentContent.appendChild(commentsDiv);
                     commentsDiv.scrollTop = commentsDiv.scrollHeight;
                 }
