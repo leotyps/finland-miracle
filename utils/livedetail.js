@@ -514,11 +514,6 @@ async function refreshPodiumData() {
                     streamData.gift_log, 
                     streamData.comment_log
                 );
-                const container = document.getElementById('stageUsersContainer');
-                container.style.opacity = '0';
-                setTimeout(() => {
-                    container.style.opacity = '1';
-                }, 150);
             }
         }
     } catch (error) {
