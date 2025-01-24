@@ -19,7 +19,16 @@ function decompressStreamData(streamId) {
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     const messagesContainer = document.getElementById('stageUsersContainer');
-    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
+    
+    // Create a wrapper div for scrollable content
+    const scrollWrapper = document.createElement('div');
+    scrollWrapper.className = 'overflow-y-auto max-h-[calc(60vh-100px)]';
+
+    // Move existing children of messagesContainer into the scroll wrapper
+    while (messagesContainer.firstChild) {
+        scrollWrapper.appendChild(messagesContainer.firstChild);
+    }
+    messagesContainer.appendChild(scrollWrapper);
 
     const buttonsContainer = document.createElement('div');
     buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1 mb-4';
@@ -36,7 +45,7 @@ function setupIDNChat(username, slug) {
 
     buttonsContainer.appendChild(liveChatButton);
     buttonsContainer.appendChild(giftLogButton);
-    messagesContainer.prepend(buttonsContainer);
+    scrollWrapper.prepend(buttonsContainer);
 
     const commentContent = document.createElement('div');
     commentContent.id = 'commentContent';
@@ -55,9 +64,9 @@ function setupIDNChat(username, slug) {
     giftLogContent.id = 'giftLogContent';
     giftLogContent.className = 'space-y-2 hidden';
 
-    messagesContainer.appendChild(commentContent);
-    messagesContainer.appendChild(liveChatContent);
-    messagesContainer.appendChild(giftLogContent);
+    scrollWrapper.appendChild(commentContent);
+    scrollWrapper.appendChild(liveChatContent);
+    scrollWrapper.appendChild(giftLogContent);
 
     let wsConnection = null;
 
