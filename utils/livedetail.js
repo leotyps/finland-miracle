@@ -334,7 +334,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
     }
 
     if (commentLogs?.length > 0) {
-        commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>';
+        commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>';
         const commentsDiv = document.createElement('div');
         commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
         
@@ -438,7 +438,7 @@ async function refreshComments() {
                     return;
                 }
                 
-                commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>';
+                commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>';
                 
                 if (streamData.comment_log?.length > 0) {
                     const commentsDiv = document.createElement('div');
