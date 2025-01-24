@@ -23,10 +23,6 @@ function setupIDNChat(username, slug) {
     const cardContainer = document.createElement('div');
     cardContainer.className = 'bg-white rounded-lg shadow-md';
 
-    const cardHeader = document.createElement('div');
-    cardHeader.className = 'px-4 py-3 border-b border-gray-200 flex justify-between items-center';
-    cardHeader.innerHTML = '<h2 class="text-lg font-semibold text-gray-900">Information</h2>';
-
     const buttonsContainer = document.createElement('div');
     buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1';
 
