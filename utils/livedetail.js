@@ -28,62 +28,18 @@ function setupIDNChat(username, slug) {
                 <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-700">Gift Log</button>
             </div>
         </div>
-        <div id="chatContent" class="space-y-4">
-            <div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa chat untuk saat ini</div>
+        <div id="chatContent" class="space-y-2">
+            <div class="text-center text-gray-500 text-sm sticky top-0 bg-white z-10 py-2 border-b">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa chat untuk saat ini</div>
+            <div class="overflow-y-auto max-h-[60vh] space-y-2" id="chatMessages"></div>
         </div>
-        <div id="giftContent" class="space-y-4 hidden">
-            <div class="text-center text-gray-500 text-sm mb-2">Gift Log</div>
+        <div id="giftContent" class="space-y-2 hidden">
+            <div class="text-center text-gray-500 text-sm sticky top-0 bg-white z-10 py-2 border-b">Gift Log Rank</div>
+            <div class="overflow-y-auto max-h-[60vh] space-y-2" id="giftLogs"></div>
         </div>
     `;
 
-    async function refreshGiftLogs() {
-        try {
-            const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
-            const data = await response.json();
-            const giftContent = document.getElementById('giftContent');
-     
-            if (data.data?.length) {
-                // Find matching livestream by username/slug
-                const stream = data.data.find(s => s.user.username === username);
-                
-                if (stream?.gift_log?.length) {
-                    giftContent.innerHTML = stream.gift_log.map(gift => `
-                        <div class="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg">
-                            <div class="flex-shrink-0">
-                                <img class="w-8 h-8 rounded-full" 
-                                    src="${gift.image_url}" 
-                                    alt="${gift.name}">
-                            </div>
-                            <div class="flex-grow min-w-0">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-sm font-medium text-gray-900">${gift.name}</span>
-                                    <span class="text-xs text-gray-500">${gift.gold}</span>
-                                </div>
-                                <p class="text-xs text-gray-500">Rank #${gift.rank} · ${gift.total_point} Points</p>
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    giftContent.innerHTML = '<div class="text-center text-gray-500 text-sm">No gift logs available</div>';
-                }
-            }
-        } catch (error) {
-            console.error('Failed to fetch gift data:', error);
-            giftContent.innerHTML = '<div class="text-center text-gray-500 text-sm">Failed to load gift logs</div>';
-        }
-     }
-
-    // Rest of your existing setupIDNChat code for WebSocket connection
-    async function getChannelId() {
-        try {
-            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
-            const data = await response.json();
-            return data.chatId;
-        } catch (error) {
-            console.error("Failed to get channel ID:", error);
-            throw error;
-        }
-    }
+    const chatMessages = document.getElementById('chatMessages');
+    const giftLogs = document.getElementById('giftLogs');
 
     function addChatMessage(messageData) {
         const messageDiv = document.createElement('div');
@@ -111,14 +67,49 @@ function setupIDNChat(username, slug) {
         messageDiv.appendChild(userImage);
         messageDiv.appendChild(contentDiv);
 
-        messagesContainer.insertBefore(messageDiv, messagesContainer.firstChild);
+        chatMessages.insertBefore(messageDiv, chatMessages.firstChild);
 
-        while (messagesContainer.children.length > 100) {
-            messagesContainer.removeChild(messagesContainer.lastChild);
+        while (chatMessages.children.length > 100) {
+            chatMessages.removeChild(chatMessages.lastChild);
         }
     }
 
-    window.showTab = function(tabName) {
+    async function refreshGiftLogs() {
+        try {
+            const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
+            const data = await response.json();
+
+            if (data.data?.length) {
+                const stream = data.data.find(s => s.user.username === username);
+
+                if (stream?.gift_log?.length) {
+                    giftLogs.innerHTML = stream.gift_log.map(gift => `
+                        <div class="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg">
+                            <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" 
+                                    src="${gift.image_url}" 
+                                    alt="${gift.name}">
+                            </div>
+                            <div class="flex-grow min-w-0">
+                                <div class="flex items-baseline justify-between">
+                                    <span class="text-sm font-medium text-gray-900">${gift.name}</span>
+                                    <span class="text-xs text-gray-500">${gift.gold}</span>
+                                </div>
+                                <p class="text-xs text-gray-500">Rank #${gift.rank} · ${gift.total_point} Points</p>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    giftLogs.innerHTML = '<div class="text-center text-gray-500 text-sm">No gift logs available</div>';
+                }
+            }
+        } catch (error) {
+            console.error('Failed to fetch gift data:', error);
+            giftLogs.innerHTML = '<div class="text-center text-gray-500 text-sm">Failed to load gift logs</div>';
+        }
+    }
+
+    window.showTab = function (tabName) {
         const chatTab = document.getElementById('chatTab');
         const giftTab = document.getElementById('giftTab');
         const chatContent = document.getElementById('chatContent');
@@ -141,11 +132,8 @@ function setupIDNChat(username, slug) {
         }
     };
 
-    // Initial refresh of gift logs
     refreshGiftLogs();
-    // Periodic refresh of gift logs
     setInterval(refreshGiftLogs, 30000);
-
 
     async function connectWebSocket() {
         try {
@@ -411,7 +399,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>';
         const commentsDiv = document.createElement('div');
         commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
-        
+
         commentLogs.forEach(comment => {
             const commentDiv = document.createElement('div');
             commentDiv.className = 'flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg';
@@ -431,7 +419,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
             `;
             commentsDiv.appendChild(commentDiv);
         });
-        
+
         commentContent.appendChild(commentsDiv);
         commentsDiv.scrollTop = commentsDiv.scrollHeight;
     }
@@ -444,9 +432,9 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         const giftContent = document.getElementById('giftContent');
         const commentContent = document.getElementById('commentContent');
 
-        [rankTab, giftTab, commentTab].forEach(tab => 
+        [rankTab, giftTab, commentTab].forEach(tab =>
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
-        [rankContent, giftContent, commentContent].forEach(content => 
+        [rankContent, giftContent, commentContent].forEach(content =>
             content.classList.add('hidden'));
 
         if (tabName === 'rank') {
@@ -511,13 +499,13 @@ async function refreshComments() {
                 if (commentContent && commentContent.classList.contains('hidden')) {
                     return;
                 }
-                
+
                 commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>';
-                
+
                 if (streamData.comment_log?.length > 0) {
                     const commentsDiv = document.createElement('div');
                     commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
-                    
+
                     streamData.comment_log.forEach(comment => {
                         const commentDiv = document.createElement('div');
                         commentDiv.className = 'flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg';
@@ -537,7 +525,7 @@ async function refreshComments() {
                         `;
                         commentsDiv.appendChild(commentDiv);
                     });
-                    
+
                     commentContent.appendChild(commentsDiv);
                     commentsDiv.scrollTop = commentsDiv.scrollHeight;
                 }
