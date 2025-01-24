@@ -356,6 +356,9 @@ async function refreshPodiumData() {
         const pathSegments = window.location.pathname.split('/');
         const platform = pathSegments[2];
         const memberName = pathSegments[3];
+        console.log('Stage Users:', streamData.stage_users);
+        console.log('Gift Logs:', streamData.gift_logs);
+
         if (platform === 'showroom' || platform === 'sr') {
             const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
             if (!response.ok) throw new Error('Failed to fetch Showroom data');
