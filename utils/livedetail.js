@@ -45,18 +45,8 @@ function setupIDNChat(username, slug) {
     giftLogContent.id = 'giftLogContent';
     giftLogContent.className = 'space-y-2 hidden';
 
-    const commentContent = document.createElement('div');
-    commentContent.id = 'commentContent';
-    commentContent.className = 'space-y-4 hidden';
-    commentContent.innerHTML = `
-        <div class="text-center text-gray-500 text-sm mb-2">
-            🥺 Kamu juga tidak bisa comment untuk saat ini
-        </div>
-    `;
-
     stageUsersContainer.appendChild(liveChatContent);
     stageUsersContainer.appendChild(giftLogContent);
-    stageUsersContainer.appendChild(commentContent);
 
     let wsConnection = null;
 
@@ -232,17 +222,15 @@ function setupIDNChat(username, slug) {
 
         const liveChatContent = document.getElementById('liveChatContent');
         const giftLogContent = document.getElementById('giftLogContent');
-        const commentContent = document.getElementById('commentContent');
 
         [liveChatTab, giftLogTab].forEach(tab => 
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
-        [liveChatContent, giftLogContent, commentContent].forEach(content => 
+        [liveChatContent, giftLogContent].forEach(content => 
             content.classList.add('hidden'));
 
         if (tabName === 'liveChat') {
             liveChatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             liveChatContent.classList.remove('hidden');
-            commentContent.classList.remove('hidden');
         } else if (tabName === 'giftLog') {
             giftLogTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             giftLogContent.classList.remove('hidden');
