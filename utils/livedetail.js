@@ -19,26 +19,26 @@ function decompressStreamData(streamId) {
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     chatContainer.classList.remove('hidden');
+    const header = chatContainer.querySelector('h2');
+    if (header) header.textContent = 'Live Chat';
     const messagesContainer = document.getElementById('stageUsersContainer');
+    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
 
-    messagesContainer.innerHTML = `
-        <div class="mb-4">
-            <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
-                <button onclick="showTab('chat')" id="chatTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors bg-white text-gray-900 shadow-sm">Live Chat</button>
-                <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-700">Gift Log</button>
-            </div>
-        </div>
-        <div id="chatContent" class="space-y-2">
-            <div class="text-center text-gray-500 text-sm sticky top-0 bg-white z-10 py-2 border-b">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa chat untuk saat ini</div>
-            <div class="overflow-y-auto max-h-[60vh] space-y-2" id="chatMessages"></div>
-        </div>
-        <div id="giftContent" class="space-y-2 hidden">
-            <div class="overflow-y-auto max-h-[60vh] space-y-2" id="giftLogs"></div>
-        </div>
-    `;
+    async function getChannelId() {
+        try {
+            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
+            const data = await response.json();
 
-    const chatMessages = document.getElementById('chatMessages');
-    const giftLogs = document.getElementById('giftLogs');
+            if (!data.chatId) {
+                throw new Error('Chat ID not found in response');
+            }
+
+            return data.chatId;
+        } catch (error) {
+            console.error("Failed to get channel ID:", error);
+            throw error;
+        }
+    }
 
     function addChatMessage(messageData) {
         const messageDiv = document.createElement('div');
@@ -66,109 +66,12 @@ function setupIDNChat(username, slug) {
         messageDiv.appendChild(userImage);
         messageDiv.appendChild(contentDiv);
 
-        chatMessages.insertBefore(messageDiv, chatMessages.firstChild);
+        messagesContainer.insertBefore(messageDiv, messagesContainer.firstChild);
 
-        while (chatMessages.children.length > 100) {
-            chatMessages.removeChild(chatMessages.lastChild);
+        while (messagesContainer.children.length > 100) {
+            messagesContainer.removeChild(messagesContainer.lastChild);
         }
     }
-
-    async function getChannelId() {
-        try {
-            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
-            const data = await response.json();
-            return data.chatId;
-        } catch (error) {
-            console.error("Failed to get channel ID:", error);
-            throw error;
-        }
-    }
-
-    async function refreshGiftLogs() {
-        try {
-            const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
-            const data = await response.json();
-
-            if (data.data?.length) {
-                const stream = data.data.find(s => s.user.username === username);
-
-                if (stream?.gift_log?.length) {
-                    giftLogs.innerHTML = stream.gift_log.map(gift => `
-                        <div class="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg">
-                            <div class="flex-shrink-0">
-                                <img class="w-8 h-8 rounded-full" 
-                                    src="${gift.image_url}" 
-                                    alt="${gift.name}">
-                            </div>
-                            <div class="flex-grow min-w-0">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-sm font-medium text-gray-900">${gift.name}</span>
-                                    <span class="text-xs text-gray-500">${gift.gold}</span>
-                                </div>
-                                <p class="text-xs text-gray-500">Rank #${gift.rank} · ${gift.total_point} Points</p>
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    giftLogs.innerHTML = '<div class="text-center text-gray-500 text-sm">No gift logs available</div>';
-                }
-            }
-        } catch (error) {
-            console.error('Failed to fetch gift data:', error);
-            giftLogs.innerHTML = '<div class="text-center text-gray-500 text-sm">Failed to load gift logs</div>';
-        }
-    }
-
-    window.showTab = function (tabName) {
-        console.log(`Switching to tab: ${tabName}`); // Debugging log
-    
-        const chatTab = document.getElementById('chatTab');
-        const giftTab = document.getElementById('giftTab');
-        const chatContent = document.getElementById('chatContent');
-        const giftContent = document.getElementById('giftContent');
-    
-        // Reset tab classes
-        [chatTab, giftTab].forEach(tab => {
-            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
-            tab.classList.add('text-gray-500');
-        });
-    
-        // Hide all contents
-        [chatContent, giftContent].forEach(content => {
-            content.classList.add('hidden');
-        });
-    
-        if (tabName === 'chat') {
-            console.log('Activating Live Chat tab and content'); // Debugging log
-            chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            chatContent.classList.remove('hidden'); // Ensure Live Chat content is shown
-    
-            // Reconnect WebSocket
-            if (wsConnection) {
-                console.log('Closing existing WebSocket connection');
-                wsConnection.close();
-            }
-            connectWebSocket();
-        } else if (tabName === 'gift') {
-            console.log('Activating Gift Log tab and content'); // Debugging log
-            giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            giftContent.classList.remove('hidden'); // Ensure Gift Log content is shown
-    
-            // Close WebSocket and refresh Gift Logs
-            if (wsConnection) {
-                console.log('Closing existing WebSocket connection');
-                wsConnection.close();
-                wsConnection = null;
-            }
-            refreshGiftLogs();
-        }
-    };
-    
-    
-
-    connectWebSocket();
-    refreshGiftLogs();
-    setInterval(refreshGiftLogs, 15000);
 
     async function connectWebSocket() {
         try {
@@ -434,7 +337,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>';
         const commentsDiv = document.createElement('div');
         commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
-
+        
         commentLogs.forEach(comment => {
             const commentDiv = document.createElement('div');
             commentDiv.className = 'flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg';
@@ -454,7 +357,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
             `;
             commentsDiv.appendChild(commentDiv);
         });
-
+        
         commentContent.appendChild(commentsDiv);
         commentsDiv.scrollTop = commentsDiv.scrollHeight;
     }
@@ -467,9 +370,9 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         const giftContent = document.getElementById('giftContent');
         const commentContent = document.getElementById('commentContent');
 
-        [rankTab, giftTab, commentTab].forEach(tab =>
+        [rankTab, giftTab, commentTab].forEach(tab => 
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
-        [rankContent, giftContent, commentContent].forEach(content =>
+        [rankContent, giftContent, commentContent].forEach(content => 
             content.classList.add('hidden'));
 
         if (tabName === 'rank') {
@@ -534,13 +437,13 @@ async function refreshComments() {
                 if (commentContent && commentContent.classList.contains('hidden')) {
                     return;
                 }
-
+                
                 commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>';
-
+                
                 if (streamData.comment_log?.length > 0) {
                     const commentsDiv = document.createElement('div');
                     commentsDiv.className = 'space-y-2 overflow-y-auto max-h-96';
-
+                    
                     streamData.comment_log.forEach(comment => {
                         const commentDiv = document.createElement('div');
                         commentDiv.className = 'flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg';
@@ -560,7 +463,7 @@ async function refreshComments() {
                         `;
                         commentsDiv.appendChild(commentDiv);
                     });
-
+                    
                     commentContent.appendChild(commentsDiv);
                     commentsDiv.scrollTop = commentsDiv.scrollHeight;
                 }
