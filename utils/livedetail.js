@@ -124,31 +124,38 @@ function setupIDNChat(username, slug) {
         const giftTab = document.getElementById('giftTab');
         const chatContent = document.getElementById('chatContent');
         const giftContent = document.getElementById('giftContent');
-    
-        // Reset classes
+
         [chatTab, giftTab].forEach(tab => {
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
             tab.classList.add('text-gray-500');
         });
-    
+
         [chatContent, giftContent].forEach(content => {
             content.classList.add('hidden');
         });
-    
+
         if (tabName === 'chat') {
+            if (wsConnection) {
+                wsConnection.close();
+                wsConnection = null;
+            }
             chatTab.classList.remove('text-gray-500');
-            chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm'); 
+            chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             chatContent.classList.remove('hidden');
+            connectWebSocket();
         } else if (tabName === 'gift') {
+            if (wsConnection) {
+                wsConnection.close();
+                wsConnection = null;
+            }
             giftTab.classList.remove('text-gray-500');
             giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             giftContent.classList.remove('hidden');
             refreshGiftLogs();
         }
     };
-    
-    window.showTab('chat');
 
+    connectWebSocket();
     refreshGiftLogs();
     setInterval(refreshGiftLogs, 15000);
 
