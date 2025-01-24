@@ -74,6 +74,17 @@ function setupIDNChat(username, slug) {
         }
     }
 
+    async function getChannelId() {
+        try {
+            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
+            const data = await response.json();
+            return data.chatId;
+        } catch (error) {
+            console.error("Failed to get channel ID:", error);
+            throw error;
+        }
+    }
+    
     async function refreshGiftLogs() {
         try {
             const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
