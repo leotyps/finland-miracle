@@ -362,8 +362,8 @@ async function refreshPodiumData() {
                 stream.room_url_key.replace('JKT48_', '').toLowerCase() === memberName.toLowerCase()
             );
 
-            if (streamData && streamData.stage_users) {
-                updateStageUsersList(streamData.stage_users);
+            if (streamData) {
+                updateStageUsersList(streamData.stage_users, streamData.gift_logs);
                 const container = document.getElementById('stageUsersContainer');
                 container.style.opacity = '0';
                 setTimeout(() => {
