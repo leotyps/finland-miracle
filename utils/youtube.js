@@ -27,7 +27,7 @@ async function fetchYoutubeVideos() {
         limitedData.forEach(video => {
             const videoId = video.url.split('/embed/')[1];
             const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-            const channelThumbnail = "https://yt3.googleusercontent.com/wBipLZF1IVqYGuYsZc0xxj5ist11fQMHWkN6vtBDCojWd8QTTlJLB8tOCOtoh7IRdmGHDn6I=s160-c-k-c0x00ffffff-no-rj";
+            const channelThumbnail = "https://yt3.googleusercontent.com/A4-nTNem_KC02wRMkktDWRSCWSGkwn-myOCaSWlSnJNhqN7yDT0zaitHm04TCVeKbg4hyuAL5gg=s160-c-k-c0x00ffffff-no-rj";
             
             const videoCard = `
                 <div class="bg-white border-4 border-gray-50 rounded-3xl  overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full max-w-sm">
@@ -38,7 +38,7 @@ async function fetchYoutubeVideos() {
                                     src="${thumbnailUrl}" 
                                     alt="${video.title}"
                                     class="w-full h-48 object-cover rounded-2xl"
-                                    onerror="this.onerror=null; this.src='https://via.placeholder.com/640x360.png?text=Thumbnail+Not+Available'"
+                                    onerror="this.onerror=null; this.src='https://jkt48.com/images/logo.svg'"
                                 >
                             </div>
                             <div class="flex items-center mb-2">
