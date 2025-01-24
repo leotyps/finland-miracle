@@ -253,43 +253,64 @@ function setupIDNChat(username, slug) {
 }
 
 function showOfflineState() {
-    const offlineContainer = document.createElement('div');
-    offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
+    try {
+        const liveStreamContainer = document.getElementById('liveStream');
+        if (!liveStreamContainer) {
+            console.error('Live stream container not found');
+            return;
+        }
 
-    const offlineIcon = document.createElement('div');
-    offlineIcon.className = 'text-gray-400 mb-4';
-    offlineIcon.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-        </svg>
-    `;
+        const videoContainer = liveStreamContainer.parentElement;
+        if (!videoContainer) {
+            console.error('Video container not found');
+            return;
+        }
 
-    const offlineText = document.createElement('h3');
-    offlineText.className = 'text-lg font-medium text-gray-900 mb-2';
-    offlineText.textContent = 'Room is Offline';
+        const offlineContainer = document.createElement('div');
+        offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
+        
+        const offlineIcon = document.createElement('div');
+        offlineIcon.className = 'text-gray-400 mb-4';
+        offlineIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+        `;
+        
+        const offlineText = document.createElement('h3');
+        offlineText.className = 'text-lg font-medium text-gray-900 mb-2';
+        offlineText.textContent = 'Room is Offline';
+        
+        const offlineDescription = document.createElement('p');
+        offlineDescription.className = 'text-sm text-gray-500';
+        offlineDescription.textContent = 'This room is currently not streaming. Please check back later.';
+        
+        offlineContainer.append(offlineIcon, offlineText, offlineDescription);
+        videoContainer.innerHTML = '';
+        videoContainer.appendChild(offlineContainer);
 
-    const offlineDescription = document.createElement('p');
-    offlineDescription.className = 'text-sm text-gray-500';
-    offlineDescription.textContent = 'This room is currently not streaming. Please check back later.';
+        const elements = {
+            'memberName': 'Room Offline',
+            'streamTitle': 'No active stream',
+            'viewCount': '-',
+            'startTime': '-',
+            'streamQuality': '-'
+        };
 
-    offlineContainer.append(offlineIcon, offlineText, offlineDescription);
+        Object.entries(elements).forEach(([id, text]) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = text;
+            }
+        });
 
-    const videoContainer = document.getElementById('liveStream').parentElement;
-    videoContainer.innerHTML = '';
-    videoContainer.appendChild(offlineContainer);
-    const elements = {
-        'memberName': 'Room Offline',
-        'streamTitle': 'No active stream',
-        'viewCount': '-',
-        'startTime': '-',
-        'streamQuality': '-'
-    };
-
-    Object.entries(elements).forEach(([id, text]) => {
-        document.getElementById(id).textContent = text;
-    });
-
-    document.getElementById('stageUsersList').classList.add('hidden');
+        const stageUsersList = document.getElementById('stageUsersList');
+        if (stageUsersList) {
+            stageUsersList.classList.add('hidden');
+        }
+    } catch (error) {
+        console.error('Error in showOfflineState:', error);
+    }
 }
 
 async function playM3u8(url) {
@@ -520,10 +541,6 @@ async function refreshPodiumData() {
         showOfflineState();
     }
 }
-
-// Call this function to start the periodic refresstartPodiumRefresh();
-
-
 
 async function refreshComments() {
     try {
