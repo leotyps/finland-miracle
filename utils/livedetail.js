@@ -253,64 +253,43 @@ function setupIDNChat(username, slug) {
 }
 
 function showOfflineState() {
-    try {
-        const liveStreamContainer = document.getElementById('liveStream');
-        if (!liveStreamContainer) {
-            console.error('Live stream container not found');
-            return;
-        }
+    const offlineContainer = document.createElement('div');
+    offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
 
-        const videoContainer = liveStreamContainer.parentElement;
-        if (!videoContainer) {
-            console.error('Video container not found');
-            return;
-        }
+    const offlineIcon = document.createElement('div');
+    offlineIcon.className = 'text-gray-400 mb-4';
+    offlineIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+    `;
 
-        const offlineContainer = document.createElement('div');
-        offlineContainer.className = 'flex flex-col items-center justify-center h-full p-8 bg-gray-50 rounded-lg';
-        
-        const offlineIcon = document.createElement('div');
-        offlineIcon.className = 'text-gray-400 mb-4';
-        offlineIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-        `;
-        
-        const offlineText = document.createElement('h3');
-        offlineText.className = 'text-lg font-medium text-gray-900 mb-2';
-        offlineText.textContent = 'Room is Offline';
-        
-        const offlineDescription = document.createElement('p');
-        offlineDescription.className = 'text-sm text-gray-500';
-        offlineDescription.textContent = 'This room is currently not streaming. Please check back later.';
-        
-        offlineContainer.append(offlineIcon, offlineText, offlineDescription);
-        videoContainer.innerHTML = '';
-        videoContainer.appendChild(offlineContainer);
+    const offlineText = document.createElement('h3');
+    offlineText.className = 'text-lg font-medium text-gray-900 mb-2';
+    offlineText.textContent = 'Room is Offline';
 
-        const elements = {
-            'memberName': 'Room Offline',
-            'streamTitle': 'No active stream',
-            'viewCount': '-',
-            'startTime': '-',
-            'streamQuality': '-'
-        };
+    const offlineDescription = document.createElement('p');
+    offlineDescription.className = 'text-sm text-gray-500';
+    offlineDescription.textContent = 'This room is currently not streaming. Please check back later.';
 
-        Object.entries(elements).forEach(([id, text]) => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = text;
-            }
-        });
+    offlineContainer.append(offlineIcon, offlineText, offlineDescription);
 
-        const stageUsersList = document.getElementById('stageUsersList');
-        if (stageUsersList) {
-            stageUsersList.classList.add('hidden');
-        }
-    } catch (error) {
-        console.error('Error in showOfflineState:', error);
-    }
+    const videoContainer = document.getElementById('liveStream').parentElement;
+    videoContainer.innerHTML = '';
+    videoContainer.appendChild(offlineContainer);
+    const elements = {
+        'memberName': 'Room Offline',
+        'streamTitle': 'No active stream',
+        'viewCount': '-',
+        'startTime': '-',
+        'streamQuality': '-'
+    };
+
+    Object.entries(elements).forEach(([id, text]) => {
+        document.getElementById(id).textContent = text;
+    });
+
+    document.getElementById('stageUsersList').classList.add('hidden');
 }
 
 async function playM3u8(url) {
@@ -509,38 +488,6 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
     window.showTab('comment');
 }
 
-function startPodiumRefresh() {
-    refreshPodiumData(); 
-    setInterval(refreshPodiumData, 20000);
-}
-
-async function refreshPodiumData() {
-    try {
-        const pathSegments = window.location.pathname.split('/');
-        const platform = pathSegments[2];
-        const memberName = pathSegments[3];
-        if (platform === 'showroom' || platform === 'sr') {
-            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
-            if (!response.ok) throw new Error('Failed to fetch Showroom data');
-
-            const data = await response.json();
-            const streamData = data.find(stream =>
-                stream.room_url_key.replace('JKT48_', '').toLowerCase() === memberName.toLowerCase()
-            );
-
-            if (streamData) {
-                updateStageUsersList(streamData.stage_users, streamData.gift_log, streamData.comment_log);
-                const container = document.getElementById('stageUsersContainer');
-                container.style.opacity = '0';
-                setTimeout(() => {
-                    container.style.opacity = '1';
-                }, 150);
-            }
-        }
-    } catch (error) {
-        showOfflineState();
-    }
-}
 
 async function refreshComments() {
     try {
