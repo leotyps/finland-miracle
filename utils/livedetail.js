@@ -19,20 +19,65 @@ function decompressStreamData(streamId) {
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     chatContainer.classList.remove('hidden');
-    const header = chatContainer.querySelector('h2');
-    if (header) header.textContent = 'Live Chat';
     const messagesContainer = document.getElementById('stageUsersContainer');
-    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
 
+    messagesContainer.innerHTML = `
+        <div class="mb-4">
+            <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
+                <button onclick="showTab('chat')" id="chatTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors bg-white text-gray-900 shadow-sm">Live Chat</button>
+                <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium text-gray-500 hover:text-gray-700">Gift Log</button>
+            </div>
+        </div>
+        <div id="chatContent" class="space-y-4">
+            <div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa chat untuk saat ini</div>
+        </div>
+        <div id="giftContent" class="space-y-4 hidden">
+            <div class="text-center text-gray-500 text-sm mb-2">Gift Log</div>
+        </div>
+    `;
+
+    async function refreshGiftLogs() {
+        try {
+            const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
+            const data = await response.json();
+            const giftContent = document.getElementById('giftContent');
+     
+            if (data.data?.length) {
+                // Find matching livestream by username/slug
+                const stream = data.data.find(s => s.user.username === username);
+                
+                if (stream?.gift_log?.length) {
+                    giftContent.innerHTML = stream.gift_log.map(gift => `
+                        <div class="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-lg">
+                            <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" 
+                                    src="${gift.image_url}" 
+                                    alt="${gift.name}">
+                            </div>
+                            <div class="flex-grow min-w-0">
+                                <div class="flex items-baseline justify-between">
+                                    <span class="text-sm font-medium text-gray-900">${gift.name}</span>
+                                    <span class="text-xs text-gray-500">${gift.gold}</span>
+                                </div>
+                                <p class="text-xs text-gray-500">Rank #${gift.rank} · ${gift.total_point} Points</p>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    giftContent.innerHTML = '<div class="text-center text-gray-500 text-sm">No gift logs available</div>';
+                }
+            }
+        } catch (error) {
+            console.error('Failed to fetch gift data:', error);
+            giftContent.innerHTML = '<div class="text-center text-gray-500 text-sm">Failed to load gift logs</div>';
+        }
+     }
+
+    // Rest of your existing setupIDNChat code for WebSocket connection
     async function getChannelId() {
         try {
             const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
             const data = await response.json();
-
-            if (!data.chatId) {
-                throw new Error('Chat ID not found in response');
-            }
-
             return data.chatId;
         } catch (error) {
             console.error("Failed to get channel ID:", error);
@@ -72,6 +117,35 @@ function setupIDNChat(username, slug) {
             messagesContainer.removeChild(messagesContainer.lastChild);
         }
     }
+
+    window.showTab = function(tabName) {
+        const chatTab = document.getElementById('chatTab');
+        const giftTab = document.getElementById('giftTab');
+        const chatContent = document.getElementById('chatContent');
+        const giftContent = document.getElementById('giftContent');
+
+        [chatTab, giftTab].forEach(tab => {
+            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
+            tab.classList.add('text-gray-500');
+        });
+
+        [chatContent, giftContent].forEach(content => content.classList.add('hidden'));
+
+        if (tabName === 'chat') {
+            chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            chatContent.classList.remove('hidden');
+        } else {
+            giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            giftContent.classList.remove('hidden');
+            refreshGiftLogs();
+        }
+    };
+
+    // Initial refresh of gift logs
+    refreshGiftLogs();
+    // Periodic refresh of gift logs
+    setInterval(refreshGiftLogs, 30000);
+
 
     async function connectWebSocket() {
         try {
