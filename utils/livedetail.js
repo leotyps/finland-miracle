@@ -103,10 +103,10 @@ function setupIDNChat(username, slug) {
         messageDiv.appendChild(userImage);
         messageDiv.appendChild(contentDiv);
 
-        messagesContainer.insertBefore(messageDiv, messagesContainer.firstChild);
+        liveChatContent.insertBefore(messageDiv, liveChatContent.firstChild);
 
-        while (messagesContainer.children.length > 100) {
-            messagesContainer.removeChild(messagesContainer.lastChild);
+        while (liveChatContent.children.length > 100) {
+            liveChatContent.removeChild(liveChatContent.lastChild);
         }
     }
 
