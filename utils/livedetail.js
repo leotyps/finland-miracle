@@ -18,17 +18,7 @@ function decompressStreamData(streamId) {
 
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
-    const messagesContainer = document.getElementById('stageUsersContainer');
-    
-    // Create a wrapper div for scrollable content
-    const scrollWrapper = document.createElement('div');
-    scrollWrapper.className = 'overflow-y-auto max-h-[calc(60vh-100px)]';
-
-    // Move existing children of messagesContainer into the scroll wrapper
-    while (messagesContainer.firstChild) {
-        scrollWrapper.appendChild(messagesContainer.firstChild);
-    }
-    messagesContainer.appendChild(scrollWrapper);
+    const stageUsersContainer = document.getElementById('stageUsersContainer');
 
     const buttonsContainer = document.createElement('div');
     buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1 mb-4';
@@ -45,28 +35,18 @@ function setupIDNChat(username, slug) {
 
     buttonsContainer.appendChild(liveChatButton);
     buttonsContainer.appendChild(giftLogButton);
-    scrollWrapper.prepend(buttonsContainer);
-
-    const commentContent = document.createElement('div');
-    commentContent.id = 'commentContent';
-    commentContent.className = 'space-y-4 hidden';
-    commentContent.innerHTML = `
-        <div class="text-center text-gray-500 text-sm mb-2">
-            🥺 Kamu juga tidak bisa comment untuk saat ini
-        </div>
-    `;
+    stageUsersContainer.prepend(buttonsContainer);
 
     const liveChatContent = document.createElement('div');
     liveChatContent.id = 'liveChatContent';
-    liveChatContent.className = 'space-y-2';
+    liveChatContent.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
 
     const giftLogContent = document.createElement('div');
     giftLogContent.id = 'giftLogContent';
     giftLogContent.className = 'space-y-2 hidden';
 
-    scrollWrapper.appendChild(commentContent);
-    scrollWrapper.appendChild(liveChatContent);
-    scrollWrapper.appendChild(giftLogContent);
+    stageUsersContainer.appendChild(liveChatContent);
+    stageUsersContainer.appendChild(giftLogContent);
 
     let wsConnection = null;
 
@@ -118,6 +98,7 @@ function setupIDNChat(username, slug) {
             liveChatContent.removeChild(liveChatContent.lastChild);
         }
     }
+
 
     function displayGiftLogs(giftLogs) {
         giftLogContent.innerHTML = '';
