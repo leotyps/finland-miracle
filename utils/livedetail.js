@@ -120,40 +120,46 @@ function setupIDNChat(username, slug) {
     }
 
     window.showTab = function (tabName) {
+        console.log(`Switching to tab: ${tabName}`);
+    
         const chatTab = document.getElementById('chatTab');
         const giftTab = document.getElementById('giftTab');
         const chatContent = document.getElementById('chatContent');
         const giftContent = document.getElementById('giftContent');
-
+    
         [chatTab, giftTab].forEach(tab => {
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
             tab.classList.add('text-gray-500');
         });
-
+    
         [chatContent, giftContent].forEach(content => {
             content.classList.add('hidden');
         });
-
+    
         if (tabName === 'chat') {
-            if (wsConnection) {
-                wsConnection.close();
-                wsConnection = null;
-            }
-            chatTab.classList.remove('text-gray-500');
+            console.log('Switching to Live Chat tab');
             chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             chatContent.classList.remove('hidden');
+    
+            if (wsConnection) {
+                console.log('Closing existing WebSocket connection');
+                wsConnection.close();
+            }
             connectWebSocket();
         } else if (tabName === 'gift') {
+            console.log('Switching to Gift Log tab');
+            giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            giftContent.classList.remove('hidden');
+    
             if (wsConnection) {
+                console.log('Closing existing WebSocket connection');
                 wsConnection.close();
                 wsConnection = null;
             }
-            giftTab.classList.remove('text-gray-500');
-            giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            giftContent.classList.remove('hidden');
             refreshGiftLogs();
         }
     };
+    
 
     connectWebSocket();
     refreshGiftLogs();
