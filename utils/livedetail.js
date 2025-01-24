@@ -25,16 +25,19 @@ function setupIDNChat(username, slug) {
     container.innerHTML = `
         <div class="mb-4">
             <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
-                <button onclick="showTab('chat')" id="chatTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Live Chat</button>
-                <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gifts</button>
+                <button onclick="window.switchTab('chat')" id="chatTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Live Chat</button>
+                <button onclick="window.switchTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gifts</button>
             </div>
         </div>
         <div id="chatContent" class="space-y-2 overflow-y-auto max-h-[60vh]"></div>
         <div id="giftContent" class="space-y-2 overflow-y-auto max-h-[60vh] hidden"></div>
     `;
 
+    let wsConnection = null;
+    let currentChannelId = null;
+
     // Tab switching functionality
-    window.showTab = function(tabName) {
+    window.switchTab = function(tabName) {
         const chatTab = document.getElementById('chatTab');
         const giftTab = document.getElementById('giftTab');
         const chatContent = document.getElementById('chatContent');
@@ -53,8 +56,6 @@ function setupIDNChat(username, slug) {
             giftContent.classList.remove('hidden');
         }
     };
-
-    window.showTab('chat');
 
     // Function to add chat messages
     function addChatMessage(messageData) {
@@ -102,20 +103,20 @@ function setupIDNChat(username, slug) {
         giftDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
         
         giftDiv.innerHTML = `
-            <div class="flex-shrink-0">
+            <div class="flex-shrink-0 relative">
                 <img class="w-12 h-12 rounded-full object-cover" 
-                    src="${giftData.sender.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
-                    alt="${giftData.sender.name}">
+                    src="${giftData.image_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                    alt="${giftData.name}">
+                <span class="absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    ${giftData.rank}
+                </span>
             </div>
             <div class="flex-grow min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">${giftData.sender.name}</p>
+                <p class="text-sm font-medium text-gray-900 truncate">${giftData.name}</p>
                 <div class="flex items-center space-x-2">
-                    <img class="w-5 h-5" src="${giftData.gift.image_url}" alt="Gift">
-                    <span class="text-xs text-gray-500">×${giftData.amount}</span>
+                    <p class="text-xs text-gray-500">${giftData.gold}</p>
                 </div>
-            </div>
-            <div class="text-xs text-gray-500">
-                ${new Date(giftData.created_at).toLocaleTimeString()}
+                <p class="text-xs text-gray-400">Total Points: ${giftData.total_point}</p>
             </div>
         `;
         
@@ -129,17 +130,24 @@ function setupIDNChat(username, slug) {
     // Function to get channel ID
     async function getChannelId() {
         try {
+            if (currentChannelId) return currentChannelId;
+
             const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
             const data = await response.json();
 
             if (!data.chatId) {
-                throw new Error('Chat ID not found in response');
+                // Use a default channel ID if API fails
+                currentChannelId = slug;
+                return slug;
             }
 
+            currentChannelId = data.chatId;
             return data.chatId;
         } catch (error) {
             console.error("Failed to get channel ID:", error);
-            throw error;
+            // Use slug as fallback
+            currentChannelId = slug;
+            return slug;
         }
     }
 
@@ -233,6 +241,9 @@ function setupIDNChat(username, slug) {
             connectWebSocket();
         };
     }
+
+    // Initial tab setup
+    window.switchTab('chat');
 }
 
 function showOfflineState() {
