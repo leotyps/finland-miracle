@@ -536,7 +536,7 @@ async function refreshPodium() {
             }
         }
     } catch (error) {
-        console.error('Error refreshing podium:', error);
+        showOfflineState();
     }
 }
 
