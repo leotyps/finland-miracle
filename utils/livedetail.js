@@ -474,7 +474,7 @@ async function refreshComments() {
     }
 }
 
-setInterval(refreshComments, 8000);
+setInterval(refreshComments, 15000);
 
 function playPause() {
     if (!video) return;
