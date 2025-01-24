@@ -33,7 +33,6 @@ function setupIDNChat(username, slug) {
             <div class="overflow-y-auto max-h-[60vh] space-y-2" id="chatMessages"></div>
         </div>
         <div id="giftContent" class="space-y-2 hidden">
-            <div class="text-center text-gray-500 text-sm sticky top-0 bg-white z-10 py-2 border-b">Gift Log Rank</div>
             <div class="overflow-y-auto max-h-[60vh] space-y-2" id="giftLogs"></div>
         </div>
     `;
@@ -84,7 +83,7 @@ function setupIDNChat(username, slug) {
             throw error;
         }
     }
-    
+
     async function refreshGiftLogs() {
         try {
             const response = await fetch('https://48intensapi.my.id/api/idnlive/jkt48');
@@ -125,18 +124,22 @@ function setupIDNChat(username, slug) {
         const giftTab = document.getElementById('giftTab');
         const chatContent = document.getElementById('chatContent');
         const giftContent = document.getElementById('giftContent');
-
+    
         [chatTab, giftTab].forEach(tab => {
             tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
-            tab.classList.add('text-gray-500');
+            tab.classList.add('text-gray-500', 'hover:text-gray-700');
         });
-
-        [chatContent, giftContent].forEach(content => content.classList.add('hidden'));
-
+        
+        [chatContent, giftContent].forEach(content => {
+            content.classList.add('hidden');
+        });
+    
         if (tabName === 'chat') {
+            chatTab.classList.remove('text-gray-500', 'hover:text-gray-700');
             chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             chatContent.classList.remove('hidden');
         } else {
+            giftTab.classList.remove('text-gray-500', 'hover:text-gray-700');
             giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             giftContent.classList.remove('hidden');
             refreshGiftLogs();
@@ -144,7 +147,7 @@ function setupIDNChat(username, slug) {
     };
 
     refreshGiftLogs();
-    setInterval(refreshGiftLogs, 30000);
+    setInterval(refreshGiftLogs, 15000);
 
     async function connectWebSocket() {
         try {
