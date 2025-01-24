@@ -124,39 +124,25 @@ function setupIDNChat(username, slug) {
         const giftTab = document.getElementById('giftTab');
         const chatContent = document.getElementById('chatContent');
         const giftContent = document.getElementById('giftContent');
-    
-        // Reset all tabs and content
-        [chatTab, giftTab].forEach(tab => {
-            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
-            tab.classList.add('text-gray-500', 'hover:text-gray-700');
-        });
-        
-        [chatContent, giftContent].forEach(content => {
-            content.classList.add('hidden');
-        });
-    
+
+        [chatTab, giftTab].forEach(tab =>
+            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
+        [chatContent, giftContent].forEach(content =>
+            content.classList.add('hidden'));
+
         if (tabName === 'chat') {
-            chatTab.classList.remove('text-gray-500', 'hover:text-gray-700');
             chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             chatContent.classList.remove('hidden');
-            
-            // Only reconnect if not already connected/connecting
-            if (!wsConnection && !isConnecting) {
-                connectWebSocket();
-            }
         } else {
-            giftTab.classList.remove('text-gray-500', 'hover:text-gray-700');
             giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
             giftContent.classList.remove('hidden');
             refreshGiftLogs();
-            
-            // Close WebSocket when switching to gift tab
-            if (wsConnection) {
-                wsConnection.close();
-                wsConnection = null;
-            }
         }
     };
+
+    window.showTab('chat');
+
+    refreshGiftLogs();
     setInterval(refreshGiftLogs, 15000);
 
     async function connectWebSocket() {
