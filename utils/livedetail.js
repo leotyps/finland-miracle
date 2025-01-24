@@ -99,7 +99,6 @@ function setupIDNChat(username, slug) {
         }
     }
 
-
     function displayGiftLogs(giftLogs) {
         giftLogContent.innerHTML = '';
 
@@ -244,12 +243,13 @@ function setupIDNChat(username, slug) {
     };
 
     giftLogButton.onclick = () => {
-        fetchGiftLogs();
         showTab('giftLog');
     };
 
     connectWebSocket();
     showTab('liveChat');
+
+    setInterval(fetchGiftLogs, 20000);
 }
 
 function showOfflineState() {
