@@ -18,13 +18,10 @@ function decompressStreamData(streamId) {
 
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
-    chatContainer.classList.remove('hidden');
-
-    const cardContainer = document.createElement('div');
-    cardContainer.className = 'bg-white rounded-lg shadow-md';
+    const stageUsersContainer = document.getElementById('stageUsersContainer');
 
     const buttonsContainer = document.createElement('div');
-    buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1';
+    buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1 mb-4';
 
     const liveChatButton = document.createElement('button');
     liveChatButton.textContent = 'Live Chat';
@@ -38,17 +35,7 @@ function setupIDNChat(username, slug) {
 
     buttonsContainer.appendChild(liveChatButton);
     buttonsContainer.appendChild(giftLogButton);
-    cardHeader.appendChild(buttonsContainer);
-
-    const messagesContainer = document.createElement('div');
-    messagesContainer.id = 'stageUsersContainer';
-    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh] p-4';
-
-    cardContainer.appendChild(cardHeader);
-    cardContainer.appendChild(messagesContainer);
-
-    chatContainer.innerHTML = '';
-    chatContainer.appendChild(cardContainer);
+    stageUsersContainer.prepend(buttonsContainer);
 
     const liveChatContent = document.createElement('div');
     liveChatContent.id = 'liveChatContent';
@@ -58,8 +45,8 @@ function setupIDNChat(username, slug) {
     giftLogContent.id = 'giftLogContent';
     giftLogContent.className = 'space-y-2 hidden';
 
-    messagesContainer.appendChild(liveChatContent);
-    messagesContainer.appendChild(giftLogContent);
+    stageUsersContainer.appendChild(liveChatContent);
+    stageUsersContainer.appendChild(giftLogContent);
 
     let wsConnection = null;
 
@@ -129,7 +116,7 @@ function setupIDNChat(username, slug) {
 
             const userName = document.createElement('span');
             userName.className = 'text-sm font-medium text-gray-900';
-            userName.textContent = `${gift.rank}. ${gift.name}`;
+            userName.textContent = `${gift.name}`;
 
             const giftDetails = document.createElement('p');
             giftDetails.className = 'text-sm text-gray-600 break-words';
