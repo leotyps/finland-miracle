@@ -19,49 +19,45 @@ function decompressStreamData(streamId) {
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     chatContainer.classList.remove('hidden');
-    
-    // Setup container and tabs
-    const container = document.getElementById('stageUsersContainer');
-    container.innerHTML = `
-        <div class="mb-4">
-            <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
-                <button onclick="window.switchTab('chat')" id="chatTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Live Chat</button>
-                <button onclick="window.switchTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gifts</button>
-            </div>
-        </div>
-        <div id="chatContent" class="space-y-2 overflow-y-auto max-h-[60vh]"></div>
-        <div id="giftContent" class="space-y-2 overflow-y-auto max-h-[60vh] hidden"></div>
-    `;
 
-    let wsConnection = null;
-    let currentChannelId = null;
+    const header = chatContainer.querySelector('h2');
+    if (header) header.textContent = 'Live Chat & Gift Log';
 
-    // Tab switching functionality
-    window.switchTab = function(tabName) {
-        const chatTab = document.getElementById('chatTab');
-        const giftTab = document.getElementById('giftTab');
-        const chatContent = document.getElementById('chatContent');
-        const giftContent = document.getElementById('giftContent');
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.className = 'flex space-x-4 mb-4';
 
-        [chatTab, giftTab].forEach(tab => 
-            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
-        [chatContent, giftContent].forEach(content => 
-            content.classList.add('hidden'));
+    const liveChatButton = document.createElement('button');
+    liveChatButton.textContent = 'Live Chat';
+    liveChatButton.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
 
-        if (tabName === 'chat') {
-            chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            chatContent.classList.remove('hidden');
-        } else {
-            giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            giftContent.classList.remove('hidden');
+    const giftLogButton = document.createElement('button');
+    giftLogButton.textContent = 'Gift Log';
+    giftLogButton.className = 'px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300';
+
+    buttonsContainer.appendChild(liveChatButton);
+    buttonsContainer.appendChild(giftLogButton);
+    chatContainer.prepend(buttonsContainer);
+
+    const messagesContainer = document.getElementById('stageUsersContainer');
+    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
+
+    async function getChannelId() {
+        try {
+            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
+            const data = await response.json();
+
+            if (!data.chatId) {
+                throw new Error('Chat ID not found in response');
+            }
+
+            return data.chatId;
+        } catch (error) {
+            console.error("Failed to get channel ID:", error);
+            throw error;
         }
-    };
+    }
 
-    // Function to add chat messages
     function addChatMessage(messageData) {
-        const chatContent = document.getElementById('chatContent');
-        if (!chatContent) return;
-
         const messageDiv = document.createElement('div');
         messageDiv.className = 'flex items-start space-x-2 p-2 hover:bg-gray-50 rounded-lg transition-colors';
 
@@ -87,71 +83,46 @@ function setupIDNChat(username, slug) {
         messageDiv.appendChild(userImage);
         messageDiv.appendChild(contentDiv);
 
-        chatContent.insertBefore(messageDiv, chatContent.firstChild);
+        messagesContainer.insertBefore(messageDiv, messagesContainer.firstChild);
 
-        while (chatContent.children.length > 100) {
-            chatContent.removeChild(chatContent.lastChild);
+        while (messagesContainer.children.length > 100) {
+            messagesContainer.removeChild(messagesContainer.lastChild);
         }
     }
 
-    // Function to add gift messages
-    function addGiftMessage(giftData) {
-        const giftContent = document.getElementById('giftContent');
-        if (!giftContent) return;
+    function displayGiftLogs(giftLogs) {
+        messagesContainer.innerHTML = '';
 
-        const giftDiv = document.createElement('div');
-        giftDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
-        
-        giftDiv.innerHTML = `
-            <div class="flex-shrink-0 relative">
-                <img class="w-12 h-12 rounded-full object-cover" 
-                    src="${giftData.image_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
-                    alt="${giftData.name}">
-                <span class="absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    ${giftData.rank}
-                </span>
-            </div>
-            <div class="flex-grow min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">${giftData.name}</p>
-                <div class="flex items-center space-x-2">
-                    <p class="text-xs text-gray-500">${giftData.gold}</p>
-                </div>
-                <p class="text-xs text-gray-400">Total Points: ${giftData.total_point}</p>
-            </div>
-        `;
-        
-        giftContent.insertBefore(giftDiv, giftContent.firstChild);
-        
-        while (giftContent.children.length > 100) {
-            giftContent.removeChild(giftContent.lastChild);
-        }
+        giftLogs.forEach((gift) => {
+            const giftDiv = document.createElement('div');
+            giftDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+
+            const userImage = document.createElement('img');
+            userImage.className = 'w-8 h-8 rounded-full object-cover flex-shrink-0';
+            userImage.src = gift.image_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg';
+            userImage.alt = gift.name || 'Anonymous';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'flex-grow min-w-0';
+
+            const userName = document.createElement('span');
+            userName.className = 'text-sm font-medium text-gray-900';
+            userName.textContent = `${gift.rank}. ${gift.name}`;
+
+            const giftDetails = document.createElement('p');
+            giftDetails.className = 'text-sm text-gray-600 break-words';
+            giftDetails.textContent = `${gift.total_point} points (${gift.gold})`;
+
+            contentDiv.appendChild(userName);
+            contentDiv.appendChild(giftDetails);
+
+            giftDiv.appendChild(userImage);
+            giftDiv.appendChild(contentDiv);
+
+            messagesContainer.appendChild(giftDiv);
+        });
     }
 
-    // Function to get channel ID
-    async function getChannelId() {
-        try {
-            if (currentChannelId) return currentChannelId;
-
-            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
-            const data = await response.json();
-
-            if (!data.chatId) {
-                // Use a default channel ID if API fails
-                currentChannelId = slug;
-                return slug;
-            }
-
-            currentChannelId = data.chatId;
-            return data.chatId;
-        } catch (error) {
-            console.error("Failed to get channel ID:", error);
-            // Use slug as fallback
-            currentChannelId = slug;
-            return slug;
-        }
-    }
-
-    // WebSocket connection setup
     async function connectWebSocket() {
         try {
             const channelId = await getChannelId();
@@ -198,13 +169,6 @@ function setupIDNChat(username, slug) {
                                     comment: data.chat.message,
                                     timestamp: data.timestamp || Date.now()
                                 });
-                            } else if (data?.gift) {
-                                addGiftMessage({
-                                    sender: data.user,
-                                    gift: data.gift,
-                                    amount: data.gift.amount || 1,
-                                    created_at: data.timestamp || Date.now()
-                                });
                             }
                         } catch (error) {
                             console.error("Failed to parse message:", error);
@@ -228,23 +192,36 @@ function setupIDNChat(username, slug) {
         }
     }
 
-    // Start WebSocket connection
-    connectWebSocket();
+    async function fetchGiftLogs() {
+        try {
+            const response = await fetch(`https://48intensapi.my.id/api/idnlive/jkt48?username=${username}&slug=${slug}`);
+            const data = await response.json();
 
-    // Setup refresh button
-    const refreshButton = chatContainer.querySelector('button');
-    if (refreshButton) {
-        refreshButton.onclick = () => {
-            if (wsConnection) {
-                wsConnection.close();
+            if (data?.gift_log) {
+                displayGiftLogs(data.gift_log);
+            } else {
+                throw new Error('Gift logs not found in response');
             }
-            connectWebSocket();
-        };
+        } catch (error) {
+            console.error("Failed to fetch gift logs:", error);
+        }
     }
 
-    // Initial tab setup
-    window.switchTab('chat');
+    liveChatButton.onclick = () => {
+        connectWebSocket();
+        liveChatButton.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
+        giftLogButton.className = 'px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300';
+    };
+
+    giftLogButton.onclick = () => {
+        fetchGiftLogs();
+        giftLogButton.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
+        liveChatButton.className = 'px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300';
+    };
+
+    connectWebSocket();
 }
+
 
 function showOfflineState() {
     const offlineContainer = document.createElement('div');
@@ -365,7 +342,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         <div id="rankContent" class="space-y-4"></div>
         <div id="giftContent" class="space-y-4 hidden"></div>
         <div id="commentContent" class="space-y-4 hidden">
-            <div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>
+            <div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>
         </div>
     `;
 
