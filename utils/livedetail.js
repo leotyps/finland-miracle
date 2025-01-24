@@ -488,12 +488,6 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
     window.showTab('comment');
 }
 
-function startDataRefresh() {
-    refreshPodiumData();
-    setInterval(refreshPodiumData, 15000); 
-    setInterval(refreshComments, 15000);
-}
-
 async function refreshPodiumData() {
     try {
         const pathSegments = window.location.pathname.split('/');
@@ -520,8 +514,7 @@ async function refreshPodiumData() {
         showOfflineState();
     }
 }
-
-startDataRefresh();
+setInterval(refreshPodiumData, 15000); 
 
 async function refreshComments() {
     try {
@@ -578,7 +571,7 @@ async function refreshComments() {
         console.error('Error refreshing comments:', error);
     }
 }
-
+setInterval(refreshComments, 15000);
 
 function playPause() {
     if (!video) return;
