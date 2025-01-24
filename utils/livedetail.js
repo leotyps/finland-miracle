@@ -387,7 +387,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         }
     };
 
-    window.showTab('rank');
+    window.showTab('comment');
 }
 
 async function refreshPodiumData() {
@@ -474,7 +474,7 @@ async function refreshComments() {
     }
 }
 
-setInterval(refreshComments, 5000);
+setInterval(refreshComments, 8000);
 
 function playPause() {
     if (!video) return;
