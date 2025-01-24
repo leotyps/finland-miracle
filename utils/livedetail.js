@@ -488,34 +488,6 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
     window.showTab('comment');
 }
 
-async function refreshPodiumData() {
-    try {
-        const pathSegments = window.location.pathname.split('/');
-        const platform = pathSegments[2];
-        const memberName = pathSegments[3];
-        if (platform === 'showroom' || platform === 'sr') {
-            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
-            if (!response.ok) throw new Error('Failed to fetch Showroom data');
-
-            const data = await response.json();
-            const streamData = data.find(stream =>
-                stream.room_url_key.replace('JKT48_', '').toLowerCase() === memberName.toLowerCase()
-            );
-
-            if (streamData) {
-                updateStageUsersList(streamData.stage_users, streamData.gift_log, streamData.comment_log);
-                const container = document.getElementById('stageUsersContainer');
-                container.style.opacity = '0';
-                setTimeout(() => {
-                    container.style.opacity = '1';
-                }, 150);
-            }
-        }
-    } catch (error) {
-        showOfflineState();
-    }
-}
-
 async function refreshComments() {
     try {
         const pathSegments = window.location.pathname.split('/');
