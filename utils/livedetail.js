@@ -488,6 +488,62 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
     window.showTab('comment');
 }
 
+async function refreshPodium() {
+    try {
+        const pathSegments = window.location.pathname.split('/');
+        const platform = pathSegments[2];
+        const memberName = pathSegments[3];
+        if (platform === 'showroom' || platform === 'sr') {
+            const response = await fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan');
+            if (!response.ok) throw new Error('Failed to fetch Showroom data');
+
+            const data = await response.json();
+            const streamData = data.find(stream =>
+                stream.room_url_key.replace('JKT48_', '').toLowerCase() === memberName.toLowerCase()
+            );
+
+            if (streamData) {
+                const rankContent = document.getElementById('rankContent');
+                if (rankContent && rankContent.classList.contains('hidden')) {
+                    return; 
+                }
+
+                rankContent.innerHTML = ''; 
+
+                if (streamData.stage_users?.length > 0) {
+                    streamData.stage_users.forEach(stageUser => {
+                        const userDiv = document.createElement('div');
+                        userDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+                        userDiv.innerHTML = `
+                            <div class="flex-shrink-0 relative">
+                                <img class="w-12 h-12 rounded-full object-cover" 
+                                    src="${stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                                    alt="${stageUser.user.name}">
+                                <span class="absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                                    ${stageUser.rank}
+                                </span>
+                            </div>
+                            <div class="flex-grow min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">${stageUser.user.name}</p>
+                                <div class="flex items-center space-x-1">
+                                    <img class="w-4 h-4" src="${stageUser.user.avatar_url || ''}" alt="Avatar">
+                                </div>
+                            </div>
+                        `;
+                        rankContent.appendChild(userDiv);
+                    });
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error refreshing podium:', error);
+    }
+}
+
+setInterval(refreshPodium, 20000);
+
+
+
 async function refreshComments() {
     try {
         const pathSegments = window.location.pathname.split('/');
