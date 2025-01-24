@@ -252,11 +252,11 @@ async function playM3u8(url) {
 
 
 
-function updateStageUsersList(stageUsers, giftLogs) {
+function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
     const stageUsersList = document.getElementById('stageUsersList');
     const container = document.getElementById('stageUsersContainer');
 
-    if ((!stageUsers || stageUsers.length === 0) && (!giftLogs || giftLogs.length === 0)) {
+    if ((!stageUsers || stageUsers.length === 0) && (!giftLogs || giftLogs.length === 0) && (!commentLogs || commentLogs.length === 0)) {
         stageUsersList.classList.add('hidden');
         return;
     }
@@ -265,91 +265,124 @@ function updateStageUsersList(stageUsers, giftLogs) {
     container.innerHTML = `
         <div class="mb-4">
             <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
-            <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Podium</button>
-            <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gift Log</button>
+                <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Podium</button>
+                <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gift Log</button>
+                <button onclick="showTab('comment')" id="commentTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Comments</button>
             </div>
         </div>
         <div id="rankContent" class="space-y-4"></div>
         <div id="giftContent" class="space-y-4 hidden"></div>
+        <div id="commentContent" class="space-y-4 hidden">
+            <div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>
+        </div>
     `;
 
     const rankContent = document.getElementById('rankContent');
     const giftContent = document.getElementById('giftContent');
+    const commentContent = document.getElementById('commentContent');
 
     rankContent.innerHTML = '';
     giftContent.innerHTML = '';
+    commentContent.innerHTML = '<div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>';
 
-    if (stageUsers && stageUsers.length > 0) {
+    if (stageUsers?.length > 0) {
         stageUsers.forEach(stageUser => {
             const userDiv = document.createElement('div');
             userDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
             userDiv.innerHTML = `
-            <div class="flex-shrink-0 relative">
-                <img class="w-12 h-12 rounded-full object-cover" 
-                    src="${stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
-                    alt="${stageUser.user.name}">
-                <span class="absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                ${stageUser.rank}
-                </span>
-            </div>
-            <div class="flex-grow min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">${stageUser.user.name}</p>
-                <div class="flex items-center space-x-1">
-                <img class="w-4 h-4" src="${stageUser.user.avatar_url || ''}" alt="Avatar">
+                <div class="flex-shrink-0 relative">
+                    <img class="w-12 h-12 rounded-full object-cover" 
+                        src="${stageUser.user.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                        alt="${stageUser.user.name}">
+                    <span class="absolute -top-1 -right-1 bg-rose-300 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        ${stageUser.rank}
+                    </span>
                 </div>
-            </div>
-        `;
+                <div class="flex-grow min-w-0">
+                    <p class="text-sm font-medium text-gray-900 truncate">${stageUser.user.name}</p>
+                    <div class="flex items-center space-x-1">
+                        <img class="w-4 h-4" src="${stageUser.user.avatar_url || ''}" alt="Avatar">
+                    </div>
+                </div>
+            `;
             rankContent.appendChild(userDiv);
         });
     }
 
-    if (giftLogs && giftLogs.length > 0) {
+    if (giftLogs?.length > 0) {
         giftLogs.forEach(gift => {
             const giftDiv = document.createElement('div');
             giftDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
             giftDiv.innerHTML = `
-            <div class="flex-shrink-0">
-                <img class="w-12 h-12 rounded-full object-cover" 
-                    src="${gift.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
-                    alt="${gift.name}">
-            </div>
-            <div class="flex-grow min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">${gift.name}</p>
-                <div class="flex items-center space-x-2">
-                <img class="w-5 h-5" src="${gift.image}" alt="Gift">
-                <span class="text-xs text-gray-500">×${gift.num}</span>
+                <div class="flex-shrink-0">
+                    <img class="w-12 h-12 rounded-full object-cover" 
+                        src="${gift.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                        alt="${gift.name}">
                 </div>
-            </div>
-            <div class="text-xs text-gray-500">
-                ${new Date(gift.created_at * 1000).toLocaleTimeString()}
-            </div>
-        `;
+                <div class="flex-grow min-w-0">
+                    <p class="text-sm font-medium text-gray-900 truncate">${gift.name}</p>
+                    <div class="flex items-center space-x-2">
+                        <img class="w-5 h-5" src="${gift.image}" alt="Gift">
+                        <span class="text-xs text-gray-500">×${gift.num}</span>
+                    </div>
+                </div>
+                <div class="text-xs text-gray-500">
+                    ${new Date(gift.created_at * 1000).toLocaleTimeString()}
+                </div>
+            `;
             giftContent.appendChild(giftDiv);
+        });
+    }
+
+    if (commentLogs?.length > 0) {
+        commentLogs.forEach(comment => {
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+            commentDiv.innerHTML = `
+                <div class="flex-shrink-0">
+                    <img class="w-12 h-12 rounded-full object-cover" 
+                        src="${comment.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                        alt="${comment.name}">
+                </div>
+                <div class="flex-grow min-w-0">
+                    <p class="text-sm font-medium text-gray-900 truncate">${comment.name}</p>
+                    <p class="text-sm text-gray-600">${comment.comment}</p>
+                </div>
+                <div class="text-xs text-gray-500">
+                    ${new Date(comment.created_at * 1000).toLocaleTimeString()}
+                </div>
+            `;
+            commentContent.appendChild(commentDiv);
         });
     }
 
     window.showTab = function (tabName) {
         const rankTab = document.getElementById('rankTab');
         const giftTab = document.getElementById('giftTab');
+        const commentTab = document.getElementById('commentTab');
         const rankContent = document.getElementById('rankContent');
         const giftContent = document.getElementById('giftContent');
+        const commentContent = document.getElementById('commentContent');
+
+        [rankTab, giftTab, commentTab].forEach(tab => 
+            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
+        [rankContent, giftContent, commentContent].forEach(content => 
+            content.classList.add('hidden'));
 
         if (tabName === 'rank') {
             rankTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            giftTab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
             rankContent.classList.remove('hidden');
-            giftContent.classList.add('hidden');
-        } else {
+        } else if (tabName === 'gift') {
             giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
-            rankTab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
             giftContent.classList.remove('hidden');
-            rankContent.classList.add('hidden');
+        } else {
+            commentTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            commentContent.classList.remove('hidden');
         }
     };
 
     window.showTab('rank');
 }
-
 
 async function refreshPodiumData() {
     try {
@@ -366,7 +399,7 @@ async function refreshPodiumData() {
             );
 
             if (streamData) {
-                updateStageUsersList(streamData.stage_users, streamData.gift_log); 
+                updateStageUsersList(streamData.stage_users, streamData.gift_log, streamData.comment_log);
                 const container = document.getElementById('stageUsersContainer');
                 container.style.opacity = '0';
                 setTimeout(() => {
@@ -379,6 +412,9 @@ async function refreshPodiumData() {
     }
 }
 
+setInterval(() => {
+    refreshPodiumData();
+}, 5000);
 
 function playPause() {
     if (!video) return;
