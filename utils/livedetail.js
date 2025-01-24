@@ -24,15 +24,17 @@ function setupIDNChat(username, slug) {
     if (header) header.textContent = 'Live Chat & Gift Log';
 
     const buttonsContainer = document.createElement('div');
-    buttonsContainer.className = 'flex space-x-4 mb-4';
+    buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1 mb-4';
 
     const liveChatButton = document.createElement('button');
     liveChatButton.textContent = 'Live Chat';
-    liveChatButton.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
+    liveChatButton.id = 'liveChatTab';
+    liveChatButton.className = 'flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors';
 
     const giftLogButton = document.createElement('button');
     giftLogButton.textContent = 'Gift Log';
-    giftLogButton.className = 'px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300';
+    giftLogButton.id = 'giftLogTab';
+    giftLogButton.className = 'flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors';
 
     buttonsContainer.appendChild(liveChatButton);
     buttonsContainer.appendChild(giftLogButton);
@@ -40,6 +42,17 @@ function setupIDNChat(username, slug) {
 
     const messagesContainer = document.getElementById('stageUsersContainer');
     messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
+
+    const liveChatContent = document.createElement('div');
+    liveChatContent.id = 'liveChatContent';
+    liveChatContent.className = 'space-y-2';
+
+    const giftLogContent = document.createElement('div');
+    giftLogContent.id = 'giftLogContent';
+    giftLogContent.className = 'space-y-2 hidden';
+
+    messagesContainer.appendChild(liveChatContent);
+    messagesContainer.appendChild(giftLogContent);
 
     async function getChannelId() {
         try {
@@ -83,15 +96,15 @@ function setupIDNChat(username, slug) {
         messageDiv.appendChild(userImage);
         messageDiv.appendChild(contentDiv);
 
-        messagesContainer.insertBefore(messageDiv, messagesContainer.firstChild);
+        liveChatContent.insertBefore(messageDiv, liveChatContent.firstChild);
 
-        while (messagesContainer.children.length > 100) {
-            messagesContainer.removeChild(messagesContainer.lastChild);
+        while (liveChatContent.children.length > 100) {
+            liveChatContent.removeChild(liveChatContent.lastChild);
         }
     }
 
     function displayGiftLogs(giftLogs) {
-        messagesContainer.innerHTML = '';
+        giftLogContent.innerHTML = '';
 
         giftLogs.forEach((gift) => {
             const giftDiv = document.createElement('div');
@@ -119,7 +132,7 @@ function setupIDNChat(username, slug) {
             giftDiv.appendChild(userImage);
             giftDiv.appendChild(contentDiv);
 
-            messagesContainer.appendChild(giftDiv);
+            giftLogContent.appendChild(giftDiv);
         });
     }
 
@@ -194,7 +207,7 @@ function setupIDNChat(username, slug) {
 
     async function fetchGiftLogs() {
         try {
-            const response = await fetch(`https://48intensapi.my.id/api/idnlive/jkt48?username=${username}&slug=${slug}`);
+            const response = await fetch(`https://48intensapi.my.id/api/idnlive/jkt48`);
             const data = await response.json();
 
             if (data?.gift_log) {
@@ -207,21 +220,40 @@ function setupIDNChat(username, slug) {
         }
     }
 
+    window.showTab = function (tabName) {
+        const liveChatTab = document.getElementById('liveChatTab');
+        const giftLogTab = document.getElementById('giftLogTab');
+
+        const liveChatContent = document.getElementById('liveChatContent');
+        const giftLogContent = document.getElementById('giftLogContent');
+
+        [liveChatTab, giftLogTab].forEach(tab => 
+            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
+        [liveChatContent, giftLogContent].forEach(content => 
+            content.classList.add('hidden'));
+
+        if (tabName === 'liveChat') {
+            liveChatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            liveChatContent.classList.remove('hidden');
+        } else if (tabName === 'giftLog') {
+            giftLogTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            giftLogContent.classList.remove('hidden');
+        }
+    };
+
     liveChatButton.onclick = () => {
         connectWebSocket();
-        liveChatButton.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
-        giftLogButton.className = 'px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300';
+        showTab('liveChat');
     };
 
     giftLogButton.onclick = () => {
         fetchGiftLogs();
-        giftLogButton.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
-        liveChatButton.className = 'px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300';
+        showTab('giftLog');
     };
 
     connectWebSocket();
+    showTab('liveChat');
 }
-
 
 function showOfflineState() {
     const offlineContainer = document.createElement('div');
