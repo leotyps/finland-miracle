@@ -19,28 +19,48 @@ function decompressStreamData(streamId) {
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     chatContainer.classList.remove('hidden');
-    const header = chatContainer.querySelector('h2');
-    if (header) header.textContent = 'Live Chat';
-    const messagesContainer = document.getElementById('stageUsersContainer');
-    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
+    
+    // Setup container and tabs
+    const container = document.getElementById('stageUsersContainer');
+    container.innerHTML = `
+        <div class="mb-4">
+            <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
+                <button onclick="showTab('chat')" id="chatTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Live Chat</button>
+                <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gifts</button>
+            </div>
+        </div>
+        <div id="chatContent" class="space-y-2 overflow-y-auto max-h-[60vh]"></div>
+        <div id="giftContent" class="space-y-2 overflow-y-auto max-h-[60vh] hidden"></div>
+    `;
 
-    async function getChannelId() {
-        try {
-            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
-            const data = await response.json();
+    // Tab switching functionality
+    window.showTab = function(tabName) {
+        const chatTab = document.getElementById('chatTab');
+        const giftTab = document.getElementById('giftTab');
+        const chatContent = document.getElementById('chatContent');
+        const giftContent = document.getElementById('giftContent');
 
-            if (!data.chatId) {
-                throw new Error('Chat ID not found in response');
-            }
+        [chatTab, giftTab].forEach(tab => 
+            tab.classList.remove('bg-white', 'text-gray-900', 'shadow-sm'));
+        [chatContent, giftContent].forEach(content => 
+            content.classList.add('hidden'));
 
-            return data.chatId;
-        } catch (error) {
-            console.error("Failed to get channel ID:", error);
-            throw error;
+        if (tabName === 'chat') {
+            chatTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            chatContent.classList.remove('hidden');
+        } else {
+            giftTab.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+            giftContent.classList.remove('hidden');
         }
-    }
+    };
 
+    window.showTab('chat');
+
+    // Function to add chat messages
     function addChatMessage(messageData) {
+        const chatContent = document.getElementById('chatContent');
+        if (!chatContent) return;
+
         const messageDiv = document.createElement('div');
         messageDiv.className = 'flex items-start space-x-2 p-2 hover:bg-gray-50 rounded-lg transition-colors';
 
@@ -66,13 +86,64 @@ function setupIDNChat(username, slug) {
         messageDiv.appendChild(userImage);
         messageDiv.appendChild(contentDiv);
 
-        messagesContainer.insertBefore(messageDiv, messagesContainer.firstChild);
+        chatContent.insertBefore(messageDiv, chatContent.firstChild);
 
-        while (messagesContainer.children.length > 100) {
-            messagesContainer.removeChild(messagesContainer.lastChild);
+        while (chatContent.children.length > 100) {
+            chatContent.removeChild(chatContent.lastChild);
         }
     }
 
+    // Function to add gift messages
+    function addGiftMessage(giftData) {
+        const giftContent = document.getElementById('giftContent');
+        if (!giftContent) return;
+
+        const giftDiv = document.createElement('div');
+        giftDiv.className = 'flex items-center space-x-4 p-2 hover:bg-gray-50 rounded-lg transition-colors';
+        
+        giftDiv.innerHTML = `
+            <div class="flex-shrink-0">
+                <img class="w-12 h-12 rounded-full object-cover" 
+                    src="${giftData.sender.avatar_url || 'https://static.showroom-live.com/assets/img/no_profile.jpg'}" 
+                    alt="${giftData.sender.name}">
+            </div>
+            <div class="flex-grow min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate">${giftData.sender.name}</p>
+                <div class="flex items-center space-x-2">
+                    <img class="w-5 h-5" src="${giftData.gift.image_url}" alt="Gift">
+                    <span class="text-xs text-gray-500">×${giftData.amount}</span>
+                </div>
+            </div>
+            <div class="text-xs text-gray-500">
+                ${new Date(giftData.created_at).toLocaleTimeString()}
+            </div>
+        `;
+        
+        giftContent.insertBefore(giftDiv, giftContent.firstChild);
+        
+        while (giftContent.children.length > 100) {
+            giftContent.removeChild(giftContent.lastChild);
+        }
+    }
+
+    // Function to get channel ID
+    async function getChannelId() {
+        try {
+            const response = await fetch(`https://jkt48showroom-api.my.id/scrapper/channel-id?username=${username}&slug=${slug}`);
+            const data = await response.json();
+
+            if (!data.chatId) {
+                throw new Error('Chat ID not found in response');
+            }
+
+            return data.chatId;
+        } catch (error) {
+            console.error("Failed to get channel ID:", error);
+            throw error;
+        }
+    }
+
+    // WebSocket connection setup
     async function connectWebSocket() {
         try {
             const channelId = await getChannelId();
@@ -119,6 +190,13 @@ function setupIDNChat(username, slug) {
                                     comment: data.chat.message,
                                     timestamp: data.timestamp || Date.now()
                                 });
+                            } else if (data?.gift) {
+                                addGiftMessage({
+                                    sender: data.user,
+                                    gift: data.gift,
+                                    amount: data.gift.amount || 1,
+                                    created_at: data.timestamp || Date.now()
+                                });
                             }
                         } catch (error) {
                             console.error("Failed to parse message:", error);
@@ -141,7 +219,11 @@ function setupIDNChat(username, slug) {
             setTimeout(() => connectWebSocket(), 5000);
         }
     }
+
+    // Start WebSocket connection
     connectWebSocket();
+
+    // Setup refresh button
     const refreshButton = chatContainer.querySelector('button');
     if (refreshButton) {
         refreshButton.onclick = () => {
@@ -152,7 +234,6 @@ function setupIDNChat(username, slug) {
         };
     }
 }
-
 
 function showOfflineState() {
     const offlineContainer = document.createElement('div');
@@ -273,7 +354,7 @@ function updateStageUsersList(stageUsers, giftLogs, commentLogs) {
         <div id="rankContent" class="space-y-4"></div>
         <div id="giftContent" class="space-y-4 hidden"></div>
         <div id="commentContent" class="space-y-4 hidden">
-            <div class="text-center text-gray-500 text-sm mb-2">🥺 Kamu tidak bisa comment untuk saat ini</div>
+            <div class="text-center text-gray-500 text-sm mb-2">🥺 Comment muncul dalam 15 detik jadi tunggu aja, Kamu juga tidak bisa comment untuk saat ini</div>
         </div>
     `;
 
