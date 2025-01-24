@@ -18,7 +18,6 @@ function decompressStreamData(streamId) {
 
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
-    chatContainer.classList.remove('hidden');
     const messagesContainer = document.getElementById('stageUsersContainer');
     messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
 
@@ -37,7 +36,16 @@ function setupIDNChat(username, slug) {
 
     buttonsContainer.appendChild(liveChatButton);
     buttonsContainer.appendChild(giftLogButton);
-    stageUsersContainer.prepend(buttonsContainer);
+    messagesContainer.prepend(buttonsContainer);
+
+    const commentContent = document.createElement('div');
+    commentContent.id = 'commentContent';
+    commentContent.className = 'space-y-4 hidden';
+    commentContent.innerHTML = `
+        <div class="text-center text-gray-500 text-sm mb-2">
+            🥺 Kamu juga tidak bisa comment untuk saat ini
+        </div>
+    `;
 
     const liveChatContent = document.createElement('div');
     liveChatContent.id = 'liveChatContent';
@@ -47,8 +55,9 @@ function setupIDNChat(username, slug) {
     giftLogContent.id = 'giftLogContent';
     giftLogContent.className = 'space-y-2 hidden';
 
-    stageUsersContainer.appendChild(liveChatContent);
-    stageUsersContainer.appendChild(giftLogContent);
+    messagesContainer.appendChild(commentContent);
+    messagesContainer.appendChild(liveChatContent);
+    messagesContainer.appendChild(giftLogContent);
 
     let wsConnection = null;
 
