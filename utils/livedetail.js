@@ -265,16 +265,19 @@ function updateStageUsersList(stageUsers, giftLogs) {
     container.innerHTML = `
         <div class="mb-4">
             <div class="flex space-x-2 bg-gray-100 rounded-lg p-1">
-            <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">User Rank</button>
+            <button onclick="showTab('rank')" id="rankTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Podium</button>
             <button onclick="showTab('gift')" id="giftTab" class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors">Gift Log</button>
             </div>
         </div>
         <div id="rankContent" class="space-y-4"></div>
         <div id="giftContent" class="space-y-4 hidden"></div>
-        `;
+    `;
 
     const rankContent = document.getElementById('rankContent');
     const giftContent = document.getElementById('giftContent');
+
+    rankContent.innerHTML = '';
+    giftContent.innerHTML = '';
 
     if (stageUsers && stageUsers.length > 0) {
         stageUsers.forEach(stageUser => {
