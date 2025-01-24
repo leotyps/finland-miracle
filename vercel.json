@@ -70,6 +70,10 @@
             "destination": "/middleware/maintenance"
         },
         {
+            "source": "/replayjkt48",
+            "destination": "/components/page/replay"
+        },
+        {
             "source": "/news/:id",
             "destination": "/components/detail/news.html?id=:id"
         },
