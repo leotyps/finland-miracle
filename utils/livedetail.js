@@ -19,6 +19,8 @@ function decompressStreamData(streamId) {
 function setupIDNChat(username, slug) {
     const chatContainer = document.getElementById('stageUsersList');
     const stageUsersContainer = document.getElementById('stageUsersContainer');
+    const messagesContainer = document.getElementById('stageUsersContainer');
+    messagesContainer.className = 'space-y-2 overflow-y-auto max-h-[60vh]';
 
     const buttonsContainer = document.createElement('div');
     buttonsContainer.className = 'flex space-x-2 bg-gray-100 rounded-lg p-1 mb-4';
