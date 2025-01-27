@@ -587,7 +587,7 @@ async function refreshComments() {
         console.error('Error refreshing comments:', error);
     }
 }
-setInterval(refreshComments, 15000);
+setInterval(refreshComments, 8000);
 
 function playPause() {
     if (!video) return;
