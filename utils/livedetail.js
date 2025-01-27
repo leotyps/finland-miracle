@@ -201,18 +201,29 @@ function setupIDNChat(username, slug) {
         }
     }
 
-    async function fetchGiftLogs() {
+    async function fetchGiftLogs(username) {
         try {
+            giftLogContent.innerHTML = '<div class="text-center p-4"><p class="text-gray-500">😭 Mohon tunggu, data gift log sedang diambil...</p></div>';
+            
             const response = await fetch(`https://48intensapi.my.id/api/idnlive/jkt48`);
             const responseData = await response.json();
 
-            if (responseData?.data && responseData.data.length > 0 && responseData.data[0].gift_log) {
-                displayGiftLogs(responseData.data[0].gift_log);
+            if (responseData?.data && responseData.data.length > 0) {
+                const memberData = responseData.data.find(data => 
+                    data.user?.username.toLowerCase() === username.toLowerCase()
+                );
+
+                if (memberData && memberData.gift_log) {
+                    displayGiftLogs(memberData.gift_log);
+                } else {
+                    giftLogContent.innerHTML = '<div class="text-center p-4"><p class="text-gray-500">Tidak ada gift log untuk saat ini</p></div>';
+                }
             } else {
                 throw new Error('Gift logs not found in response');
             }
         } catch (error) {
             console.error("Failed to fetch gift logs:", error);
+            giftLogContent.innerHTML = '<div class="text-center p-4"><p class="text-gray-500">Gagal mengambil data gift log</p></div>';
         }
     }
 
