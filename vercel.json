@@ -82,7 +82,7 @@
             "destination": "/components/detail/member?id=:id"
         },
         {
-            "source": "/devintens",
+            "source": "/teamintens",
             "destination": "/components/dev/dev"
         },
         {
