@@ -27,12 +27,5 @@ function checkLoginStatus() {
     }
 }
 
-function handleLogout(event) {
-    event.preventDefault();
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userOshimen');
-    window.location.href = '/login';
-}
-
 document.addEventListener('DOMContentLoaded', checkLoginStatus);
 window.addEventListener('storage', checkLoginStatus);
