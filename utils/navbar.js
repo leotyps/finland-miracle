@@ -27,5 +27,7 @@ function checkLoginStatus() {
     }
 }
 
+
+
 document.addEventListener('DOMContentLoaded', checkLoginStatus);
 window.addEventListener('storage', checkLoginStatus);
