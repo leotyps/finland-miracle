@@ -209,8 +209,13 @@ function setupIDNChat(username, slug) {
             const responseData = await response.json();
 
             if (responseData?.data && responseData.data.length > 0) {
+                const pathSegments = window.location.pathname.split('/');
+                const currentMemberSlug = pathSegments[3]; 
+
                 const memberData = responseData.data.find(data => 
-                    data.user?.username.toLowerCase() === username.toLowerCase()
+                    data.slug.includes(currentMemberSlug) || 
+                    (data.user && data.user.username && 
+                    data.user.username.replace('jkt48_', '').toLowerCase() === currentMemberSlug.toLowerCase())
                 );
 
                 if (memberData && memberData.gift_log) {
