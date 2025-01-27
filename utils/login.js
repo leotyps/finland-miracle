@@ -37,3 +37,5 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
     localStorage.setItem("userOshimen", oshimen);
     window.location.href = "/mypage";
 });
+
+

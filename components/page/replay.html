@@ -61,7 +61,7 @@
                         </button>
                     </a>
                     <a href="/login" class="inline-block">
-                        <button
+                        <button id="loginButton"
                             class="border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center">
                             Login
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,7 +95,7 @@
                         </button>
                     </a>
                     <a href="/login" class="block">
-                        <button
+                        <button id="loginButtonMobile"
                             class="w-full border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center justify-center">
                             Login
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,33 +118,40 @@
         <div class="flex flex-col space-y-6">
             <div class="flex justify-between items-center">
                 <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold">
-                    <span class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text">
+                    <span
+                        class="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-transparent bg-clip-text">
                         JKT48 Replay
                     </span>
                 </h1>
                 <div class="flex space-x-4">
-                    <a href="/livejkt48" class="flex items-center gap-2 px-3 sm:px-4 py-2 bg-rose-300 text-white rounded-3xl hover:bg-rose-500 transition-colors text-sm sm:text-base">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
+                    <a href="/livejkt48"
+                        class="flex items-center gap-2 px-3 sm:px-4 py-2 bg-rose-300 text-white rounded-3xl hover:bg-rose-500 transition-colors text-sm sm:text-base">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
                         </svg>
                         <span class="hidden sm:inline">Live JKT48</span>
                         <span class="sm:hidden">Live</span>
                     </a>
                 </div>
             </div>
-    
+
             <div class="flex justify-start">
                 <div class="inline-flex rounded-xl shadow-sm p-1" role="group">
-                    <button onclick="switchTab('livestream')" id="livestreamTab" class="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 min-w-[120px]">
+                    <button onclick="switchTab('livestream')" id="livestreamTab"
+                        class="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 min-w-[120px]">
                         Showroom/IDN
                     </button>
-                    <button onclick="switchTab('theater')" id="theaterTab" class="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 min-w-[120px]">
+                    <button onclick="switchTab('theater')" id="theaterTab"
+                        class="px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 min-w-[120px]">
                         Theater
                     </button>
                 </div>
             </div>
-    
-            <div id="replayContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 min-h-[24rem]">
+
+            <div id="replayContainer"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 min-h-[24rem]">
             </div>
         </div>
     </div>
@@ -192,6 +199,7 @@
 
     <script src="/progress.js"></script>
     <script src="/utils/replay.js"></script>
+    <script src="/utils/navbar.js"></script>
     <script>
         const menuToggle = document.getElementById("menu-toggle");
         const mobileMenu = document.getElementById("mobile-menu");

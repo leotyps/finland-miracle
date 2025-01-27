@@ -61,7 +61,7 @@
                         </button>
                     </a>
                     <a href="/login" class="inline-block">
-                        <button
+                        <button id="loginButton"
                             class="border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center">
                             Login
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,7 +95,7 @@
                         </button>
                     </a>
                     <a href="/login" class="block">
-                        <button
+                        <button id="loginButtonMobile"
                             class="w-full border-2 border-blue-300 hover:bg-blue-300 hover:text-white text-blue-300 px-6 py-2 rounded-full flex items-center justify-center">
                             Login
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,6 +198,7 @@
     </footer>
 
     <script src="/progress.js"></script>
+    <script src="/utils/navbar.js"></script>
     <script>
         const menuToggle = document.getElementById("menu-toggle");
         const mobileMenu = document.getElementById("mobile-menu");
