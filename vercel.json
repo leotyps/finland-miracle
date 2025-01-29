@@ -83,7 +83,7 @@
         },
         {
             "source": "/teamintens",
-            "destination": "/components/dev/dev"
+            "destination": "/components/page/teams"
         },
         {
             "source": "/live/idn/:memberUsername/:streamId",
