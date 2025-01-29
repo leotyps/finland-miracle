@@ -11,7 +11,7 @@ class LiveNotification {
         if (!container) {
             container = document.createElement('div');
             container.id = 'notification-container';
-            container.className = 'fixed top-20 right-5 transform transition-all duration-500 ease-in-out z-50 space-y-4';
+            container.className = 'fixed top-20 right-2 sm:right-5 transform transition-all duration-500 ease-in-out z-50 space-y-4 w-[95%] sm:w-auto max-w-full sm:max-w-md mx-auto';
             document.body.appendChild(container);
         }
         this.container = container;
@@ -84,12 +84,12 @@ class LiveNotification {
 
     createNotificationElement(notification) {
         const notificationDiv = document.createElement('div');
-        notificationDiv.className = 'transform translate-x-full transition-all duration-300 ease-in-out w-full max-w-md p-6 text-gray-900 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300 mb-4';
+        notificationDiv.className = 'transform translate-x-full transition-all duration-300 ease-in-out w-full p-4 sm:p-6 text-gray-900 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300 mb-4';
         notificationDiv.role = 'alert';
         
         notificationDiv.innerHTML = `
             <div class="flex items-center mb-3">
-                <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Live Streaming Now!</span>
+                <span class="mb-1 text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Live Streaming Now!</span>
                 <button type="button" class="ms-auto bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
                     <span class="sr-only">Close</span>
                     <svg class="w-3 h-3" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,10 +98,10 @@ class LiveNotification {
                 </button>
             </div>
             <a href="/livejkt48" target="_blank" class="flex items-center group">
-                <img class="w-16 h-16 rounded-full" src="${notification.image}" alt="${notification.name}"/>
-                <div class="ms-3 text-sm font-normal">
-                    <div class="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200">${notification.name}</div>
-                    <div class="text-sm">is live on ${notification.platform}</div>
+                <img class="w-14 h-14 sm:w-16 sm:h-16 rounded-full" src="${notification.image}" alt="${notification.name}"/>
+                <div class="ms-3 text-xs sm:text-sm font-normal">
+                    <div class="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200">${notification.name}</div>
+                    <div class="">is live on ${notification.platform}</div>
                     <span class="text-xs font-medium text-blue-600 dark:text-blue-500">Watch now!</span>
                 </div>
             </a>
@@ -122,7 +122,7 @@ class LiveNotification {
 
         setTimeout(() => {
             this.container.classList.remove('-right-full');
-            this.container.classList.add('right-5');
+            this.container.classList.add('right-2', 'sm:right-5');
         }, 100);
 
         this.notifications.forEach((notification, index) => {
