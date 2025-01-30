@@ -226,8 +226,6 @@ async function fetchTopStreamers() {
         if (data.success && data.data) {
             const topStreamersContainer = document.getElementById('topStreamersContainer');
             const streamers = data.data;
-            
-            // Function to get rank styling based on position
             const getRankStyle = (rank) => {
                 switch(rank) {
                     case 1:
@@ -284,7 +282,7 @@ async function fetchTopStreamers() {
             }).join('');
             
             topStreamersContainer.innerHTML = `
-                <div class="bg-white rounded-3xl shadow-lg p-6">
+                <div class="bg-white border-2 border-gray-200 rounded-3xl shadow-lg p-6">
                     <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
                     ${streamersList}
                 </div>
