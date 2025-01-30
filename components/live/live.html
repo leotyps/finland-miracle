@@ -109,26 +109,30 @@
 
   <div class="container mx-auto px-4 py-8 flex-grow bg-w">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl sm:text-4xl font-bold text-left">
-        <span class="bg-gradient-to-r from-[#83b4ff] via-[#5a72a0] to-[#1a2130] text-transparent bg-clip-text">
-          Now Live JKT48
-        </span>
-      </h1>
-      <a href="/replayjkt48"
-        class="flex items-center gap-2 px-4 py-2 bg-rose-300 text-white rounded-3xl hover:bg-rose-500 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-          class="w-5 h-5">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
-        </svg>
-        <span class="hidden sm:inline">Replay JKT48</span>
-        <span class="sm:hidden">Replay</span>
-      </a>
+        <h1 class="text-3xl sm:text-4xl font-bold text-left">
+            <span class="bg-gradient-to-r from-[#83b4ff] via-[#5a72a0] to-[#1a2130] text-transparent bg-clip-text">
+                Now Live JKT48
+            </span>
+        </h1>
+        <a href="/replayjkt48" class="flex items-center gap-2 px-4 py-2 bg-rose-300 text-white rounded-3xl hover:bg-rose-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
+            </svg>
+            <span class="hidden sm:inline">Replay JKT48</span>
+            <span class="sm:hidden">Replay</span>
+        </a>
     </div>
-    <div id="liveContainer"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[24rem] relative">
+    <div class="flex flex-col lg:flex-row gap-6">
+        <div class="lg:w-3/4">
+            <div id="liveContainer" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 min-h-[24rem] relative">
+            </div>
+        </div>
+        <div class="lg:w-1/4">
+            <div id="topStreamersContainer" class="sticky top-6">
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 
   <footer class="bg-gray-900 text-white py-8">
     <div class="container mx-auto px-6">

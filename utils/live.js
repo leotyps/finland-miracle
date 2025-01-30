@@ -218,7 +218,90 @@ function createShowroomCard(stream) {
         </div>
     `;
 }
+async function fetchTopStreamers() {
+    try {
+        const response = await fetch('https://48intensapi.my.id/api/livejkt48/topstreamer');
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+            const topStreamersContainer = document.getElementById('topStreamersContainer');
+            const streamers = data.data;
+            
+            // Function to get rank styling based on position
+            const getRankStyle = (rank) => {
+                switch(rank) {
+                    case 1:
+                        return {
+                            badge: 'bg-gradient-to-r from-yellow-400 to-yellow-600',
+                            text: 'text-yellow-500',
+                            border: 'border-yellow-200',
+                            icon: '👑'
+                        };
+                    case 2:
+                        return {
+                            badge: 'bg-gradient-to-r from-gray-400 to-gray-600',
+                            text: 'text-gray-600',
+                            border: 'border-gray-200',
+                            icon: '⭐'
+                        };
+                    case 3:
+                        return {
+                            badge: 'bg-gradient-to-r from-amber-500 to-orange-600',
+                            text: 'text-orange-500',
+                            border: 'border-orange-200',
+                            icon: '🔥'
+                        };
+                    default:
+                        return {
+                            badge: 'bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300',
+                            text: 'text-gray-700',
+                            border: 'border-purple-100',
+                            icon: ''
+                        };
+                }
+            };
+            
+            const streamersList = streamers.map(streamer => {
+                const style = getRankStyle(streamer.rank);
+                return `
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors">
+                        <div class="relative">
+                            <div class="absolute -top-2 -left-2 ${style.badge} text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
+                                ${streamer.rank}
+                            </div>
+                            <img src="${streamer.image_url}" alt="${streamer.name}" 
+                                class="w-12 h-12 rounded-full border-2 ${style.border}">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-bold ${style.text} line-clamp-1">${streamer.name}</h3>
+                                ${style.icon ? `<span>${style.icon}</span>` : ''}
+                            </div>
+                            <p class="text-sm text-gray-500">${streamer.total_live_stream}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            topStreamersContainer.innerHTML = `
+                <div class="bg-white rounded-3xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
+                    ${streamersList}
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Error fetching top streamers:', error);
+        const topStreamersContainer = document.getElementById('topStreamersContainer');
+        topStreamersContainer.innerHTML = `
+            <div class="bg-white rounded-3xl shadow-lg p-6">
+                <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
+                <p class="text-gray-500 text-center">Failed to load top streamers data</p>
+            </div>
+        `;
+    }
+}
 
-
+fetchTopStreamers();
 fetchLiveData();
 setInterval(fetchLiveData, 30000);
