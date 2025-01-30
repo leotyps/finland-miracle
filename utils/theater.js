@@ -64,29 +64,30 @@ async function fetchTheaterData() {
         container.innerHTML = Array(skeletonCount).fill(`
             <div class="bg-black rounded-xl shadow-md overflow-hidden skeleton max-w-md mx-auto">
                 <div class="relative">
-                    <div class="bg-gray-300 h-64 w-full animate-pulse"></div>
+                    <div class="bg-gray-300 h-80 w-full animate-pulse"></div>
                     <div class="absolute top-4 right-4">
                         <div class="bg-gray-300 h-6 w-20 rounded-full animate-pulse"></div>
                     </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-5">
-                        <div class="bg-gray-300 h-7 w-3/4 mb-3 mt-4 rounded animate-pulse"></div>
-                        <div class="flex items-center gap-2 mb-3">
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="bg-gray-300 h-7 w-3/4 mb-4 mt-6 rounded animate-pulse"></div>
+                        <div class="flex items-center gap-2 mb-4">
                             <div class="bg-gray-300 h-4 w-4 rounded animate-pulse"></div>
                             <div class="bg-gray-300 h-4 w-1/2 rounded animate-pulse"></div>
                         </div>
-                        <div class="flex items-center gap-2 mb-4">
+                        <div class="flex items-center gap-2 mb-5">
                             <div class="bg-gray-300 h-4 w-4 rounded animate-pulse"></div>
                             <div class="bg-gray-300 h-4 w-1/3 rounded animate-pulse"></div>
                         </div>
-                        <div class="flex items-center gap-2 mb-3">
+                        <div class="flex items-center gap-2 mb-4">
                             <div class="bg-gray-300 h-5 w-5 rounded-full animate-pulse"></div>
                             <div class="bg-gray-300 h-4 w-16 rounded animate-pulse"></div>
                         </div>
-                        <div class="bg-gray-300 h-9 w-full rounded-full animate-pulse"></div>
+                        <div class="bg-gray-300 h-10 w-full rounded-full animate-pulse"></div>
                     </div>
                 </div>
             </div>
         `).join('');
+
         const [bannerResponse, memberResponse] = await Promise.all([
             fetch('/data/theater.json'),
             fetch('https://48intensapi.my.id/api/member')
@@ -111,46 +112,44 @@ async function fetchTheaterData() {
 
             const theaterCard = `
                 <div class="bg-black rounded-3xl shadow-md overflow-hidden max-w-md mx-auto">
-                <div class="relative">
-                <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" 
-                    alt="${show.setlist}" 
-                    class="w-full h-64 object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/60 to-transparent"></div>
-                ${birthdayMembers
-                    ? `<span class="absolute top-4 left-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs px-3 py-1 rounded-full">Birthday</span>`
-                    : ''}
-                ${status
-                    ? `<span class="absolute top-4 right-4 bg-white/30 text-white text-xs px-3 py-1 rounded-full backdrop-blur-md">${status.text}</span>`
-                    : ''}
-                <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-                    <!-- Show title - increased top margin -->
-                    <h3 class="text-lg font-bold mb-3 mt-4">${show.setlist}</h3>
-                    <div class="flex items-center gap-2 text-sm mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <span>${show.showInfo.split(' ')[0]} ${show.showInfo.split(' ')[1]} | ${show.time} WIB</span>
+                    <div class="relative">
+                        <img src="${banner ? banner.image : 'https://jkt48.com/images/logo.svg'}" 
+                            alt="${show.setlist}" 
+                            class="w-full h-80 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/60 to-transparent"></div>
+                        ${birthdayMembers
+                            ? `<span class="absolute top-4 left-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-sm px-4 py-1.5 rounded-full">Birthday</span>`
+                            : ''}
+                        ${status
+                            ? `<span class="absolute top-4 right-4 bg-white/30 text-white text-sm px-4 py-1.5 rounded-full backdrop-blur-md">${status.text}</span>`
+                            : ''}
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                            <h3 class="text-xl font-bold mb-4 mt-6">${show.setlist}</h3>
+                            <div class="flex items-center gap-3 text-sm mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                <span>${show.showInfo.split(' ')[0]} ${show.showInfo.split(' ')[1]} | ${show.time} WIB</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm mb-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                <span>${show.members.length > 0 ? `${show.members.length} Members yang tampil` : 'No Members 😭'}</span>
+                            </div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <img src="https://jkt48.com/images/logo.svg" alt="JKT48" class="w-6 h-6 rounded-full object-cover">
+                                <span class="text-sm">JKT48</span>
+                            </div>
+                            <button class="w-full bg-white/20 hover:bg-white/30 text-white px-4 py-2.5 rounded-full text-sm transition duration-300 backdrop-blur-sm"
+                                onclick="showPopup(${JSON.stringify(show).replace(/"/g, '&quot;')}, ${JSON.stringify(banner).replace(/"/g, '&quot;')}, ${JSON.stringify(memberData.members.member).replace(/"/g, '&quot;')})">
+                                Detail
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2 text-sm mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <span>${show.members.length > 0 ? `${show.members.length} Members yang tampil` : 'No Members 😭'}</span>
-                    </div>
-                    <div class="flex items-center gap-2 mb-3">
-                        <img src="https://jkt48.com/images/logo.svg" alt="JKT48" class="w-5 h-5 rounded-full object-cover">
-                        <span class="text-sm">JKT48</span>
-                    </div>
-                    <button class="w-full bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full text-sm transition duration-300 backdrop-blur-sm"
-                        onclick="showPopup(${JSON.stringify(show).replace(/"/g, '&quot;')}, ${JSON.stringify(banner).replace(/"/g, '&quot;')}, ${JSON.stringify(memberData.members.member).replace(/"/g, '&quot;')})">
-                        Detail
-                    </button>
                 </div>
-            </div>
-        </div>
-        `;
+            `;
             container.innerHTML += theaterCard;
-
         });
 
     } catch (error) {
