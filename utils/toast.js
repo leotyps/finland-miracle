@@ -84,61 +84,79 @@ class LiveNotification {
 
     createNotificationElement(notification) {
         const notificationDiv = document.createElement('div');
-        notificationDiv.className = 'transform translate-x-full transition-all duration-300 ease-in-out w-full p-4 sm:p-6 text-gray-900 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-300 mb-4';
+        notificationDiv.className = 'transform translate-x-full opacity-0 transition-all duration-500 ease-out w-full max-w-[95vw] sm:max-w-md p-4 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 dark:shadow-2xl mb-3 hover:shadow-lg dark:hover:shadow-xl transition-all duration-300';
         notificationDiv.role = 'alert';
         
         notificationDiv.innerHTML = `
-            <div class="flex items-center mb-3">
-                <span class="mb-1 text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Live Streaming Now!</span>
-                <button type="button" class="ms-auto bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="flex justify-between items-start mb-2">
+                <div class="flex-1">
+                    <span class="text-xs font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">Live Now 🔴</span>
+                    <h3 class="mt-1 text-sm font-semibold text-gray-900 dark:text-gray-100">${notification.name}</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">${notification.platform}</p>
+                </div>
+                <button type="button" class="ml-4 -mt-2 -mr-2 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
                     <span class="sr-only">Close</span>
-                    <svg class="w-3 h-3" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l12 12M13 1L1 13"/>
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
-            <a href="/livejkt48" target="_blank" class="flex items-center group">
-                <img class="w-14 h-14 sm:w-16 sm:h-16 rounded-full" src="${notification.image}" alt="${notification.name}"/>
-                <div class="ms-3 text-xs sm:text-sm font-normal">
-                    <div class="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors duration-200">${notification.name}</div>
-                    <div class="">is live on ${notification.platform}</div>
-                    <span class="text-xs font-medium text-blue-600 dark:text-blue-500">Watch now!</span>
+            <a href="/livejkt48" target="_blank" class="group block">
+                <div class="flex items-center gap-4 pt-2">
+                    <div class="relative">
+                        <img class="w-12 h-12 sm:w-14 sm:h-14 rounded-lg object-cover shadow-sm group-hover:shadow-md transition-shadow duration-300" src="${notification.image}" alt="${notification.name}"/>
+                        <div class="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+                            Watch Live Stream
+                            <span class="inline-block ml-2 opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-300">→</span>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Click to view ${notification.name}'s stream</p>
+                    </div>
                 </div>
             </a>
         `;
-
+    
         notificationDiv.querySelector('button').addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            notificationDiv.classList.replace('translate-x-0', 'translate-x-full');
-            setTimeout(() => notificationDiv.remove(), 300);
+            notificationDiv.style.opacity = '0';
+            notificationDiv.style.transform = 'translateX(120%)';
+            setTimeout(() => notificationDiv.remove(), 500);
         });
-
+    
         return notificationDiv;
     }
-
+    
     showNotifications() {
         if (this.notifications.length === 0) return;
-
-        setTimeout(() => {
-            this.container.classList.remove('-right-full');
-            this.container.classList.add('right-2', 'sm:right-5');
-        }, 100);
-
+    
+        // Update container positioning
+        this.container.classList.add('right-2', 'sm:right-4', 'top-4', 'sm:top-6');
+        this.container.classList.remove('space-y-4');
+        this.container.classList.add('space-y-3');
+    
         this.notifications.forEach((notification, index) => {
             setTimeout(() => {
                 const notificationElement = this.createNotificationElement(notification);
                 this.container.appendChild(notificationElement);
+                
+                // Animate in
                 setTimeout(() => {
                     notificationElement.classList.replace('translate-x-full', 'translate-x-0');
+                    notificationElement.style.opacity = '1';
                 }, 50);
+    
+                // Auto-dismiss after 12 seconds
                 setTimeout(() => {
-                    notificationElement.classList.replace('translate-x-0', 'translate-x-full');
-                    setTimeout(() => notificationElement.remove(), 300);
-                }, 10000);
-            }, index * 1000);
+                    notificationElement.style.opacity = '0';
+                    notificationElement.style.transform = 'translateX(120%)';
+                    setTimeout(() => notificationElement.remove(), 500);
+                }, 12000);
+            }, index * 300); // Stagger animations
         });
-
+    
         sessionStorage.setItem('sentNotifications', JSON.stringify([...this.sentNotifications]));
     }
 }
