@@ -218,13 +218,39 @@ function createShowroomCard(stream) {
         </div>
     `;
 }
+
+
 async function fetchTopStreamers() {
+    const topStreamersContainer = document.getElementById('topStreamersContainer');
+    
+    // Show skeleton loading state first
+    const skeletonCards = Array(5).fill().map(() => `
+        <div class="bg-gray-50 rounded-lg p-4 mb-3 skeleton animate-pulse">
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <div class="absolute -top-2 -left-2 w-6 h-6 bg-gray-300 rounded-full"></div>
+                    <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+                </div>
+                <div class="flex-1">
+                    <div class="h-5 bg-gray-300 rounded w-3/4 mb-2"></div>
+                    <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    topStreamersContainer.innerHTML = `
+        <div class="bg-white border-2 border-gray-200 rounded-3xl shadow-lg p-6">
+            <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
+            ${skeletonCards}
+        </div>
+    `;
+
     try {
         const response = await fetch('https://48intensapi.my.id/api/livejkt48/topstreamer');
         const data = await response.json();
         
         if (data.success && data.data) {
-            const topStreamersContainer = document.getElementById('topStreamersContainer');
             const streamers = data.data;
             const getRankStyle = (rank) => {
                 switch(rank) {
@@ -262,7 +288,7 @@ async function fetchTopStreamers() {
             const streamersList = streamers.map(streamer => {
                 const style = getRankStyle(streamer.rank);
                 return `
-                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors">
+                    <div class="flex items-center bg-gray-50 space-x-4 p-4 rounded-lg mb-3">
                         <div class="relative">
                             <div class="absolute -top-2 -left-2 ${style.badge} text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
                                 ${streamer.rank}
@@ -275,7 +301,7 @@ async function fetchTopStreamers() {
                                 <h3 class="font-bold ${style.text} line-clamp-1">${streamer.name}</h3>
                                 ${style.icon ? `<span>${style.icon}</span>` : ''}
                             </div>
-                            <p class="text-sm text-gray-500">${streamer.total_live_stream}</p>
+                            <p class="text-sm text-gray-500">${streamer.total_live_stream} live streams</p>
                         </div>
                     </div>
                 `;
@@ -290,7 +316,6 @@ async function fetchTopStreamers() {
         }
     } catch (error) {
         console.error('Error fetching top streamers:', error);
-        const topStreamersContainer = document.getElementById('topStreamersContainer');
         topStreamersContainer.innerHTML = `
             <div class="bg-white rounded-3xl shadow-lg p-6">
                 <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
@@ -299,7 +324,6 @@ async function fetchTopStreamers() {
         `;
     }
 }
-
 fetchTopStreamers();
 fetchLiveData();
 setInterval(fetchLiveData, 30000);
