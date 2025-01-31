@@ -223,7 +223,6 @@ function createShowroomCard(stream) {
 async function fetchTopStreamers() {
     const topStreamersContainer = document.getElementById('topStreamersContainer');
     
-    // Show skeleton loading state first
     const skeletonCards = Array(5).fill().map(() => `
         <div class="bg-gray-50 rounded-lg p-4 mb-3 skeleton animate-pulse">
             <div class="flex items-center space-x-4">
@@ -301,7 +300,7 @@ async function fetchTopStreamers() {
                                 <h3 class="font-bold ${style.text} line-clamp-1">${streamer.name}</h3>
                                 ${style.icon ? `<span>${style.icon}</span>` : ''}
                             </div>
-                            <p class="text-sm text-gray-500">${streamer.total_live_stream} live streams</p>
+                            <p class="text-sm text-gray-500">${streamer.total_live_stream}</p>
                         </div>
                     </div>
                 `;
