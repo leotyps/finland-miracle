@@ -231,7 +231,7 @@ function generateShareableLink(sortedMembers) {
         member.img_alt
     ]);
     const encodedData = btoa(JSON.stringify(compactData));
-    const baseUrl = 'https://finland-miracle.vercel.app/share';
+    const baseUrl = 'https://48intens.com/share';
     return `${baseUrl}?d=${encodedData}`;
 }
 
