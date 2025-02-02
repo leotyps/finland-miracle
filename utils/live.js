@@ -102,8 +102,7 @@ function createIDNCard(stream) {
         'TEMEN MAKAN',
         'TRIAL'
     ];
-    
-    // Use case-insensitive comparison and check for substrings
+
     const isFreeStream = freeStreamTitles.some(title => 
         stream.title && stream.title.toUpperCase().includes(title.toUpperCase())
     );
@@ -174,7 +173,7 @@ function createShowroomCard(stream) {
     const watchUrl = `/live/sr/${memberUsername}/${streamId}`;
 
     return `
-        <div class="bg-rose-300/80 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
+        <div class="bg-[#ff88da]/70 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
             <div class="relative group">
                 <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
                 <div class="absolute inset-0  group-hover:opacity-100 transition-opacity duration-300"></div>
