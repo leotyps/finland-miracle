@@ -1,79 +1,302 @@
+(function (_0x4ed500, _0x281518) {
+    const _0xd424e8 = _0xc47a, _0x143baf = _0x4ed500();
+    while (!![]) {
+        try {
+            const _0x4cae68 = -parseInt(_0xd424e8(0x223)) / (0x43 * 0x8b + 0x1be6 * -0x1 + 0x87a * -0x1) * (-parseInt(_0xd424e8(0x275)) / (-0x2e7 * 0x8 + 0x222d + 0x1 * -0xaf3)) + parseInt(_0xd424e8(0x28d)) / (0x1ea8 + -0x2540 + 0x69b * 0x1) * (parseInt(_0xd424e8(0x22e)) / (-0x1638 + -0x25b * 0x9 + 0x2b6f * 0x1)) + -parseInt(_0xd424e8(0x249)) / (-0x12d * -0x21 + -0x1 * 0x17cb + -0xefd) * (-parseInt(_0xd424e8(0x2cb)) / (-0x7 * 0x3cd + 0x10a5 * 0x1 + -0x1 * -0x9fc)) + parseInt(_0xd424e8(0x276)) / (-0x1fff + -0x31 * -0x6f + 0xac7) + -parseInt(_0xd424e8(0x202)) / (0x1413 + -0x2 * 0x778 + -0x1 * 0x51b) + parseInt(_0xd424e8(0x216)) / (-0xa * -0x36d + 0x2318 + -0x4551) + -parseInt(_0xd424e8(0x1f0)) / (-0x67d + -0x247 * 0xe + 0x2669);
+            if (_0x4cae68 === _0x281518)
+                break;
+            else
+                _0x143baf['push'](_0x143baf['shift']());
+        } catch (_0x40605e) {
+            _0x143baf['push'](_0x143baf['shift']());
+        }
+    }
+}(_0x1898, 0x56171 + 0x25a44 + 0x23d84));
 async function fetchYoutubeVideos() {
+    const _0xd05386 = _0xc47a, _0x2d8973 = {
+            'MoBNa': _0xd05386(0x27e),
+            'DBgBm': _0xd05386(0x24e) + _0xd05386(0x242) + _0xd05386(0x262) + _0xd05386(0x2a2) + _0xd05386(0x272) + _0xd05386(0x21f) + _0xd05386(0x20c) + _0xd05386(0x2a0) + _0xd05386(0x1fb) + _0xd05386(0x231) + _0xd05386(0x23c) + _0xd05386(0x2c1) + _0xd05386(0x239) + _0xd05386(0x233),
+            'sFFMy': _0xd05386(0x2a6) + _0xd05386(0x2bf),
+            'yUHzS': function (_0xce910d, _0x5c41ab) {
+                return _0xce910d(_0x5c41ab);
+            },
+            'dlFOt': _0xd05386(0x2b2) + _0xd05386(0x245) + _0xd05386(0x266) + _0xd05386(0x244),
+            'ceJqd': function (_0x245735, _0x436a3c) {
+                return _0x245735 === _0x436a3c;
+            },
+            'nMAVb': function (_0xc8269, _0x236af1, _0x3ab594) {
+                return _0xc8269(_0x236af1, _0x3ab594);
+            },
+            'VTaXw': _0xd05386(0x27c) + _0xd05386(0x284),
+            'asZMC': _0xd05386(0x251) + _0xd05386(0x2b1) + _0xd05386(0x2c9),
+            'hFffB': function (_0x2f5495, _0x5647d7, _0x576215) {
+                return _0x2f5495(_0x5647d7, _0x576215);
+            }
+        };
     try {
-        const container = document.getElementById('youtube-container');
-        container.innerHTML = `
-            <div class="bg-white rounded-3xl shadow-md overflow-hidden skeleton w-full max-w-sm">
-                <div class="p-4">
-                    <div class="bg-gray-300 h-48 w-full rounded-2xl mb-4"></div>
-                    <div class="flex items-center mb-2">
-                        <div class="bg-gray-300 h-6 w-6 rounded-full mr-2"></div>
-                        <div class="bg-gray-300 h-4 w-32 rounded"></div>
-                    </div>
-                    <div class="bg-gray-300 h-6 w-full rounded"></div>
-                </div>
-            </div>
-        `.repeat(4);
-
-        const response = await fetch('https://48intensapi.my.id/api/video');
-        const data = await response.json();
-        container.innerHTML = '';
-        
-        if (!data || data.length === 0) {
-            showNotFoundMessage(container, 'Videos Not Found 😭');
+        const _0x1b80ad = document[_0xd05386(0x2bd) + _0xd05386(0x283)](_0x2d8973[_0xd05386(0x268)]);
+        _0x1b80ad[_0xd05386(0x264)] = (_0xd05386(0x22d) + _0xd05386(0x220) + _0xd05386(0x2c3) + _0xd05386(0x235) + _0xd05386(0x260) + _0xd05386(0x255) + _0xd05386(0x2c7) + _0xd05386(0x2ca) + _0xd05386(0x1fa) + _0xd05386(0x1ff) + _0xd05386(0x2b0) + _0xd05386(0x213) + _0xd05386(0x227) + _0xd05386(0x256) + _0xd05386(0x2b0) + _0xd05386(0x220) + _0xd05386(0x258) + _0xd05386(0x29a) + _0xd05386(0x2cf) + _0xd05386(0x28f) + _0xd05386(0x28c) + _0xd05386(0x2b3) + _0xd05386(0x2b0) + _0xd05386(0x294) + _0xd05386(0x27d) + _0xd05386(0x24f) + _0xd05386(0x229) + _0xd05386(0x22d) + _0xd05386(0x2b0) + _0xd05386(0x213) + _0xd05386(0x28b) + _0xd05386(0x2aa) + _0xd05386(0x22f) + _0xd05386(0x21d) + _0xd05386(0x2be) + _0xd05386(0x2a7) + _0xd05386(0x2b0) + _0xd05386(0x25e) + _0xd05386(0x29f) + _0xd05386(0x25c) + _0xd05386(0x2c4) + _0xd05386(0x205) + _0xd05386(0x210) + _0xd05386(0x2b0) + _0xd05386(0x298) + _0xd05386(0x2a7) + _0xd05386(0x2b0) + _0xd05386(0x220) + _0xd05386(0x258) + _0xd05386(0x20d) + _0xd05386(0x23b) + _0xd05386(0x267) + _0xd05386(0x2b3) + _0xd05386(0x2b0) + _0xd05386(0x23e) + _0xd05386(0x21e) + _0xd05386(0x210) + _0xd05386(0x2c5))[_0xd05386(0x279)](0xb * 0x1 + -0x2fb * 0x7 + 0x14d6);
+        const _0x550ede = await _0x2d8973[_0xd05386(0x280)](fetch, _0x2d8973[_0xd05386(0x1fe)]), _0x1fcbcc = await _0x550ede[_0xd05386(0x232)]();
+        _0x1b80ad[_0xd05386(0x264)] = '';
+        if (!_0x1fcbcc || _0x2d8973[_0xd05386(0x252)](_0x1fcbcc[_0xd05386(0x217)], 0x1df6 + -0x11d + 0x23 * -0xd3)) {
+            _0x2d8973[_0xd05386(0x250)](showNotFoundMessage, _0x1b80ad, _0x2d8973[_0xd05386(0x20b)]);
             return;
         }
-
-        const limitedData = data.slice(0, 4);
-        limitedData.forEach(video => {
-            const videoId = video.url.split('/embed/')[1];
-            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-            const channelThumbnail = "https://yt3.googleusercontent.com/A4-nTNem_KC02wRMkktDWRSCWSGkwn-myOCaSWlSnJNhqN7yDT0zaitHm04TCVeKbg4hyuAL5gg=s160-c-k-c0x00ffffff-no-rj";
-            
-            const videoCard = `
-                <div class="bg-white border-4 border-gray-50 rounded-3xl  overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full max-w-sm">
-                    <div class="p-4">
-                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="block">
-                            <div class="mb-4">
-                                <img 
-                                    src="${thumbnailUrl}" 
-                                    alt="${video.title}"
-                                    class="w-full h-48 object-cover rounded-2xl"
-                                    onerror="this.onerror=null; this.src='https://jkt48.com/images/logo.svg'"
-                                >
-                            </div>
-                            <div class="flex items-center mb-2">
-                                <img 
-                                    src="${channelThumbnail}" 
-                                    alt="JKT48"
-                                    class="w-6 h-6 rounded-full mr-2"
-                                >
-                                <span class="text-sm text-gray-600">JKT48</span>
-                            </div>
-                            <h3 class="font-semibold text-gray-900 line-clamp-2">
-                                ${video.title}
-                            </h3>
-                        </a>
-                    </div>
-                </div>
-            `;
-            container.innerHTML += videoCard;
+        const _0x34cff7 = _0x1fcbcc[_0xd05386(0x253)](0x746 + -0xfe1 + 0x89b, -0x6f * -0x2f + 0x213b + -0x3598);
+        _0x34cff7[_0xd05386(0x295)](_0x31a4b6 => {
+            const _0x194ecc = _0xd05386, _0x61643f = _0x31a4b6[_0x194ecc(0x1f1)][_0x194ecc(0x23d)](_0x2d8973[_0x194ecc(0x26e)])[-0x1fd3 + -0x225f + 0x4233], _0x2943cc = _0x194ecc(0x29d) + _0x194ecc(0x1f8) + _0x194ecc(0x230) + _0x61643f + (_0x194ecc(0x257) + _0x194ecc(0x219)), _0x20df05 = _0x2d8973[_0x194ecc(0x2b4)], _0x4ad782 = _0x194ecc(0x22d) + _0x194ecc(0x25e) + _0x194ecc(0x29f) + _0x194ecc(0x209) + _0x194ecc(0x248) + _0x194ecc(0x287) + _0x194ecc(0x27b) + _0x194ecc(0x25f) + _0x194ecc(0x23a) + _0x194ecc(0x20f) + _0x194ecc(0x27f) + _0x194ecc(0x254) + _0x194ecc(0x24d) + _0x194ecc(0x2a8) + _0x194ecc(0x26d) + _0x194ecc(0x23f) + _0x194ecc(0x2b0) + _0x194ecc(0x2af) + _0x194ecc(0x296) + _0x194ecc(0x22c) + _0x194ecc(0x2b0) + _0x194ecc(0x222) + _0x194ecc(0x2ac) + _0x194ecc(0x26a) + _0x194ecc(0x221) + _0x194ecc(0x285) + _0x61643f + (_0x194ecc(0x21a) + _0x194ecc(0x21b) + _0x194ecc(0x208) + _0x194ecc(0x256) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2bb) + _0x194ecc(0x293) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x237) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x225)) + _0x2943cc + (_0x194ecc(0x288) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x25b) + _0x194ecc(0x238)) + _0x31a4b6[_0x194ecc(0x2c0)] + (_0x194ecc(0x212) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x263) + _0x194ecc(0x2a1) + _0x194ecc(0x26f) + _0x194ecc(0x291) + _0x194ecc(0x241) + _0x194ecc(0x2cd) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x236) + _0x194ecc(0x2bc) + _0x194ecc(0x26b) + _0x194ecc(0x289) + _0x194ecc(0x292) + _0x194ecc(0x243) + _0x194ecc(0x22b) + _0x194ecc(0x246) + _0x194ecc(0x278) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2b7) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x25d) + _0x194ecc(0x2c2) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2ba) + _0x194ecc(0x274) + _0x194ecc(0x1f4) + _0x194ecc(0x273) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x21e) + _0x194ecc(0x297) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x215)) + _0x20df05 + (_0x194ecc(0x288) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x25b) + _0x194ecc(0x1f6) + _0x194ecc(0x22d) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x259) + _0x194ecc(0x2b8) + _0x194ecc(0x2ad) + _0x194ecc(0x265) + _0x194ecc(0x22d) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2b5) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2b6) + _0x194ecc(0x290) + _0x194ecc(0x299) + _0x194ecc(0x20a) + _0x194ecc(0x226) + _0x194ecc(0x200) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x26c) + _0x194ecc(0x22d) + _0x194ecc(0x2b0) + _0x194ecc(0x21e) + _0x194ecc(0x29e) + _0x194ecc(0x2a4) + _0x194ecc(0x29c) + _0x194ecc(0x2a9) + _0x194ecc(0x22a) + _0x194ecc(0x256) + _0x194ecc(0x2b0) + _0x194ecc(0x2b0) + _0x194ecc(0x2ab)) + _0x31a4b6[_0x194ecc(0x2c0)] + (_0x194ecc(0x22d) + _0x194ecc(0x2b0) + _0x194ecc(0x21e) + _0x194ecc(0x271) + _0x194ecc(0x2b0) + _0x194ecc(0x21e) + _0x194ecc(0x2b9) + _0x194ecc(0x2b0) + _0x194ecc(0x26c) + _0x194ecc(0x22d) + _0x194ecc(0x207) + _0x194ecc(0x2b3) + _0x194ecc(0x269));
+            _0x1b80ad[_0x194ecc(0x264)] += _0x4ad782;
         });
-    } catch (error) {
-        console.error('Error fetching YouTube videos:', error);
-        showNotFoundMessage(container, 'Videos Not Found 😭');
+    } catch (_0x306fb1) {
+        console[_0xd05386(0x28e)](_0x2d8973[_0xd05386(0x28a)], _0x306fb1), _0x2d8973[_0xd05386(0x277)](showNotFoundMessage, container, _0x2d8973[_0xd05386(0x20b)]);
     }
 }
-
-function showNotFoundMessage(container, message) {
-    container.innerHTML = `
-        <div class="absolute inset-0 flex items-center justify-center">
-            <div class="flex flex-col items-center">
-                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" alt="Not Found" class="w-64 mb-4">
-                <p class="text-gray-500 text-center text-lg font-bold">${message}</p>
-            </div>
-        </div>
-    `;
-    container.classList.add('relative', 'min-h-[24rem]');
+function _0xc47a(_0x1ad497, _0x38945d) {
+    const _0xb446be = _0x1898();
+    return _0xc47a = function (_0x2abe11, _0xc5f32a) {
+        _0x2abe11 = _0x2abe11 - (-0x2284 + -0x1cbc + -0xb * -0x5ed);
+        let _0x33aca1 = _0xb446be[_0x2abe11];
+        return _0x33aca1;
+    }, _0xc47a(_0x1ad497, _0x38945d);
 }
-
+function showNotFoundMessage(_0x166c5c, _0x29bf56) {
+    const _0x25efa0 = _0xc47a, _0x55137e = {
+            'ATVRD': _0x25efa0(0x286),
+            'fyHkx': _0x25efa0(0x2a3) + _0x25efa0(0x1f5)
+        };
+    _0x166c5c[_0x25efa0(0x264)] = _0x25efa0(0x1f9) + _0x25efa0(0x261) + _0x25efa0(0x2c8) + _0x25efa0(0x2c6) + _0x25efa0(0x1f7) + _0x25efa0(0x224) + _0x25efa0(0x1f2) + _0x25efa0(0x256) + _0x25efa0(0x213) + _0x25efa0(0x2cc) + _0x25efa0(0x228) + _0x25efa0(0x24f) + _0x25efa0(0x1fd) + _0x25efa0(0x2b0) + _0x25efa0(0x206) + _0x25efa0(0x1ef) + _0x25efa0(0x204) + _0x25efa0(0x24c) + _0x25efa0(0x270) + _0x25efa0(0x1fc) + _0x25efa0(0x25a) + _0x25efa0(0x247) + _0x25efa0(0x24a) + _0x25efa0(0x281) + _0x25efa0(0x2ce) + _0x25efa0(0x218) + _0x25efa0(0x203) + _0x25efa0(0x20e) + _0x25efa0(0x2b0) + _0x25efa0(0x214) + _0x25efa0(0x282) + _0x25efa0(0x211) + _0x25efa0(0x234) + _0x25efa0(0x2ae) + _0x25efa0(0x1f3) + _0x29bf56 + (_0x25efa0(0x21c) + _0x25efa0(0x207) + _0x25efa0(0x2b3) + _0x25efa0(0x240) + _0x25efa0(0x2a5)), _0x166c5c[_0x25efa0(0x201)][_0x25efa0(0x27a)](_0x55137e[_0x25efa0(0x24b)], _0x55137e[_0x25efa0(0x29b)]);
+}
+function _0x1898() {
+    const _0xaf5e9a = [
+        '\x20\x20\x20\x20\x20\x20\x20\x20<a',
+        '1SZiDqe',
+        'enter\x20just',
+        '\x20\x20\x20\x20src=\x22',
+        '0\x22>JKT48</',
+        'class=\x22p-4',
+        'x\x20flex-col',
+        'ter\x20mb-2\x22>',
+        'ne-clamp-2',
+        '.com/image',
+        '4\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        '8zIpokG',
+        '-6\x20w-6\x20rou',
+        'com/vi/',
+        'm04TCVeKbg',
+        'json',
+        '-no-rj',
+        'center\x20tex',
+        'ite\x20rounde',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20o',
+        '\x20\x20<img\x20\x0a\x20\x20',
+        'lt=\x22',
+        '0x00ffffff',
+        'low-hidden',
+        '\x20w-full\x20ro',
+        '4hyuAL5gg=',
+        'split',
+        '</div>\x0a\x20\x20\x20',
+        '-sm\x22>\x0a\x20\x20\x20\x20',
+        '\x20\x20</div>\x0a\x20',
+        'rounded-2x',
+        '3.googleus',
+        'ps://jkt48',
+        'video',
+        'intensapi.',
+        's/logo.svg',
+        '118/z0erje',
+        'rder-4\x20bor',
+        '660hDStJH',
+        'cyq6twx7cm',
+        'ATVRD',
+        'nary.com/d',
+        'adow\x20durat',
+        'https://yt',
+        '\x20items-cen',
+        'nMAVb',
+        'Error\x20fetc',
+        'ceJqd',
+        'slice',
+        'nsition-sh',
+        'ow-md\x20over',
+        '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        '/maxresdef',
+        'ass=\x22bg-gr',
+        '\x20\x20\x20\x20\x20\x20\x20cla',
+        'd/v1737173',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20a',
+        'g-gray-300',
+        '\x20\x20\x20\x20\x20</div',
+        '\x20\x20\x20\x20\x20\x20\x20<di',
+        '3xl\x20\x20overf',
+        'd-3xl\x20shad',
+        'div\x20class=',
+        'ercontent.',
+        '\x20\x20\x20\x20\x20\x20\x20\x20cl',
+        'innerHTML',
+        'full\x20mr-2\x22',
+        'my.id/api/',
+        'unded\x22></d',
+        'sFFMy',
+        '\x20\x20\x20\x20\x20\x20',
+        'ps://www.y',
+        'is.onerror',
+        '\x20\x20\x20\x20</div>',
+        'full\x20max-w',
+        'MoBNa',
+        'l\x20h-48\x20obj',
+        'lx2zm7ha/i',
+        '/h3>\x0a\x20\x20\x20\x20\x20',
+        'em_KC02wRM',
+        'mb-2\x22>\x0a\x20\x20\x20',
+        '=\x22flex\x20ite',
+        '1438374cLBCjM',
+        '1888271VUGBWC',
+        'hFffB',
+        '\x27\x22\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'repeat',
+        'add',
+        '0\x20rounded-',
+        'Videos\x20Not',
+        'lass=\x22flex',
+        '/embed/',
+        'dow-lg\x20tra',
+        'yUHzS',
+        'naii.png\x22\x20',
+        '\x22text-gray',
+        'ById',
+        '\x20Found\x20😭',
+        '/watch?v=',
+        'relative',
+        'der-gray-5',
+        '\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20',
+        '=null;\x20thi',
+        'asZMC',
+        'class=\x22bg-',
+        '\x20mb-4\x22></d',
+        '550911izzHXJ',
+        'error',
+        'ounded-2xl',
+        'an\x20class=\x22',
+        'ect-cover\x20',
+        's.src=\x27htt',
+        's=\x22mb-4\x22>\x0a',
+        '\x20\x20\x20\x20<div\x20c',
+        'forEach',
+        '\x20class=\x22p-',
+        'img\x20\x0a\x20\x20\x20\x20\x20',
+        '\x20\x20\x20\x20\x20\x20</di',
+        'text-sm\x20te',
+        'ay-300\x20h-4',
+        'fyHkx',
+        'old\x20text-g',
+        'https://im',
+        'h3\x20class=\x22',
+        'v\x20class=\x22b',
+        'SWlSnJNhqN',
+        'ass=\x22w-ful',
+        'com/A4-nTN',
+        'min-h-[24r',
+        'font-semib',
+        '\x20\x20\x20',
+        'youtube-co',
+        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'ion-300\x20w-',
+        'ray-900\x20li',
+        'gray-300\x20h',
+        '\x20\x20\x20\x20\x20',
+        '\x20href=\x22htt',
+        '6\x20rounded-',
+        't-lg\x20font-',
+        '\x20\x20\x20\x20\x20\x20<div',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        'hing\x20YouTu',
+        'https://48',
+        'iv>\x0a\x20\x20\x20\x20\x20\x20',
+        'DBgBm',
+        '\x20\x20\x20>\x0a\x20\x20\x20\x20\x20',
+        '\x20\x20\x20\x20\x20\x20\x20<sp',
+        '\x20\x20\x20\x20\x20>\x0a\x20\x20\x20',
+        'ss=\x22w-6\x20h-',
+        '/a>\x0a\x20\x20\x20\x20\x20\x20',
+        '<div\x20class',
+        '\x20<div\x20clas',
+        'nerror=\x22th',
+        'getElement',
+        'mr-2\x22></di',
+        'ntainer',
+        'title',
+        's160-c-k-c',
+        '>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
+        'ass=\x22bg-wh',
+        '\x20h-4\x20w-32\x20',
+        '\x20\x20\x20\x20',
+        'inset-0\x20fl',
+        'flow-hidde',
+        '\x22absolute\x20',
+        'be\x20videos:',
+        'n\x20skeleton',
+        '20574PQvOUu',
+        'class=\x22fle',
+        'l\x22\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'alt=\x22Not\x20F',
+        '8\x20w-full\x20r',
+        '=\x22https://',
+        '11713430BNYAzJ',
+        'url',
+        'ify-center',
+        'bold\x22>',
+        'ms-center\x20',
+        'em]',
+        'lt=\x22JKT48\x22',
+        'ex\x20items-c',
+        'g.youtube.',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<',
+        '\x20w-full\x20ma',
+        '7yDT0zaitH',
+        'mage/uploa',
+        'ter\x22>\x0a\x20\x20\x20\x20',
+        'dlFOt',
+        'x-w-sm\x22>\x0a\x20',
+        'span>\x0a\x20\x20\x20\x20',
+        'classList',
+        '10197336lnkZMS',
+        's=\x22w-64\x20mb',
+        'res.cloudi',
+        'rounded\x22><',
+        '\x20\x20<img\x20src',
+        '\x20\x20\x20\x20\x20\x20\x20</d',
+        'ass=\x22block',
+        'g-white\x20bo',
+        'xt-gray-60',
+        'VTaXw',
+        'Gkwn-myOCa',
+        'ay-300\x20h-6',
+        '-4\x22>\x0a\x20\x20\x20\x20\x20',
+        '\x20hover:sha',
+        '/div>\x0a\x20\x20\x20\x20',
+        '-500\x20text-',
+        '\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
+        '\x20\x20\x20\x20\x20<div\x20',
+        '\x20<p\x20class=',
+        '\x20src=\x22',
+        '11617137SNounp',
+        'length',
+        'ound\x22\x20clas',
+        'ault.jpg',
+        '\x22\x20target=\x22',
+        '_blank\x22\x20cl',
+        '</p>\x0a\x20\x20\x20\x20\x20',
+        'nded-full\x20',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
+        'kktDWRSCWS',
+        '\x20\x20\x20<div\x20cl',
+        'outube.com'
+    ];
+    _0x1898 = function () {
+        return _0xaf5e9a;
+    };
+    return _0x1898();
+}
 fetchYoutubeVideos();

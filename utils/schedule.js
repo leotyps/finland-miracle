@@ -1,107 +1,341 @@
-let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth();
-let events = [];
-
-async function fetchEvents(year, month) {
+const _0x31f3f2 = _0x1ea1;
+function _0x45ec() {
+    const _0x3a055e = [
+        'RdUtH',
+        'error',
+        'calendar',
+        'FvKJV',
+        'qighB',
+        'kraQH',
+        'YkWbG',
+        'getDate',
+        'g-white\x20bo',
+        'PTVdV',
+        'DOMContent',
+        'prevMonth',
+        'createElem',
+        'my.id/api/',
+        'vVtAC',
+        'grid-cols-',
+        'January',
+        'getFullYea',
+        'hsvJC',
+        '92wwMKYW',
+        'umFou',
+        'uCgUY',
+        '2\x20md:grid-',
+        'e-600\x20mt-1',
+        'April',
+        '52795aoUSAK',
+        'NsPiQ',
+        'aQcOR',
+        'cols-4\x20lg:',
+        'Error\x20fetc',
+        'Mfjav',
+        'aiGXB',
+        'KYopL',
+        '\x20\x20\x20\x20\x20\x20\x20',
+        '=\x22text-xs\x20',
+        '48?year=',
+        'xt-purple-',
+        'l\x20hidden\x20l',
+        'min-h-32\x20b',
+        '</div>',
+        'click',
+        'avGCz',
+        'November',
+        'rounded-3x',
+        'June',
+        'dium\x20trunc',
+        '</div>\x0a\x20\x20\x20',
+        'esOcj',
+        '1513140IsDPgx',
+        'className',
+        'LwPLe',
+        'ggdLG',
+        'ple-100\x20te',
+        'LKJsw',
+        '725334zUSRaM',
+        'WJviH',
+        '-col',
+        'g:block',
+        '0\x20mb-2',
+        'PtShO',
+        'February',
+        'ent',
+        'xt-gray-80',
+        '<div\x20class',
+        '7\x20gap-4',
+        'hing\x20event',
+        '700\x20rounde',
+        'currentDat',
+        'events_jkt',
+        'EBJQs',
+        'kBwoo',
+        'ed-3xl\x20p-2',
+        'No\x20events',
+        'flex-grow',
+        'innerHTML',
+        '400\x20text-s',
+        's=\x22font-me',
+        'stener',
+        'addEventLi',
+        'https://48',
+        'tXSbp',
+        'whKzd',
+        '68212vhPShj',
+        'text-lg\x20fo',
+        'length',
+        'cyuFE',
+        'p-2\x20bg-pur',
+        'December',
+        'July',
+        'nt-bold\x20te',
+        '\x20<div\x20clas',
+        'September',
+        'rNwJy',
+        'EBqhu',
+        'getMonth',
+        'intensapi.',
+        'json',
+        'div',
+        'have_event',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        'Loaded',
+        'filter',
+        'getElement',
+        'lastChild',
+        'ueHRr',
+        'bZRlZ',
+        'm\x20italic',
+        'TTPBe',
+        'event_time',
+        'XfQLg',
+        'March',
+        'xWMOf',
+        'space-y-2\x20',
+        'getDay',
+        'iYonJ',
+        'mLuQy',
+        'd-md\x20text-',
+        'appendChil',
+        'forEach',
+        '&month=',
+        'MFVfZ',
+        'HEfIT',
+        'removeChil',
+        'text-gray-',
+        'grid\x20grid-',
+        'tanggal_fu',
+        'oYFwk',
+        'GJLYe',
+        'event_name',
+        'TCgRh',
+        '1695880jJGoOe',
+        'GAPXF',
+        '2BzlGof',
+        'ate\x22>',
+        'October',
+        'ById',
+        'data',
+        '\x20flex\x20flex',
+        'YsUCD',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        'textConten',
+        'text-purpl',
+        '2084054fQOvrm',
+        '4632894NqWWqo',
+        'split',
+        'rder\x20round',
+        'g-gray-50\x20',
+        'May',
+        'August',
+        'cols-1\x20sm:',
+        'XSaLw',
+        'success',
+        'nextMonth',
+        'children',
+        'EXzlh'
+    ];
+    _0x45ec = function () {
+        return _0x3a055e;
+    };
+    return _0x45ec();
+}
+function _0x1ea1(_0x32356e, _0x119f7a) {
+    const _0x3141b4 = _0x45ec();
+    return _0x1ea1 = function (_0xb163a6, _0x2ad0a3) {
+        _0xb163a6 = _0xb163a6 - (-0x26 * -0xd7 + 0x4 * -0x833 + 0x209);
+        let _0x2b374d = _0x3141b4[_0xb163a6];
+        return _0x2b374d;
+    }, _0x1ea1(_0x32356e, _0x119f7a);
+}
+(function (_0x30cd86, _0x472c7b) {
+    const _0x37a15c = _0x1ea1, _0x83ef3e = _0x30cd86();
+    while (!![]) {
+        try {
+            const _0x5dbab4 = -parseInt(_0x37a15c(0x143)) / (0x170d + 0x637 + -0x21 * 0xe3) + -parseInt(_0x37a15c(0x175)) / (-0x11a1 * -0x1 + -0xd1 * -0xf + -0x1dde) * (-parseInt(_0x37a15c(0x127)) / (0x1 * 0x1255 + 0x1 * 0x26d2 + -0x3924)) + -parseInt(_0x37a15c(0x19f)) / (0xdc + -0x7 * -0xbf + -0x611 * 0x1) * (-parseInt(_0x37a15c(0x1a5)) / (-0x11e3 + 0x2 * -0x133b + 0x385e)) + -parseInt(_0x37a15c(0x1bc)) / (-0x90f + -0x557 * -0x7 + -0x1c4c) + -parseInt(_0x37a15c(0x17f)) / (-0x1e94 * 0x1 + 0x52 * 0x26 + -0x126f * -0x1) + -parseInt(_0x37a15c(0x173)) / (0x11b8 + -0xf00 + -0x2b0) + parseInt(_0x37a15c(0x180)) / (-0x25e4 + -0x1 * 0xd69 + 0x3356);
+            if (_0x5dbab4 === _0x472c7b)
+                break;
+            else
+                _0x83ef3e['push'](_0x83ef3e['shift']());
+        } catch (_0x2ae3d9) {
+            _0x83ef3e['push'](_0x83ef3e['shift']());
+        }
+    }
+}(_0x45ec, -0x2c181 + -0x427a4 + -0x1 * -0x97e71));
+let currentYear = new Date()[_0x31f3f2(0x19d) + 'r'](), currentMonth = new Date()[_0x31f3f2(0x14f)](), events = [];
+async function fetchEvents(_0x2bd2b1, _0x38b276) {
+    const _0x585841 = _0x31f3f2, _0xdb693d = {
+            'aQcOR': function (_0x51e004, _0x3d3477) {
+                return _0x51e004 + _0x3d3477;
+            },
+            'HEfIT': function (_0x1d179c, _0x54107e) {
+                return _0x1d179c(_0x54107e);
+            },
+            'xWMOf': function (_0x3890f1, _0x333a77, _0x5c96a4) {
+                return _0x3890f1(_0x333a77, _0x5c96a4);
+            },
+            'TTPBe': _0x585841(0x1a9) + _0x585841(0x132) + 's:'
+        };
     try {
-        const url = `https://48intensapi.my.id/api/events_jkt48?year=${year}&month=${month + 1}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.success && data.data) {
-            events = data.data;
-            renderCalendar(year, month);
-        } else {
-            events = [];
-            renderCalendar(year, month);
-        }
-    } catch (error) {
-        console.error('Error fetching events:', error);
-        events = [];
-        renderCalendar(year, month);
+        const _0x1d198d = _0x585841(0x140) + _0x585841(0x150) + _0x585841(0x199) + _0x585841(0x135) + _0x585841(0x1af) + _0x2bd2b1 + _0x585841(0x168) + _0xdb693d[_0x585841(0x1a7)](_0x38b276, 0x244e + 0x47 * 0x4f + -0x1 * 0x3a36), _0x12d768 = await _0xdb693d[_0x585841(0x16a)](fetch, _0x1d198d), _0x4f3848 = await _0x12d768[_0x585841(0x151)]();
+        _0x4f3848[_0x585841(0x188)] && _0x4f3848[_0x585841(0x179)] ? (events = _0x4f3848[_0x585841(0x179)], _0xdb693d[_0x585841(0x160)](renderCalendar, _0x2bd2b1, _0x38b276)) : (events = [], _0xdb693d[_0x585841(0x160)](renderCalendar, _0x2bd2b1, _0x38b276));
+    } catch (_0x3e2a07) {
+        console[_0x585841(0x18d)](_0xdb693d[_0x585841(0x15c)], _0x3e2a07), events = [], _0xdb693d[_0x585841(0x160)](renderCalendar, _0x2bd2b1, _0x38b276);
     }
 }
-
-function renderCalendar(year, month) {
-    const calendar = document.getElementById('calendar');
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const startingDay = firstDay.getDay();
-
-    calendar.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4';
-    while (calendar.children.length > 7) {
-        calendar.removeChild(calendar.lastChild);
+function renderCalendar(_0x51131d, _0x393767) {
+    const _0x27df58 = _0x31f3f2, _0x42b29f = {
+            'WJviH': function (_0x60f9ff, _0x7662da) {
+                return _0x60f9ff === _0x7662da;
+            },
+            'EBqhu': function (_0x37cb98, _0x82b15c) {
+                return _0x37cb98(_0x82b15c);
+            },
+            'vVtAC': function (_0x5eae01, _0x531ace) {
+                return _0x5eae01 !== _0x531ace;
+            },
+            'kraQH': function (_0x48a725, _0x17c3bf) {
+                return _0x48a725 === _0x17c3bf;
+            },
+            'ggdLG': _0x27df58(0x152),
+            'avGCz': _0x27df58(0x147) + _0x27df58(0x1c0) + _0x27df58(0x1b0) + _0x27df58(0x133) + _0x27df58(0x165) + 'sm',
+            'qighB': _0x27df58(0x18e),
+            'LKJsw': function (_0x3cba21, _0x4a352c) {
+                return _0x3cba21 + _0x4a352c;
+            },
+            'tXSbp': _0x27df58(0x16d) + _0x27df58(0x186) + _0x27df58(0x19b) + _0x27df58(0x1a2) + _0x27df58(0x1a8) + _0x27df58(0x19b) + _0x27df58(0x131),
+            'Mfjav': function (_0x9d49ce, _0xe1e73c) {
+                return _0x9d49ce > _0xe1e73c;
+            },
+            'RdUtH': function (_0x287d95, _0x372d56) {
+                return _0x287d95 < _0x372d56;
+            },
+            'LwPLe': _0x27df58(0x1b2) + _0x27df58(0x183) + _0x27df58(0x1b7) + _0x27df58(0x1b1) + _0x27df58(0x12a),
+            'cyuFE': function (_0x226870, _0x370401) {
+                return _0x226870 <= _0x370401;
+            },
+            'aiGXB': _0x27df58(0x1b2) + _0x27df58(0x194) + _0x27df58(0x182) + _0x27df58(0x138) + _0x27df58(0x17a) + _0x27df58(0x129),
+            'ueHRr': _0x27df58(0x144) + _0x27df58(0x14a) + _0x27df58(0x12f) + _0x27df58(0x12b),
+            'PtShO': function (_0x132270, _0x4b600a) {
+                return _0x132270 > _0x4b600a;
+            },
+            'uCgUY': _0x27df58(0x161) + _0x27df58(0x13a),
+            'PTVdV': _0x27df58(0x16c) + _0x27df58(0x13c) + _0x27df58(0x15b),
+            'kBwoo': _0x27df58(0x139),
+            'iYonJ': function (_0x50125d) {
+                return _0x50125d();
+            }
+        }, _0x39fe68 = document[_0x27df58(0x157) + _0x27df58(0x178)](_0x42b29f[_0x27df58(0x190)]), _0x41c13f = new Date(_0x51131d, _0x393767, 0x20b * -0xb + -0x69f + -0x23d * -0xd), _0x1ccaa6 = new Date(_0x51131d, _0x42b29f[_0x27df58(0x1c1)](_0x393767, -0xd * -0x14b + -0x1144 + 0x3b * 0x2), -0x134d + -0x21f2 + 0x353f), _0x35eef9 = _0x41c13f[_0x27df58(0x162)]();
+    _0x39fe68[_0x27df58(0x1bd)] = _0x42b29f[_0x27df58(0x141)];
+    while (_0x42b29f[_0x27df58(0x1aa)](_0x39fe68[_0x27df58(0x18a)][_0x27df58(0x145)], 0x1 * 0x243 + -0x13a * -0x1d + -0x2 * 0x12e7)) {
+        _0x39fe68[_0x27df58(0x16b) + 'd'](_0x39fe68[_0x27df58(0x158)]);
     }
-    for (let i = 0; i < startingDay; i++) {
-        const emptyDay = document.createElement('div');
-        emptyDay.className = 'min-h-32 bg-gray-50 rounded-3xl hidden lg:block';
-        calendar.appendChild(emptyDay);
+    for (let _0x362738 = -0x5c4 + 0x1bdc + -0x1618; _0x42b29f[_0x27df58(0x18c)](_0x362738, _0x35eef9); _0x362738++) {
+        const _0x1d224c = document[_0x27df58(0x198) + _0x27df58(0x12e)](_0x42b29f[_0x27df58(0x1bf)]);
+        _0x1d224c[_0x27df58(0x1bd)] = _0x42b29f[_0x27df58(0x1be)], _0x39fe68[_0x27df58(0x166) + 'd'](_0x1d224c);
     }
-
-    for (let day = 1; day <= lastDay.getDate(); day++) {
-        const dayCell = document.createElement('div');
-        dayCell.className = 'min-h-32 bg-white border rounded-3xl p-2 flex flex-col';
-        const dateText = document.createElement('div');
-        dateText.className = 'text-lg font-bold text-gray-800 mb-2';
-        dateText.textContent = day;
-        dayCell.appendChild(dateText);
-
-        const dayEvents = events.filter(event => {
-            const eventDate = event.tanggal_full.split('/');
-            return parseInt(eventDate[0]) === day && event.event_name !== null && event.have_event === true;
+    for (let _0x16cde3 = -0xeaf + -0x2450 + 0x3300; _0x42b29f[_0x27df58(0x146)](_0x16cde3, _0x1ccaa6[_0x27df58(0x193)]()); _0x16cde3++) {
+        const _0x42f620 = document[_0x27df58(0x198) + _0x27df58(0x12e)](_0x42b29f[_0x27df58(0x1bf)]);
+        _0x42f620[_0x27df58(0x1bd)] = _0x42b29f[_0x27df58(0x1ab)];
+        const _0x5e9ea9 = document[_0x27df58(0x198) + _0x27df58(0x12e)](_0x42b29f[_0x27df58(0x1bf)]);
+        _0x5e9ea9[_0x27df58(0x1bd)] = _0x42b29f[_0x27df58(0x159)], _0x5e9ea9[_0x27df58(0x17d) + 't'] = _0x16cde3, _0x42f620[_0x27df58(0x166) + 'd'](_0x5e9ea9);
+        const _0x53e5c7 = events[_0x27df58(0x156)](_0x576114 => {
+            const _0x2d15dc = _0x27df58, _0x43bbcb = _0x576114[_0x2d15dc(0x16e) + 'll'][_0x2d15dc(0x181)]('/');
+            return _0x42b29f[_0x2d15dc(0x128)](_0x42b29f[_0x2d15dc(0x14e)](parseInt, _0x43bbcb[0x4 * -0x22a + -0x3d9 * -0x9 + -0x19f9]), _0x16cde3) && _0x42b29f[_0x2d15dc(0x19a)](_0x576114[_0x2d15dc(0x171)], null) && _0x42b29f[_0x2d15dc(0x191)](_0x576114[_0x2d15dc(0x153)], !![]);
         });
-
-        if (dayEvents.length > 0) {
-            const eventsContainer = document.createElement('div');
-            eventsContainer.className = 'space-y-2 flex-grow';
-
-            dayEvents.forEach(event => {
-                const eventDiv = document.createElement('div');
-                eventDiv.className = 'p-2 bg-purple-100 text-purple-700 rounded-md text-sm';
-                eventDiv.innerHTML = `
-                    <div class="font-medium truncate">${event.event_name}</div>
-                    ${event.event_time ? `<div class="text-xs text-purple-600 mt-1">${event.event_time}</div>` : ''}
-                `;
-                eventsContainer.appendChild(eventDiv);
-            });
-
-            dayCell.appendChild(eventsContainer);
+        if (_0x42b29f[_0x27df58(0x12c)](_0x53e5c7[_0x27df58(0x145)], -0x2551 * 0x1 + 0x343 * 0x3 + 0x1b88)) {
+            const _0x1ea763 = document[_0x27df58(0x198) + _0x27df58(0x12e)](_0x42b29f[_0x27df58(0x1bf)]);
+            _0x1ea763[_0x27df58(0x1bd)] = _0x42b29f[_0x27df58(0x1a1)], _0x53e5c7[_0x27df58(0x167)](_0x10a619 => {
+                const _0x1a4a54 = _0x27df58, _0x17b350 = document[_0x1a4a54(0x198) + _0x1a4a54(0x12e)](_0x42b29f[_0x1a4a54(0x1bf)]);
+                _0x17b350[_0x1a4a54(0x1bd)] = _0x42b29f[_0x1a4a54(0x1b5)], _0x17b350[_0x1a4a54(0x13b)] = _0x1a4a54(0x154) + _0x1a4a54(0x17c) + _0x1a4a54(0x14b) + _0x1a4a54(0x13d) + _0x1a4a54(0x1b9) + _0x1a4a54(0x176) + _0x10a619[_0x1a4a54(0x171)] + (_0x1a4a54(0x1ba) + _0x1a4a54(0x17c) + _0x1a4a54(0x1ad)) + (_0x10a619[_0x1a4a54(0x15d)] ? _0x1a4a54(0x130) + _0x1a4a54(0x1ae) + _0x1a4a54(0x17e) + _0x1a4a54(0x1a3) + '\x22>' + _0x10a619[_0x1a4a54(0x15d)] + _0x1a4a54(0x1b3) : '') + (_0x1a4a54(0x154) + _0x1a4a54(0x1ad)), _0x1ea763[_0x1a4a54(0x166) + 'd'](_0x17b350);
+            }), _0x42f620[_0x27df58(0x166) + 'd'](_0x1ea763);
         } else {
-            const noEventText = document.createElement('div');
-            noEventText.className = 'text-gray-400 text-sm italic';
-            noEventText.textContent = 'No events';
-            dayCell.appendChild(noEventText);
+            const _0x572bf2 = document[_0x27df58(0x198) + _0x27df58(0x12e)](_0x42b29f[_0x27df58(0x1bf)]);
+            _0x572bf2[_0x27df58(0x1bd)] = _0x42b29f[_0x27df58(0x195)], _0x572bf2[_0x27df58(0x17d) + 't'] = _0x42b29f[_0x27df58(0x137)], _0x42f620[_0x27df58(0x166) + 'd'](_0x572bf2);
         }
-
-        calendar.appendChild(dayCell);
+        _0x39fe68[_0x27df58(0x166) + 'd'](_0x42f620);
     }
-    updateCurrentDate();
+    _0x42b29f[_0x27df58(0x163)](updateCurrentDate);
 }
-
-
 function updateCurrentDate() {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'];
-    document.getElementById('currentDate').textContent = `${months[currentMonth]} ${currentYear}`;
+    const _0x5342af = _0x31f3f2, _0x1802e1 = {
+            'NsPiQ': _0x5342af(0x19c),
+            'whKzd': _0x5342af(0x12d),
+            'GAPXF': _0x5342af(0x15f),
+            'rNwJy': _0x5342af(0x1a4),
+            'EBJQs': _0x5342af(0x184),
+            'umFou': _0x5342af(0x1b8),
+            'oYFwk': _0x5342af(0x149),
+            'YsUCD': _0x5342af(0x185),
+            'hsvJC': _0x5342af(0x14c),
+            'FvKJV': _0x5342af(0x177),
+            'EXzlh': _0x5342af(0x1b6),
+            'bZRlZ': _0x5342af(0x148),
+            'esOcj': _0x5342af(0x134) + 'e'
+        }, _0x7d9e8d = [
+            _0x1802e1[_0x5342af(0x1a6)],
+            _0x1802e1[_0x5342af(0x142)],
+            _0x1802e1[_0x5342af(0x174)],
+            _0x1802e1[_0x5342af(0x14d)],
+            _0x1802e1[_0x5342af(0x136)],
+            _0x1802e1[_0x5342af(0x1a0)],
+            _0x1802e1[_0x5342af(0x16f)],
+            _0x1802e1[_0x5342af(0x17b)],
+            _0x1802e1[_0x5342af(0x19e)],
+            _0x1802e1[_0x5342af(0x18f)],
+            _0x1802e1[_0x5342af(0x18b)],
+            _0x1802e1[_0x5342af(0x15a)]
+        ];
+    document[_0x5342af(0x157) + _0x5342af(0x178)](_0x1802e1[_0x5342af(0x1bb)])[_0x5342af(0x17d) + 't'] = _0x7d9e8d[currentMonth] + '\x20' + currentYear;
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('prevMonth').addEventListener('click', () => {
-        currentMonth--;
-        if (currentMonth < 0) {
-            currentMonth = 11;
-            currentYear--;
-        }
-        fetchEvents(currentYear, currentMonth);
-    });
-
-    document.getElementById('nextMonth').addEventListener('click', () => {
-        currentMonth++;
-        if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear++;
-        }
-        fetchEvents(currentYear, currentMonth);
-    });
-
-    fetchEvents(currentYear, currentMonth);
+document[_0x31f3f2(0x13f) + _0x31f3f2(0x13e)](_0x31f3f2(0x196) + _0x31f3f2(0x155), function () {
+    const _0x268c31 = _0x31f3f2, _0x31e73e = {
+            'mLuQy': function (_0x10dcfe, _0x518803) {
+                return _0x10dcfe < _0x518803;
+            },
+            'GJLYe': function (_0x1cab5d, _0x5a59f1, _0x43912d) {
+                return _0x1cab5d(_0x5a59f1, _0x43912d);
+            },
+            'XSaLw': function (_0x2a5c7e, _0x38fc05) {
+                return _0x2a5c7e > _0x38fc05;
+            },
+            'MFVfZ': function (_0x4cafbc, _0x310f21, _0xd33232) {
+                return _0x4cafbc(_0x310f21, _0xd33232);
+            },
+            'YkWbG': _0x268c31(0x197),
+            'TCgRh': _0x268c31(0x1b4),
+            'XfQLg': _0x268c31(0x189),
+            'KYopL': function (_0x596f5a, _0x2fba31, _0x35584d) {
+                return _0x596f5a(_0x2fba31, _0x35584d);
+            }
+        };
+    document[_0x268c31(0x157) + _0x268c31(0x178)](_0x31e73e[_0x268c31(0x192)])[_0x268c31(0x13f) + _0x268c31(0x13e)](_0x31e73e[_0x268c31(0x172)], () => {
+        const _0x4723b4 = _0x268c31;
+        currentMonth--, _0x31e73e[_0x4723b4(0x164)](currentMonth, 0x7 * -0xe3 + -0xf * -0x23b + 0x368 * -0x8) && (currentMonth = -0x2694 + 0xc05 + 0x1 * 0x1a9a, currentYear--), _0x31e73e[_0x4723b4(0x170)](fetchEvents, currentYear, currentMonth);
+    }), document[_0x268c31(0x157) + _0x268c31(0x178)](_0x31e73e[_0x268c31(0x15e)])[_0x268c31(0x13f) + _0x268c31(0x13e)](_0x31e73e[_0x268c31(0x172)], () => {
+        const _0x4288f3 = _0x268c31;
+        currentMonth++, _0x31e73e[_0x4288f3(0x187)](currentMonth, -0x239f + -0x1 * -0xef4 + 0x14b6) && (currentMonth = 0x9a5 + 0xcb2 + -0x85 * 0x2b, currentYear++), _0x31e73e[_0x4288f3(0x169)](fetchEvents, currentYear, currentMonth);
+    }), _0x31e73e[_0x268c31(0x1ac)](fetchEvents, currentYear, currentMonth);
 });

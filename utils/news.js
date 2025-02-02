@@ -1,64 +1,275 @@
+const _0x1c6825 = _0x1931;
+(function (_0x58aa07, _0x5aa3aa) {
+    const _0x467754 = _0x1931, _0x3e6e45 = _0x58aa07();
+    while (!![]) {
+        try {
+            const _0x2ad141 = parseInt(_0x467754(0x1e3)) / (0x75 * -0x51 + 0xc69 * -0x1 + 0x316f) * (-parseInt(_0x467754(0x238)) / (-0x674 + -0xf * -0x1eb + 0x1 * -0x164f)) + -parseInt(_0x467754(0x1df)) / (0x1e0 + -0x9d0 * 0x1 + 0x7f3) * (parseInt(_0x467754(0x226)) / (0x11 * -0x13a + -0x8ff + -0x1 * -0x1ddd)) + parseInt(_0x467754(0x1ff)) / (-0x1d35 + -0x1818 + 0x3552) + -parseInt(_0x467754(0x262)) / (-0x19e * -0x6 + -0x118 + 0xe * -0x9d) * (parseInt(_0x467754(0x20d)) / (-0x3ee + 0x1 * 0x829 + -0x434)) + -parseInt(_0x467754(0x1d6)) / (-0x16bf + 0x28a + -0x9d * -0x21) + parseInt(_0x467754(0x21c)) / (-0x251 * -0x5 + -0x9b9 + -0x1d3) * (parseInt(_0x467754(0x224)) / (0xe * 0x202 + -0xdca + -0xe48)) + -parseInt(_0x467754(0x263)) / (0x1 * -0xe09 + 0xafc + -0x42 * -0xc) * (-parseInt(_0x467754(0x1b2)) / (-0xa2 * 0x2d + 0x2 * -0x1075 + 0x1 * 0x3d70));
+            if (_0x2ad141 === _0x5aa3aa)
+                break;
+            else
+                _0x3e6e45['push'](_0x3e6e45['shift']());
+        } catch (_0x130ab0) {
+            _0x3e6e45['push'](_0x3e6e45['shift']());
+        }
+    }
+}(_0x2ff2, -0x32599 + -0x759 * 0xc6 + -0xc1885 * -0x1));
 async function fetchHotNews() {
+    const _0x2b00bc = _0x1931, _0x3f38f7 = {
+            'hBjKY': function (_0x100901, _0xfc91dc) {
+                return _0x100901 % _0xfc91dc;
+            },
+            'IRazS': _0x2b00bc(0x20e) + _0x2b00bc(0x22b),
+            'pGjxe': function (_0x47d397, _0x503fc5) {
+                return _0x47d397(_0x503fc5);
+            },
+            'ypfcv': _0x2b00bc(0x216) + _0x2b00bc(0x265) + _0x2b00bc(0x1ca) + _0x2b00bc(0x1b5),
+            'ZUgEi': function (_0x1b506c, _0x35fb3c) {
+                return _0x1b506c === _0x35fb3c;
+            },
+            'TMCmU': function (_0x7683aa, _0x5d01f2, _0x321902) {
+                return _0x7683aa(_0x5d01f2, _0x321902);
+            },
+            'fdSae': _0x2b00bc(0x1b8) + _0x2b00bc(0x258),
+            'Fvupi': _0x2b00bc(0x1fc) + '0',
+            'jEsCP': _0x2b00bc(0x1d1) + _0x2b00bc(0x218),
+            'TtdBw': _0x2b00bc(0x25a) + '00',
+            'bRpSA': _0x2b00bc(0x1e7) + _0x2b00bc(0x245),
+            'UaXQB': _0x2b00bc(0x237) + _0x2b00bc(0x26d) + _0x2b00bc(0x256),
+            'iRHEv': function (_0x13df6b, _0x2bc9e4, _0x511a33) {
+                return _0x13df6b(_0x2bc9e4, _0x511a33);
+            }
+        };
     try {
-        const container = document.getElementById('hot-news-container');
-        container.innerHTML = Array(6).fill(`
-            <div class="bg-white rounded-3xl shadow-md overflow-hidden p-4 skeleton">
-                <div class="flex items-center mb-4">
-                    <div class="bg-gray-300 w-10 h-5 mr-3 rounded"></div>
-                    <div class="bg-gray-300 w-20 h-4 rounded"></div>
-                </div>
-                <div class="bg-gray-300 h-6 w-3/4 mb-4 rounded"></div>
-                <div class="bg-gray-200 h-4 w-1/2 mb-2 rounded"></div>
-                <div class="bg-gray-200 h-4 w-1/4 rounded"></div>
-            </div>
-        `).join(''); 
-
-        const response = await fetch('https://48intensapi.my.id/api/news');
-        const data = await response.json();
-
-        container.innerHTML = '';
-
-        if (!data || !data.berita || data.berita.length === 0) {
-            showNotFoundMessage(container, 'News Not Found 😭');
+        const _0xd0c1eb = document[_0x2b00bc(0x1ed) + _0x2b00bc(0x1bc)](_0x3f38f7[_0x2b00bc(0x1ce)]);
+        _0xd0c1eb[_0x2b00bc(0x215)] = _0x3f38f7[_0x2b00bc(0x1b4)](Array, -0x1946 * 0x1 + -0x15eb + 0x2f37)[_0x2b00bc(0x246)](_0x2b00bc(0x268) + _0x2b00bc(0x252) + _0x2b00bc(0x26b) + _0x2b00bc(0x264) + _0x2b00bc(0x1e0) + _0x2b00bc(0x1e9) + _0x2b00bc(0x205) + _0x2b00bc(0x220) + _0x2b00bc(0x1bf) + _0x2b00bc(0x1db) + _0x2b00bc(0x252) + _0x2b00bc(0x1f5) + _0x2b00bc(0x1fd) + _0x2b00bc(0x20c) + _0x2b00bc(0x1db) + _0x2b00bc(0x1db) + _0x2b00bc(0x1e5) + _0x2b00bc(0x223) + _0x2b00bc(0x25d) + _0x2b00bc(0x1ea) + _0x2b00bc(0x1f8) + _0x2b00bc(0x210) + _0x2b00bc(0x1db) + _0x2b00bc(0x217) + _0x2b00bc(0x1b7) + _0x2b00bc(0x244) + _0x2b00bc(0x257) + _0x2b00bc(0x254) + _0x2b00bc(0x236) + _0x2b00bc(0x1f6) + _0x2b00bc(0x23d) + _0x2b00bc(0x1db) + _0x2b00bc(0x248) + _0x2b00bc(0x208) + _0x2b00bc(0x26c) + _0x2b00bc(0x240) + _0x2b00bc(0x213) + _0x2b00bc(0x24c) + _0x2b00bc(0x1db) + _0x2b00bc(0x252) + _0x2b00bc(0x1da) + _0x2b00bc(0x1bb) + _0x2b00bc(0x242) + _0x2b00bc(0x1ef) + _0x2b00bc(0x200) + _0x2b00bc(0x1db) + _0x2b00bc(0x217) + _0x2b00bc(0x1b7) + _0x2b00bc(0x22d) + _0x2b00bc(0x250) + _0x2b00bc(0x1f8) + _0x2b00bc(0x210) + _0x2b00bc(0x23e) + _0x2b00bc(0x236) + '\x20')[_0x2b00bc(0x1c3)]('');
+        const _0x8172f4 = await _0x3f38f7[_0x2b00bc(0x1b4)](fetch, _0x3f38f7[_0x2b00bc(0x1be)]), _0x1fa4d0 = await _0x8172f4[_0x2b00bc(0x1d4)]();
+        _0xd0c1eb[_0x2b00bc(0x215)] = '';
+        if (!_0x1fa4d0 || !_0x1fa4d0[_0x2b00bc(0x259)] || _0x3f38f7[_0x2b00bc(0x1c8)](_0x1fa4d0[_0x2b00bc(0x259)][_0x2b00bc(0x1b3)], -0x20cc + -0x1af * -0xa + 0xff6)) {
+            _0x3f38f7[_0x2b00bc(0x255)](showNotFoundMessage, _0xd0c1eb, _0x3f38f7[_0x2b00bc(0x1ee)]);
             return;
         }
-
-        const topThreeNews = data.berita.slice(0, 6); 
-        const colors = ["bg-blue-500", "bg-purple-500", "bg-green-500", "bg-red-500/50"];
-
-        topThreeNews.forEach((news, index) => {
-            const colorClass = colors[index % colors.length];
-
-            const newsCard = `
-                <a href="/news/${news.berita_id}" class="block ${colorClass} text-white rounded-3xl shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
-                    onclick="localStorage.setItem('newsColor', '${colorClass}')">
-                    <div class="p-4">
-                        <div class="flex items-center mb-4">
-                            <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}" alt="Badge" class="w-14 h-5 mr-3 rounded-3xl loading="lazy"">
-                            <span class="text-sm text-white-200">${news.waktu}</span>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2">${news.judul}</h3>
-                    </div>
-                </a>
-            `;
-            container.innerHTML += newsCard;
+        const _0x210898 = _0x1fa4d0[_0x2b00bc(0x259)][_0x2b00bc(0x1d5)](-0x1501 * 0x1 + -0x2c1 * 0xa + 0x2b * 0x121, -0x3ce * 0x1 + 0x2475 + -0x20a1), _0x58612f = [
+                _0x3f38f7[_0x2b00bc(0x23f)],
+                _0x3f38f7[_0x2b00bc(0x1f9)],
+                _0x3f38f7[_0x2b00bc(0x243)],
+                _0x3f38f7[_0x2b00bc(0x233)]
+            ];
+        _0x210898[_0x2b00bc(0x1c4)]((_0x421310, _0x656917) => {
+            const _0x329767 = _0x2b00bc, _0x20d71b = _0x58612f[_0x3f38f7[_0x329767(0x24a)](_0x656917, _0x58612f[_0x329767(0x1b3)])], _0x571f0e = _0x329767(0x268) + _0x329767(0x1e6) + _0x329767(0x209) + 's/' + _0x421310[_0x329767(0x25e)] + (_0x329767(0x1c9) + _0x329767(0x21d)) + _0x20d71b + (_0x329767(0x204) + _0x329767(0x230) + _0x329767(0x229) + _0x329767(0x249) + _0x329767(0x1d2) + _0x329767(0x253) + _0x329767(0x1e8) + _0x329767(0x201) + _0x329767(0x1d8) + _0x329767(0x1e2) + _0x329767(0x1db) + _0x329767(0x234) + _0x329767(0x267) + _0x329767(0x1ba) + _0x329767(0x20b) + _0x329767(0x228)) + _0x20d71b + (_0x329767(0x251) + _0x329767(0x1db) + _0x329767(0x1f2) + _0x329767(0x1f7) + _0x329767(0x1b6) + _0x329767(0x1db) + _0x329767(0x1fb) + _0x329767(0x207) + _0x329767(0x21f) + _0x329767(0x266) + _0x329767(0x231) + _0x329767(0x1db) + _0x329767(0x1db) + _0x329767(0x25f) + _0x329767(0x241) + _0x329767(0x203) + _0x329767(0x232) + _0x329767(0x261) + _0x329767(0x22a) + _0x329767(0x1dc) + _0x329767(0x23b)) + _0x421310[_0x329767(0x222)] + (_0x329767(0x1f3) + _0x329767(0x1f0) + _0x329767(0x23a) + _0x329767(0x20f) + _0x329767(0x1bd) + _0x329767(0x1c2) + _0x329767(0x1cc) + _0x329767(0x1db) + _0x329767(0x1db) + _0x329767(0x20a) + _0x329767(0x22c) + _0x329767(0x269) + _0x329767(0x225)) + _0x421310[_0x329767(0x247)] + (_0x329767(0x1c7) + _0x329767(0x1db) + _0x329767(0x1db) + _0x329767(0x24e) + _0x329767(0x1db) + _0x329767(0x1db) + _0x329767(0x211) + _0x329767(0x26a) + _0x329767(0x1fa) + _0x329767(0x235)) + _0x421310[_0x329767(0x1d0)] + (_0x329767(0x23c) + _0x329767(0x1db) + _0x329767(0x23e) + _0x329767(0x236) + _0x329767(0x1f6) + _0x329767(0x1cd) + _0x329767(0x1c5));
+            _0xd0c1eb[_0x329767(0x215)] += _0x571f0e;
         });
-    } catch (error) {
-        console.error('Error fetching Hot News:', error);
-        const container = document.getElementById('hot-news-container');
-        showNotFoundMessage(container, 'News Not Found 😭');
+    } catch (_0x265bb6) {
+        console[_0x2b00bc(0x1fe)](_0x3f38f7[_0x2b00bc(0x221)], _0x265bb6);
+        const _0x308984 = document[_0x2b00bc(0x1ed) + _0x2b00bc(0x1bc)](_0x3f38f7[_0x2b00bc(0x1ce)]);
+        _0x3f38f7[_0x2b00bc(0x1de)](showNotFoundMessage, _0x308984, _0x3f38f7[_0x2b00bc(0x1ee)]);
     }
 }
-
-function showNotFoundMessage(container, message) {
-    container.className = 'flex items-center justify-center min-h-[24rem]';
-
-    container.innerHTML = `
-        <div class="flex flex-col items-center">
-            <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" alt="Not Found" class="w-64 mb-4">
-            <p class="text-gray-500 text-lg font-bold">${message}</p>
-        </div>
-    `;
+function _0x2ff2() {
+    const _0x1491b4 = [
+        '></div>\x0a\x20\x20',
+        'sition-all',
+        'ound\x22\x20clas',
+        'res.cloudi',
+        '\x20text-whit',
+        'flow-hidde',
+        '\x22flex\x20flex',
+        'v\x20class=\x22f',
+        'ss=\x22bg-gra',
+        'href=\x22/new',
+        '\x20\x20<span\x20cl',
+        'Item(\x27news',
+        'er\x20mb-4\x22>\x0a',
+        '2674ECgotG',
+        'hot-news-c',
+        'mr-3\x20round',
+        'iv>\x0a\x20\x20\x20\x20\x20\x20',
+        '\x20\x20\x20<h3\x20cla',
+        'DOMContent',
+        '\x20rounded\x22>',
+        'ont-bold\x22>',
+        'innerHTML',
+        'https://48',
+        '\x20\x20\x20\x20<div\x20c',
+        '500',
+        'cyq6twx7cm',
+        'div\x20class=',
+        '\x20\x20\x20\x20\x20\x20\x20<p\x20',
+        '9jUSOpx',
+        'lock\x20',
+        'oofDe',
+        'lex\x20items-',
+        'n\x20p-4\x20skel',
+        'UaXQB',
+        'badge_url',
+        '=\x22bg-gray-',
+        '2867990nLvDGV',
+        'ite-200\x22>',
+        '4KdbXgi',
+        'class=\x22tex',
+        'Color\x27,\x20\x27',
+        '3xl\x20shadow',
+        'mage/uploa',
+        'ontainer',
+        'ass=\x22text-',
+        'ray-200\x20h-',
+        '\x20text-lg\x20f',
+        'stener',
+        'e\x20rounded-',
+        '4\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        'nary.com/h',
+        'bRpSA',
+        '\x20\x20\x20\x20\x20oncli',
+        'd\x20mb-2\x22>',
+        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'Error\x20fetc',
+        '8bFrqip',
+        'stify-cent',
+        '\x22w-14\x20h-5\x20',
+        'kt48',
+        '</h3>\x0a\x20\x20\x20\x20',
+        '/div>\x0a\x20\x20\x20\x20',
+        '\x20\x20\x20\x20\x20\x20</di',
+        'Fvupi',
+        'w-3/4\x20mb-4',
+        '=\x22https://',
+        '\x20w-1/2\x20mb-',
+        'TtdBw',
+        'ray-300\x20w-',
+        '/50',
+        'fill',
+        'waktu',
+        '\x20\x20<div\x20cla',
+        '-md\x20hover:',
+        'hBjKY',
+        '-center\x22>\x0a',
+        '</div>\x0a\x20\x20\x20',
+        'naii.png\x22\x20',
+        '\x20\x20</div>\x0a\x20',
+        '-4\x22>\x0a\x20\x20\x20\x20\x20',
+        '4\x20w-1/4\x20ro',
+        '\x27)\x22>\x0a\x20\x20\x20\x20\x20',
+        '\x20\x20\x20<div\x20cl',
+        'overflow-h',
+        'nded\x22></di',
+        'TMCmU',
+        'ews:',
+        '20\x20h-4\x20rou',
+        'ound\x20😭',
+        'berita',
+        'bg-green-5',
+        'er\x20min-h-[',
+        'nary.com/d',
+        '300\x20w-10\x20h',
+        'berita_id',
+        '\x20\x20<img\x20src',
+        '118/z0erje',
+        'aymzm4wp/i',
+        '4350qHRYaW',
+        '73117wemlbc',
+        'ite\x20rounde',
+        'intensapi.',
+        'center\x20mb-',
+        'ck=\x22localS',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        'sm\x20text-wh',
+        'ss=\x22text-l',
+        'ass=\x22bg-wh',
+        'y-300\x20h-6\x20',
+        'hing\x20Hot\x20N',
+        '828yMKttv',
+        'length',
+        'pGjxe',
+        'news',
+        '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'lass=\x22bg-g',
+        'News\x20Not\x20F',
+        '-center\x20ju',
+        'torage.set',
+        'ay-200\x20h-4',
+        'ById',
+        'ed-3xl\x20loa',
+        'ypfcv',
+        'eton\x22>\x0a\x20\x20\x20',
+        'Loaded',
+        'flex\x20items',
+        'ding=\x22lazy',
+        'join',
+        'forEach',
+        '\x20\x20\x20\x20\x20\x20',
+        '24rem]',
+        '</span>\x0a\x20\x20',
+        'ZUgEi',
+        '\x22\x20class=\x22b',
+        'my.id/api/',
+        'className',
+        '\x22\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        '/a>\x0a\x20\x20\x20\x20\x20\x20',
+        'IRazS',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<',
+        'judul',
+        'bg-purple-',
+        'shadow-lg\x20',
+        '\x20\x20\x20</div>\x0a',
+        'json',
+        'slice',
+        '1386296uuqMzg',
+        'lx2zm7ha/i',
+        '\x20duration-',
+        '-col\x20items',
+        'ass=\x22bg-gr',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        'd/assets/j',
+        'd/v1737173',
+        'iRHEv',
+        '595383uMpACJ',
+        'd-3xl\x20shad',
+        's=\x22w-64\x20mb',
+        '300\x22\x0a\x20\x20\x20\x20\x20',
+        '24832WmjRcA',
+        '\x20\x20\x20\x20',
+        '<div\x20class',
+        '\x20\x20\x20\x20\x20\x20\x20<a\x20',
+        'bg-red-500',
+        'idden\x20tran',
+        'ow-md\x20over',
+        '-5\x20mr-3\x20ro',
+        'addEventLi',
+        '</p>\x0a\x20\x20\x20\x20\x20',
+        'getElement',
+        'fdSae',
+        '2\x20rounded\x22',
+        'ge\x22\x20class=',
+        'alt=\x22Not\x20F',
+        '\x20\x20\x20\x20\x20<div\x20',
+        '\x22\x20alt=\x22Bad',
+        't-gray-500',
+        'ass=\x22flex\x20',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
+        'class=\x22p-4',
+        'unded\x22></d',
+        'jEsCP',
+        'g\x20font-bol',
+        '\x20\x20\x20\x20\x20\x20\x20<di',
+        'bg-blue-50',
+        'items-cent',
+        'error',
+        '1083110xHzMxv'
+    ];
+    _0x2ff2 = function () {
+        return _0x1491b4;
+    };
+    return _0x2ff2();
 }
-
-document.addEventListener('DOMContentLoaded', fetchHotNews);
+function _0x1931(_0x1b8567, _0x23610b) {
+    const _0x50bacd = _0x2ff2();
+    return _0x1931 = function (_0x2e9a58, _0x38d5b2) {
+        _0x2e9a58 = _0x2e9a58 - (-0x1b * -0xad + -0x9 * -0x1fd + -0x2272);
+        let _0x376541 = _0x50bacd[_0x2e9a58];
+        return _0x376541;
+    }, _0x1931(_0x1b8567, _0x23610b);
+}
+function showNotFoundMessage(_0x197b01, _0x23d8f2) {
+    const _0x4c15c6 = _0x1931, _0x18471b = { 'oofDe': _0x4c15c6(0x1c1) + _0x4c15c6(0x1b9) + _0x4c15c6(0x239) + _0x4c15c6(0x25b) + _0x4c15c6(0x1c6) };
+    _0x197b01[_0x4c15c6(0x1cb)] = _0x18471b[_0x4c15c6(0x21e)], _0x197b01[_0x4c15c6(0x215)] = _0x4c15c6(0x1cf) + _0x4c15c6(0x21a) + _0x4c15c6(0x206) + _0x4c15c6(0x1d9) + _0x4c15c6(0x24b) + _0x4c15c6(0x1db) + _0x4c15c6(0x25f) + _0x4c15c6(0x241) + _0x4c15c6(0x203) + _0x4c15c6(0x25c) + _0x4c15c6(0x1d7) + _0x4c15c6(0x22a) + _0x4c15c6(0x1dd) + _0x4c15c6(0x260) + _0x4c15c6(0x219) + _0x4c15c6(0x24d) + _0x4c15c6(0x1f1) + _0x4c15c6(0x202) + _0x4c15c6(0x1e1) + _0x4c15c6(0x24f) + _0x4c15c6(0x21b) + _0x4c15c6(0x227) + _0x4c15c6(0x1f4) + _0x4c15c6(0x22e) + _0x4c15c6(0x214) + _0x23d8f2 + (_0x4c15c6(0x1ec) + _0x4c15c6(0x1d3) + _0x4c15c6(0x1e4));
+}
+document[_0x1c6825(0x1eb) + _0x1c6825(0x22f)](_0x1c6825(0x212) + _0x1c6825(0x1c0), fetchHotNews);

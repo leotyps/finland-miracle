@@ -1,327 +1,910 @@
-// live.js
+function _0x6243(_0x26322a, _0x158c31) {
+    const _0xe2f2f0 = _0xea88();
+    return _0x6243 = function (_0x4827c3, _0x5a85ba) {
+        _0x4827c3 = _0x4827c3 - (-0x4f7 + -0x130c + 0x24d * 0xb);
+        let _0x3c0aa9 = _0xe2f2f0[_0x4827c3];
+        return _0x3c0aa9;
+    }, _0x6243(_0x26322a, _0x158c31);
+}
+(function (_0x4a5ef4, _0x1ad0dd) {
+    const _0x3c9eb5 = _0x6243, _0x2ce55d = _0x4a5ef4();
+    while (!![]) {
+        try {
+            const _0x4caad9 = -parseInt(_0x3c9eb5(0x1e2)) / (0x3f5 * 0x1 + -0x244d * 0x1 + 0x2059) + parseInt(_0x3c9eb5(0x3a7)) / (0x1c5d + 0x1 * 0x1cc6 + -0x3921 * 0x1) * (-parseInt(_0x3c9eb5(0x293)) / (0xc16 + 0x10ee + -0x1d01)) + -parseInt(_0x3c9eb5(0x35e)) / (0x1 * 0x200b + 0x195a + -0x3961) * (parseInt(_0x3c9eb5(0x3d3)) / (0x971 * -0x1 + 0x16c * -0x8 + 0xe * 0x17d)) + parseInt(_0x3c9eb5(0x272)) / (0x35 * -0x2e + -0x61 * -0x63 + -0x1bf7) * (parseInt(_0x3c9eb5(0x2c7)) / (-0x4a6 + -0x2188 + 0x2635)) + parseInt(_0x3c9eb5(0x3be)) / (-0x1 * -0x1eb5 + 0x1 * 0x11c5 + 0x2 * -0x1839) + -parseInt(_0x3c9eb5(0x14c)) / (0x17d6 + 0x140f + -0x2bdc) * (-parseInt(_0x3c9eb5(0x3d5)) / (-0x982 * 0x1 + -0x20f1 + 0x2a7d)) + parseInt(_0x3c9eb5(0x209)) / (-0xf62 * -0x2 + 0x22f5 + -0x2 * 0x20d7) * (parseInt(_0x3c9eb5(0x356)) / (-0x5 * -0x275 + -0x1511 + -0xa * -0xe2));
+            if (_0x4caad9 === _0x1ad0dd)
+                break;
+            else
+                _0x2ce55d['push'](_0x2ce55d['shift']());
+        } catch (_0x29622b) {
+            _0x2ce55d['push'](_0x2ce55d['shift']());
+        }
+    }
+}(_0xea88, -0x11b3b0 + -0x7 * -0x16577 + 0x11d18d));
 async function fetchLiveData() {
-    try {
-        const container = document.getElementById('liveContainer');
-        const fragment = document.createDocumentFragment(); 
-
-        container.innerHTML = ''; 
-
-        const [idnResponse, showroomResponse] = await Promise.all([
-            fetch('https://48intensapi.my.id/api/idnlive/jkt48'),
-            fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan')
-        ]);
-
-        const idnData = await idnResponse.json();
-        const showroomData = await showroomResponse.json();
-
-        let hasContent = false;
-
-        if (idnData.data && idnData.data.length > 0) {
-            idnData.data.forEach(stream => {
-                const card = createIDNCard(stream);
-                const wrapper = document.createElement('div');
-                wrapper.innerHTML = card;
-                fragment.appendChild(wrapper.firstElementChild); 
-            });
-            hasContent = true;
-        }
-
-        if (showroomData && showroomData.length > 0) {
-            showroomData.forEach(stream => {
-                const card = createShowroomCard(stream);
-                const wrapper = document.createElement('div');
-                wrapper.innerHTML = card;
-                fragment.appendChild(wrapper.firstElementChild);
-            });
-            hasContent = true;
-        }
-
-        if (!hasContent) {
-            showNotFoundMessage(container, 'No live streams available at the moment 😭');
-        } else {
-            container.appendChild(fragment);
-        }
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        const container = document.getElementById('liveContainer');
-        showNotFoundMessage(container, 'Error loading live streams. Please try again later 😭');
-    }
-}
-
-function showNotFoundMessage(container, message) {
-    container.innerHTML = '';
-    container.className = 'min-h-[24rem] relative';
-
-    const notFoundContent = `
-        <div class="absolute inset-0 flex items-center justify-center">
-            <div class="flex flex-col items-center">
-                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" 
-                        alt="Not Found" 
-                        class="w-64  mb-4">
-                <p class="text-gray-500 text-lg font-bold">${message}</p>
-            </div>
-        </div>
-    `;
-
-    container.innerHTML = notFoundContent;
-}
-
-function compressStreamData(url, platform) {
-    const streamId = generateShortId(url);
-    const streamData = {
-        mpath: url,
-        ptype: platform === 'showroom' ? 'sroom' : 'idnlv',
-        exp: Date.now() + (3 * 60 * 60 * 1000)
-    };
-
-    localStorage.setItem(`stream_${streamId}`, JSON.stringify(streamData));
-    return streamId;
-}
-
-function generateShortId(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
-        hash = hash & hash;
-    }
-    return Math.abs(hash).toString(36).slice(-6);
-}
-
-
-function createIDNCard(stream) {
-    const memberUsername = stream.user.username.replace('jkt48_', '');
-    const proxyStreamUrl = `https://jkt48showroom-api.my.id/proxy?url=${encodeURIComponent(stream.stream_url)}`;
-    const streamId = compressStreamData(proxyStreamUrl, 'idn');
-    const watchUrl = `/live/idn/${memberUsername}/${streamId}`;
-
-    const freeStreamTitles = [
-        'TEMEN NGOBROL',
-        'TEMEN MAIN',
-        'TEMEN MASAK',
-        'TEMEN MAKAN',
-        'TRIAL'
-    ];
-
-    const isFreeStream = freeStreamTitles.some(title => 
-        stream.title && stream.title.toUpperCase().includes(title.toUpperCase())
-    );
-    
-    const isMemberAccount = stream.user.username.startsWith('jkt48_');
-
-    let buttonProps = {
-        label: "Get Ticket",
-        link: "https://www.idn.app/jkt48-official",
-        icon: "fa-ticket-alt",
-        gradient: "from-amber-400 to-yellow-500"
-    };
-    
-    if (isFreeStream || isMemberAccount) {
-        buttonProps = {
-            label: "Watch Stream",
-            link: watchUrl,
-            icon: "fa-play",
-            gradient: "from-amber-400 to-yellow-500"
+    const _0x32ddcb = _0x6243, _0x13981f = {
+            'IqIXE': function (_0x563b87, _0x34e487) {
+                return _0x563b87(_0x34e487);
+            },
+            'avJRX': _0x32ddcb(0x199),
+            'jGURW': _0x32ddcb(0x2ee) + _0x32ddcb(0x247),
+            'hqxtK': _0x32ddcb(0x200) + _0x32ddcb(0x267) + _0x32ddcb(0x33a) + _0x32ddcb(0x363) + _0x32ddcb(0x3a8),
+            'ZEGlM': _0x32ddcb(0x200) + _0x32ddcb(0x267) + _0x32ddcb(0x33a) + _0x32ddcb(0x2f5) + _0x32ddcb(0x2e5) + _0x32ddcb(0x2a0),
+            'WbHrB': function (_0x1a34cc, _0x4eae78) {
+                return _0x1a34cc > _0x4eae78;
+            },
+            'jEXdB': function (_0x339327, _0x51d6d5, _0xef03a3) {
+                return _0x339327(_0x51d6d5, _0xef03a3);
+            },
+            'OiDlk': _0x32ddcb(0x2e8) + _0x32ddcb(0x3cd) + _0x32ddcb(0x396) + _0x32ddcb(0x280) + '😭',
+            'oHZlb': _0x32ddcb(0x207) + _0x32ddcb(0x30d),
+            'mWOrh': _0x32ddcb(0x206) + _0x32ddcb(0x3cb) + _0x32ddcb(0x2d1) + _0x32ddcb(0x201) + _0x32ddcb(0x252) + _0x32ddcb(0x2f0)
         };
-    }
-
-    return `
-        <div class="bg-yellow-100/80 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
-            <div class="relative group">
-                <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
-                <div class="absolute inset-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="absolute top-3 left-3 flex items-center space-x-2">
-                    <div class="bg-red-600 text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg">
-                        <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                        <span>LIVE</span>
-                    </div>
-                    <div class="bg-black/75 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium">
-                        ${stream.view_count} watching
-                    </div>
-                </div>
-                <div class="absolute top-3 right-3">
-                    <div class="bg-gradient-to-r from-amber-400 to-yellow-500 text-white px-3 py-1.5 rounded-full text-sm font-medium">
-                        IDN Live
-                    </div>
-                </div>
-            </div>
-            <div class="p-5">
-                <div class="flex items-center space-x-4 mb-4">
-                    <div class="relative">
-                        <img src="${stream.user.avatar}" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-purple-100">
-                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-gray-600">${stream.user.name}</h3>
-                        <p class="text-gray-600 text-sm">@${stream.user.username}</p>
-                    </div>
-                </div>
-                <h4 class="font-medium text-gray-600 mb-4 line-clamp-2">${stream.title}</h4>
-                <a href="${buttonProps.link}" class="block w-full text-center px-6 py-3 bg-gradient-to-r ${buttonProps.gradient} text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
-                    <i class="fas ${buttonProps.icon} mr-2"></i>
-                    ${buttonProps.label}
-                </a>
-            </div>
-        </div>
-    `;
-}
-
-
-function createShowroomCard(stream) {
-    const memberUsername = stream.room_url_key.replace('JKT48_', '').toLowerCase();
-    const streamId = compressStreamData(stream.streaming_url_list[0].url, 'showroom');
-    const watchUrl = `/live/sr/${memberUsername}/${streamId}`;
-
-    return `
-        <div class="bg-[#ff88da]/70 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
-            <div class="relative group">
-                <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
-                <div class="absolute inset-0  group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="absolute top-3 left-3 flex items-center space-x-2">
-                    <div class="bg-red-600 text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg">
-                        <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                        <span>LIVE</span>
-                    </div>
-                    <div class="bg-black/75 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium">
-                        ${stream.view_num.toLocaleString()} watching
-                    </div>
-                </div>
-                <div class="absolute top-3 right-3">
-                    <div class="bg-gradient-to-r from-rose-400 to-rose-500 text-white px-3 py-1.5 rounded-full text-sm font-medium">
-                        SHOWROOM
-                    </div>
-                </div>
-            </div>
-            <div class="p-5">
-                <div class="flex items-center space-x-4 mb-4">
-                    <div class="relative">
-                        <img src="${stream.image_square}" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-purple-100">
-                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white">${stream.main_name}</h3>
-                        <p class="text-white font-medium text-sm">${stream.genre_name}</p>
-                    </div>
-                </div>
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center space-x-2 text-gray-500">
-                        <i class="text-white fas fa-users"></i>
-                        <span class="text-sm text-white">${stream.follower_num.toLocaleString()} followers</span>
-                    </div>
-                </div>
-                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-rose-400 to-rose-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
-                    <i class="fas fa-play mr-2"></i>
-                    Watch Stream
-                </a>
-            </div>
-        </div>
-    `;
-}
-
-
-async function fetchTopStreamers() {
-    const topStreamersContainer = document.getElementById('topStreamersContainer');
-    
-    const skeletonCards = Array(5).fill().map(() => `
-        <div class="bg-gray-50 rounded-lg p-4 mb-3 skeleton animate-pulse">
-            <div class="flex items-center space-x-4">
-                <div class="relative">
-                    <div class="absolute -top-2 -left-2 w-6 h-6 bg-gray-300 rounded-full"></div>
-                    <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
-                </div>
-                <div class="flex-1">
-                    <div class="h-5 bg-gray-300 rounded w-3/4 mb-2"></div>
-                    <div class="h-4 bg-gray-300 rounded w-1/2"></div>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
-    topStreamersContainer.innerHTML = `
-        <div class="bg-white border-2 border-gray-200 rounded-3xl shadow-lg p-6">
-            <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
-            ${skeletonCards}
-        </div>
-    `;
-
     try {
-        const response = await fetch('https://48intensapi.my.id/api/livejkt48/topstreamer');
-        const data = await response.json();
-        
-        if (data.success && data.data) {
-            const streamers = data.data;
-            const getRankStyle = (rank) => {
-                switch(rank) {
-                    case 1:
+        const _0x38c071 = document[_0x32ddcb(0x232) + _0x32ddcb(0x240)](_0x13981f[_0x32ddcb(0x3ae)]), _0x422b8d = document[_0x32ddcb(0x1c9) + _0x32ddcb(0x20b) + 'nt']();
+        _0x38c071[_0x32ddcb(0x29a)] = '';
+        const [_0x49465d, _0x29b66a] = await Promise[_0x32ddcb(0x15a)]([
+                _0x13981f[_0x32ddcb(0x2cd)](fetch, _0x13981f[_0x32ddcb(0x215)]),
+                _0x13981f[_0x32ddcb(0x2cd)](fetch, _0x13981f[_0x32ddcb(0x286)])
+            ]), _0x37400d = await _0x49465d[_0x32ddcb(0x271)](), _0x5727c1 = await _0x29b66a[_0x32ddcb(0x271)]();
+        let _0x104deb = ![];
+        _0x37400d[_0x32ddcb(0x3c4)] && _0x13981f[_0x32ddcb(0x222)](_0x37400d[_0x32ddcb(0x3c4)][_0x32ddcb(0x2aa)], 0x33d * -0x9 + 0x5 * 0x14b + 0x16ae * 0x1) && (_0x37400d[_0x32ddcb(0x3c4)][_0x32ddcb(0x35a)](_0x434df5 => {
+            const _0x4231b3 = _0x32ddcb, _0x5404b1 = _0x13981f[_0x4231b3(0x2cd)](createIDNCard, _0x434df5), _0x15d853 = document[_0x4231b3(0x3d1) + _0x4231b3(0x37b)](_0x13981f[_0x4231b3(0x3c5)]);
+            _0x15d853[_0x4231b3(0x29a)] = _0x5404b1, _0x422b8d[_0x4231b3(0x347) + 'd'](_0x15d853[_0x4231b3(0x245) + _0x4231b3(0x1d3)]);
+        }), _0x104deb = !![]), _0x5727c1 && _0x13981f[_0x32ddcb(0x222)](_0x5727c1[_0x32ddcb(0x2aa)], -0x3 * -0x181 + 0x172c + -0x1baf * 0x1) && (_0x5727c1[_0x32ddcb(0x35a)](_0x2087df => {
+            const _0x52a898 = _0x32ddcb, _0x296c21 = _0x13981f[_0x52a898(0x2cd)](createShowroomCard, _0x2087df), _0x45b322 = document[_0x52a898(0x3d1) + _0x52a898(0x37b)](_0x13981f[_0x52a898(0x3c5)]);
+            _0x45b322[_0x52a898(0x29a)] = _0x296c21, _0x422b8d[_0x52a898(0x347) + 'd'](_0x45b322[_0x52a898(0x245) + _0x52a898(0x1d3)]);
+        }), _0x104deb = !![]), !_0x104deb ? _0x13981f[_0x32ddcb(0x1c7)](showNotFoundMessage, _0x38c071, _0x13981f[_0x32ddcb(0x173)]) : _0x38c071[_0x32ddcb(0x347) + 'd'](_0x422b8d);
+    } catch (_0x3f6a19) {
+        console[_0x32ddcb(0x398)](_0x13981f[_0x32ddcb(0x1e7)], _0x3f6a19);
+        const _0x23e3cb = document[_0x32ddcb(0x232) + _0x32ddcb(0x240)](_0x13981f[_0x32ddcb(0x3ae)]);
+        _0x13981f[_0x32ddcb(0x1c7)](showNotFoundMessage, _0x23e3cb, _0x13981f[_0x32ddcb(0x374)]);
+    }
+}
+function showNotFoundMessage(_0x563f83, _0x2f38db) {
+    const _0x4a4ae8 = _0x6243, _0x158126 = { 'vFmcE': _0x4a4ae8(0x3da) + _0x4a4ae8(0x339) + 've' };
+    _0x563f83[_0x4a4ae8(0x29a)] = '', _0x563f83[_0x4a4ae8(0x214)] = _0x158126[_0x4a4ae8(0x1fc)];
+    const _0x54700c = _0x4a4ae8(0x190) + _0x4a4ae8(0x37f) + _0x4a4ae8(0x254) + _0x4a4ae8(0x1af) + _0x4a4ae8(0x217) + _0x4a4ae8(0x262) + _0x4a4ae8(0x17d) + _0x4a4ae8(0x241) + _0x4a4ae8(0x309) + _0x4a4ae8(0x2a2) + _0x4a4ae8(0x2e2) + _0x4a4ae8(0x227) + _0x4a4ae8(0x17e) + _0x4a4ae8(0x305) + _0x4a4ae8(0x180) + _0x4a4ae8(0x2b7) + _0x4a4ae8(0x1a3) + _0x4a4ae8(0x361) + _0x4a4ae8(0x32c) + _0x4a4ae8(0x192) + _0x4a4ae8(0x307) + _0x4a4ae8(0x2f7) + _0x4a4ae8(0x302) + _0x4a4ae8(0x3bd) + _0x4a4ae8(0x1df) + _0x4a4ae8(0x305) + _0x4a4ae8(0x1e1) + _0x4a4ae8(0x39c) + _0x4a4ae8(0x322) + _0x4a4ae8(0x305) + _0x4a4ae8(0x2f4) + _0x4a4ae8(0x16f) + _0x4a4ae8(0x3a6) + _0x4a4ae8(0x305) + _0x4a4ae8(0x297) + _0x4a4ae8(0x2b4) + _0x4a4ae8(0x341) + _0x4a4ae8(0x19f) + _0x4a4ae8(0x249) + _0x2f38db + (_0x4a4ae8(0x1a4) + _0x4a4ae8(0x34d) + _0x4a4ae8(0x379) + _0x4a4ae8(0x371) + _0x4a4ae8(0x2ef));
+    _0x563f83[_0x4a4ae8(0x29a)] = _0x54700c;
+}
+function compressStreamData(_0x2d3fcc, _0x15efbc) {
+    const _0x611ac2 = _0x6243, _0x4cd7aa = {
+            'OHnMZ': function (_0x4f2abf, _0x47fb7c) {
+                return _0x4f2abf(_0x47fb7c);
+            },
+            'vLeSO': function (_0x2a7f48, _0x2a2079) {
+                return _0x2a7f48 === _0x2a2079;
+            },
+            'StsMB': _0x611ac2(0x372),
+            'AVtuk': _0x611ac2(0x19e),
+            'AEbru': _0x611ac2(0x2d8),
+            'vIgyI': function (_0x2fe9b7, _0x192ff6) {
+                return _0x2fe9b7 + _0x192ff6;
+            },
+            'AizRT': function (_0x12f860, _0x4f0547) {
+                return _0x12f860 * _0x4f0547;
+            },
+            'kBvtg': function (_0x4528b4, _0x1803ad) {
+                return _0x4528b4 * _0x1803ad;
+            }
+        }, _0x5c83ba = _0x4cd7aa[_0x611ac2(0x1e5)](generateShortId, _0x2d3fcc), _0x3f822f = {
+            'mpath': _0x2d3fcc,
+            'ptype': _0x4cd7aa[_0x611ac2(0x359)](_0x15efbc, _0x4cd7aa[_0x611ac2(0x2df)]) ? _0x4cd7aa[_0x611ac2(0x34c)] : _0x4cd7aa[_0x611ac2(0x300)],
+            'exp': _0x4cd7aa[_0x611ac2(0x238)](Date[_0x611ac2(0x278)](), _0x4cd7aa[_0x611ac2(0x14f)](_0x4cd7aa[_0x611ac2(0x14f)](_0x4cd7aa[_0x611ac2(0x24e)](0xa * 0x1f3 + -0x15b * -0x1 + -0x14d6, -0x1bb8 + 0x1154 + -0x154 * -0x8), -0xb * -0x129 + -0x10f7 * -0x2 + -0x2e75), 0x7f * -0x43 + -0x2 * 0x511 + 0x2f47))
+        };
+    return localStorage[_0x611ac2(0x343)](_0x611ac2(0x28e) + _0x5c83ba, JSON[_0x611ac2(0x18c)](_0x3f822f)), _0x5c83ba;
+}
+function generateShortId(_0x343d63) {
+    const _0x490177 = _0x6243, _0x3e328e = {
+            'pYAqC': function (_0x24e674, _0x4fe402) {
+                return _0x24e674 < _0x4fe402;
+            },
+            'kuyQV': function (_0x10f61b, _0xf157aa) {
+                return _0x10f61b + _0xf157aa;
+            },
+            'HEpgL': function (_0x2f1bf4, _0x1ff8c2) {
+                return _0x2f1bf4 - _0x1ff8c2;
+            },
+            'AVOZz': function (_0x19271a, _0x296d6e) {
+                return _0x19271a << _0x296d6e;
+            },
+            'CEoAQ': function (_0x7784c9, _0x5b3793) {
+                return _0x7784c9 & _0x5b3793;
+            }
+        };
+    let _0x5d2c82 = -0x2 * -0xf29 + 0xc * 0x1f + 0x1 * -0x1fc6;
+    for (let _0x49eb12 = 0x1c86 * -0x1 + -0x1 * -0x1d53 + -0xcd; _0x3e328e[_0x490177(0x29f)](_0x49eb12, _0x343d63[_0x490177(0x2aa)]); _0x49eb12++) {
+        const _0x5a4dde = _0x343d63[_0x490177(0x323)](_0x49eb12);
+        _0x5d2c82 = _0x3e328e[_0x490177(0x30e)](_0x3e328e[_0x490177(0x36e)](_0x3e328e[_0x490177(0x203)](_0x5d2c82, 0x3d * -0x67 + 0x1766 + 0x12a * 0x1), _0x5d2c82), _0x5a4dde), _0x5d2c82 = _0x3e328e[_0x490177(0x1f9)](_0x5d2c82, _0x5d2c82);
+    }
+    return Math[_0x490177(0x1ae)](_0x5d2c82)[_0x490177(0x29b)](0xe5 + -0x5 * -0x1d3 + -0x9e0)[_0x490177(0x296)](-(0x1 * 0xa61 + 0x21b1 + -0x2c0c));
+}
+function createIDNCard(_0x51962e) {
+    const _0x396949 = _0x6243, _0xea05af = {
+            'CjCrs': _0x396949(0x1de),
+            'sEoYl': function (_0x4c1eca, _0x58512a) {
+                return _0x4c1eca(_0x58512a);
+            },
+            'nRTMa': function (_0x4589f8, _0xf413f4, _0x13b534) {
+                return _0x4589f8(_0xf413f4, _0x13b534);
+            },
+            'HzKDD': _0x396949(0x2fb),
+            'urGPi': _0x396949(0x15f) + _0x396949(0x2b3),
+            'YewmP': _0x396949(0x17f),
+            'dtegV': _0x396949(0x1be) + 'K',
+            'QezQC': _0x396949(0x1db) + 'N',
+            'niOKo': _0x396949(0x185),
+            'ibYPY': _0x396949(0x3a0),
+            'GfHTZ': _0x396949(0x333) + _0x396949(0x1c3) + _0x396949(0x219) + _0x396949(0x276),
+            'Rghkm': _0x396949(0x332) + _0x396949(0x168),
+            'iuxBW': _0x396949(0x3db) + _0x396949(0x2d0) + _0x396949(0x176),
+            'utcaA': function (_0x135e90, _0x47f3c0) {
+                return _0x135e90 || _0x47f3c0;
+            },
+            'UPFQP': _0x396949(0x1c6) + 'am',
+            'DbgmP': _0x396949(0x3b1)
+        }, _0x613635 = _0x51962e[_0x396949(0x1a6)][_0x396949(0x21b)][_0x396949(0x18e)](_0xea05af[_0x396949(0x2a6)], ''), _0x518be0 = _0x396949(0x1b3) + _0x396949(0x24c) + _0x396949(0x2d9) + _0x396949(0x1f3) + 'l=' + _0xea05af[_0x396949(0x31e)](encodeURIComponent, _0x51962e[_0x396949(0x181)]), _0x1c453f = _0xea05af[_0x396949(0x2da)](compressStreamData, _0x518be0, _0xea05af[_0x396949(0x2d5)]), _0x2e2aa4 = _0x396949(0x159) + _0x613635 + '/' + _0x1c453f, _0x469526 = [
+            _0xea05af[_0x396949(0x2a4)],
+            _0xea05af[_0x396949(0x1aa)],
+            _0xea05af[_0x396949(0x380)],
+            _0xea05af[_0x396949(0x1d5)],
+            _0xea05af[_0x396949(0x32e)]
+        ], _0x1418e6 = _0x469526[_0x396949(0x32b)](_0x2a7db => _0x51962e[_0x396949(0x3c8)] && _0x51962e[_0x396949(0x3c8)][_0x396949(0x301) + 'e']()[_0x396949(0x20a)](_0x2a7db[_0x396949(0x301) + 'e']())), _0x1f087a = _0x51962e[_0x396949(0x1a6)][_0x396949(0x21b)][_0x396949(0x288)](_0xea05af[_0x396949(0x2a6)]);
+    let _0x5efd41 = {
+        'label': _0xea05af[_0x396949(0x29d)],
+        'link': _0xea05af[_0x396949(0x23c)],
+        'icon': _0xea05af[_0x396949(0x235)],
+        'gradient': _0xea05af[_0x396949(0x3ac)]
+    };
+    return _0xea05af[_0x396949(0x189)](_0x1418e6, _0x1f087a) && (_0x5efd41 = {
+        'label': _0xea05af[_0x396949(0x263)],
+        'link': _0x2e2aa4,
+        'icon': _0xea05af[_0x396949(0x345)],
+        'gradient': _0xea05af[_0x396949(0x3ac)]
+    }), _0x396949(0x190) + _0x396949(0x37f) + _0x396949(0x1e0) + _0x396949(0x387) + _0x396949(0x367) + _0x396949(0x273) + _0x396949(0x1b0) + _0x396949(0x15d) + _0x396949(0x290) + _0x396949(0x2a8) + _0x396949(0x39e) + _0x396949(0x270) + _0x396949(0x382) + _0x396949(0x320) + _0x396949(0x158) + _0x396949(0x305) + _0x396949(0x2ae) + _0x396949(0x35c) + _0x396949(0x15c) + _0x396949(0x305) + _0x396949(0x32f) + _0x396949(0x22d) + _0x51962e[_0x396949(0x1dd)] + (_0x396949(0x342) + _0x396949(0x1ce) + _0x396949(0x316) + _0x396949(0x1e8) + _0x396949(0x37c) + _0x396949(0x1c4) + _0x396949(0x212) + _0x396949(0x221) + _0x396949(0x27d) + _0x396949(0x230) + _0x396949(0x29c) + _0x396949(0x177) + _0x396949(0x305) + _0x396949(0x289) + _0x396949(0x294) + _0x396949(0x370) + _0x396949(0x2be) + _0x396949(0x2a5) + _0x396949(0x373) + _0x396949(0x1b6) + _0x396949(0x384) + _0x396949(0x3a4) + _0x396949(0x1a7) + _0x396949(0x305) + _0x396949(0x309) + _0x396949(0x17a) + _0x396949(0x1d9) + _0x396949(0x165) + _0x396949(0x2b0) + _0x396949(0x385) + _0x396949(0x375) + _0x396949(0x305) + _0x396949(0x2d7) + _0x396949(0x37f) + _0x396949(0x31c) + _0x396949(0x22a) + _0x396949(0x381) + _0x396949(0x2f1) + _0x396949(0x156) + _0x396949(0x20c) + _0x396949(0x357) + _0x396949(0x217) + _0x396949(0x27e) + _0x396949(0x291) + _0x396949(0x34b) + _0x396949(0x305) + _0x396949(0x305) + _0x396949(0x2d2) + _0x396949(0x195) + _0x396949(0x366) + _0x396949(0x36a) + _0x396949(0x3bc) + _0x396949(0x397) + _0x396949(0x28c) + _0x396949(0x32a) + _0x396949(0x1df) + _0x396949(0x305) + _0x396949(0x3b0) + _0x396949(0x231) + _0x396949(0x351) + _0x396949(0x305) + _0x396949(0x314) + _0x396949(0x305) + _0x396949(0x305) + _0x396949(0x2ae) + _0x396949(0x2c3) + _0x396949(0x3ca) + _0x396949(0x24f) + _0x396949(0x170) + _0x396949(0x28d) + _0x396949(0x349) + _0x396949(0x25c) + _0x396949(0x281) + _0x396949(0x2cb) + _0x396949(0x305) + _0x396949(0x305) + _0x396949(0x2ef)) + _0x51962e[_0x396949(0x23a)] + (_0x396949(0x25e) + _0x396949(0x305) + _0x396949(0x305) + _0x396949(0x202) + _0x396949(0x305) + _0x396949(0x314) + _0x396949(0x305) + _0x396949(0x289) + _0x396949(0x294) + _0x396949(0x1e3) + _0x396949(0x196) + _0x396949(0x241) + _0x396949(0x305) + _0x396949(0x1ff) + _0x396949(0x3c3) + _0x396949(0x1e4) + _0x396949(0x19d) + _0x396949(0x295) + _0x396949(0x2a1) + _0x396949(0x170) + _0x396949(0x28d) + _0x396949(0x349) + _0x396949(0x25c) + _0x396949(0x281) + _0x396949(0x2cb) + _0x396949(0x305) + _0x396949(0x305) + _0x396949(0x3a2) + _0x396949(0x26d) + _0x396949(0x305) + _0x396949(0x371) + _0x396949(0x305) + _0x396949(0x2bf) + _0x396949(0x279) + _0x396949(0x2c8) + _0x396949(0x1df) + _0x396949(0x1ff) + _0x396949(0x22b) + _0x396949(0x1df) + _0x396949(0x383) + _0x396949(0x283) + _0x396949(0x2b0) + _0x396949(0x385) + _0x396949(0x23b) + _0x396949(0x1a5) + _0x396949(0x305) + _0x396949(0x1d6) + _0x396949(0x377) + _0x396949(0x321) + _0x396949(0x305) + _0x396949(0x305) + _0x396949(0x1e6) + '\x22') + _0x51962e[_0x396949(0x1a6)][_0x396949(0x25d)] + (_0x396949(0x34f) + _0x396949(0x16e) + _0x396949(0x378) + _0x396949(0x178) + _0x396949(0x151) + _0x396949(0x31d) + _0x396949(0x28b) + _0x396949(0x198) + _0x396949(0x305) + _0x396949(0x2ce) + _0x396949(0x330) + _0x396949(0x152) + _0x396949(0x2ad) + _0x396949(0x348) + _0x396949(0x3d2) + _0x396949(0x1d0) + _0x396949(0x3ba) + _0x396949(0x26a) + _0x396949(0x2ba) + _0x396949(0x2c5) + _0x396949(0x279) + _0x396949(0x305) + _0x396949(0x371) + _0x396949(0x305) + _0x396949(0x2d7) + _0x396949(0x1fa) + _0x396949(0x305) + _0x396949(0x2d7) + _0x396949(0x20f) + _0x396949(0x3d4) + _0x396949(0x3a1) + _0x396949(0x3b3)) + _0x51962e[_0x396949(0x1a6)][_0x396949(0x334)] + (_0x396949(0x327) + _0x396949(0x305) + _0x396949(0x305) + _0x396949(0x1b2) + _0x396949(0x3a1) + _0x396949(0x2b1) + _0x396949(0x3cc)) + _0x51962e[_0x396949(0x1a6)][_0x396949(0x21b)] + (_0x396949(0x1a4) + _0x396949(0x305) + _0x396949(0x2bf) + _0x396949(0x279) + _0x396949(0x253) + _0x396949(0x1fa) + _0x396949(0x305) + _0x396949(0x1b8) + _0x396949(0x194) + _0x396949(0x24d) + _0x396949(0x3dd) + _0x396949(0x261) + _0x396949(0x324)) + _0x51962e[_0x396949(0x3c8)] + (_0x396949(0x312) + _0x396949(0x305) + _0x396949(0x26b) + '\x22') + _0x5efd41[_0x396949(0x2d3)] + (_0x396949(0x34e) + _0x396949(0x362) + _0x396949(0x1dc) + _0x396949(0x17c) + _0x396949(0x1eb) + _0x396949(0x16b) + '\x20') + _0x5efd41[_0x396949(0x3c1)] + (_0x396949(0x170) + _0x396949(0x1a0) + _0x396949(0x1ea) + _0x396949(0x2e7) + _0x396949(0x19a) + _0x396949(0x2bd) + _0x396949(0x2b5) + _0x396949(0x3a4) + _0x396949(0x2c9) + _0x396949(0x306) + _0x396949(0x315) + _0x396949(0x305) + _0x396949(0x2d7) + _0x396949(0x1f8) + _0x396949(0x353)) + _0x5efd41[_0x396949(0x2b6)] + (_0x396949(0x259) + _0x396949(0x279) + _0x396949(0x305) + '\x20\x20') + _0x5efd41[_0x396949(0x1f1)] + (_0x396949(0x1df) + _0x396949(0x2ca) + _0x396949(0x279) + _0x396949(0x2c8) + _0x396949(0x190) + _0x396949(0x1fb));
+}
+function _0xea88() {
+    const _0x58d95b = [
+        '-top-2\x20-le',
+        'ss=\x22h-5\x20bg',
+        'StsMB',
+        'genre_name',
+        'ium\x22>\x0a\x20\x20\x20\x20',
+        'x\x20flex-col',
+        '/live/sr/',
+        'v\x20class=\x22w',
+        'ekatepatla',
+        'follower_n',
+        'd-3xl\x20hove',
+        'No\x20live\x20st',
+        'ray-500\x20te',
+        '\x20\x20<div\x20cla',
+        '\x20\x20\x20\x20\x20\x20\x20\x20Wa',
+        'CrZvA',
+        'vsPfz',
+        'liveContai',
+        '\x20\x20\x20',
+        '\x20😭',
+        '-1.5\x20round',
+        'g-white\x20bo',
+        '\x20\x20\x20\x20',
+        '\x20\x20\x20\x20\x20\x20clas',
+        'showroom/j',
+        'hing\x20top\x20s',
+        '118/z0erje',
+        'v\x20class=\x22r',
+        '\x22relative\x20',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<h',
+        'idn',
+        '\x20\x20\x20\x20<i\x20cla',
+        '\x20via-purpl',
+        'y-300\x20roun',
+        '\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'AEbru',
+        'toUpperCas',
+        'cyq6twx7cm',
+        '\x20\x20\x20<span\x20c',
+        '\x20of\x20the\x20We',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        '\x20hover:sha',
+        'd/v1737173',
+        '\x20\x20\x20\x20<img\x20s',
+        '\x20\x20\x20\x20\x20<div\x20',
+        'ems-center',
+        'mg\x20src=\x22',
+        '</span>',
+        'hing\x20data:',
+        'kuyQV',
+        '\x20justify-b',
+        '-lg\x22>\x0a\x20\x20\x20\x20',
+        'ft-2\x20',
+        '</h4>\x0a\x20\x20\x20\x20',
+        'url_list',
+        '\x20\x20\x20</div>\x0a',
+        'dow-lg\x22>\x0a\x20',
+        'humbnail\x22\x20',
+        '-2\x20h-2\x20bg-',
+        's=\x22relativ',
+        'border',
+        'm-pink-300',
+        '\x20\x20\x20\x20<a\x20hre',
+        '\x22bg-red-60',
+        'r-2\x20border',
+        'sEoYl',
+        'pace-x-4\x22>',
+        'hover:shad',
+        'tive\x22>\x0a\x20\x20\x20',
+        '\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
+        'charCodeAt',
+        'amp-2\x22>',
+        '\x20\x20\x20\x20\x20<h2\x20c',
+        'group\x22>\x0a\x20\x20',
+        '</h3>\x0a\x20\x20\x20\x20',
+        '\x20</div>\x0a\x20\x20',
+        'ite\x20rounde',
+        'e\x22></span>',
+        'some',
+        'lx2zm7ha/i',
+        'm\x20text-whi',
+        'niOKo',
+        '\x20\x20\x20\x20\x20<img\x20',
+        'iv\x20class=\x22',
+        'fONjQ',
+        'fa-ticket-',
+        'https://ww',
+        'name',
+        'main_name',
+        'a-play\x20mr-',
+        '\x20\x20\x20\x20\x20class',
+        'ace-x-2\x22>\x0a',
+        'em]\x20relati',
+        'my.id/api/',
+        '\x20font-medi',
+        'old\x20shadow',
+        'a-users\x22><',
+        'hycgL',
+        'dow-md\x20hov',
+        'gray-700\x22>',
+        'y-500\x20text',
+        '\x22\x20alt=\x22Liv',
+        'setItem',
+        'text',
+        'DbgmP',
+        's-center\x20s',
+        'appendChil',
+        'right-1\x20w-',
+        '1.5\x20rounde',
+        'ded-full\x22>',
+        'ow-lg\x22>\x0a\x20\x20',
+        'AVtuk',
+        '\x20\x20\x20\x20\x20\x20\x20</d',
+        '\x22\x20class=\x22b',
+        '\x22\x20alt=\x22Ava',
+        'lass=\x22flex',
+        'n>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        '\x22text-sm\x20t',
+        'as\x20',
+        'relative\x22>',
+        'm\x20text-gra',
+        '24jxZfKC',
+        '-medium\x20fl',
+        '00\x20rounded',
+        'vLeSO',
+        'forEach',
+        '\x22bg-white\x20',
+        '=\x22relative',
+        '\x20from-rose',
+        '28VlzHJn',
+        'topStreame',
+        'bg-gradien',
+        'nary.com/d',
+        'lock\x20w-ful',
+        'idnlive/jk',
+        '-gray-300\x20',
+        't-bold\x20mb-',
+        'e-block\x20w-',
+        'unded-3xl\x20',
+        'SHOWROOM\x0a\x20',
+        'border-gra',
+        '2\x20h-2\x20bg-w',
+        'aiocC',
+        'w-xl\x22>\x0a\x20\x20\x20',
+        'v\x20class=\x22h',
+        'HEpgL',
+        'hadow-lg\x20o',
+        'solute\x20ins',
+        '\x20\x20</div>\x0a\x20',
+        'showroom',
+        'city-100\x20t',
+        'mWOrh',
+        'ce-x-2\x22>\x0a\x20',
+        'transition',
+        'lass=\x22rela',
+        '=\x22w-12\x20h-1',
+        'iv>\x0a\x20\x20\x20\x20\x20\x20',
+        'ded-full\x20t',
+        'ent',
+        'ull\x20h-56\x20o',
+        'ubQRz',
+        'ss=\x22text-s',
+        'div\x20class=',
+        'dtegV',
+        'te\x20px-3\x20py',
+        'scale-102\x20',
+        '\x20\x20\x20\x20\x20\x20\x20<di',
+        'opacity\x20du',
+        'center\x20spa',
+        '700',
+        '-100/80\x20ro',
+        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'yan-300',
+        'se-500\x20tex',
+        'border-yel',
+        'Wjbvg',
+        'over:shado',
+        'acity-100\x20',
+        'order-gray',
+        '\x20\x20\x20\x20\x20\x20\x20',
+        '0\x22></div>\x0a',
+        '\x20<div\x20clas',
+        '\x20rounded-f',
+        'center\x20gap',
+        'p-hover:op',
+        'lable\x20at\x20t',
+        'ed-full\x20an',
+        'error',
+        'er:shadow-',
+        'fill',
+        '\x20the\x20Week<',
+        'Not\x20Found\x22',
+        'url',
+        '\x20duration-',
+        'x-2\x20text-g',
+        'Get\x20Ticket',
+        'text-gray-',
+        '\x20\x20\x20IDN\x20Liv',
+        'nAbvD',
+        'ration-300',
+        '6\x20text-gra',
+        'b-4\x22>\x0a\x20\x20\x20\x20',
+        '58246qjeBmj',
+        't48',
+        '\x20to-gray-6',
+        '0\x20space-x-',
+        'xt-white\x20p',
+        'iuxBW',
+        '-3xl\x20shado',
+        'jGURW',
+        'll\x20flex\x20it',
+        '\x20\x20\x20\x20\x20<span',
+        'fa-play',
+        '-12\x20h-12\x20b',
+        '600\x22>',
+        'nded-3xl\x20s',
+        'enter\x20text',
+        'YHnlf',
+        't-to-r\x20fro',
+        'flex-1\x22>\x0a\x20',
+        '-opacity\x20d',
+        'ounded-ful',
+        '\x20Streamers',
+        'hite\x20round',
+        'naii.png\x22\x20',
+        '6171448yXZQvy',
+        'FtOlD',
+        'w-lg\x20p-6\x22>',
+        'gradient',
+        'm\x20font-med',
+        'ass=\x22bg-gr',
+        'data',
+        'avJRX',
+        'rder-2\x20bor',
+        '\x20line-clam',
+        'title',
+        'join',
+        '/75\x20backdr',
+        'ing\x20live\x20s',
+        'm\x22>@',
+        'reams\x20avai',
+        'f=\x22',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        'eft-2\x20w-6\x20',
+        'createElem',
+        '4\x20h-4\x20bg-g',
+        '58455HmHUkd',
+        'font-bold\x20',
+        '4500hmZgXE',
+        'success',
+        'yYpko',
+        'ded-lg\x20mb-',
+        'ne-block\x20w',
+        'min-h-[24r',
+        'from-amber',
+        'ZDIEY',
+        'ray-600\x20mb',
+        'd-3xl\x20shad',
+        'toLocaleSt',
+        '4275DvHIgd',
+        'border-2\x20b',
+        '\x20\x20\x20\x20\x20\x20<spa',
+        'AizRT',
+        'low-200',
+        'full\x20borde',
+        'absolute\x20-',
+        '\x20bg-gray-5',
+        'topstreame',
+        'map',
+        'ed-full\x20te',
+        'text-white',
+        'ow-xl\x22>\x0a\x20\x20',
+        '/live/idn/',
+        'all',
+        'mb-6\x20text-',
+        '\x20group\x22>\x0a\x20',
+        'idden\x20tran',
+        't-medium\x20f',
+        'TEMEN\x20NGOB',
+        'x-3\x20py-1.5',
+        'duration-3',
+        'ull\x20text-s',
+        'ring',
+        '\x20\x20\x20\x20\x20\x20</di',
+        '3\x20left-3\x20f',
+        'total_live',
+        'y-200',
+        'alt',
+        'nt-medium\x20',
+        '\x20\x20\x20\x20\x20\x20\x20\x20',
+        'dient-to-r',
+        'elative\x22>\x0a',
+        'k/75\x20backd',
+        'tar\x22\x20class',
+        's=\x22w-64\x20\x20m',
+        '\x20text-whit',
+        'p-1\x22>',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<i',
+        'OiDlk',
+        '\x20<h2\x20class',
+        'rop-blur-s',
+        'llow-500',
+        'ale-105\x22>\x0a',
+        '2\x20rounded-',
+        'treamers:',
+        'class=\x22abs',
+        'text-yello',
+        'ter\x20px-6\x20p',
+        'ify-center',
+        'ter\x22>\x0a\x20\x20\x20\x20',
+        'TEMEN\x20MAIN',
+        '\x20\x20<img\x20src',
+        'stream_url',
+        '00\x20to-yell',
+        'ter\x20space-',
+        's=\x22bg-blac',
+        'TRIAL',
+        'cale-102\x20h',
+        'e-600',
+        'e\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        'utcaA',
+        'ext-sm\x20fon',
+        'PunZM',
+        'stringify',
+        'h-6\x20bg-gra',
+        'replace',
+        '\x20-top-2\x20-l',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<',
+        '3/4\x20mb-2\x22>',
+        'mage/uploa',
+        '-4\x20bg-gray',
+        '=\x22font-med',
+        'ass=\x22inlin',
+        '-3\x20right-3',
+        'ext-white\x22',
+        '0\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        'div',
+        'r:opacity-',
+        'ose-500\x20te',
+        '00\x22>Top\x20St',
+        'r\x20from-amb',
+        'sroom',
+        '-lg\x20font-b',
+        'e\x20font-med',
+        '\x20\x20\x20\x20\x20\x20',
+        '4\x20p-4\x20roun',
+        'res.cloudi',
+        '</p>\x0a\x20\x20\x20\x20\x20',
+        '4\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        'user',
+        '\x22></div>\x0a\x20',
+        'room_url_k',
+        'iv>\x0a\x20\x20\x20\x20',
+        'YewmP',
+        'e-500',
+        '/h2>\x0a\x20\x20\x20\x20\x20',
+        'ed-3xl\x20sha',
+        'abs',
+        'inset-0\x20fl',
+        'overflow-h',
+        '\x22bg-[#ff88',
+        '<p\x20class=\x22',
+        'https://jk',
+        '\x22\x20alt=\x22',
+        '/i>\x0a\x20\x20\x20\x20\x20\x20',
+        'ransition-',
+        'der-gray-2',
+        '\x20<h4\x20class',
+        'ow-600',
+        'ple-100',
+        'dden\x20trans',
+        'bdJyr',
+        '\x20animate-p',
+        'TEMEN\x20MASA',
+        '-center\x20sp',
+        '-2\x22>\x0a\x20\x20\x20\x20\x20',
+        '\x22flex\x20item',
+        'KnIxd',
+        'w.idn.app/',
+        'bject-cove',
+        '\x20load\x20top\x20',
+        'Watch\x20Stre',
+        'jEXdB',
+        'rounded-3x',
+        'createDocu',
+        '00\x20hover:s',
+        '-3\x20left-3\x20',
+        'toLowerCas',
+        'badge',
+        'e\x20Stream\x20T',
+        'y-700\x22>Top',
+        'reen-500\x20r',
+        '-medium\x22>\x0a',
+        'r\x20from-ros',
+        'ntChild',
+        '-200\x20round',
+        'QezQC',
+        '\x20\x20\x20\x20<div\x20c',
+        'n>LIVE</sp',
+        'image_squa',
+        'olute\x20top-',
+        'acity-80\x20t',
+        'TEMEN\x20MAKA',
+        'l\x20text-cen',
+        'image',
+        'jkt48_',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        '\x22bg-yellow',
+        '\x20\x20\x20\x20\x20alt=\x22',
+        '753932SLrKFa',
+        'solute\x20top',
+        'adient-to-',
+        'OHnMZ',
+        '\x20<img\x20src=',
+        'oHZlb',
+        'class=\x22w-f',
+        '\x20\x20\x20\x20<p\x20cla',
+        'ium\x20rounde',
+        'y-3\x20bg-gra',
+        '-sm\x20font-b',
+        'rounded\x20w-',
+        'ext-xl\x20fon',
+        'nimate-pul',
+        'g-gray-300',
+        'label',
+        'x-4\x20mb-4\x22>',
+        'd/proxy?ur',
+        'ulse\x22>\x0a\x20\x20\x20',
+        'nt-bold\x20',
+        '<span>',
+        'lass=\x22inli',
+        'i\x20class=\x22f',
+        'CEoAQ',
+        'div>\x0a\x20\x20\x20\x20\x20',
+        '/div>\x0a\x20\x20\x20\x20',
+        'vFmcE',
+        'etween\x20mb-',
+        's=\x22flex-1\x22',
+        '\x20\x20\x20<div\x20cl',
+        'https://48',
+        'ease\x20try\x20a',
+        '</div>\x0a\x20\x20\x20',
+        'AVOZz',
+        'e\x20w-6\x20h-6\x20',
+        'old\x20mb-6\x20t',
+        'Error\x20load',
+        'Error\x20fetc',
+        'e-400\x20to-r',
+        '6236285aGFMDb',
+        'includes',
+        'mentFragme',
+        'xt-sm\x20font',
+        't-white\x20fo',
+        '\x20justify-c',
+        'h3\x20class=\x22',
+        'xt-center\x22',
+        'da]/70\x20rou',
+        'r\x20transiti',
+        'VrtcV',
+        'className',
+        'hqxtK',
+        'hite\x20fas\x20f',
+        'ex\x20items-c',
+        '0\x20to-orang',
+        'jkt48-offi',
+        'nge-200',
+        'username',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<s',
+        'white\x20roun',
+        'ed\x20w-1/2\x22>',
+        'all\x20durati',
+        'lass=\x22text',
+        'on-transfo',
+        'WbHrB',
+        'streamers\x20',
+        'streaming_',
+        'l\x20hover:op',
+        'w-500',
+        '\x20items-cen',
+        'rank',
+        'TnKDX',
+        '0\x20text-whi',
+        'ass=\x22p-5\x22>',
+        'm-amber-50',
+        'src=\x22',
+        '_stream',
+        'ition-all\x20',
+        'n-300\x20grou',
+        '>LIVE</spa',
+        'getElement',
+        '00\x20text-wh',
+        'text-orang',
+        'Rghkm',
+        'ss=\x22text-g',
+        '3\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        'vIgyI',
+        '2\x22></i>\x0a\x20\x20',
+        'view_count',
+        'ce-x-4\x20mb-',
+        'GfHTZ',
+        'ce-x-2\x20sha',
+        'ers\x20of\x20the',
+        'ext-gray-7',
+        'ById',
+        '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'pan\x20class=',
+        'flex\x20items',
+        'v\x20class=\x22b',
+        'firstEleme',
+        'on-300\x20sha',
+        'ner',
+        'lg\x20p-4\x20mb-',
+        'old\x22>',
+        's=\x22flex\x20it',
+        'border-pur',
+        't48showroo',
+        'ium\x20text-g',
+        'kBvtg',
+        'op-blur-sm',
+        '\x20class=\x22fo',
+        'um\x20text-sm',
+        'gain\x20later',
+        '\x20\x20\x20\x20\x20\x20\x20\x20</',
+        '\x22absolute\x20',
+        '\x20\x20\x20\x20\x20\x20\x20<h3',
+        'm-yellow-4',
+        'ow-lg\x20p-6\x22',
+        'ass=\x22fas\x20f',
+        '\x20mr-2\x22></i',
+        'form\x20trans',
+        'm-gray-400',
+        'd-full\x20tex',
+        'avatar',
+        '\x20watching\x0a',
+        'livejkt48/',
+        'ull\x22></div',
+        '-4\x20line-cl',
+        'enter\x20just',
+        'UPFQP',
+        'ded-full\x20a',
+        'an>\x0a\x20\x20\x20\x20\x20\x20',
+        'JKT48_',
+        'intensapi.',
+        'Top\x20Stream',
+        '\x20Week</h2>',
+        'l\x20border-2',
+        '\x20\x20<a\x20href=',
+        'lg\x22>\x0a\x20\x20\x20\x20\x20',
+        'e\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
+        '2\x20class=\x22t',
+        '\x22bg-gray-5',
+        '300\x20hover:',
+        'json',
+        '6yjIFyX',
+        'shadow-lg\x20',
+        '-300\x20round',
+        'uBLQe',
+        'cial',
+        'ite\x20px-3\x20p',
+        'now',
+        '>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
+        '=\x22absolute',
+        'rsContaine',
+        'rounded-fu',
+        'rm\x20duratio',
+        'enter\x20spac',
+        'image_url',
+        'he\x20moment\x20',
+        't-sm\x20font-',
+        'se\x22></span',
+        'v\x20class=\x22f',
+        'ray-500\x22>\x0a',
+        '-xl\x20font-b',
+        'ZEGlM',
+        '=\x22text-xl\x20',
+        'startsWith',
+        '\x20\x20\x20\x20\x20\x20<div',
+        'ass=\x22bg-wh',
+        '-purple-10',
+        'imate-puls',
+        'e\x20px-3\x20py-',
+        'stream_',
+        'et-0\x20\x20grou',
+        'sform\x20tran',
+        'e-x-2\x20shad',
+        'dow-lg\x20p-6',
+        '81GYSqTM',
+        '\x20class=\x22ab',
+        'er-400\x20to-',
+        'slice',
+        '\x20\x20<p\x20class',
+        '=\x22bg-red-6',
+        'tch\x20Stream',
+        'innerHTML',
+        'toString',
+        'p-hover:sc',
+        'ibYPY',
+        '-400\x20to-ro',
+        'pYAqC',
+        'pan',
+        'yellow-500',
+        'class=\x22fle',
+        'e-300\x20to-c',
+        'urGPi',
+        '-hover:opa',
+        'CjCrs',
+        '\x20\x20\x20\x20\x20<i\x20cl',
+        'sition-all',
+        '>Failed\x20to',
+        'length',
+        'data</p>\x0a\x20',
+        'border-ora',
+        'bottom-1\x20-',
+        '<div\x20class',
+        'view_num',
+        'lex\x20items-',
+        '600\x20text-s',
+        'uration-30',
+        'ROL',
+        '=\x22text-gra',
+        'ion-all\x20du',
+        'icon',
+        '=\x22https://',
+        'AqYIU',
+        '0\x20rounded-',
+        '\x20border-wh',
+        '3\x20skeleton',
+        '600',
+        '80\x20transit',
+        'et-0\x20group',
+        '\x20\x20\x20\x20\x20</div',
+        '=\x22p-5\x22>\x0a\x20\x20',
+        'rc=\x22',
+        'r-2\x20',
+        '=\x22bg-black',
+        '\x20followers',
+        'ite\x22></div',
+        'verflow-hi',
+        '1058827XBZyRf',
+        '\x20\x20\x20\x20</div>',
+        '\x20shadow-md',
+        '\x20\x20\x20\x20\x20\x20\x20</a',
+        'medium\x22>\x0a\x20',
+        'reamers\x20of',
+        'IqIXE',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<d',
+        'ss=\x22text-w',
+        '-400\x20to-ye',
+        'treams.\x20Pl',
+        '\x20\x20<span\x20cl',
+        'link',
+        '</span>\x0a\x20\x20',
+        'HzKDD',
+        'y-1.5\x20roun',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
+        'idnlv',
+        'm-api.my.i',
+        'nRTMa',
+        'ek</h2>\x0a\x20\x20',
+        'y-500\x22>'
+    ];
+    _0xea88 = function () {
+        return _0x58d95b;
+    };
+    return _0xea88();
+}
+function createShowroomCard(_0xf5ab1b) {
+    const _0x1229fb = _0x6243, _0x4286d7 = {
+            'CrZvA': _0x1229fb(0x266),
+            'aiocC': function (_0x974826, _0xaca117, _0x2d78e0) {
+                return _0x974826(_0xaca117, _0x2d78e0);
+            },
+            'vsPfz': _0x1229fb(0x372)
+        }, _0xcc9a82 = _0xf5ab1b[_0x1229fb(0x1a8) + 'ey'][_0x1229fb(0x18e)](_0x4286d7[_0x1229fb(0x2ec)], '')[_0x1229fb(0x1cc) + 'e'](), _0x4cbd4e = _0x4286d7[_0x1229fb(0x36b)](compressStreamData, _0xf5ab1b[_0x1229fb(0x224) + _0x1229fb(0x313)][0x4 * 0x3bb + 0x3 * 0x9fd + -0x2ce3][_0x1229fb(0x39d)], _0x4286d7[_0x1229fb(0x2ed)]), _0x1cdaae = _0x1229fb(0x2e3) + _0xcc9a82 + '/' + _0x4cbd4e;
+    return _0x1229fb(0x190) + _0x1229fb(0x37f) + _0x1229fb(0x1b1) + _0x1229fb(0x211) + _0x1229fb(0x3b4) + _0x1229fb(0x36f) + _0x1229fb(0x2c6) + _0x1229fb(0x1bb) + _0x1229fb(0x25a) + _0x1229fb(0x22f) + _0x1229fb(0x161) + _0x1229fb(0x1ca) + _0x1229fb(0x186) + _0x1229fb(0x38d) + _0x1229fb(0x36c) + _0x1229fb(0x2d7) + _0x1229fb(0x37f) + _0x1229fb(0x2f9) + _0x1229fb(0x326) + _0x1229fb(0x305) + _0x1229fb(0x308) + _0x1229fb(0x2c1) + _0xf5ab1b[_0x1229fb(0x1dd)] + (_0x1229fb(0x342) + _0x1229fb(0x1ce) + _0x1229fb(0x316) + _0x1229fb(0x1e8) + _0x1229fb(0x37c) + _0x1229fb(0x1c4) + _0x1229fb(0x212) + _0x1229fb(0x221) + _0x1229fb(0x27d) + _0x1229fb(0x230) + _0x1229fb(0x29c) + _0x1229fb(0x177) + _0x1229fb(0x305) + _0x1229fb(0x289) + _0x1229fb(0x294) + _0x1229fb(0x370) + _0x1229fb(0x28f) + _0x1229fb(0x395) + _0x1229fb(0x38e) + _0x1229fb(0x376) + _0x1229fb(0x3b9) + _0x1229fb(0x2b2) + _0x1229fb(0x391) + _0x1229fb(0x305) + _0x1229fb(0x289) + _0x1229fb(0x294) + _0x1229fb(0x1e3) + _0x1229fb(0x1cb) + _0x1229fb(0x243) + _0x1229fb(0x1bf) + _0x1229fb(0x338) + _0x1229fb(0x305) + _0x1229fb(0x305) + _0x1229fb(0x2ae) + _0x1229fb(0x298) + _0x1229fb(0x233) + _0x1229fb(0x277) + _0x1229fb(0x2d6) + _0x1229fb(0x37a) + _0x1229fb(0x18a) + _0x1229fb(0x15e) + _0x1229fb(0x2b0) + _0x1229fb(0x385) + _0x1229fb(0x23d) + _0x1229fb(0x315) + _0x1229fb(0x305) + _0x1229fb(0x305) + _0x1229fb(0x303) + _0x1229fb(0x1f7) + _0x1229fb(0x3d9) + _0x1229fb(0x317) + _0x1229fb(0x21d) + _0x1229fb(0x264) + _0x1229fb(0x1ef) + _0x1229fb(0x282) + _0x1229fb(0x279) + _0x1229fb(0x305) + _0x1229fb(0x14e) + _0x1229fb(0x1d7) + _0x1229fb(0x265) + _0x1229fb(0x305) + _0x1229fb(0x2c8) + _0x1229fb(0x1df) + _0x1229fb(0x305) + _0x1229fb(0x392) + _0x1229fb(0x184) + _0x1229fb(0x16d) + _0x1229fb(0x175) + _0x1229fb(0x32d) + _0x1229fb(0x381) + _0x1229fb(0x2f1) + _0x1229fb(0x156) + _0x1229fb(0x20c) + _0x1229fb(0x1d1) + _0x1229fb(0x305) + _0x1229fb(0x305) + _0x1229fb(0x2f3)) + _0xf5ab1b[_0x1229fb(0x2af)][_0x1229fb(0x3df) + _0x1229fb(0x163)]() + (_0x1229fb(0x25e) + _0x1229fb(0x305) + _0x1229fb(0x305) + _0x1229fb(0x202) + _0x1229fb(0x305) + _0x1229fb(0x314) + _0x1229fb(0x305) + _0x1229fb(0x289) + _0x1229fb(0x294) + _0x1229fb(0x1e3) + _0x1229fb(0x196) + _0x1229fb(0x241) + _0x1229fb(0x305) + _0x1229fb(0x1ff) + _0x1229fb(0x3c3) + _0x1229fb(0x1e4) + _0x1229fb(0x1d2) + _0x1229fb(0x208) + _0x1229fb(0x19b) + _0x1229fb(0x3ab) + _0x1229fb(0x160) + _0x1229fb(0x393) + _0x1229fb(0x162) + _0x1229fb(0x3c2) + _0x1229fb(0x2e1) + _0x1229fb(0x305) + _0x1229fb(0x305) + _0x1229fb(0x368) + _0x1229fb(0x305) + _0x1229fb(0x2d7) + _0x1229fb(0x1fb) + _0x1229fb(0x305) + _0x1229fb(0x371) + _0x1229fb(0x305) + _0x1229fb(0x328) + _0x1229fb(0x305) + _0x1229fb(0x2ae) + _0x1229fb(0x2c0) + _0x1229fb(0x305) + _0x1229fb(0x1d6) + _0x1229fb(0x350) + _0x1229fb(0x227) + _0x1229fb(0x183) + _0x1229fb(0x1f2) + _0x1229fb(0x1df) + _0x1229fb(0x305) + _0x1229fb(0x392) + _0x1229fb(0x318) + _0x1229fb(0x188) + _0x1229fb(0x305) + _0x1229fb(0x172) + _0x1229fb(0x30b)) + _0xf5ab1b[_0x1229fb(0x1d8) + 're'] + (_0x1229fb(0x34f) + _0x1229fb(0x16e) + _0x1229fb(0x378) + _0x1229fb(0x178) + _0x1229fb(0x151) + _0x1229fb(0x31d) + _0x1229fb(0x28b) + _0x1229fb(0x198) + _0x1229fb(0x305) + _0x1229fb(0x2ce) + _0x1229fb(0x330) + _0x1229fb(0x152) + _0x1229fb(0x2ad) + _0x1229fb(0x348) + _0x1229fb(0x3d2) + _0x1229fb(0x1d0) + _0x1229fb(0x3ba) + _0x1229fb(0x26a) + _0x1229fb(0x2ba) + _0x1229fb(0x2c5) + _0x1229fb(0x279) + _0x1229fb(0x305) + _0x1229fb(0x371) + _0x1229fb(0x305) + _0x1229fb(0x2d7) + _0x1229fb(0x1fa) + _0x1229fb(0x305) + _0x1229fb(0x2d7) + _0x1229fb(0x20f) + _0x1229fb(0x3d4) + _0x1229fb(0x157) + '\x22>') + _0xf5ab1b[_0x1229fb(0x335)] + (_0x1229fb(0x327) + _0x1229fb(0x305) + _0x1229fb(0x305) + _0x1229fb(0x1b2) + _0x1229fb(0x157) + _0x1229fb(0x33b) + _0x1229fb(0x251) + '\x22>') + _0xf5ab1b[_0x1229fb(0x2e0)] + (_0x1229fb(0x1a4) + _0x1229fb(0x305) + _0x1229fb(0x2bf) + _0x1229fb(0x279) + _0x1229fb(0x253) + _0x1229fb(0x1fa) + _0x1229fb(0x305) + _0x1229fb(0x392) + _0x1229fb(0x24a) + _0x1229fb(0x30a) + _0x1229fb(0x30f) + _0x1229fb(0x1fd) + _0x1229fb(0x1a5) + _0x1229fb(0x305) + _0x1229fb(0x1d6) + _0x1229fb(0x350) + _0x1229fb(0x227) + _0x1229fb(0x183) + _0x1229fb(0x39f) + _0x1229fb(0x284) + _0x1229fb(0x305) + _0x1229fb(0x305) + _0x1229fb(0x2fc) + _0x1229fb(0x2cf) + _0x1229fb(0x216) + _0x1229fb(0x33d) + _0x1229fb(0x1b5) + _0x1229fb(0x305) + _0x1229fb(0x21c) + _0x1229fb(0x242) + _0x1229fb(0x352) + _0x1229fb(0x197) + '>') + _0xf5ab1b[_0x1229fb(0x2e6) + 'um'][_0x1229fb(0x3df) + _0x1229fb(0x163)]() + (_0x1229fb(0x2c4) + _0x1229fb(0x2d4) + _0x1229fb(0x305) + _0x1229fb(0x253) + _0x1229fb(0x1fa) + _0x1229fb(0x305) + _0x1229fb(0x328) + _0x1229fb(0x305) + _0x1229fb(0x31b) + _0x1229fb(0x3ce)) + _0x1cdaae + (_0x1229fb(0x34e) + _0x1229fb(0x362) + _0x1229fb(0x1dc) + _0x1229fb(0x17c) + _0x1229fb(0x1eb) + _0x1229fb(0x16b) + _0x1229fb(0x35d) + _0x1229fb(0x29e) + _0x1229fb(0x38a) + _0x1229fb(0x20d) + _0x1229fb(0x169) + _0x1229fb(0x1c8) + _0x1229fb(0x225) + _0x1229fb(0x1da) + _0x1229fb(0x1b6) + _0x1229fb(0x21f) + _0x1229fb(0x246) + _0x1229fb(0x33f) + _0x1229fb(0x399) + _0x1229fb(0x26c) + _0x1229fb(0x305) + _0x1229fb(0x2a7) + _0x1229fb(0x258) + _0x1229fb(0x336) + _0x1229fb(0x239) + _0x1229fb(0x305) + _0x1229fb(0x2eb) + _0x1229fb(0x299) + _0x1229fb(0x1df) + _0x1229fb(0x2ca) + _0x1229fb(0x279) + _0x1229fb(0x2c8) + _0x1229fb(0x190) + _0x1229fb(0x1fb));
+}
+async function fetchTopStreamers() {
+    const _0x599f66 = _0x6243, _0x182314 = {
+            'fONjQ': _0x599f66(0x360) + _0x599f66(0x3b7) + _0x599f66(0x256) + _0x599f66(0x182) + _0x599f66(0x1b9),
+            'Wjbvg': _0x599f66(0x17b) + _0x599f66(0x226),
+            'ubQRz': _0x599f66(0x38b) + _0x599f66(0x150),
+            'TnKDX': _0x599f66(0x360) + _0x599f66(0x3b7) + _0x599f66(0x25b) + _0x599f66(0x3a9) + '00',
+            'uBLQe': _0x599f66(0x3a1) + _0x599f66(0x2bc),
+            'AqYIU': _0x599f66(0x369) + _0x599f66(0x167),
+            'VrtcV': _0x599f66(0x360) + _0x599f66(0x3b7) + _0x599f66(0x22c) + _0x599f66(0x218) + _0x599f66(0x187),
+            'yYpko': _0x599f66(0x234) + _0x599f66(0x1ab),
+            'ZDIEY': _0x599f66(0x2ac) + _0x599f66(0x21a),
+            'KnIxd': _0x599f66(0x360) + _0x599f66(0x3b7) + _0x599f66(0x31a) + _0x599f66(0x2fd) + _0x599f66(0x2a3) + _0x599f66(0x389),
+            'hycgL': _0x599f66(0x3a1) + _0x599f66(0x386),
+            'PunZM': _0x599f66(0x24b) + _0x599f66(0x1ba),
+            'YHnlf': function (_0x4f615f, _0x3ca9a8) {
+                return _0x4f615f(_0x3ca9a8);
+            },
+            'nAbvD': _0x599f66(0x35f) + _0x599f66(0x27b) + 'r',
+            'FtOlD': _0x599f66(0x200) + _0x599f66(0x267) + _0x599f66(0x33a) + _0x599f66(0x25f) + _0x599f66(0x154) + 'r',
+            'bdJyr': _0x599f66(0x207) + _0x599f66(0x2f6) + _0x599f66(0x179)
+        }, _0x4bc121 = document[_0x599f66(0x232) + _0x599f66(0x240)](_0x182314[_0x599f66(0x3a3)]), _0x516edb = _0x182314[_0x599f66(0x3b6)](Array, -0x2 * -0xc31 + -0x9df + -0xe7e)[_0x599f66(0x39a)]()[_0x599f66(0x155)](() => _0x599f66(0x190) + _0x599f66(0x37f) + _0x599f66(0x26f) + _0x599f66(0x2b9) + _0x599f66(0x248) + _0x599f66(0x2bb) + _0x599f66(0x1bd) + _0x599f66(0x1f4) + _0x599f66(0x2d7) + _0x599f66(0x37f) + _0x599f66(0x1c1) + _0x599f66(0x346) + _0x599f66(0x31f) + _0x599f66(0x1df) + _0x599f66(0x383) + _0x599f66(0x2f8) + _0x599f66(0x16c) + _0x599f66(0x305) + _0x599f66(0x305) + _0x599f66(0x2ae) + _0x599f66(0x27a) + _0x599f66(0x18f) + _0x599f66(0x3d0) + _0x599f66(0x18d) + _0x599f66(0x2fe) + _0x599f66(0x34a) + _0x599f66(0x202) + _0x599f66(0x305) + _0x599f66(0x383) + _0x599f66(0x2e4) + _0x599f66(0x3b2) + _0x599f66(0x1f0) + _0x599f66(0x393) + _0x599f66(0x260) + _0x599f66(0x279) + _0x599f66(0x253) + _0x599f66(0x1fa) + _0x599f66(0x305) + _0x599f66(0x392) + _0x599f66(0x1fe) + _0x599f66(0x279) + _0x599f66(0x305) + _0x599f66(0x2ea) + _0x599f66(0x2de) + _0x599f66(0x364) + _0x599f66(0x1ed) + _0x599f66(0x191) + _0x599f66(0x202) + _0x599f66(0x305) + _0x599f66(0x383) + _0x599f66(0x36d) + _0x599f66(0x193) + _0x599f66(0x274) + _0x599f66(0x21e) + _0x599f66(0x202) + _0x599f66(0x305) + _0x599f66(0x314) + _0x599f66(0x305) + _0x599f66(0x371) + _0x599f66(0x34d) + _0x599f66(0x1a9))[_0x599f66(0x3c9)]('');
+    _0x4bc121[_0x599f66(0x29a)] = _0x599f66(0x190) + _0x599f66(0x37f) + _0x599f66(0x35b) + _0x599f66(0x14d) + _0x599f66(0x38f) + _0x599f66(0x1d4) + _0x599f66(0x1ad) + _0x599f66(0x292) + _0x599f66(0x241) + _0x599f66(0x325) + _0x599f66(0x220) + _0x599f66(0x285) + _0x599f66(0x205) + _0x599f66(0x23f) + _0x599f66(0x19c) + _0x599f66(0x2cc) + _0x599f66(0x39b) + _0x599f66(0x1ac) + _0x599f66(0x390) + _0x516edb + (_0x599f66(0x190) + _0x599f66(0x1fb));
+    try {
+        const _0x2a7eb3 = await _0x182314[_0x599f66(0x3b6)](fetch, _0x182314[_0x599f66(0x3bf)]), _0x1c4dd7 = await _0x2a7eb3[_0x599f66(0x271)]();
+        if (_0x1c4dd7[_0x599f66(0x3d6)] && _0x1c4dd7[_0x599f66(0x3c4)]) {
+            const _0x3cd663 = _0x1c4dd7[_0x599f66(0x3c4)], _0xc19f50 = _0xc7f4dd => {
+                    const _0x2b51f9 = _0x599f66;
+                    switch (_0xc7f4dd) {
+                    case 0x1b81 + 0x1cb9 + 0x185 * -0x25:
                         return {
-                            badge: 'bg-gradient-to-r from-yellow-400 to-yellow-600',
-                            text: 'text-yellow-500',
-                            border: 'border-yellow-200',
-                            icon: '👑'
+                            'badge': _0x182314[_0x2b51f9(0x331)],
+                            'text': _0x182314[_0x2b51f9(0x38c)],
+                            'border': _0x182314[_0x2b51f9(0x37d)],
+                            'icon': '👑'
                         };
-                    case 2:
+                    case -0x23 * -0xb + 0x216 + -0x1 * 0x395:
                         return {
-                            badge: 'bg-gradient-to-r from-gray-400 to-gray-600',
-                            text: 'text-gray-600',
-                            border: 'border-gray-200',
-                            icon: '⭐'
+                            'badge': _0x182314[_0x2b51f9(0x229)],
+                            'text': _0x182314[_0x2b51f9(0x275)],
+                            'border': _0x182314[_0x2b51f9(0x2b8)],
+                            'icon': '⭐'
                         };
-                    case 3:
+                    case -0x43 * 0x53 + 0xdcb + 0x13 * 0x6b:
                         return {
-                            badge: 'bg-gradient-to-r from-amber-500 to-orange-600',
-                            text: 'text-orange-500',
-                            border: 'border-orange-200',
-                            icon: '🔥'
+                            'badge': _0x182314[_0x2b51f9(0x213)],
+                            'text': _0x182314[_0x2b51f9(0x3d7)],
+                            'border': _0x182314[_0x2b51f9(0x3dc)],
+                            'icon': '🔥'
                         };
                     default:
                         return {
-                            badge: 'bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300',
-                            text: 'text-gray-700',
-                            border: 'border-purple-100',
-                            icon: ''
+                            'badge': _0x182314[_0x2b51f9(0x1c2)],
+                            'text': _0x182314[_0x2b51f9(0x33e)],
+                            'border': _0x182314[_0x2b51f9(0x18b)],
+                            'icon': ''
                         };
-                }
-            };
-            
-            const streamersList = streamers.map(streamer => {
-                const style = getRankStyle(streamer.rank);
-                return `
-                    <div class="flex items-center bg-gray-50 space-x-4 p-4 rounded-lg mb-3">
-                        <div class="relative">
-                            <div class="absolute -top-2 -left-2 ${style.badge} text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
-                                ${streamer.rank}
-                            </div>
-                            <img src="${streamer.image_url}" alt="${streamer.name}" 
-                                class="w-12 h-12 rounded-full border-2 ${style.border}">
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2">
-                                <h3 class="font-bold ${style.text} line-clamp-1">${streamer.name}</h3>
-                                ${style.icon ? `<span>${style.icon}</span>` : ''}
-                            </div>
-                            <p class="text-sm text-gray-500">${streamer.total_live_stream}</p>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
-            topStreamersContainer.innerHTML = `
-                <div class="bg-white border-2 border-gray-200 rounded-3xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
-                    ${streamersList}
-                </div>
-            `;
+                    }
+                }, _0x23d710 = _0x3cd663[_0x599f66(0x155)](_0x2823af => {
+                    const _0x11808c = _0x599f66, _0xb51096 = _0x182314[_0x11808c(0x3b6)](_0xc19f50, _0x2823af[_0x11808c(0x228)]);
+                    return _0x11808c(0x1df) + _0x11808c(0x305) + _0x11808c(0x392) + _0x11808c(0x24a) + _0x11808c(0x30a) + _0x11808c(0x153) + _0x11808c(0x3aa) + _0x11808c(0x1a2) + _0x11808c(0x3d8) + _0x11808c(0x237) + _0x11808c(0x305) + _0x11808c(0x2ce) + _0x11808c(0x330) + _0x11808c(0x354) + _0x11808c(0x1df) + _0x11808c(0x305) + _0x11808c(0x2d7) + _0x11808c(0x37f) + _0x11808c(0x254) + _0x11808c(0x2dd) + _0x11808c(0x311) + _0xb51096[_0x11808c(0x1cd)] + (_0x11808c(0x170) + _0x11808c(0x204) + _0x11808c(0x27c) + _0x11808c(0x3af) + _0x11808c(0x30a) + _0x11808c(0x20e) + _0x11808c(0x3b5) + _0x11808c(0x1ec) + _0x11808c(0x33c) + _0x11808c(0x310) + _0x11808c(0x305) + _0x11808c(0x305) + _0x11808c(0x16a)) + _0x2823af[_0x11808c(0x228)] + (_0x11808c(0x1df) + _0x11808c(0x305) + _0x11808c(0x2d7) + _0x11808c(0x1fb) + _0x11808c(0x305) + _0x11808c(0x305) + _0x11808c(0x308) + _0x11808c(0x2c1)) + _0x2823af[_0x11808c(0x27f)] + _0x11808c(0x1b4) + _0x2823af[_0x11808c(0x334)] + (_0x11808c(0x2ff) + _0x11808c(0x305) + _0x11808c(0x305) + _0x11808c(0x337) + _0x11808c(0x378) + _0x11808c(0x178) + _0x11808c(0x151) + _0x11808c(0x2c2)) + _0xb51096[_0x11808c(0x319)] + (_0x11808c(0x241) + _0x11808c(0x305) + _0x11808c(0x34d) + _0x11808c(0x379) + _0x11808c(0x305) + _0x11808c(0x2ce) + _0x11808c(0x330) + _0x11808c(0x3b8) + _0x11808c(0x305) + _0x11808c(0x305) + _0x11808c(0x383) + _0x11808c(0x283) + _0x11808c(0x2b0) + _0x11808c(0x394) + _0x11808c(0x1c0) + _0x11808c(0x305) + _0x11808c(0x305) + _0x11808c(0x255) + _0x11808c(0x250) + _0x11808c(0x1f5)) + _0xb51096[_0x11808c(0x344)] + (_0x11808c(0x3c7) + _0x11808c(0x171)) + _0x2823af[_0x11808c(0x334)] + (_0x11808c(0x327) + _0x11808c(0x305) + _0x11808c(0x305) + _0x11808c(0x16a)) + (_0xb51096[_0x11808c(0x2b6)] ? _0x11808c(0x1f6) + _0xb51096[_0x11808c(0x2b6)] + _0x11808c(0x30c) : '') + (_0x11808c(0x1df) + _0x11808c(0x305) + _0x11808c(0x2d7) + _0x11808c(0x1fb) + _0x11808c(0x305) + _0x11808c(0x305) + _0x11808c(0x1e9) + _0x11808c(0x37e) + _0x11808c(0x355) + _0x11808c(0x2dc)) + _0x2823af[_0x11808c(0x166) + _0x11808c(0x22e)] + (_0x11808c(0x1a4) + _0x11808c(0x305) + _0x11808c(0x2d7) + _0x11808c(0x1fb) + _0x11808c(0x305) + _0x11808c(0x164) + _0x11808c(0x388) + _0x11808c(0x3cf));
+                })[_0x599f66(0x3c9)]('');
+            _0x4bc121[_0x599f66(0x29a)] = _0x599f66(0x1df) + _0x599f66(0x383) + _0x599f66(0x244) + _0x599f66(0x2f2) + _0x599f66(0x3c6) + _0x599f66(0x1b7) + _0x599f66(0x358) + _0x599f66(0x3ad) + _0x599f66(0x3c0) + _0x599f66(0x1df) + _0x599f66(0x305) + _0x599f66(0x174) + _0x599f66(0x287) + _0x599f66(0x3d4) + _0x599f66(0x15b) + _0x599f66(0x340) + _0x599f66(0x268) + _0x599f66(0x23e) + _0x599f66(0x269) + _0x599f66(0x1df) + _0x599f66(0x305) + '\x20' + _0x23d710 + (_0x599f66(0x1df) + _0x599f66(0x34d) + _0x599f66(0x379) + _0x599f66(0x1a1));
         }
-    } catch (error) {
-        console.error('Error fetching top streamers:', error);
-        topStreamersContainer.innerHTML = `
-            <div class="bg-white rounded-3xl shadow-lg p-6">
-                <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
-                <p class="text-gray-500 text-center">Failed to load top streamers data</p>
-            </div>
-        `;
+    } catch (_0x3e9984) {
+        console[_0x599f66(0x398)](_0x182314[_0x599f66(0x1bc)], _0x3e9984), _0x4bc121[_0x599f66(0x29a)] = _0x599f66(0x1df) + _0x599f66(0x1ff) + _0x599f66(0x28a) + _0x599f66(0x329) + _0x599f66(0x3de) + _0x599f66(0x257) + _0x599f66(0x279) + _0x599f66(0x2fa) + _0x599f66(0x26e) + _0x599f66(0x1ee) + _0x599f66(0x365) + _0x599f66(0x3a5) + _0x599f66(0x1cf) + _0x599f66(0x3bb) + _0x599f66(0x304) + _0x599f66(0x2db) + _0x599f66(0x305) + _0x599f66(0x1e9) + _0x599f66(0x236) + _0x599f66(0x2e9) + _0x599f66(0x210) + _0x599f66(0x2a9) + _0x599f66(0x1c5) + _0x599f66(0x223) + _0x599f66(0x2ab) + _0x599f66(0x305) + _0x599f66(0x328) + _0x599f66(0x1a1);
     }
 }
-fetchTopStreamers();
-fetchLiveData();
-setInterval(fetchLiveData, 30000);
+fetchTopStreamers(), fetchLiveData(), setInterval(fetchLiveData, -0x132b + 0x225 * -0x1 + 0x2 * 0x4540);

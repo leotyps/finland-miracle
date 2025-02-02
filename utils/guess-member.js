@@ -1,196 +1,442 @@
-const quizData = [];
-let currentQuestion = 0;
-let correctCount = 0;
-let incorrectCount = 0;
-let quizCompletedFlag = false;
-let quizResults = [];
-let inactivityTimeout;
-let questionTimer;
-let timeLeft = 15;
-
-fetch("/data/quiz.json")
-  .then((response) => response.json())
-  .then((data) => {
-    quizData.push(...data);
-
-    const shuffledData = [...quizData].sort(() => Math.random() - 0.5);
-    quizData.length = 0;
-    quizData.push(...shuffledData);
-
-    initializeQuiz();
-  })
-  .catch((error) => console.error("Error fetching quiz data:", error));
-
-function initializeQuiz() {
-  loadGameState();
-  let totalQuestions = parseInt(localStorage.getItem("questionCount")) || 5;
-
-  let gameQuestions = [];
-  if (totalQuestions >= quizData.length) {
-    gameQuestions = [...quizData].sort(() => Math.random() - 0.5);
-  } else {
-    const shuffled = [...quizData].sort(() => Math.random() - 0.5);
-    gameQuestions = shuffled.slice(0, totalQuestions);
-  }
-
-  const fotoElement = document.getElementById("foto");
-  const choicesElements = document.querySelectorAll(".choice-btn");
-  const correctSpan = document.getElementById("correct");
-  const incorrectSpan = document.getElementById("incorrect");
-
-  function updateTimer() {
-    const timerDisplay = document.getElementById("timer");
-    timerDisplay.textContent = `Time left: ${timeLeft} seconds`;
-
-    if (timeLeft <= 0) {
-      clearInterval(questionTimer);
-      incorrectCount++;
-      currentQuestion++;
-      timeLeft = 15;
-      loadQuestion();
-      updateScore();
-      saveGameState();
-    }
-  }
-
-  function startTimer() {
-    clearInterval(questionTimer);
-    timeLeft = 15;
-    updateTimer();
-    questionTimer = setInterval(() => {
-      timeLeft--;
-      updateTimer();
-    }, 1000);
-  }
-
-  async function loadQuestion() {
-    if (currentQuestion < gameQuestions.length) {
-      const currentQuiz = gameQuestions[currentQuestion];
-
-      fotoElement.style.backgroundColor = "#f0f0f0"; // Placeholder while loading
-      fotoElement.src = ""; // Clear existing image
-
+function _0xbff3(_0x55b14c, _0x3ec802) {
+  const _0xddf8e1 = _0x30c7();
+  return _0xbff3 = function (_0x233889, _0x46885b) {
+      _0x233889 = _0x233889 - (-0xc2 * -0x25 + -0x1 * 0x977 + -0x118b);
+      let _0x147b04 = _0xddf8e1[_0x233889];
+      return _0x147b04;
+  }, _0xbff3(_0x55b14c, _0x3ec802);
+}
+const _0xaf1b62 = _0xbff3;
+(function (_0x5d1382, _0x3a0dd1) {
+  const _0x54a0be = _0xbff3, _0x31b5e3 = _0x5d1382();
+  while (!![]) {
       try {
-        // Preload the image
-        const img = await preloadImage(currentQuiz.image);
-        fotoElement.style.backgroundColor = "transparent";
-        fotoElement.src = img.src;
-      } catch (error) {
-        console.error("Failed to load image:", error);
-        fotoElement.style.backgroundColor = "#f0f0f0"; // Fallback placeholder
+          const _0x353c4c = -parseInt(_0x54a0be(0x135)) / (-0xe8a + 0x585 + 0x906) * (parseInt(_0x54a0be(0x16c)) / (0xe3e + 0x1727 * 0x1 + -0x2563)) + parseInt(_0x54a0be(0x13f)) / (-0x175 * 0x17 + -0x265e + 0x47e4) + parseInt(_0x54a0be(0x122)) / (0x1823 + 0x2f4 + 0xef * -0x1d) + -parseInt(_0x54a0be(0x14c)) / (0x46 * -0x7d + -0x2ca + -0x11 * -0x22d) * (-parseInt(_0x54a0be(0x185)) / (-0x3e0 * -0x6 + -0x1 * -0x20f4 + -0x382e)) + parseInt(_0x54a0be(0x154)) / (0x25e8 + 0x1b5d + -0x413e) * (parseInt(_0x54a0be(0x13c)) / (0xe52 + -0xa6 + -0x123 * 0xc)) + -parseInt(_0x54a0be(0x12e)) / (0x2 * 0xb5d + 0x179b + -0x2e4c) + parseInt(_0x54a0be(0x17f)) / (-0x2c * -0x5 + -0xee6 * 0x1 + 0xe14 * 0x1) * (-parseInt(_0x54a0be(0x162)) / (-0xac2 + 0x8f2 + 0x5 * 0x5f));
+          if (_0x353c4c === _0x3a0dd1)
+              break;
+          else
+              _0x31b5e3['push'](_0x31b5e3['shift']());
+      } catch (_0x46594f) {
+          _0x31b5e3['push'](_0x31b5e3['shift']());
       }
-
-      const otherAnswers = quizData
-        .filter((q) => q.correctAnswer !== currentQuiz.correctAnswer)
-        .map((q) => q.correctAnswer);
-
-      const wrongAnswers = [...new Set(otherAnswers)]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 3);
-
-      const choices = [...wrongAnswers, currentQuiz.correctAnswer].sort(
-        () => Math.random() - 0.5
-      );
-
-      choicesElements.forEach((btn, index) => {
-        btn.textContent = choices[index];
-      });
-
-      startTimer();
-      resetInactivityTimer();
-    } else {
-      quizCompleted();
-    }
   }
-
-  function preloadImage(url) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = reject;
-      img.src = url;
-    });
-  }
-
-  function checkAnswer(btn) {
-    if (currentQuestion < gameQuestions.length) {
-      clearInterval(questionTimer);
-
-      const selectedAnswer = btn.textContent;
-      const correctAnswer = gameQuestions[currentQuestion].correctAnswer;
-
-      quizResults.push({
-        question: gameQuestions[currentQuestion].image,
-        answer: selectedAnswer,
-        correct: selectedAnswer === correctAnswer,
-      });
-
-      if (selectedAnswer === correctAnswer) {
-        correctCount++;
-      } else {
-        incorrectCount++;
-      }
-
-      currentQuestion++;
-      timeLeft = 15;
-      loadQuestion();
-      updateScore();
-      saveGameState();
-    } else {
-      quizCompleted();
-    }
-  }
-
-  function quizCompleted() {
-    if (quizCompletedFlag) return;
-    quizCompletedFlag = true;
-
-    clearInterval(questionTimer);
-    resetQuiz();
-    localStorage.setItem("quizResults", JSON.stringify(quizResults));
-    localStorage.removeItem("currentQuestion");
-    localStorage.removeItem("correctCount");
-    localStorage.removeItem("incorrectCount");
-    window.location.href = "/guess/result";
-  }
-
-  function updateScore() {
-    correctSpan.textContent = correctCount;
-    incorrectSpan.textContent = incorrectCount;
-  }
-
-  function resetQuiz() {
-    currentQuestion = 0;
-    correctCount = 0;
-    incorrectCount = 0;
-    timeLeft = 15;
-    updateScore();
-  }
-
-  function resetInactivityTimer() {
-    clearTimeout(inactivityTimeout);
-    inactivityTimeout = setTimeout(quizCompleted, 300000); // 5 minutes
-  }
-
-  choicesElements.forEach((btn) => {
-    btn.addEventListener("click", (event) => {
-      event.preventDefault();
-      checkAnswer(btn);
-      resetInactivityTimer();
-    });
-  });
-
-  loadQuestion();
+}(_0x30c7, -0xf * -0x17ec1 + -0xef21 * 0x1d + 0x12ed5e));
+const quizData = [];
+function _0x30c7() {
+  const _0x27b1b8 = [
+      'getItem',
+      'catch',
+      'correctAns',
+      '.json',
+      'cvvtc',
+      'forEach',
+      'torAll',
+      '.choice-bt',
+      '6|1|4|3|0|',
+      'Zpnjz',
+      'lBVwQ',
+      'RAnIm',
+      'questionCo',
+      'Iwcjf',
+      'wer',
+      'gxxRi',
+      'map',
+      'fIlvi',
+      'href',
+      'HsCIa',
+      'Time\x20left:',
+      'xAIKD',
+      '2|5',
+      '6752168jUUPAi',
+      'sort',
+      '#f0f0f0',
+      'ult',
+      'ault',
+      'incorrectC',
+      'transparen',
+      'style',
+      'stener',
+      'load\x20image',
+      'cDpFk',
+      '4|1|3|2|0',
+      '3074058sEzkld',
+      'stion',
+      'json',
+      'onload',
+      'length',
+      'random',
+      'quizResult',
+      '501476vyYfUL',
+      'kVJKh',
+      'split',
+      'data:',
+      'ById',
+      'click',
+      '3|5|7|2|4|',
+      '88yVwVjB',
+      'BiGhi',
+      'background',
+      '2030256gSaCBp',
+      'DDVyY',
+      'unt',
+      'Color',
+      'IVbge',
+      'src',
+      'preventDef',
+      'ZvcSA',
+      'XMDjN',
+      '/data/quiz',
+      'bCFQt',
+      'hing\x20quiz\x20',
+      'hViQs',
+      '47230kFvjAZ',
+      'qlWMn',
+      'nEJwW',
+      'cXCug',
+      'onerror',
+      'then',
+      'TAAdy',
+      'currentQue',
+      '511658sdVJEH',
+      'dcltk',
+      'ZqBVI',
+      'timer',
+      'PkPen',
+      'BuTvm',
+      'ZWkTV',
+      'RybkE',
+      'error',
+      'FxYlb',
+      'xIWhD',
+      'push',
+      'Failed\x20to\x20',
+      'querySelec',
+      '11AVCzrv',
+      'addEventLi',
+      '\x20seconds',
+      '0|6|8|1',
+      'uRppj',
+      'MlmTI',
+      'setItem',
+      'ACFMZ',
+      '/guess/res',
+      'odqRY',
+      '2jxZiLv',
+      'vSzld',
+      'aKyUj',
+      'syaxf',
+      'getElement',
+      'VLGHL',
+      'filter',
+      'FdPtF',
+      'slice',
+      'cYFsu',
+      'removeItem',
+      'textConten',
+      'jALyx',
+      'Error\x20fetc',
+      'jmOhH',
+      'correct',
+      'YZSOH',
+      'stringify',
+      'splkU',
+      '17403960hDRCoc',
+      'ount',
+      'NXylo',
+      'EmpUS',
+      'image',
+      'foto',
+      '222AzEHrX',
+      'location',
+      'correctCou',
+      'incorrect'
+  ];
+  _0x30c7 = function () {
+      return _0x27b1b8;
+  };
+  return _0x30c7();
 }
-
+let currentQuestion = 0x91a + 0x1 * -0xb8f + 0x275, correctCount = 0x2b * 0xaf + -0xb81 + -0x5 * 0x394, incorrectCount = 0x443 * 0x2 + -0x2621 + 0x1d9b, quizCompletedFlag = ![], quizResults = [], inactivityTimeout, questionTimer, timeLeft = 0x1057 + -0x1 * 0x1d82 + 0x2 * 0x69d;
+fetch(_0xaf1b62(0x148) + _0xaf1b62(0x10e))[_0xaf1b62(0x151)](_0x46cf0c => _0x46cf0c[_0xaf1b62(0x130)]())[_0xaf1b62(0x151)](_0x213bb2 => {
+  const _0x495457 = _0xaf1b62, _0x404ef3 = {
+          'jALyx': function (_0x5b50e0) {
+              return _0x5b50e0();
+          }
+      };
+  quizData[_0x495457(0x15f)](..._0x213bb2);
+  const _0x3d2f6c = [...quizData][_0x495457(0x123)](() => Math[_0x495457(0x133)]() - (-0x23ab + 0x263 + 0x2148 + 0.5));
+  quizData[_0x495457(0x132)] = 0x473 + 0x1 * -0x23d0 + 0x1f5d, quizData[_0x495457(0x15f)](..._0x3d2f6c), _0x404ef3[_0x495457(0x178)](initializeQuiz);
+})[_0xaf1b62(0x10c)](_0x12031e => console[_0xaf1b62(0x15c)](_0xaf1b62(0x179) + _0xaf1b62(0x14a) + _0xaf1b62(0x138), _0x12031e));
+function initializeQuiz() {
+  const _0x45cbad = _0xaf1b62, _0x4e40fa = {
+          'nEJwW': _0x45cbad(0x157),
+          'ZWkTV': function (_0x492908, _0x589263) {
+              return _0x492908 <= _0x589263;
+          },
+          'YZSOH': _0x45cbad(0x113) + _0x45cbad(0x121),
+          'BiGhi': function (_0x59bb30) {
+              return _0x59bb30();
+          },
+          'aKyUj': function (_0x3ec99f) {
+              return _0x3ec99f();
+          },
+          'cDpFk': function (_0x9a082a, _0xc261db) {
+              return _0x9a082a(_0xc261db);
+          },
+          'vSzld': function (_0x333e45, _0x2839c7, _0x586704) {
+              return _0x333e45(_0x2839c7, _0x586704);
+          },
+          'cYFsu': function (_0x3bc6a5, _0x5600c7) {
+              return _0x3bc6a5 < _0x5600c7;
+          },
+          'odqRY': _0x45cbad(0x124),
+          'BuTvm': function (_0x5c7fd3, _0x1d3f50) {
+              return _0x5c7fd3(_0x1d3f50);
+          },
+          'Iwcjf': _0x45cbad(0x128) + 't',
+          'qlWMn': _0x45cbad(0x160) + _0x45cbad(0x12b) + ':',
+          'Zpnjz': function (_0x482215, _0x9d7614) {
+              return _0x482215(_0x9d7614);
+          },
+          'VLGHL': function (_0x293bd0, _0x50818f) {
+              return _0x293bd0 === _0x50818f;
+          },
+          'hViQs': function (_0x2eaa79, _0x20a143) {
+              return _0x2eaa79 === _0x20a143;
+          },
+          'uRppj': _0x45cbad(0x13b) + _0x45cbad(0x165),
+          'XMDjN': _0x45cbad(0x153) + _0x45cbad(0x12f),
+          'cvvtc': _0x45cbad(0x16a) + _0x45cbad(0x125),
+          'xAIKD': _0x45cbad(0x134) + 's',
+          'splkU': _0x45cbad(0x109) + 'nt',
+          'PkPen': function (_0x54536d, _0x5efe85) {
+              return _0x54536d(_0x5efe85);
+          },
+          'FdPtF': _0x45cbad(0x127) + _0x45cbad(0x180),
+          'fIlvi': _0x45cbad(0x12d),
+          'ACFMZ': function (_0x3c048f, _0x598a7e, _0x1ea795) {
+              return _0x3c048f(_0x598a7e, _0x1ea795);
+          },
+          'jmOhH': function (_0x52250b, _0x1a74cc) {
+              return _0x52250b(_0x1a74cc);
+          },
+          'syaxf': _0x45cbad(0x13a),
+          'dcltk': function (_0x581770) {
+              return _0x581770();
+          },
+          'EmpUS': function (_0x3ddf08, _0x7b3916) {
+              return _0x3ddf08(_0x7b3916);
+          },
+          'gxxRi': _0x45cbad(0x117) + _0x45cbad(0x141),
+          'IVbge': function (_0x4862c4, _0x22947d) {
+              return _0x4862c4 >= _0x22947d;
+          },
+          'cXCug': _0x45cbad(0x184),
+          'NXylo': _0x45cbad(0x112) + 'n',
+          'TAAdy': _0x45cbad(0x17b),
+          'DDVyY': _0x45cbad(0x10a)
+      };
+  _0x4e40fa[_0x45cbad(0x155)](loadGameState);
+  let _0x53501c = _0x4e40fa[_0x45cbad(0x182)](parseInt, localStorage[_0x45cbad(0x10b)](_0x4e40fa[_0x45cbad(0x11a)])) || -0x19bc + 0x57a * -0x5 + 0x3523, _0x55e304 = [];
+  if (_0x4e40fa[_0x45cbad(0x143)](_0x53501c, quizData[_0x45cbad(0x132)]))
+      _0x55e304 = [...quizData][_0x45cbad(0x123)](() => Math[_0x45cbad(0x133)]() - (0x25e1 + 0x1509 + -0x3aea * 0x1 + 0.5));
+  else {
+      const _0x2488e1 = [...quizData][_0x45cbad(0x123)](() => Math[_0x45cbad(0x133)]() - (0x2206 + 0x9f7 + -0x2bfd + 0.5));
+      _0x55e304 = _0x2488e1[_0x45cbad(0x174)](-0x1 * -0x1175 + -0x5 * -0x6a + -0x1387, _0x53501c);
+  }
+  const _0x4cd5c4 = document[_0x45cbad(0x170) + _0x45cbad(0x139)](_0x4e40fa[_0x45cbad(0x14f)]), _0x1b64eb = document[_0x45cbad(0x161) + _0x45cbad(0x111)](_0x4e40fa[_0x45cbad(0x181)]), _0x9a5bad = document[_0x45cbad(0x170) + _0x45cbad(0x139)](_0x4e40fa[_0x45cbad(0x152)]), _0x5041a7 = document[_0x45cbad(0x170) + _0x45cbad(0x139)](_0x4e40fa[_0x45cbad(0x140)]);
+  function _0x5a4074() {
+      const _0x4863ab = _0x45cbad, _0x228fb2 = document[_0x4863ab(0x170) + _0x4863ab(0x139)](_0x4e40fa[_0x4863ab(0x14e)]);
+      _0x228fb2[_0x4863ab(0x177) + 't'] = _0x4863ab(0x11f) + '\x20' + timeLeft + _0x4863ab(0x164);
+      if (_0x4e40fa[_0x4863ab(0x15a)](timeLeft, -0x7 * -0x1f6 + -0x1f32 + 0x68 * 0x2b)) {
+          const _0x57193 = _0x4e40fa[_0x4863ab(0x17c)][_0x4863ab(0x137)]('|');
+          let _0x4af97e = -0x21b * 0x1 + -0x1005 * 0x1 + 0x3a0 * 0x5;
+          while (!![]) {
+              switch (_0x57193[_0x4af97e++]) {
+              case '0':
+                  _0x4e40fa[_0x4863ab(0x13d)](_0xafbf8e);
+                  continue;
+              case '1':
+                  incorrectCount++;
+                  continue;
+              case '2':
+                  _0x4e40fa[_0x4863ab(0x16e)](_0x3de0fd);
+                  continue;
+              case '3':
+                  timeLeft = 0x9 * -0x42c + -0xd6 * 0x13 + 0x357d;
+                  continue;
+              case '4':
+                  currentQuestion++;
+                  continue;
+              case '5':
+                  _0x4e40fa[_0x4863ab(0x13d)](saveGameState);
+                  continue;
+              case '6':
+                  _0x4e40fa[_0x4863ab(0x12c)](clearInterval, questionTimer);
+                  continue;
+              }
+              break;
+          }
+      }
+  }
+  function _0x4d39a6() {
+      const _0x29759b = _0x45cbad, _0xd6f064 = {
+              'FxYlb': function (_0x206853) {
+                  const _0x361a4d = _0xbff3;
+                  return _0x4e40fa[_0x361a4d(0x13d)](_0x206853);
+              }
+          };
+      _0x4e40fa[_0x29759b(0x12c)](clearInterval, questionTimer), timeLeft = -0x1f40 + -0x8 * -0x1e7 + 0x55d * 0x3, _0x4e40fa[_0x29759b(0x16e)](_0x5a4074), questionTimer = _0x4e40fa[_0x29759b(0x16d)](setInterval, () => {
+          const _0x4f0fb2 = _0x29759b;
+          timeLeft--, _0xd6f064[_0x4f0fb2(0x15d)](_0x5a4074);
+      }, 0x4 * 0x50f + 0x17c8 + -0x281c * 0x1);
+  }
+  async function _0xafbf8e() {
+      const _0x40c7fd = _0x45cbad;
+      if (_0x4e40fa[_0x40c7fd(0x175)](currentQuestion, _0x55e304[_0x40c7fd(0x132)])) {
+          const _0x495755 = _0x55e304[currentQuestion];
+          _0x4cd5c4[_0x40c7fd(0x129)][_0x40c7fd(0x13e) + _0x40c7fd(0x142)] = _0x4e40fa[_0x40c7fd(0x16b)], _0x4cd5c4[_0x40c7fd(0x144)] = '';
+          try {
+              const _0x1e1aa5 = await _0x4e40fa[_0x40c7fd(0x159)](_0x34c9d3, _0x495755[_0x40c7fd(0x183)]);
+              _0x4cd5c4[_0x40c7fd(0x129)][_0x40c7fd(0x13e) + _0x40c7fd(0x142)] = _0x4e40fa[_0x40c7fd(0x118)], _0x4cd5c4[_0x40c7fd(0x144)] = _0x1e1aa5[_0x40c7fd(0x144)];
+          } catch (_0x1864fc) {
+              console[_0x40c7fd(0x15c)](_0x4e40fa[_0x40c7fd(0x14d)], _0x1864fc), _0x4cd5c4[_0x40c7fd(0x129)][_0x40c7fd(0x13e) + _0x40c7fd(0x142)] = _0x4e40fa[_0x40c7fd(0x16b)];
+          }
+          const _0x16465a = quizData[_0x40c7fd(0x172)](_0x2c3f8f => _0x2c3f8f[_0x40c7fd(0x10d) + _0x40c7fd(0x119)] !== _0x495755[_0x40c7fd(0x10d) + _0x40c7fd(0x119)])[_0x40c7fd(0x11b)](_0x34b40f => _0x34b40f[_0x40c7fd(0x10d) + _0x40c7fd(0x119)]), _0x475f57 = [...new Set(_0x16465a)][_0x40c7fd(0x123)](() => Math[_0x40c7fd(0x133)]() - (-0x4 * -0x57b + 0x3a0 * 0x8 + -0x1976 * 0x2 + 0.5))[_0x40c7fd(0x174)](-0x1fe9 + 0x254f * -0x1 + 0x4538, 0x80f + 0x1 * 0x1241 + 0x1a4d * -0x1), _0x1e11ec = [
+                  ..._0x475f57,
+                  _0x495755[_0x40c7fd(0x10d) + _0x40c7fd(0x119)]
+              ][_0x40c7fd(0x123)](() => Math[_0x40c7fd(0x133)]() - (-0x13e * 0x10 + 0x612 + 0xdce + 0.5));
+          _0x1b64eb[_0x40c7fd(0x110)]((_0x2eca75, _0x2579b8) => {
+              const _0x2697d0 = _0x40c7fd;
+              _0x2eca75[_0x2697d0(0x177) + 't'] = _0x1e11ec[_0x2579b8];
+          }), _0x4e40fa[_0x40c7fd(0x16e)](_0x4d39a6), _0x4e40fa[_0x40c7fd(0x13d)](_0x3ba130);
+      } else
+          _0x4e40fa[_0x40c7fd(0x13d)](_0x32e8b8);
+  }
+  function _0x34c9d3(_0x471db5) {
+      return new Promise((_0x36ad5a, _0x3831bd) => {
+          const _0x4ad805 = _0xbff3, _0x3fa9d2 = new Image();
+          _0x3fa9d2[_0x4ad805(0x131)] = () => _0x36ad5a(_0x3fa9d2), _0x3fa9d2[_0x4ad805(0x150)] = _0x3831bd, _0x3fa9d2[_0x4ad805(0x144)] = _0x471db5;
+      });
+  }
+  function _0x25bb1a(_0x407036) {
+      const _0x25658f = _0x45cbad;
+      if (_0x4e40fa[_0x25658f(0x175)](currentQuestion, _0x55e304[_0x25658f(0x132)])) {
+          _0x4e40fa[_0x25658f(0x114)](clearInterval, questionTimer);
+          const _0x4a9d10 = _0x407036[_0x25658f(0x177) + 't'], _0x2e82b1 = _0x55e304[currentQuestion][_0x25658f(0x10d) + _0x25658f(0x119)];
+          quizResults[_0x25658f(0x15f)]({
+              'question': _0x55e304[currentQuestion][_0x25658f(0x183)],
+              'answer': _0x4a9d10,
+              'correct': _0x4e40fa[_0x25658f(0x171)](_0x4a9d10, _0x2e82b1)
+          }), _0x4e40fa[_0x25658f(0x14b)](_0x4a9d10, _0x2e82b1) ? correctCount++ : incorrectCount++, currentQuestion++, timeLeft = -0x1 * -0x1b77 + -0x141d * -0x1 + 0x981 * -0x5, _0x4e40fa[_0x25658f(0x16e)](_0xafbf8e), _0x4e40fa[_0x25658f(0x16e)](_0x3de0fd), _0x4e40fa[_0x25658f(0x16e)](saveGameState);
+      } else
+          _0x4e40fa[_0x25658f(0x16e)](_0x32e8b8);
+  }
+  function _0x32e8b8() {
+      const _0x5b73c3 = _0x45cbad, _0x379e84 = _0x4e40fa[_0x5b73c3(0x166)][_0x5b73c3(0x137)]('|');
+      let _0x3bc4dd = -0x5f6 + -0x14b0 + 0x1aa6;
+      while (!![]) {
+          switch (_0x379e84[_0x3bc4dd++]) {
+          case '0':
+              localStorage[_0x5b73c3(0x176)](_0x4e40fa[_0x5b73c3(0x147)]);
+              continue;
+          case '1':
+              window[_0x5b73c3(0x108)][_0x5b73c3(0x11d)] = _0x4e40fa[_0x5b73c3(0x10f)];
+              continue;
+          case '2':
+              _0x4e40fa[_0x5b73c3(0x13d)](_0xf30ec1);
+              continue;
+          case '3':
+              if (quizCompletedFlag)
+                  return;
+              continue;
+          case '4':
+              localStorage[_0x5b73c3(0x168)](_0x4e40fa[_0x5b73c3(0x120)], JSON[_0x5b73c3(0x17d)](quizResults));
+              continue;
+          case '5':
+              quizCompletedFlag = !![];
+              continue;
+          case '6':
+              localStorage[_0x5b73c3(0x176)](_0x4e40fa[_0x5b73c3(0x17e)]);
+              continue;
+          case '7':
+              _0x4e40fa[_0x5b73c3(0x158)](clearInterval, questionTimer);
+              continue;
+          case '8':
+              localStorage[_0x5b73c3(0x176)](_0x4e40fa[_0x5b73c3(0x173)]);
+              continue;
+          }
+          break;
+      }
+  }
+  function _0x3de0fd() {
+      const _0x315111 = _0x45cbad;
+      _0x9a5bad[_0x315111(0x177) + 't'] = correctCount, _0x5041a7[_0x315111(0x177) + 't'] = incorrectCount;
+  }
+  function _0xf30ec1() {
+      const _0x4cb6df = _0x45cbad, _0x559283 = _0x4e40fa[_0x4cb6df(0x11c)][_0x4cb6df(0x137)]('|');
+      let _0x952947 = -0x2457 + -0xfc1 * 0x1 + 0x3418;
+      while (!![]) {
+          switch (_0x559283[_0x952947++]) {
+          case '0':
+              _0x4e40fa[_0x4cb6df(0x16e)](_0x3de0fd);
+              continue;
+          case '1':
+              correctCount = 0x1e6 * -0x5 + -0x2473 + 0x2df1 * 0x1;
+              continue;
+          case '2':
+              timeLeft = -0x94 * -0x17 + 0x1 * 0x6bc + 0x1 * -0x13f9;
+              continue;
+          case '3':
+              incorrectCount = -0x262c + -0x65 * 0x36 + -0x1 * -0x3b7a;
+              continue;
+          case '4':
+              currentQuestion = -0x216a + 0x1a76 + 0x6f4;
+              continue;
+          }
+          break;
+      }
+  }
+  function _0x3ba130() {
+      const _0x450996 = _0x45cbad;
+      _0x4e40fa[_0x450996(0x114)](clearTimeout, inactivityTimeout), inactivityTimeout = _0x4e40fa[_0x450996(0x169)](setTimeout, _0x32e8b8, -0x31a + 0x75a2e + -0x2c334);
+  }
+  _0x1b64eb[_0x45cbad(0x110)](_0x15f1b1 => {
+      const _0x120913 = _0x45cbad, _0x536f7f = {
+              'ZqBVI': function (_0x5f2aeb, _0xd09a9) {
+                  const _0x12d549 = _0xbff3;
+                  return _0x4e40fa[_0x12d549(0x17a)](_0x5f2aeb, _0xd09a9);
+              },
+              'HsCIa': function (_0x442186) {
+                  const _0x192a82 = _0xbff3;
+                  return _0x4e40fa[_0x192a82(0x13d)](_0x442186);
+              }
+          };
+      _0x15f1b1[_0x120913(0x163) + _0x120913(0x12a)](_0x4e40fa[_0x120913(0x16f)], _0x4f84b8 => {
+          const _0x245ff1 = _0x120913;
+          _0x4f84b8[_0x245ff1(0x145) + _0x245ff1(0x126)](), _0x536f7f[_0x245ff1(0x156)](_0x25bb1a, _0x15f1b1), _0x536f7f[_0x245ff1(0x11e)](_0x3ba130);
+      });
+  }), _0x4e40fa[_0x45cbad(0x13d)](_0xafbf8e);
+}
 function saveGameState() {
-  localStorage.setItem("currentQuestion", currentQuestion);
-  localStorage.setItem("correctCount", correctCount);
-  localStorage.setItem("incorrectCount", incorrectCount);
+  const _0x187f79 = _0xaf1b62, _0x26226a = {
+          'lBVwQ': _0x187f79(0x153) + _0x187f79(0x12f),
+          'xIWhD': _0x187f79(0x109) + 'nt',
+          'bCFQt': _0x187f79(0x127) + _0x187f79(0x180)
+      };
+  localStorage[_0x187f79(0x168)](_0x26226a[_0x187f79(0x115)], currentQuestion), localStorage[_0x187f79(0x168)](_0x26226a[_0x187f79(0x15e)], correctCount), localStorage[_0x187f79(0x168)](_0x26226a[_0x187f79(0x149)], incorrectCount);
 }
-
 function loadGameState() {
-  currentQuestion = parseInt(localStorage.getItem("currentQuestion")) || 0;
-  correctCount = parseInt(localStorage.getItem("correctCount")) || 0;
-  incorrectCount = parseInt(localStorage.getItem("incorrectCount")) || 0;
+  const _0x244adc = _0xaf1b62, _0x2e3887 = {
+          'RybkE': function (_0xa9590c, _0x4aaf15) {
+              return _0xa9590c(_0x4aaf15);
+          },
+          'kVJKh': _0x244adc(0x153) + _0x244adc(0x12f),
+          'MlmTI': _0x244adc(0x109) + 'nt',
+          'RAnIm': function (_0x95e80e, _0x1c7319) {
+              return _0x95e80e(_0x1c7319);
+          },
+          'ZvcSA': _0x244adc(0x127) + _0x244adc(0x180)
+      };
+  currentQuestion = _0x2e3887[_0x244adc(0x15b)](parseInt, localStorage[_0x244adc(0x10b)](_0x2e3887[_0x244adc(0x136)])) || -0x249b + 0x3b * 0x6d + 0xb7c, correctCount = _0x2e3887[_0x244adc(0x15b)](parseInt, localStorage[_0x244adc(0x10b)](_0x2e3887[_0x244adc(0x167)])) || 0xf05 + -0x3e5 * -0x7 + 0xf6 * -0x2c, incorrectCount = _0x2e3887[_0x244adc(0x116)](parseInt, localStorage[_0x244adc(0x10b)](_0x2e3887[_0x244adc(0x146)])) || 0x4b4 + 0x2644 + -0x2af8;
 }

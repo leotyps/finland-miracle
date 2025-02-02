@@ -1,61 +1,255 @@
-function displayBirthdays() {
-    const container = document.getElementById('birthdayContainer');
-    const countElement = document.getElementById('birthdayCount');
-
-    container.innerHTML = Array(3)
-        .fill(`
-            <div class="bg-white rounded-xl p-4 hover:shadow-sm transition-shadow skeleton">
-                <div class="flex items-center space-x-4">
-                    <div class="relative flex-shrink-0">
-                        <div class="bg-gray-300 w-16 h-16 rounded-3xl"></div>
-                    </div>
-                    <div class="flex-1 space-y-2">
-                        <div class="bg-gray-300 h-4 w-3/4 rounded"></div>
-                        <div class="bg-gray-200 h-3 w-1/2 rounded"></div>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-
-    fetch('https://48intensapi.my.id/api/birthdays')
-        .then(response => response.json())
-        .then(data => {
-            countElement.textContent = `${data.length} Members`;
-
-            container.innerHTML = data.map(member => {
-                const shortenedLink = member.profileLink.match(/\/(\d+)(?=\?|$)/)[0];
-
-                return `
-                    <div class="bg-white rounded-xl p-4 hover:shadow-sm transition-shadow">
-                        <a href="/member${shortenedLink}" class="flex items-center space-x-4">
-                            <div class="relative flex-shrink-0">
-                                <img src="${member.imgSrc}" alt="${member.name}" class="w-16 h-16 rounded-3xl object-cover loading="lazy"">
-                                <div class="absolute -bottom-1 -right-1">
-                                    <div class="bg-gray-100 rounded-full p-1">
-                                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm font-medium text-gray-900 truncate">${member.name}</h3>
-                                <p class="text-xs text-gray-500">${member.birthday}</p>
-                            </div>
-                            <div class="text-xs text-gray-400">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                            </div>
-                        </a>
-                    </div>
-                `;
-            }).join('');
-        })
-        .catch(error => {
-            container.innerHTML = '<div class="text-center py-3 text-sm text-gray-500">Failed to load birthday data 😭</div>';
-            console.error('Error:', error);
-        });
+const _0xd8ef95 = _0x1ec7;
+(function (_0x1eb61a, _0x25fd79) {
+    const _0x3b2da0 = _0x1ec7, _0x4320bc = _0x1eb61a();
+    while (!![]) {
+        try {
+            const _0x2e23fc = -parseInt(_0x3b2da0(0x1bb)) / (0x2235 + -0x1614 + -0xc20) + parseInt(_0x3b2da0(0x1af)) / (0x16a + -0x1d * -0xf1 + -0x1cb5) * (parseInt(_0x3b2da0(0x237)) / (0x1604 + 0x3f5 + 0x2 * -0xcfb)) + parseInt(_0x3b2da0(0x221)) / (-0x2b6 + 0x4b * 0x63 + -0x1f * 0xd9) + parseInt(_0x3b2da0(0x1f7)) / (0x26d + -0x25d2 + 0x236a) * (-parseInt(_0x3b2da0(0x196)) / (-0x3 * -0x8ef + -0x3 * 0xb9 + 0x189c * -0x1)) + parseInt(_0x3b2da0(0x1c6)) / (0x1d * 0xcb + 0x31e + -0x9f * 0x2a) + -parseInt(_0x3b2da0(0x23f)) / (0x2 * 0xb6b + -0x1884 + -0x49 * -0x6) + -parseInt(_0x3b2da0(0x1d0)) / (-0x1 * 0x8c5 + 0x14d9 + -0x1 * 0xc0b) * (-parseInt(_0x3b2da0(0x1c2)) / (0xad * 0x6 + 0x5 * 0x480 + 0x2 * -0xd42));
+            if (_0x2e23fc === _0x25fd79)
+                break;
+            else
+                _0x4320bc['push'](_0x4320bc['shift']());
+        } catch (_0x1de1fa) {
+            _0x4320bc['push'](_0x4320bc['shift']());
+        }
+    }
+}(_0x19f3, -0x1 * -0x2245c + -0x208c * 0x14 + 0x801e5));
+function _0x19f3() {
+    const _0x909a51 = [
+        '318a4.5\x204.',
+        '/4\x20rounded',
+        'ay-300\x20w-1',
+        '\x20\x20\x20</div>\x0a',
+        '0\x200\x2024\x2024\x22',
+        '<div\x20class',
+        'elative\x20fl',
+        'json',
+        've\x20flex-sh',
+        '\x20\x20\x20\x20\x20\x20\x20<di',
+        '\x22flex-1\x20mi',
+        'xt-gray-40',
+        'birthday',
+        '6\x20h-16\x20rou',
+        's=\x22bg-gray',
+        'ms-center\x20',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<d',
+        '\x20\x20\x20\x20</div>',
+        '\x20Members',
+        'ounded-3xl',
+        '\x20\x20\x20\x20\x20\x20\x20<a\x20',
+        'match',
+        'vg>\x0a\x20\x20\x20\x20\x20\x20',
+        'L12\x207.636l',
+        '-linecap=\x22',
+        'h-4\x20text-g',
+        'ass=\x22bg-gr',
+        '\x20\x20\x20\x20\x20\x20\x20</s',
+        'thday\x20data',
+        'fill',
+        'round\x22\x20str',
+        '-1\x20space-y',
+        'ass=\x22bg-wh',
+        '5\x200\x20000\x206.',
+        'DOMContent',
+        'ver\x20loadin',
+        '1731064CavMcw',
+        'iv\x20class=\x22',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<p',
+        '\x20stroke=\x22c',
+        'ed-full\x20p-',
+        'birthdays',
+        '-100\x20round',
+        '\x200\x2000-6.36',
+        '</svg>\x0a\x20\x20\x20',
+        '\x22M9\x205l7\x207-',
+        '1\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        '<h3\x20class=',
+        'KTHKQ',
+        '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'OguXm',
+        'dth=\x222\x22\x20d=',
+        'lass=\x22w-4\x20',
+        '\x20\x20\x20\x20\x20\x20\x20</d',
+        '\x20<div\x20clas',
+        'center\x20spa',
+        '-900\x20trunc',
+        '\x20\x20\x20\x20\x20\x20<svg',
+        '39FUmhuL',
+        'ber',
+        'l=\x22none\x22\x20s',
+        '=\x220\x200\x2024\x202',
+        '7\x207\x22/>\x0a\x20\x20\x20',
+        'KcHop',
+        'ite\x20rounde',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        '194904cnVTxh',
+        'sm\x20transit',
+        'birthdayCo',
+        '=\x22text-cen',
+        '\x20text-gray',
+        '\x22text-sm\x20f',
+        'ss=\x22relati',
+        'troke=\x22cur',
+        'CHvqA',
+        'nded-3xl\x22>',
+        'm-1\x20-right',
+        '\x20w-1/2\x20rou',
+        '\x20\x20\x20\x20',
+        '4\x200z\x22/>\x0a\x20\x20',
+        'Qmvzr',
+        '\x22></div>\x0a\x20',
+        'gcRdM',
+        '-gray-500\x22',
+        '\x20viewBox=\x22',
+        '\x20src=\x22',
+        '\x20\x20\x20<div\x20cl',
+        'unt',
+        '\x20\x20\x20\x20\x20\x20</di',
+        'imgSrc',
+        'length',
+        'ass=\x22absol',
+        'lex\x20items-',
+        'getElement',
+        'ex-shrink-',
+        '/div>\x0a\x20\x20\x20\x20',
+        'g=\x22lazy\x22\x22>',
+        's=\x22bg-whit',
+        '401862KoWHfp',
+        'o\x20load\x20bir',
+        '\x20\x20<div\x20cla',
+        '\x20\x20\x20\x20\x20</div',
+        'xt-xs\x20text',
+        '\x20\x20\x20\x20<svg\x20c',
+        'd-xl\x20p-4\x20h',
+        '5\x20h-5\x22\x20fil',
+        't-gray-500',
+        'ext-sm\x20tex',
+        'text-xs\x20te',
+        '\x20😭</div>',
+        '364L12\x2020.',
+        'n\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        '\x20</div>\x0a\x20\x20',
+        '364l7.682-',
+        '-2\x22>\x0a\x20\x20\x20\x20\x20',
+        'n-w-0\x22>\x0a\x20\x20',
+        'href=\x22/mem',
+        '\x20object-co',
+        'rentColor\x22',
+        'ate\x22>',
+        '\x22M4.318\x206.',
+        'lass=\x22flex',
+        'urrentColo',
+        '64908HESbzJ',
+        'name',
+        'ition-shad',
+        '</h3>\x0a\x20\x20\x20\x20',
+        '7.682a4.5\x20',
+        '\x20class=\x22te',
+        '\x22\x20class=\x22w',
+        'ill=\x22none\x22',
+        'ow\x20skeleto',
+        'xl\x20p-4\x20hov',
+        'ById',
+        'r\x22\x20viewBox',
+        '790162mdHrVX',
+        'ay-200\x20h-3',
+        '\x20class=\x22w-',
+        'my.id/api/',
+        '4.5\x200\x2000-6',
+        '-16\x20h-16\x20r',
+        'e\x20rounded-',
+        '106670HGkluq',
+        '\x22\x20class=\x22f',
+        '00\x20h-4\x20w-3',
+        'textConten',
+        '616000doeSrY',
+        '=\x22flex\x20ite',
+        'ray-500\x22\x20f',
+        'ter\x20py-3\x20t',
+        'addEventLi',
+        'ath\x20stroke',
+        '</div>\x0a\x20\x20\x20',
+        'over:shado',
+        '\x22>Failed\x20t',
+        '\x20\x20\x20\x20<div\x20c',
+        '369fbNHGy',
+        'innerHTML',
+        '>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
+        '.364-6.364',
+        '-1\x22>\x0a\x20\x20\x20\x20\x20',
+        '\x20\x20\x20\x20\x20\x20<img',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
+        'w-sm\x20trans',
+        'catch',
+        '-1.318-1.3',
+        'ont-medium',
+        '\x22\x20alt=\x22',
+        'map',
+        'oke-linejo',
+        'ntainer',
+        'Error:',
+        '0\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        'iv>\x0a\x20\x20\x20\x20\x20\x20',
+        'div\x20class=',
+        'error',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        '18a4.5\x204.5',
+        'join',
+        'ion-shadow',
+        'stener',
+        'er:shadow-',
+        'rink-0\x22>\x0a\x20',
+        '\x22bg-gray-3',
+        'intensapi.',
+        'ute\x20-botto',
+        'profileLin',
+        'in=\x22round\x22',
+        'then',
+        'ce-x-4\x22>\x0a\x20',
+        '\x20stroke-wi',
+        '\x20\x20\x20\x20\x20\x20</a>',
+        'v\x20class=\x22r',
+        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'nded\x22></di',
+        '5PacXmB',
+        'Loaded',
+        'space-x-4\x22',
+        '</p>\x0a\x20\x20\x20\x20\x20',
+        'https://48',
+        '4\x22>\x0a\x20\x20\x20\x20\x20\x20'
+    ];
+    _0x19f3 = function () {
+        return _0x909a51;
+    };
+    return _0x19f3();
 }
-
-document.addEventListener('DOMContentLoaded', displayBirthdays, { once: true });
+function _0x1ec7(_0x4426c6, _0x4fbeb6) {
+    const _0x2f6b47 = _0x19f3();
+    return _0x1ec7 = function (_0x2dfeae, _0x1a5ff1) {
+        _0x2dfeae = _0x2dfeae - (-0x13a3 + 0x60f + 0xf25);
+        let _0xe4886c = _0x2f6b47[_0x2dfeae];
+        return _0xe4886c;
+    }, _0x1ec7(_0x4426c6, _0x4fbeb6);
+}
+function displayBirthdays() {
+    const _0x11c1c4 = _0x1ec7, _0x548ca4 = {
+            'OguXm': _0x11c1c4(0x202) + _0x11c1c4(0x242) + _0x11c1c4(0x1c9) + _0x11c1c4(0x19f) + _0x11c1c4(0x19e) + _0x11c1c4(0x1ce) + _0x11c1c4(0x197) + _0x11c1c4(0x219) + _0x11c1c4(0x1a1),
+            'gcRdM': _0x11c1c4(0x1df),
+            'KcHop': _0x11c1c4(0x241) + _0x11c1c4(0x1de),
+            'CHvqA': _0x11c1c4(0x241) + _0x11c1c4(0x254),
+            'Qmvzr': function (_0x39da94, _0x4e60d7) {
+                return _0x39da94(_0x4e60d7);
+            },
+            'KTHKQ': _0x11c1c4(0x1fb) + _0x11c1c4(0x1ec) + _0x11c1c4(0x1be) + _0x11c1c4(0x226)
+        }, _0x57a3b9 = document[_0x11c1c4(0x191) + _0x11c1c4(0x1b9)](_0x548ca4[_0x11c1c4(0x23c)]), _0x258100 = document[_0x11c1c4(0x191) + _0x11c1c4(0x1b9)](_0x548ca4[_0x11c1c4(0x247)]);
+    _0x57a3b9[_0x11c1c4(0x1d1)] = _0x548ca4[_0x11c1c4(0x24d)](Array, -0x1292 + 0x2075 + -0xde0)[_0x11c1c4(0x21a)](_0x11c1c4(0x1e4) + _0x11c1c4(0x253) + _0x11c1c4(0x21d) + _0x11c1c4(0x23d) + _0x11c1c4(0x19c) + _0x11c1c4(0x1cd) + _0x11c1c4(0x1d7) + _0x11c1c4(0x1b1) + _0x11c1c4(0x1b7) + _0x11c1c4(0x1a3) + _0x11c1c4(0x23e) + _0x11c1c4(0x202) + _0x11c1c4(0x1c7) + _0x11c1c4(0x20c) + _0x11c1c4(0x1f9) + _0x11c1c4(0x1d2) + _0x11c1c4(0x23e) + _0x11c1c4(0x198) + _0x11c1c4(0x245) + _0x11c1c4(0x205) + _0x11c1c4(0x1ea) + _0x11c1c4(0x23e) + _0x11c1c4(0x23e) + _0x11c1c4(0x253) + _0x11c1c4(0x217) + _0x11c1c4(0x1ff) + _0x11c1c4(0x20a) + _0x11c1c4(0x248) + _0x11c1c4(0x1cc) + _0x11c1c4(0x23e) + _0x11c1c4(0x232) + _0x11c1c4(0x1e1) + _0x11c1c4(0x23e) + _0x11c1c4(0x1cf) + _0x11c1c4(0x1ad) + _0x11c1c4(0x21c) + _0x11c1c4(0x1a6) + _0x11c1c4(0x23e) + _0x11c1c4(0x1d6) + _0x11c1c4(0x1e2) + _0x11c1c4(0x1eb) + _0x11c1c4(0x1c4) + _0x11c1c4(0x1fe) + _0x11c1c4(0x24e) + _0x11c1c4(0x23e) + _0x11c1c4(0x23e) + _0x11c1c4(0x253) + _0x11c1c4(0x217) + _0x11c1c4(0x1bc) + _0x11c1c4(0x24a) + _0x11c1c4(0x1f6) + _0x11c1c4(0x1f5) + _0x11c1c4(0x23e) + _0x11c1c4(0x200) + _0x11c1c4(0x23e) + _0x11c1c4(0x255) + _0x11c1c4(0x1f5) + _0x11c1c4(0x199) + _0x11c1c4(0x1d2))[_0x11c1c4(0x1e6)](''), _0x548ca4[_0x11c1c4(0x24d)](fetch, _0x548ca4[_0x11c1c4(0x22d)])[_0x11c1c4(0x1f0)](_0x18a27d => _0x18a27d[_0x11c1c4(0x204)]())[_0x11c1c4(0x1f0)](_0x13b713 => {
+        const _0x31c874 = _0x11c1c4;
+        _0x258100[_0x31c874(0x1c5) + 't'] = _0x13b713[_0x31c874(0x257)] + _0x31c874(0x20f), _0x57a3b9[_0x31c874(0x1d1)] = _0x13b713[_0x31c874(0x1dc)](_0x5aea30 => {
+            const _0xfdb372 = _0x31c874, _0x306ea3 = _0x5aea30[_0xfdb372(0x1ee) + 'k'][_0xfdb372(0x212)](/\/(\d+)(?=\?|$)/)[0x2170 + -0x2187 + 0x17];
+            return _0xfdb372(0x1e4) + _0xfdb372(0x23e) + _0xfdb372(0x233) + _0xfdb372(0x195) + _0xfdb372(0x1c1) + _0xfdb372(0x1b8) + _0xfdb372(0x1e9) + _0xfdb372(0x240) + _0xfdb372(0x1e7) + _0xfdb372(0x22e) + _0xfdb372(0x23e) + _0xfdb372(0x211) + _0xfdb372(0x1a8) + _0xfdb372(0x238) + _0x306ea3 + (_0xfdb372(0x1c3) + _0xfdb372(0x259) + _0xfdb372(0x234) + _0xfdb372(0x1f1) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x206) + _0xfdb372(0x1f4) + _0xfdb372(0x203) + _0xfdb372(0x192) + _0xfdb372(0x1e0) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x1d5) + _0xfdb372(0x252)) + _0x5aea30[_0xfdb372(0x256)] + _0xfdb372(0x1db) + _0x5aea30[_0xfdb372(0x1b0)] + (_0xfdb372(0x1b5) + _0xfdb372(0x1c0) + _0xfdb372(0x210) + _0xfdb372(0x1a9) + _0xfdb372(0x220) + _0xfdb372(0x194) + _0xfdb372(0x1e4) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x253) + _0xfdb372(0x258) + _0xfdb372(0x1ed) + _0xfdb372(0x249) + _0xfdb372(0x1d4) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x233) + _0xfdb372(0x20b) + _0xfdb372(0x227) + _0xfdb372(0x225) + _0xfdb372(0x22b) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x19b) + _0xfdb372(0x231) + _0xfdb372(0x216) + _0xfdb372(0x1c8) + _0xfdb372(0x1b6) + _0xfdb372(0x224) + _0xfdb372(0x1ae) + _0xfdb372(0x1ba) + _0xfdb372(0x23a) + _0xfdb372(0x1fc) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x223) + _0xfdb372(0x1cb) + _0xfdb372(0x215) + _0xfdb372(0x21b) + _0xfdb372(0x1dd) + _0xfdb372(0x1ef) + _0xfdb372(0x1f2) + _0xfdb372(0x230) + _0xfdb372(0x22a) + _0xfdb372(0x23b) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x218) + _0xfdb372(0x213) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x1cc) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x1d6) + _0xfdb372(0x193) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x20e) + _0xfdb372(0x1e4) + _0xfdb372(0x23e) + _0xfdb372(0x1d6) + _0xfdb372(0x1e2) + _0xfdb372(0x207) + _0xfdb372(0x1a7) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x22c) + _0xfdb372(0x244) + _0xfdb372(0x1da) + _0xfdb372(0x243) + _0xfdb372(0x235) + _0xfdb372(0x1ab)) + _0x5aea30[_0xfdb372(0x1b0)] + (_0xfdb372(0x1b2) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x223) + _0xfdb372(0x1b4) + _0xfdb372(0x19a) + _0xfdb372(0x250) + '>') + _0x5aea30[_0xfdb372(0x209)] + (_0xfdb372(0x1fa) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x200) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x20d) + _0xfdb372(0x222) + _0xfdb372(0x1a0) + _0xfdb372(0x208) + _0xfdb372(0x1e0) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x236) + _0xfdb372(0x1bd) + _0xfdb372(0x19d) + _0xfdb372(0x239) + _0xfdb372(0x246) + _0xfdb372(0x1aa) + _0xfdb372(0x251) + _0xfdb372(0x201) + _0xfdb372(0x1d2) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x223) + _0xfdb372(0x1cb) + _0xfdb372(0x215) + _0xfdb372(0x21b) + _0xfdb372(0x1dd) + _0xfdb372(0x1ef) + _0xfdb372(0x1f2) + _0xfdb372(0x230) + _0xfdb372(0x1ac) + _0xfdb372(0x1fd) + _0xfdb372(0x21e) + _0xfdb372(0x1a2) + _0xfdb372(0x1a5) + _0xfdb372(0x1b3) + _0xfdb372(0x1bf) + _0xfdb372(0x1d3) + _0xfdb372(0x214) + _0xfdb372(0x1d9) + _0xfdb372(0x1e5) + _0xfdb372(0x228) + _0xfdb372(0x24c) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x229) + _0xfdb372(0x23e) + _0xfdb372(0x23e) + _0xfdb372(0x199) + _0xfdb372(0x1d2) + _0xfdb372(0x23e) + _0xfdb372(0x1f3) + _0xfdb372(0x1e4) + _0xfdb372(0x23e) + _0xfdb372(0x1a4) + _0xfdb372(0x23e) + _0xfdb372(0x24b));
+        })[_0x31c874(0x1e6)]('');
+    })[_0x11c1c4(0x1d8)](_0x52eea0 => {
+        const _0x59f8ee = _0x11c1c4;
+        _0x57a3b9[_0x59f8ee(0x1d1)] = _0x548ca4[_0x59f8ee(0x22f)], console[_0x59f8ee(0x1e3)](_0x548ca4[_0x59f8ee(0x24f)], _0x52eea0);
+    });
+}
+document[_0xd8ef95(0x1ca) + _0xd8ef95(0x1e8)](_0xd8ef95(0x21f) + _0xd8ef95(0x1f8), displayBirthdays, { 'once': !![] });

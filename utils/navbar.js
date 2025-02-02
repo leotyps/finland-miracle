@@ -1,49 +1,121 @@
-function checkLoginStatus() {
-    const loginButton = document.getElementById('loginButton');
-    const loginButtonMobile = document.getElementById('loginButtonMobile');
-    const username = localStorage.getItem('userName');
-
-    if (username) {
-        if (loginButton) {
-            loginButton.innerHTML = `
-                ${username}
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-5-5 5-5"></path>
-                </svg>
-            `;
-            loginButton.parentElement.href = "javascript:void(0)";
-        }
-        if (loginButtonMobile) {
-            loginButtonMobile.innerHTML = `
-                ${username}
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-5-5 5-5"></path>
-                </svg>
-            `;
-            loginButtonMobile.parentElement.href = "javascript:void(0)";
-        }
-    } else {
-        if (loginButton) {
-            loginButton.innerHTML = `
-                Login
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-5-5 5-5"></path>
-                </svg>
-            `;
-            loginButton.parentElement.href = "/login";
-        }
-
-        if (loginButtonMobile) {
-            loginButtonMobile.innerHTML = `
-                Login
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17l-5-5 5-5"></path>
-                </svg>
-            `;
-            loginButtonMobile.parentElement.href = "/login";
+function _0x24f8(_0x541b6f, _0xfca314) {
+    const _0x4b7af1 = _0x1039();
+    return _0x24f8 = function (_0x16009b, _0x5e58b8) {
+        _0x16009b = _0x16009b - (-0x7ae + -0x1652 + 0x29 * 0xc5);
+        let _0x2c6dd5 = _0x4b7af1[_0x16009b];
+        return _0x2c6dd5;
+    }, _0x24f8(_0x541b6f, _0xfca314);
+}
+const _0x5d654d = _0x24f8;
+(function (_0x2e953f, _0x52800c) {
+    const _0x32bdf0 = _0x24f8, _0x8413d2 = _0x2e953f();
+    while (!![]) {
+        try {
+            const _0x24a0b5 = parseInt(_0x32bdf0(0x1d4)) / (-0xa1e * -0x3 + 0x1d * -0x91 + -0xdec) + -parseInt(_0x32bdf0(0x1d5)) / (0x1 * 0xa57 + -0x3b5 + 0x20 * -0x35) + parseInt(_0x32bdf0(0x19d)) / (0x15ca + 0x950 * -0x1 + -0xc77) * (-parseInt(_0x32bdf0(0x1ba)) / (0x4c0 + -0x1d7 + 0x2e5 * -0x1)) + parseInt(_0x32bdf0(0x192)) / (-0x18 + 0x46 * -0x55 + 0x7c9 * 0x3) + -parseInt(_0x32bdf0(0x1be)) / (-0xa1b * -0x3 + -0x5 * -0x607 + -0x3c6e) + -parseInt(_0x32bdf0(0x1a9)) / (-0x224e + -0x1491 + 0x1 * 0x36e6) + -parseInt(_0x32bdf0(0x18d)) / (0x2363 + 0xbf7 + -0x2f52) * (-parseInt(_0x32bdf0(0x1d2)) / (-0x4cd + 0x17 * -0xa3 + -0x137b * -0x1));
+            if (_0x24a0b5 === _0x52800c)
+                break;
+            else
+                _0x8413d2['push'](_0x8413d2['shift']());
+        } catch (_0x423b32) {
+            _0x8413d2['push'](_0x8413d2['shift']());
         }
     }
+}(_0x1039, -0x158b + -0x2 * -0x6e26e + 0x140cb));
+function checkLoginStatus() {
+    const _0x44299b = _0x24f8, _0x1f4c86 = {
+            'VHcdw': _0x44299b(0x1bb) + 'n',
+            'nwahD': _0x44299b(0x1bb) + _0x44299b(0x18f),
+            'XrZaY': _0x44299b(0x19f),
+            'yXLMj': _0x44299b(0x1c8) + _0x44299b(0x1a0),
+            'pVoXi': _0x44299b(0x1c7)
+        }, _0x4fb81e = document[_0x44299b(0x1da) + _0x44299b(0x1d0)](_0x1f4c86[_0x44299b(0x1a8)]), _0x517a4a = document[_0x44299b(0x1da) + _0x44299b(0x1d0)](_0x1f4c86[_0x44299b(0x1ad)]), _0x57aa68 = localStorage[_0x44299b(0x1b6)](_0x1f4c86[_0x44299b(0x1af)]);
+    _0x57aa68 ? (_0x4fb81e && (_0x4fb81e[_0x44299b(0x1c2)] = _0x44299b(0x1a1) + _0x44299b(0x19a) + _0x57aa68 + (_0x44299b(0x1a1) + _0x44299b(0x1d9) + _0x44299b(0x1ae) + _0x44299b(0x1c3) + _0x44299b(0x199) + _0x44299b(0x1a5) + _0x44299b(0x1b1) + _0x44299b(0x1db) + _0x44299b(0x1d3) + _0x44299b(0x1d7) + _0x44299b(0x19c) + _0x44299b(0x1a4) + _0x44299b(0x1bd) + _0x44299b(0x195) + _0x44299b(0x1c0) + _0x44299b(0x1b8) + _0x44299b(0x1ca) + _0x44299b(0x1a2) + _0x44299b(0x18e) + _0x44299b(0x1ac) + _0x44299b(0x1bc) + _0x44299b(0x1cb) + _0x44299b(0x19c) + _0x44299b(0x1c9) + _0x44299b(0x19c) + '\x20'), _0x4fb81e[_0x44299b(0x1ab) + _0x44299b(0x1ce)][_0x44299b(0x1d6)] = _0x1f4c86[_0x44299b(0x1b5)]), _0x517a4a && (_0x517a4a[_0x44299b(0x1c2)] = _0x44299b(0x1a1) + _0x44299b(0x19a) + _0x57aa68 + (_0x44299b(0x1a1) + _0x44299b(0x1d9) + _0x44299b(0x1ae) + _0x44299b(0x1c3) + _0x44299b(0x199) + _0x44299b(0x1a5) + _0x44299b(0x1b1) + _0x44299b(0x1db) + _0x44299b(0x1d3) + _0x44299b(0x1d7) + _0x44299b(0x19c) + _0x44299b(0x1a4) + _0x44299b(0x1bd) + _0x44299b(0x195) + _0x44299b(0x1c0) + _0x44299b(0x1b8) + _0x44299b(0x1ca) + _0x44299b(0x1a2) + _0x44299b(0x18e) + _0x44299b(0x1ac) + _0x44299b(0x1bc) + _0x44299b(0x1cb) + _0x44299b(0x19c) + _0x44299b(0x1c9) + _0x44299b(0x19c) + '\x20'), _0x517a4a[_0x44299b(0x1ab) + _0x44299b(0x1ce)][_0x44299b(0x1d6)] = _0x1f4c86[_0x44299b(0x1b5)])) : (_0x4fb81e && (_0x4fb81e[_0x44299b(0x1c2)] = _0x44299b(0x1a1) + _0x44299b(0x198) + _0x44299b(0x196) + _0x44299b(0x1b4) + _0x44299b(0x19e) + _0x44299b(0x1a3) + _0x44299b(0x1b0) + _0x44299b(0x1cc) + _0x44299b(0x1bf) + _0x44299b(0x1c6) + _0x44299b(0x197) + _0x44299b(0x1cd) + _0x44299b(0x19c) + _0x44299b(0x19c) + _0x44299b(0x1d8) + _0x44299b(0x1c1) + _0x44299b(0x190) + _0x44299b(0x1cf) + _0x44299b(0x191) + _0x44299b(0x1b7) + _0x44299b(0x193) + _0x44299b(0x19b) + _0x44299b(0x1b2) + _0x44299b(0x1c5) + _0x44299b(0x19c) + _0x44299b(0x1a6) + _0x44299b(0x1a1) + _0x44299b(0x1b3), _0x4fb81e[_0x44299b(0x1ab) + _0x44299b(0x1ce)][_0x44299b(0x1d6)] = _0x1f4c86[_0x44299b(0x1c4)]), _0x517a4a && (_0x517a4a[_0x44299b(0x1c2)] = _0x44299b(0x1a1) + _0x44299b(0x198) + _0x44299b(0x196) + _0x44299b(0x1b4) + _0x44299b(0x19e) + _0x44299b(0x1a3) + _0x44299b(0x1b0) + _0x44299b(0x1cc) + _0x44299b(0x1bf) + _0x44299b(0x1c6) + _0x44299b(0x197) + _0x44299b(0x1cd) + _0x44299b(0x19c) + _0x44299b(0x19c) + _0x44299b(0x1d8) + _0x44299b(0x1c1) + _0x44299b(0x190) + _0x44299b(0x1cf) + _0x44299b(0x191) + _0x44299b(0x1b7) + _0x44299b(0x193) + _0x44299b(0x19b) + _0x44299b(0x1b2) + _0x44299b(0x1c5) + _0x44299b(0x19c) + _0x44299b(0x1a6) + _0x44299b(0x1a1) + _0x44299b(0x1b3), _0x517a4a[_0x44299b(0x1ab) + _0x44299b(0x1ce)][_0x44299b(0x1d6)] = _0x1f4c86[_0x44299b(0x1c4)]));
 }
-
-document.addEventListener('DOMContentLoaded', checkLoginStatus);
-window.addEventListener('storage', checkLoginStatus);
+document[_0x5d654d(0x1d1) + _0x5d654d(0x1a7)](_0x5d654d(0x1b9) + _0x5d654d(0x1aa), checkLoginStatus), window[_0x5d654d(0x1d1) + _0x5d654d(0x1a7)](_0x5d654d(0x194), checkLoginStatus);
+function _0x1039() {
+    const _0x24654e = [
+        'wBox=\x220\x200\x20',
+        '401217GbsuCe',
+        '1047304VQAQfM',
+        'href',
+        '24\x2024\x22>\x0a\x20\x20',
+        '<path\x20stro',
+        '\x20\x20\x20\x20\x20\x20\x20<sv',
+        'getElement',
+        'Color\x22\x20vie',
+        '104736RmFicT',
+        'dth=\x222\x22\x20d=',
+        'nMobile',
+        '=\x22round\x22\x20s',
+        'join=\x22roun',
+        '1805365RLwQnV',
+        'width=\x222\x22\x20',
+        'storage',
+        '-linecap=\x22',
+        'in\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'iewBox=\x220\x20',
+        '\x20\x20\x20\x20\x20\x20\x20Log',
+        '2\x22\x20fill=\x22n',
+        '\x20\x20\x20\x20\x20\x20\x20',
+        'd=\x22M15\x2017l',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        '219rCIuXH',
+        'svg\x20class=',
+        'userName',
+        ':void(0)',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        '\x20stroke-wi',
+        '\x22w-4\x20h-4\x20m',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<p',
+        'one\x22\x20strok',
+        '\x20\x20\x20\x20</svg>',
+        'stener',
+        'VHcdw',
+        '2348675xPvtmi',
+        'Loaded',
+        'parentElem',
+        '\x22M15\x2017l-5',
+        'nwahD',
+        'g\x20class=\x22w',
+        'XrZaY',
+        'l-2\x22\x20fill=',
+        'e=\x22current',
+        '-5-5\x205-5\x22>',
+        '\x20\x20\x20',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
+        'yXLMj',
+        'getItem',
+        'd\x22\x20stroke-',
+        'oke-linejo',
+        'DOMContent',
+        '64212JhPNxX',
+        'loginButto',
+        '-5\x205-5\x22></',
+        'ath\x20stroke',
+        '652992FSgwvS',
+        'oke=\x22curre',
+        'round\x22\x20str',
+        'ke-linecap',
+        'innerHTML',
+        '-4\x20h-4\x20ml-',
+        'pVoXi',
+        '</path>\x0a\x20\x20',
+        'ntColor\x22\x20v',
+        '/login',
+        'javascript',
+        '\x20\x20</svg>\x0a\x20',
+        'in=\x22round\x22',
+        'path>\x0a\x20\x20\x20\x20',
+        '\x22none\x22\x20str',
+        '0\x2024\x2024\x22>\x0a',
+        'ent',
+        'troke-line',
+        'ById',
+        'addEventLi',
+        '1620DkWtYK'
+    ];
+    _0x1039 = function () {
+        return _0x24654e;
+    };
+    return _0x1039();
+}

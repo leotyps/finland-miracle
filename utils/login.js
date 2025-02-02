@@ -1,41 +1,137 @@
-const loggedInUser = localStorage.getItem("userName");
-const loggedInOshimen = localStorage.getItem("userOshimen");
-
-if (loggedInUser && loggedInOshimen) {
-    window.location.href = "/mypage";
+const _0x737daa = _0x5c2f;
+(function (_0x5fac53, _0x3e4ef9) {
+    const _0x4d8be6 = _0x5c2f, _0x48cde3 = _0x5fac53();
+    while (!![]) {
+        try {
+            const _0x34b352 = -parseInt(_0x4d8be6(0x19a)) / (0xc * 0x25f + 0x148f + -0x3102) * (parseInt(_0x4d8be6(0x18e)) / (0x1ac8 + -0xcac + -0xe1a)) + -parseInt(_0x4d8be6(0x1a4)) / (-0x179c + 0x7d * -0x35 + 0x3180) * (parseInt(_0x4d8be6(0x198)) / (-0x63 * -0x59 + 0xe24 + -0x1 * 0x308b)) + parseInt(_0x4d8be6(0x1ab)) / (-0x1b7b + 0x3 * -0x93d + 0x3737) * (-parseInt(_0x4d8be6(0x1b0)) / (0x2e9 + 0x25b7 * -0x1 + 0xc * 0x2e7)) + -parseInt(_0x4d8be6(0x18d)) / (-0x214f * -0x1 + 0x31d * -0x1 + 0x1 * -0x1e2b) * (parseInt(_0x4d8be6(0x189)) / (-0x72f + -0x246 + 0x97d)) + -parseInt(_0x4d8be6(0x1b1)) / (-0x7f0 + 0x41 * -0x89 + 0x2 * 0x1561) * (parseInt(_0x4d8be6(0x1a1)) / (-0x1 * 0x1b83 + 0x1888 + 0x305)) + -parseInt(_0x4d8be6(0x180)) / (0xe96 + -0x13 * 0x4d + 0x1 * -0x8d4) * (-parseInt(_0x4d8be6(0x1b6)) / (0x1b48 + -0x219a + 0x65e)) + parseInt(_0x4d8be6(0x19f)) / (-0xe89 * -0x1 + -0x381 + -0xafb * 0x1);
+            if (_0x34b352 === _0x3e4ef9)
+                break;
+            else
+                _0x48cde3['push'](_0x48cde3['shift']());
+        } catch (_0x23ac62) {
+            _0x48cde3['push'](_0x48cde3['shift']());
+        }
+    }
+}(_0x420f, 0x1 * 0x4563f + -0x2a7b4 * -0x2 + -0x6f2ec));
+const loggedInUser = localStorage[_0x737daa(0x1af)](_0x737daa(0x194)), loggedInOshimen = localStorage[_0x737daa(0x1af)](_0x737daa(0x1a8) + 'n');
+loggedInUser && loggedInOshimen && (window[_0x737daa(0x18a)][_0x737daa(0x191)] = _0x737daa(0x18b));
+function _0x5c2f(_0x458f39, _0x47bc79) {
+    const _0x70c424 = _0x420f();
+    return _0x5c2f = function (_0x228bdc, _0x249553) {
+        _0x228bdc = _0x228bdc - (0x3e7 * 0x1 + 0x1f93 + -0x21fe);
+        let _0x2e9e23 = _0x70c424[_0x228bdc];
+        return _0x2e9e23;
+    }, _0x5c2f(_0x458f39, _0x47bc79);
 }
-
-const oshimenSelect = document.getElementById('oshimen');
-
+const oshimenSelect = document[_0x737daa(0x17d) + _0x737daa(0x1ae)](_0x737daa(0x1b7));
 async function loadOshimen() {
-    const memberEndpoint = '/data/member.json'; 
+    const _0x22d345 = _0x737daa, _0x1a0253 = {
+            'SSIfy': _0x22d345(0x1aa),
+            'XcSDU': _0x22d345(0x1a7) + _0x22d345(0x19c),
+            'DrOmA': function (_0x419dc0, _0x572887) {
+                return _0x419dc0(_0x572887);
+            },
+            'xulEA': _0x22d345(0x190) + _0x22d345(0x1a2) + 's:'
+        }, _0x1e6bae = _0x1a0253[_0x22d345(0x19b)];
     try {
-        const response = await fetch(memberEndpoint);
-        const members = await response.json();
-        members.forEach(member => {
-            const option = document.createElement('option');
-            option.value = member.name;
-            option.textContent = member.name;
-            oshimenSelect.appendChild(option);
+        const _0x1a49b3 = await _0x1a0253[_0x22d345(0x1b4)](fetch, _0x1e6bae), _0x37b79f = await _0x1a49b3[_0x22d345(0x1a0)]();
+        _0x37b79f[_0x22d345(0x1a5)](_0x90284f => {
+            const _0x851d5e = _0x22d345, _0x56fad3 = document[_0x851d5e(0x1b2) + _0x851d5e(0x1b3)](_0x1a0253[_0x851d5e(0x18f)]);
+            _0x56fad3[_0x851d5e(0x187)] = _0x90284f[_0x851d5e(0x188)], _0x56fad3[_0x851d5e(0x184) + 't'] = _0x90284f[_0x851d5e(0x188)], oshimenSelect[_0x851d5e(0x181) + 'd'](_0x56fad3);
         });
-    } catch (error) {
-        console.error('Error loading members:', error);
+    } catch (_0x13f66e) {
+        console[_0x22d345(0x1a6)](_0x1a0253[_0x22d345(0x17c)], _0x13f66e);
     }
 }
-
-loadOshimen();
-
-document.getElementById("loginForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const name = document.getElementById("name").value.trim();
-    const oshimen = document.getElementById("oshimen").value;
-    if (!name || !oshimen) {
-        alert("Please fill in your name and select an oshimen.");
+function _0x420f() {
+    const _0x49042a = [
+        'name\x20and\x20s',
+        'Please\x20fil',
+        '9677434wWTmeS',
+        'json',
+        '120HYEDIw',
+        'ing\x20member',
+        'trim',
+        '5766JoyTwY',
+        'forEach',
+        'error',
+        '/data/memb',
+        'userOshime',
+        'loginForm',
+        'option',
+        '15520mmwQUE',
+        'addEventLi',
+        'iOWeK',
+        'ById',
+        'getItem',
+        '72LzYSbI',
+        '156249pMUyNd',
+        'createElem',
+        'ent',
+        'DrOmA',
+        'stener',
+        '84GTPREf',
+        'oshimen',
+        'Wqvwf',
+        'xulEA',
+        'getElement',
+        'elect\x20an\x20o',
+        'l\x20in\x20your\x20',
+        '248787yzpEzM',
+        'appendChil',
+        'ault',
+        'VXnun',
+        'textConten',
+        'FWTGC',
+        'submit',
+        'value',
+        'name',
+        '48VOTfFW',
+        'location',
+        '/mypage',
+        'jAjYp',
+        '307713HREEmw',
+        '19514Jecxuv',
+        'SSIfy',
+        'Error\x20load',
+        'href',
+        'shimen.',
+        'preventDef',
+        'userName',
+        'VEEvi',
+        'DsBaU',
+        'aHMgD',
+        '4FADCDN',
+        'setItem',
+        '22SRwvda',
+        'XcSDU',
+        'er.json'
+    ];
+    _0x420f = function () {
+        return _0x49042a;
+    };
+    return _0x420f();
+}
+loadOshimen(), document[_0x737daa(0x17d) + _0x737daa(0x1ae)](_0x737daa(0x1a9))[_0x737daa(0x1ac) + _0x737daa(0x1b5)](_0x737daa(0x186), _0x5119ef => {
+    const _0x157d6b = _0x737daa, _0x3b5ade = {
+            'aHMgD': _0x157d6b(0x188),
+            'VXnun': _0x157d6b(0x1b7),
+            'Wqvwf': function (_0x196703, _0x2e80a2) {
+                return _0x196703 || _0x2e80a2;
+            },
+            'jAjYp': function (_0x1a5149, _0x337b83) {
+                return _0x1a5149(_0x337b83);
+            },
+            'DsBaU': _0x157d6b(0x19e) + _0x157d6b(0x17f) + _0x157d6b(0x19d) + _0x157d6b(0x17e) + _0x157d6b(0x192),
+            'iOWeK': _0x157d6b(0x194),
+            'VEEvi': _0x157d6b(0x1a8) + 'n',
+            'FWTGC': _0x157d6b(0x18b)
+        };
+    _0x5119ef[_0x157d6b(0x193) + _0x157d6b(0x182)]();
+    const _0x4be93a = document[_0x157d6b(0x17d) + _0x157d6b(0x1ae)](_0x3b5ade[_0x157d6b(0x197)])[_0x157d6b(0x187)][_0x157d6b(0x1a3)](), _0x3dccac = document[_0x157d6b(0x17d) + _0x157d6b(0x1ae)](_0x3b5ade[_0x157d6b(0x183)])[_0x157d6b(0x187)];
+    if (_0x3b5ade[_0x157d6b(0x1b8)](!_0x4be93a, !_0x3dccac)) {
+        _0x3b5ade[_0x157d6b(0x18c)](alert, _0x3b5ade[_0x157d6b(0x196)]);
         return;
     }
-    localStorage.setItem("userName", name);
-    localStorage.setItem("userOshimen", oshimen);
-    window.location.href = "/mypage";
+    localStorage[_0x157d6b(0x199)](_0x3b5ade[_0x157d6b(0x1ad)], _0x4be93a), localStorage[_0x157d6b(0x199)](_0x3b5ade[_0x157d6b(0x195)], _0x3dccac), window[_0x157d6b(0x18a)][_0x157d6b(0x191)] = _0x3b5ade[_0x157d6b(0x185)];
 });
-
-
