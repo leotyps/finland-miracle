@@ -1,253 +1,679 @@
-function showNotFoundMessage(container, message) {
-    container.className = 'flex items-center justify-center min-h-[24rem]';
-    container.innerHTML = `
-      <div class="flex flex-col items-center">
-        <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" alt="Not Found" class="w-64 mb-4">
-        <p class="text-gray-500 text-lg font-bold">${message}</p>
-      </div>
-    `;
+(function (_0xd63fcf, _0x4dc150) {
+    const _0x36920a = _0x3562, _0x234206 = _0xd63fcf();
+    while (!![]) {
+        try {
+            const _0x8a8d96 = parseInt(_0x36920a(0x35d)) / (-0x45a * -0x1 + 0x19 * -0x32 + 0x89) + -parseInt(_0x36920a(0x273)) / (0x2335 * -0x1 + -0x14b * 0x17 + -0x40f4 * -0x1) * (parseInt(_0x36920a(0x1e3)) / (-0x152 * -0xb + -0x3e5 * -0x9 + 0xc64 * -0x4)) + -parseInt(_0x36920a(0x2c9)) / (0x58c * 0x4 + 0x4 * 0x3e3 + -0x25b8) * (-parseInt(_0x36920a(0x35b)) / (-0x1f73 + 0x3f1 * -0x9 + 0x42f1)) + -parseInt(_0x36920a(0x36a)) / (-0x19f6 + -0x1 * -0x455 + -0x15a7 * -0x1) * (parseInt(_0x36920a(0x1ca)) / (-0x12e * -0x6 + -0x1 * 0x26ae + 0x1fa1)) + -parseInt(_0x36920a(0x261)) / (0x1 * 0x2155 + -0x1720 + 0x5 * -0x209) + -parseInt(_0x36920a(0x25f)) / (0x16ee + -0x7 * -0x455 + 0xd4e * -0x4) + parseInt(_0x36920a(0x2b6)) / (-0x1385 + -0x1d7d + 0x310c) * (parseInt(_0x36920a(0x23b)) / (0x1b6b + -0x1040 + -0x59 * 0x20));
+            if (_0x8a8d96 === _0x4dc150)
+                break;
+            else
+                _0x234206['push'](_0x234206['shift']());
+        } catch (_0x2d160e) {
+            _0x234206['push'](_0x234206['shift']());
+        }
+    }
+}(_0x29aa, -0x1bfe2 * -0x4 + 0x134f * -0x44 + 0x26661));
+function showNotFoundMessage(_0x423623, _0x32661c) {
+    const _0x34b469 = _0x3562, _0x418615 = { 'gejFl': _0x34b469(0x1d4) + _0x34b469(0x32a) + _0x34b469(0x279) + _0x34b469(0x239) + _0x34b469(0x217) };
+    _0x423623[_0x34b469(0x252)] = _0x418615[_0x34b469(0x293)], _0x423623[_0x34b469(0x2a7)] = _0x34b469(0x28c) + _0x34b469(0x2c7) + _0x34b469(0x362) + _0x34b469(0x30d) + _0x34b469(0x224) + _0x34b469(0x28f) + _0x34b469(0x1ec) + _0x34b469(0x2e9) + _0x34b469(0x2ca) + _0x34b469(0x28d) + _0x34b469(0x1fe) + _0x34b469(0x364) + _0x34b469(0x2f8) + _0x34b469(0x23c) + _0x34b469(0x264) + _0x34b469(0x2a4) + _0x34b469(0x2df) + _0x34b469(0x32d) + _0x34b469(0x208) + _0x34b469(0x276) + _0x34b469(0x2d3) + _0x34b469(0x344) + _0x34b469(0x305) + _0x34b469(0x2a0) + _0x32661c + (_0x34b469(0x1f1) + _0x34b469(0x2f6));
 }
-
-function showNotFoundMessageInsideCard(container, message) {
-    container.innerHTML = `
-      <div class="bg-gray-700 text-white rounded-2xl p-4 mb-2 shadow-md">
-        <div class="flex flex-col items-center justify-center py-8">
-          <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" alt="Not Found" class="w-32 mb-4">
-          <p class="text-gray-400 text-center">${message}</p>
-        </div>
-      </div>
-    `;
+function showNotFoundMessageInsideCard(_0x1bded0, _0x204767) {
+    const _0x481c04 = _0x3562;
+    _0x1bded0[_0x481c04(0x2a7)] = _0x481c04(0x28c) + _0x481c04(0x327) + _0x481c04(0x2e2) + _0x481c04(0x256) + _0x481c04(0x25b) + _0x481c04(0x34c) + _0x481c04(0x346) + _0x481c04(0x304) + _0x481c04(0x354) + _0x481c04(0x24f) + _0x481c04(0x345) + _0x481c04(0x32a) + _0x481c04(0x279) + _0x481c04(0x1c6) + _0x481c04(0x2b7) + _0x481c04(0x20d) + _0x481c04(0x27d) + _0x481c04(0x338) + _0x481c04(0x23a) + _0x481c04(0x21d) + _0x481c04(0x2ee) + _0x481c04(0x272) + _0x481c04(0x308) + _0x481c04(0x1f6) + _0x481c04(0x255) + _0x481c04(0x2f4) + _0x481c04(0x2cf) + _0x481c04(0x2ec) + _0x481c04(0x35f) + _0x481c04(0x340) + _0x481c04(0x306) + _0x481c04(0x2a8) + _0x481c04(0x1f0) + _0x204767 + (_0x481c04(0x225) + _0x481c04(0x282) + _0x481c04(0x20f) + '\x20');
 }
-
-
-// list news
-
-function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
+function getQueryParam(_0x3e1253) {
+    const _0x511177 = _0x3562, _0x24334c = new URLSearchParams(window[_0x511177(0x34a)][_0x511177(0x323)]);
+    return _0x24334c[_0x511177(0x283)](_0x3e1253);
 }
-
+function _0x3562(_0xf7097d, _0x5b8f9a) {
+    const _0x3a8899 = _0x29aa();
+    return _0x3562 = function (_0x453582, _0x9cb5c2) {
+        _0x453582 = _0x453582 - (-0x259d + -0x2 * 0xdc1 + 0x42e2);
+        let _0x2ef090 = _0x3a8899[_0x453582];
+        return _0x2ef090;
+    }, _0x3562(_0xf7097d, _0x5b8f9a);
+}
 async function fetchPageNews() {
-    const container = document.getElementById("page-news-container");
-
-    if (!container) {
-        console.error("Not found");
+    const _0x5a6f26 = _0x3562, _0x58c117 = {
+            'vKcAy': _0x5a6f26(0x1c3) + _0x5a6f26(0x246) + _0x5a6f26(0x235) + _0x5a6f26(0x280),
+            'SSZNw': _0x5a6f26(0x21f) + _0x5a6f26(0x27e),
+            'oisgb': _0x5a6f26(0x30b) + _0x5a6f26(0x27e),
+            'mdYzQ': function (_0x19313b, _0x38dcf0) {
+                return _0x19313b % _0x38dcf0;
+            },
+            'TnVVQ': _0x5a6f26(0x2c0) + _0x5a6f26(0x329),
+            'MbtdG': _0x5a6f26(0x350),
+            'fOSQX': function (_0x79773, _0x29eed7) {
+                return _0x79773 < _0x29eed7;
+            },
+            'QEXLc': function (_0xd11c78, _0x38776f) {
+                return _0xd11c78(_0x38776f);
+            },
+            'HGAPk': _0x5a6f26(0x2db) + _0x5a6f26(0x214) + _0x5a6f26(0x229) + _0x5a6f26(0x36c),
+            'uBKrn': _0x5a6f26(0x35c) + _0x5a6f26(0x234) + _0x5a6f26(0x2ef),
+            'SjHUM': _0x5a6f26(0x30c) + '0',
+            'erdgV': _0x5a6f26(0x1cd) + _0x5a6f26(0x343),
+            'rUQOg': _0x5a6f26(0x368) + '00',
+            'KyQVh': _0x5a6f26(0x259) + _0x5a6f26(0x21a),
+            'vDboS': function (_0x4ea39a, _0x5bf7ca) {
+                return _0x4ea39a === _0x5bf7ca;
+            },
+            'PmDxQ': function (_0x5b3968, _0x471af4, _0x91148) {
+                return _0x5b3968(_0x471af4, _0x91148);
+            },
+            'pCfsT': _0x5a6f26(0x211) + _0x5a6f26(0x200),
+            'Atwkb': _0x5a6f26(0x331) + _0x5a6f26(0x292) + _0x5a6f26(0x238),
+            'oejtC': function (_0x140353, _0x28be70, _0x158d98) {
+                return _0x140353(_0x28be70, _0x158d98);
+            }
+        }, _0x52a368 = document[_0x5a6f26(0x35e) + _0x5a6f26(0x1e9)](_0x58c117[_0x5a6f26(0x324)]);
+    if (!_0x52a368) {
+        console[_0x5a6f26(0x22a)](_0x58c117[_0x5a6f26(0x1d5)]);
         return;
     }
-
-    const skeletonCount = 16;
-    container.innerHTML = "";
-    for (let i = 0; i < skeletonCount; i++) {
-        const skeletonCard = ` 
-      <div class="block bg-gray-300 rounded-3xl shadow-md animate-pulse overflow-hidden">
-        <div class="p-4">
-          <div class="w-20 h-5 bg-gray-400 rounded-3xl mb-3"></div>
-          <div class="h-6 bg-gray-400 rounded mb-2"></div>
-          <div class="h-4 bg-gray-400 rounded w-3/4"></div>
-        </div>
-      </div>
-      `;
-        container.innerHTML += skeletonCard;
+    const _0x4064d8 = -0x99b + -0x1436 + 0x1de1;
+    _0x52a368[_0x5a6f26(0x2a7)] = '';
+    for (let _0xc2981c = 0x9e * -0x38 + -0x11 * 0x1e5 + 0x42c5; _0x58c117[_0x5a6f26(0x2fb)](_0xc2981c, _0x4064d8); _0xc2981c++) {
+        const _0x5ae6c3 = _0x5a6f26(0x318) + _0x5a6f26(0x267) + _0x5a6f26(0x28b) + _0x5a6f26(0x294) + _0x5a6f26(0x31b) + _0x5a6f26(0x222) + _0x5a6f26(0x1f4) + _0x5a6f26(0x319) + _0x5a6f26(0x303) + _0x5a6f26(0x245) + _0x5a6f26(0x265) + _0x5a6f26(0x25d) + _0x5a6f26(0x21c) + _0x5a6f26(0x2bf) + _0x5a6f26(0x2e8) + _0x5a6f26(0x310) + _0x5a6f26(0x278) + _0x5a6f26(0x300) + _0x5a6f26(0x2d9) + _0x5a6f26(0x233) + _0x5a6f26(0x26c) + _0x5a6f26(0x29f) + _0x5a6f26(0x215) + _0x5a6f26(0x33e) + _0x5a6f26(0x1e6) + _0x5a6f26(0x27f) + _0x5a6f26(0x203) + _0x5a6f26(0x33a) + _0x5a6f26(0x2d4) + _0x5a6f26(0x1fb) + _0x5a6f26(0x282) + _0x5a6f26(0x20f) + _0x5a6f26(0x301);
+        _0x52a368[_0x5a6f26(0x2a7)] += _0x5ae6c3;
     }
-
     try {
-        const response = await fetch(
-            "https://48intensapi.my.id/api/news"
-        );
-
-        if (!response.ok) throw new Error("Network response was not ok");
-
-        const data = await response.json();
-
-        const News = data.berita.slice(0, 16);
-
-        const colors = ["bg-blue-400", "bg-purple-400", "bg-green-400", "bg-red-400/50"];
-
-        container.innerHTML = "";
-
-        if (News.length === 0) {
-            showNotFoundMessage(container, "News Not Found 😭");
+        const _0x32caa3 = await _0x58c117[_0x5a6f26(0x1de)](fetch, _0x58c117[_0x5a6f26(0x2dc)]);
+        if (!_0x32caa3['ok'])
+            throw new Error(_0x58c117[_0x5a6f26(0x34e)]);
+        const _0xe3520 = await _0x32caa3[_0x5a6f26(0x266)](), _0x25ff88 = _0xe3520[_0x5a6f26(0x247)][_0x5a6f26(0x1e0)](0x116 * 0x1f + 0x2538 + 0x1 * -0x46e2, -0x1714 + -0x2677 + 0x3d9b), _0x135f92 = [
+                _0x58c117[_0x5a6f26(0x348)],
+                _0x58c117[_0x5a6f26(0x22b)],
+                _0x58c117[_0x5a6f26(0x244)],
+                _0x58c117[_0x5a6f26(0x2b4)]
+            ];
+        _0x52a368[_0x5a6f26(0x2a7)] = '';
+        if (_0x58c117[_0x5a6f26(0x2ad)](_0x25ff88[_0x5a6f26(0x2c2)], 0x11ab + 0x5 * 0xf7 + -0x167e)) {
+            _0x58c117[_0x5a6f26(0x2ab)](showNotFoundMessage, _0x52a368, _0x58c117[_0x5a6f26(0x32b)]);
             return;
         }
-
-        News.forEach((news, index) => {
-            const beritaId = news.berita_id || "";
-            const badgeUrl = news.badge_url
-                ? `https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}`
-                : "https://jkt48.com/images/logo.svg";
-            const waktu = news.waktu || "Waktu tidak tersedia";
-            const judul = news.judul || "Judul tidak tersedia";
-
-            const colorClass = colors[index % colors.length];
-            const detailUrl = `/news/${beritaId}`;
-            const newsCard = `
-        <a href="${detailUrl}" class="block ${colorClass} text-white rounded-3xl shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
-          onclick="localStorage.setItem('newsColor', '${colorClass}')">
-          <div class="p-4">
-            <img src="${badgeUrl}" alt="Badge" class="w-14 h-5 mb-3 rounded-3xl">
-            <h3 class="text-lg text-white font-bold mb-2">${judul}</h3>
-            <span class="text-sm text-white-200">${waktu}</span>
-          </div>
-        </a>
-        `;
-            container.innerHTML += newsCard;
+        _0x25ff88[_0x5a6f26(0x313)]((_0x55f79e, _0x33ea58) => {
+            const _0x216a8f = _0x5a6f26, _0x1e816a = _0x55f79e[_0x216a8f(0x312)] || '', _0x272ed6 = _0x55f79e[_0x216a8f(0x334)] ? _0x216a8f(0x207) + _0x216a8f(0x2a2) + _0x216a8f(0x1df) + _0x216a8f(0x2e7) + _0x216a8f(0x2d6) + _0x216a8f(0x2fe) + '48' + _0x55f79e[_0x216a8f(0x334)] : _0x58c117[_0x216a8f(0x2b1)], _0x565a25 = _0x55f79e[_0x216a8f(0x270)] || _0x58c117[_0x216a8f(0x243)], _0x4152f5 = _0x55f79e[_0x216a8f(0x1eb)] || _0x58c117[_0x216a8f(0x1e4)], _0x3b27b6 = _0x135f92[_0x58c117[_0x216a8f(0x2b8)](_0x33ea58, _0x135f92[_0x216a8f(0x2c2)])], _0x4c2af4 = _0x216a8f(0x29e) + _0x1e816a, _0x206869 = _0x216a8f(0x316) + _0x216a8f(0x1da) + _0x4c2af4 + (_0x216a8f(0x35a) + _0x216a8f(0x2d1)) + _0x3b27b6 + (_0x216a8f(0x1d7) + _0x216a8f(0x1cc) + _0x216a8f(0x351) + _0x216a8f(0x29b) + _0x216a8f(0x220) + _0x216a8f(0x1c7) + _0x216a8f(0x341) + _0x216a8f(0x202) + _0x216a8f(0x2d5) + _0x216a8f(0x2b3) + _0x216a8f(0x353) + _0x216a8f(0x1ea) + _0x216a8f(0x32e) + _0x216a8f(0x1e7) + _0x216a8f(0x339)) + _0x3b27b6 + (_0x216a8f(0x212) + _0x216a8f(0x295) + _0x216a8f(0x1ff) + _0x216a8f(0x297) + _0x216a8f(0x2ae) + '\x22') + _0x272ed6 + (_0x216a8f(0x1cb) + _0x216a8f(0x275) + _0x216a8f(0x30e) + _0x216a8f(0x2af) + _0x216a8f(0x2ff) + _0x216a8f(0x325) + _0x216a8f(0x2e0) + _0x216a8f(0x2c5) + _0x216a8f(0x315) + _0x216a8f(0x22d) + _0x216a8f(0x22c)) + _0x4152f5 + (_0x216a8f(0x23e) + _0x216a8f(0x2dd) + _0x216a8f(0x20a) + _0x216a8f(0x363) + _0x216a8f(0x30a) + _0x216a8f(0x1fd)) + _0x565a25 + (_0x216a8f(0x2b5) + _0x216a8f(0x356) + _0x216a8f(0x23d) + _0x216a8f(0x20e));
+            _0x52a368[_0x216a8f(0x2a7)] += _0x206869;
         });
-    } catch (error) {
-        console.error("Error fetching Page News:", error);
-        showNotFoundMessage(container, "News Not Found 😭");
+    } catch (_0x23f4c8) {
+        console[_0x5a6f26(0x22a)](_0x58c117[_0x5a6f26(0x2e1)], _0x23f4c8), _0x58c117[_0x5a6f26(0x2d0)](showNotFoundMessage, _0x52a368, _0x58c117[_0x5a6f26(0x32b)]);
     }
 }
-
-
-//  detail news
+function _0x29aa() {
+    const _0x5b11b5 = [
+        'ages/logo.',
+        'MqMtC',
+        '\x20\x20\x20\x20\x20\x20\x20<di',
+        'News:',
+        'er\x20min-h-[',
+        '.com/dlx2z',
+        '18931xIpkWg',
+        'cyq6twx7cm',
+        'v>\x0a\x20\x20\x20\x20\x20\x20<',
+        '</h3>\x0a\x20\x20\x20\x20',
+        'g-relaxed\x20',
+        'geHJh',
+        '-800\x20shado',
+        'ded-2xl\x20p-',
+        'SSZNw',
+        'rUQOg',
+        '\x20\x20\x20\x20\x20\x20<div',
+        't48.com/im',
+        'berita',
+        'Tanggal\x20ti',
+        '<img\x20src=\x22',
+        '-3xl\x22>\x0a\x20\x20\x20',
+        'text-white',
+        'fscGx',
+        'lpteb',
+        'YclJZ',
+        '\x22flex\x20flex',
+        'sidebar',
+        'dow-md\x20tra',
+        'className',
+        'ss=\x22flex\x20i',
+        'tanggal',
+        '.png\x22\x20alt=',
+        'ext-white\x20',
+        'le</p>',
+        '-white\x20tex',
+        'bg-red-400',
+        'aEYGK',
+        'rounded-2x',
+        'dak\x20tersed',
+        '4\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        'HePVb',
+        '120744ibzUcu',
+        '\x20\x20\x20\x20\x20<h3\x20c',
+        '571176TQVwnB',
+        'YTYPf',
+        'xl\x20p-4\x20mb-',
+        'naii.png\x22\x20',
+        '\x20class=\x22p-',
+        'json',
+        '\x20class=\x22bl',
+        '2\x20shadow-m',
+        'nsition-al',
+        'Error\x20pars',
+        'Detail\x20New',
+        'h-6\x20bg-gra',
+        'l\x22>\x0a\x20\x20\x20\x20\x20\x20',
+        '\x20\x20\x20<img\x20sr',
+        'schedule-s',
+        'waktu',
+        '\x20mx-auto\x20p',
+        '737173118/',
+        '2478goVlkm',
+        'object-cov',
+        'ge\x22\x20class=',
+        '\x20<p\x20class=',
+        'PlGOy',
+        'ed-3xl\x20mb-',
+        'stify-cent',
+        '-600\x20text-',
+        'map',
+        'Gagal\x20memu',
+        'tps://res.',
+        'k\x20tersedia',
+        'class=\x22h-4',
+        'svg',
+        'IsmnJ',
+        '\x20</div>\x0a\x20\x20',
+        'get',
+        'KmXpa',
+        '\x22text-xs\x20t',
+        '48${event.',
+        'XVXRU',
+        'load\x20sched',
+        'rgspd',
+        'gambar',
+        'ock\x20bg-gra',
+        '\x0a\x20\x20\x20\x20<div\x20',
+        'lx2zm7ha/i',
+        'd\x20transiti',
+        '\x20\x20<img\x20src',
+        'hing\x20News\x20',
+        'g\x20events.',
+        'hing\x20Page\x20',
+        'gejFl',
+        'y-300\x20roun',
+        '\x20\x20\x20<div\x20cl',
+        'ext-gray-3',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        'ss=\x22block\x20',
+        '\x20rounded-2',
+        '\x20<a\x20href=\x22',
+        '-md\x20hover:',
+        'c=\x22',
+        '</h1>\x0a\x20\x20\x20\x20',
+        '/news/',
+        'y-400\x20roun',
+        'ld\x22>',
+        'SUIzk',
+        's.cloudina',
+        'ing\x20detail',
+        'alt=\x22Not\x20F',
+        'news/detai',
+        '\x20\x20\x20\x20\x20',
+        'innerHTML',
+        '00\x20text-ce',
+        'eventName',
+        'Sidebar:',
+        'PmDxQ',
+        '\x0a\x20\x20\x20\x20',
+        'vDboS',
+        '\x20<img\x20src=',
+        'mb-3\x20round',
+        'v\x20class=\x22f',
+        'vKcAy',
+        '00\x22>',
+        '300\x22\x0a\x20\x20\x20\x20\x20',
+        'KyQVh',
+        '</span>\x0a\x20\x20',
+        '790IOLuQg',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<i',
+        'mdYzQ',
+        'fetch\x20data',
+        '\x20<h3\x20class',
+        'er\x22>\x0a\x20\x20\x20\x20\x20',
+        '<br>',
+        'pan\x20class=',
+        'join',
+        'ss=\x22w-20\x20h',
+        'page-news-',
+        '-3\x20rounded',
+        'length',
+        'b-4\x22>Lates',
+        'bg-gray-70',
+        'text-lg\x20te',
+        'tidak\x20dite',
+        'class=\x22fle',
+        'fetch\x20news',
+        '327580qVafDp',
+        'nary.com/d',
+        'hing\x20Sched',
+        '\x0a\x20\x20\x20\x20\x20\x20</d',
+        'pathname',
+        'find',
+        '\x22\x20class=\x22w',
+        'oejtC',
+        'lock\x20',
+        '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        '\x22text-gray',
+        '\x20w-3/4\x22></',
+        '\x20duration-',
+        'ge/upload/',
+        'SBIoH',
+        '>\x0a\x20\x20\x20\x20\x20\x20',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<d',
+        'PLWJI',
+        'https://48',
+        'HGAPk',
+        '\x20\x20\x20\x20\x20\x20<spa',
+        'news-list-',
+        'ound\x22\x20clas',
+        'h3\x20class=\x22',
+        'Atwkb',
+        'gray-700\x20t',
+        '\x20<div\x20clas',
+        'JCPzm',
+        'Oeeho',
+        'text-3xl\x20f',
+        'mzm4wp/ima',
+        '-5\x20bg-gray',
+        'res.cloudi',
+        'er:bg-gray',
+        'text-sm\x20fo',
+        '-32\x20mb-4\x22>',
+        'ounded-lg\x20',
+        '/upload/v1',
+        '\x20not\x20ok',
+        'sJUiy',
+        'mukan\x20di\x20U',
+        's=\x22flex\x20it',
+        'b-4\x22>Upcom',
+        '\x22Not\x20Found',
+        'ailable.',
+        '/div>\x0a\x20\x20',
+        '>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
+        '118/z0erje',
+        'lock\x20bg-gr',
+        'OyiYk',
+        'fOSQX',
+        'ection',
+        'ay-300\x22>',
+        'assets/jkt',
+        'ed-3xl\x22>\x0a\x20',
+        '3\x22></div>\x0a',
+        '\x20\x20\x20',
+        '\x20lagi\x20nant',
+        '-hidden\x22>\x0a',
+        '\x22>\x0a\x20\x20\x20\x20\x20\x20<',
+        'lg\x20font-bo',
+        'ext-gray-4',
+        '4\x20mb-2\x20sha',
+        'z0erjecyq6',
+        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        't-white-20',
+        'Judul\x20tida',
+        'bg-blue-40',
+        '\x20items-cen',
+        '\x22w-14\x20h-5\x20',
+        'lakan\x20coba',
+        '-400\x20round',
+        'load\x20news.',
+        'berita_id',
+        'forEach',
+        '\x20\x20\x20\x20\x20\x20</a>',
+        'xt-white\x20f',
+        '\x0a\x20\x20\x20\x20\x20\x20<a\x20',
+        'EicSQ',
+        '\x20\x0a\x20\x20\x20\x20<div',
+        'e\x20overflow',
+        'Berita\x20ID\x20',
+        'ded-3xl\x20sh',
+        'setlist',
+        'Kgoos',
+        'wDcZU',
+        'xs\x20text-gr',
+        'rap\x20gap-4\x22',
+        'white\x20roun',
+        '\x22\x20alt=\x22',
+        'search',
+        'TnVVQ',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
+        'hite\x22>',
+        'class=\x22bg-',
+        'ay-700\x20hov',
+        'container',
+        '-center\x20ju',
+        'pCfsT',
+        'berita.\x20Si',
+        's=\x22w-64\x20mb',
+        'rage.setIt',
+        'rounded-lg',
+        '\x20gap-3\x22>\x0a\x20',
+        'Error\x20fetc',
+        '-14\x20h-5\x20mb',
+        'RL.',
+        'badge_url',
+        'd\x22>',
+        'ule\x20Sideba',
+        'iv>\x0a\x20\x20\x20\x20',
+        'cloudinary',
+        'lor\x27,\x20\x27',
+        '00\x20rounded',
+        'ter.json',
+        'lex\x20flex-w',
+        '\x20\x20\x20\x20\x20\x20\x20\x20<s',
+        '</div>\x0a\x20\x20\x20',
+        'ass=\x22text-',
+        'p\x20class=\x22t',
+        'idden\x20tran',
+        '<p\x20class=\x22',
+        '400',
+        '-500\x20text-',
+        '-col\x20items',
+        '\x20shadow-md',
+        '-10\x20h-10\x20r',
+        'SjHUM',
+        '\x20details',
+        'location',
+        '\x22class=\x22w-',
+        'l\x20p-4\x20mb-2',
+        'tems-cente',
+        'uBKrn',
+        'pBlZp',
+        'Not\x20found',
+        '3xl\x20shadow',
+        'No\x20upcomin',
+        '\x20\x20\x20onclick',
+        'div\x20class=',
+        's\x20Not\x20Foun',
+        '\x20\x20\x20\x20\x20\x20</di',
+        'MnplF',
+        '\x0a\x20\x20\x20\x20\x20\x20<di',
+        'oiLUL',
+        '\x22\x20class=\x22b',
+        '20RwWyIQ',
+        'Network\x20re',
+        '211938uExkEm',
+        'getElement',
+        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<',
+        'ZdDuN',
+        'DnOcY',
+        'x\x20flex-col',
+        'ext-sm\x20tex',
+        'd/v1737173',
+        'at\x20detail\x20',
+        'b-6\x20text-w',
+        'd\x20😭',
+        'bg-green-4',
+        'Failed\x20to\x20',
+        '921132lfCZco',
+        '6\x22>',
+        'news',
+        '0\x20hover:bg',
+        's=\x22text-wh',
+        'idebar',
+        'ing\x20Schedu',
+        'https://jk',
+        'l-containe',
+        '=\x22text-sm\x20',
+        'er\x20py-8\x22>\x0a',
+        'overflow-h',
+        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
+        '-sm\x20font-b',
+        '7qdKmxC',
+        '\x22\x20alt=\x22Bad',
+        'e\x20rounded-',
+        'bg-purple-',
+        'RjfSs',
+        'news-detai',
+        'hing\x20Detai',
+        'all',
+        'r\x20gap-3\x22>\x0a',
+        '\x20\x20\x20\x20\x20\x20\x20\x20</',
+        'flex\x20items',
+        'MbtdG',
+        'ule.',
+        '\x20text-whit',
+        '\x20\x20\x20\x20\x20\x20<p\x20c',
+        'ak\x20tersedi',
+        'href=\x22',
+        'QZslb',
+        '-gray-600\x20',
+        '/home\x22\x20cla',
+        'QEXLc',
+        'ry.com/hay',
+        'slice',
+        '\x20\x20<span\x20cl',
+        'w-lg\x20round',
+        '381gAgXiy',
+        'oisgb',
+        'ite\x20leadin',
+        '\x20\x20\x20\x20\x20<div\x20',
+        'em(\x27newsCo',
+        'schedule/s',
+        'ById',
+        '=\x22localSto',
+        'judul',
+        '=\x22https://',
+        'eventUrl}',
+        '80\x20h-auto\x20',
+        'No\x20news\x20av',
+        'nter\x22>',
+        '</p>\x0a\x20\x20\x20\x20<',
+        'nt-semibol',
+        'lass=\x22text',
+        'imate-puls',
+        'woPeC',
+        'twx7cmnaii',
+        'konten',
+        'PsEXl',
+        'font-bold\x22',
+        '\x20news:',
+        'div>\x0a\x20\x20\x20\x20\x20',
+        '\x20\x20\x20</div>\x0a',
+        '0\x22>',
+        'mage/uploa',
+        'ass=\x22p-4\x22>',
+        'ound\x20😭',
+        'href=\x22/new',
+        'sition-all',
+        '\x20bg-gray-4',
+        'image',
+        'StNso',
+        'a>\x0a\x20\x20\x20\x20\x20\x20\x20',
+        'https://re',
+        '-4\x22>\x0a\x20\x20\x20\x20\x20',
+        '\x20text-lg\x20f',
+        'n\x20class=\x22t',
+        'l\x20News:',
+        'on-all\x22>\x0a\x20',
+        'mg\x20src=\x22ht',
+        '/a>\x0a\x20\x20\x20\x20\x20\x20',
+        '\x20\x20</div>\x0a\x20',
+        'split',
+        'News\x20Not\x20F',
+        '\x27)\x22>\x0a\x20\x20\x20\x20\x20',
+        'old\x22>',
+        'intensapi.',
+        'ded\x20mb-2\x22>',
+        '\x22max-w-5xl',
+        '24rem]',
+        't-base\x20mb-',
+        'uDyHg',
+        '/50',
+        'ems-center',
+        '\x20\x20<div\x20cla',
+        'm7ha/image',
+        'replace',
+        'Waktu\x20tida',
+        'shadow-lg\x20',
+        'h1\x20class=\x22',
+        'adow-md\x20an',
+        't\x20News</p>',
+        'ter\x22>\x0a\x20\x20\x20\x20',
+        '</p>\x0a\x20\x20\x20\x20\x20',
+        'hhTLg',
+        '-8\x20bg-gray',
+        'oFDar',
+        'my.id/api/',
+        'error',
+        'erdgV',
+        'b-2\x22>',
+        'ont-bold\x20m',
+        '\x20\x20\x20\x20\x20</div',
+        'Konten\x20tid',
+        'ocfgf',
+        '/data/thea',
+        'GSCZk',
+        'iv\x20class=\x22',
+        'sponse\x20was'
+    ];
+    _0x29aa = function () {
+        return _0x5b11b5;
+    };
+    return _0x29aa();
+}
 async function fetchDetailNews() {
+    const _0x67c351 = _0x3562, _0x614775 = {
+            'hhTLg': function (_0x2da498, _0x5d5bd6) {
+                return _0x2da498 - _0x5d5bd6;
+            },
+            'PLWJI': _0x67c351(0x1cf) + _0x67c351(0x1c4) + 'r',
+            'EicSQ': _0x67c351(0x31a) + _0x67c351(0x2c6) + _0x67c351(0x2f1) + _0x67c351(0x333),
+            'sJUiy': function (_0xd70f08, _0x3517a0, _0x5c9d57) {
+                return _0xd70f08(_0x3517a0, _0x5c9d57);
+            },
+            'SUIzk': _0x67c351(0x26b) + _0x67c351(0x355) + _0x67c351(0x367),
+            'HePVb': function (_0x1095e2, _0x40a482) {
+                return _0x1095e2(_0x40a482);
+            },
+            'Oeeho': _0x67c351(0x369) + _0x67c351(0x2c8) + _0x67c351(0x349),
+            'oiLUL': _0x67c351(0x30b) + _0x67c351(0x27e),
+            'geHJh': _0x67c351(0x248) + _0x67c351(0x25c) + 'ia',
+            'OyiYk': _0x67c351(0x22f) + _0x67c351(0x1d9) + 'a',
+            'pBlZp': _0x67c351(0x2bc),
+            'DnOcY': _0x67c351(0x26a) + _0x67c351(0x2a3) + _0x67c351(0x1fa),
+            'ocfgf': function (_0x58c745, _0x3809bd, _0x3af67b) {
+                return _0x58c745(_0x3809bd, _0x3af67b);
+            },
+            'JCPzm': _0x67c351(0x331) + _0x67c351(0x1d0) + _0x67c351(0x20b),
+            'uDyHg': _0x67c351(0x27c) + _0x67c351(0x365) + _0x67c351(0x32c) + _0x67c351(0x30f) + _0x67c351(0x302) + 'i.'
+        };
     try {
-        const pathSegments = window.location.pathname.split('/');
-        const beritaId = pathSegments[pathSegments.length - 1];
-        const container = document.getElementById("news-detail-container");
-
-        if (!beritaId) {
-            console.error("Berita ID tidak ditemukan di URL.");
-            showNotFoundMessage(container, "Detail News Not Found 😭");
+        const _0x1c11bd = window[_0x67c351(0x34a)][_0x67c351(0x2cd)][_0x67c351(0x210)]('/'), _0x392b65 = _0x1c11bd[_0x614775[_0x67c351(0x226)](_0x1c11bd[_0x67c351(0x2c2)], -0x20c6 + 0x329 + 0x1d9e)], _0xf324c8 = document[_0x67c351(0x35e) + _0x67c351(0x1e9)](_0x614775[_0x67c351(0x2da)]);
+        if (!_0x392b65) {
+            console[_0x67c351(0x22a)](_0x614775[_0x67c351(0x317)]), _0x614775[_0x67c351(0x2f0)](showNotFoundMessage, _0xf324c8, _0x614775[_0x67c351(0x2a1)]);
             return;
         }
-
         try {
-            const response = await fetch(`https://48intensapi.my.id/api/news/detail/${beritaId}`);
-            if (!response.ok) throw new Error("Failed to fetch news details");
-
-            const data = await response.json();
-            const judul = data.judul || "Judul tidak tersedia";
-            const tanggal = data.tanggal || "Tanggal tidak tersedia";
-            const konten = (data.konten || "Konten tidak tersedia").replace(
-                /\n/g,
-                "<br>"
-            );
-            const gambarArray = data.gambar || [];
-
-            const gambarHTML = `
-        <div class="flex flex-wrap gap-4">
-          ${gambarArray
-                    .map(
-                        (url) => `
-              <img src="${url}" alt="${judul}"class="w-80 h-auto rounded-lg">
-            `
-                    )
-                    .join("")}
-        </div>
-      `;
-
-
-            const detailTemplate = `
-          <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
-            <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
-            <p class="text-white text-base mb-6">${tanggal}</p>
-            ${gambarHTML}
-            <div class="text-white leading-relaxed text-sm font-semibold">${konten}</div>
-          </div>
-        `;
-
-            container.innerHTML = detailTemplate;
-        } catch (error) {
-            console.error("Error parsing detail news:", error);
-            showNotFoundMessage(container, "Detail News Not Found 😭");
+            const _0x2ee9ce = await _0x614775[_0x67c351(0x25e)](fetch, _0x67c351(0x2db) + _0x67c351(0x214) + _0x67c351(0x229) + _0x67c351(0x2a5) + 'l/' + _0x392b65);
+            if (!_0x2ee9ce['ok'])
+                throw new Error(_0x614775[_0x67c351(0x2e5)]);
+            const _0x29f9f3 = await _0x2ee9ce[_0x67c351(0x266)](), _0x218a5c = _0x29f9f3[_0x67c351(0x1eb)] || _0x614775[_0x67c351(0x359)], _0x2aa1df = _0x29f9f3[_0x67c351(0x254)] || _0x614775[_0x67c351(0x240)], _0x359e87 = (_0x29f9f3[_0x67c351(0x1f7)] || _0x614775[_0x67c351(0x2fa)])[_0x67c351(0x21e)](/\n/g, _0x614775[_0x67c351(0x34f)]), _0x5ba2ec = _0x29f9f3[_0x67c351(0x28a)] || [], _0x164f5e = _0x67c351(0x358) + _0x67c351(0x2b0) + _0x67c351(0x33c) + _0x67c351(0x320) + _0x67c351(0x2f7) + _0x5ba2ec[_0x67c351(0x27b)](_0x147571 => _0x67c351(0x297) + _0x67c351(0x26e) + _0x67c351(0x29c) + _0x147571 + _0x67c351(0x322) + _0x218a5c + (_0x67c351(0x34b) + _0x67c351(0x1ee) + _0x67c351(0x32f) + _0x67c351(0x2d2) + _0x67c351(0x301)))[_0x67c351(0x2be)]('') + (_0x67c351(0x2cc) + _0x67c351(0x337)), _0x4fccd9 = _0x67c351(0x35f) + _0x67c351(0x354) + _0x67c351(0x216) + _0x67c351(0x271) + _0x67c351(0x227) + _0x67c351(0x241) + _0x67c351(0x1e2) + _0x67c351(0x2ff) + _0x67c351(0x325) + _0x67c351(0x221) + _0x67c351(0x2e6) + _0x67c351(0x22d) + _0x67c351(0x366) + _0x67c351(0x326) + _0x218a5c + (_0x67c351(0x29d) + _0x67c351(0x1d8) + _0x67c351(0x1f3) + _0x67c351(0x258) + _0x67c351(0x218) + _0x67c351(0x36b)) + _0x2aa1df + (_0x67c351(0x225) + _0x67c351(0x2a6)) + _0x164f5e + (_0x67c351(0x297) + _0x67c351(0x2e3) + _0x67c351(0x36e) + _0x67c351(0x1e5) + _0x67c351(0x23f) + _0x67c351(0x2eb) + _0x67c351(0x1f2) + _0x67c351(0x335)) + _0x359e87 + (_0x67c351(0x33e) + _0x67c351(0x22e) + _0x67c351(0x2d8));
+            _0xf324c8[_0x67c351(0x2a7)] = _0x4fccd9;
+        } catch (_0x26bd63) {
+            console[_0x67c351(0x22a)](_0x614775[_0x67c351(0x361)], _0x26bd63), _0x614775[_0x67c351(0x230)](showNotFoundMessage, _0xf324c8, _0x614775[_0x67c351(0x2a1)]);
         }
-    } catch (error) {
-        console.error("Error fetching Detail News:", error);
-        const container = document.getElementById("news-detail-container");
-        showNotFoundMessage(container, "Gagal memuat detail berita. Silakan coba lagi nanti.");
+    } catch (_0x230099) {
+        console[_0x67c351(0x22a)](_0x614775[_0x67c351(0x2e4)], _0x230099);
+        const _0x1975d3 = document[_0x67c351(0x35e) + _0x67c351(0x1e9)](_0x614775[_0x67c351(0x2da)]);
+        _0x614775[_0x67c351(0x2f0)](showNotFoundMessage, _0x1975d3, _0x614775[_0x67c351(0x219)]);
     }
 }
-
-// news sidebar
-
 async function fetchNewsSidebar() {
-    const container = document.getElementById("news-list-sidebar");
-    if (!container) return;
-
-    container.innerHTML = `<p class="text-white text-lg font-bold mb-4">Latest News</p>`;
-
+    const _0x569c37 = _0x3562, _0x4de4c9 = {
+            'ZdDuN': _0x569c37(0x2de) + _0x569c37(0x250),
+            'StNso': function (_0x2a77db, _0x4214fa) {
+                return _0x2a77db(_0x4214fa);
+            },
+            'woPeC': _0x569c37(0x2db) + _0x569c37(0x214) + _0x569c37(0x229) + _0x569c37(0x36c),
+            'YTYPf': _0x569c37(0x369) + _0x569c37(0x2c8),
+            'oFDar': function (_0x30b566, _0x49d2d7) {
+                return _0x30b566 === _0x49d2d7;
+            },
+            'rgspd': function (_0x4a33d5, _0x19d114, _0x1dcd79) {
+                return _0x4a33d5(_0x19d114, _0x1dcd79);
+            },
+            'XVXRU': _0x569c37(0x1ef) + _0x569c37(0x2f5),
+            'MnplF': _0x569c37(0x331) + _0x569c37(0x290) + _0x569c37(0x2aa),
+            'RjfSs': function (_0x581769, _0x210860, _0x515016) {
+                return _0x581769(_0x210860, _0x515016);
+            },
+            'KmXpa': _0x569c37(0x369) + _0x569c37(0x311)
+        }, _0x5cf707 = document[_0x569c37(0x35e) + _0x569c37(0x1e9)](_0x4de4c9[_0x569c37(0x360)]);
+    if (!_0x5cf707)
+        return;
+    _0x5cf707[_0x569c37(0x2a7)] = _0x569c37(0x342) + _0x569c37(0x24b) + _0x569c37(0x209) + _0x569c37(0x22d) + _0x569c37(0x2c3) + _0x569c37(0x223);
     try {
-        const response = await fetch("https://48intensapi.my.id/api/news");
-        if (!response.ok) throw new Error("Failed to fetch news");
-
-        const data = await response.json();
-        const News = data.berita.slice(0, 5);
-
-        if (News.length === 0) {
-            showNotFoundMessageInsideCard(container, "No news available.");
+        const _0x5668f8 = await _0x4de4c9[_0x569c37(0x205)](fetch, _0x4de4c9[_0x569c37(0x1f5)]);
+        if (!_0x5668f8['ok'])
+            throw new Error(_0x4de4c9[_0x569c37(0x262)]);
+        const _0x4504a4 = await _0x5668f8[_0x569c37(0x266)](), _0x5acf21 = _0x4504a4[_0x569c37(0x247)][_0x569c37(0x1e0)](-0x1495 + -0xf3f + 0x2 * 0x11ea, -0x78d * 0x2 + -0x26a1 + 0x560 * 0xa);
+        if (_0x4de4c9[_0x569c37(0x228)](_0x5acf21[_0x569c37(0x2c2)], -0x1f27 + -0xdf * 0xa + -0x1 * -0x27dd)) {
+            _0x4de4c9[_0x569c37(0x289)](showNotFoundMessageInsideCard, _0x5cf707, _0x4de4c9[_0x569c37(0x287)]);
             return;
         }
-
-        container.innerHTML += News.map(news => `
-        <a href="/news/${news.berita_id}" class="block bg-gray-700 hover:bg-gray-600 text-white rounded-2xl p-4 mb-2 shadow-md transition-all">
-          <div class="flex items-center gap-3">
-            <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url || ''}" class="w-14 h-5 mb-3 rounded-3xl">
-            <div>
-              <h3 class="text-sm font-bold">${news.judul}</h3>
-              <span class="text-xs text-gray-300">${news.waktu}</span>
-            </div>
-          </div>
-        </a>
-      `).join("");
-    } catch (error) {
-        console.error("Error fetching News Sidebar:", error);
-        showNotFoundMessageInsideCard(container, "Failed to load news.");
+        _0x5cf707[_0x569c37(0x2a7)] += _0x5acf21[_0x569c37(0x27b)](_0x35b5c6 => _0x569c37(0x316) + _0x569c37(0x201) + 's/' + _0x35b5c6[_0x569c37(0x312)] + (_0x569c37(0x35a) + _0x569c37(0x2f9) + _0x569c37(0x328) + _0x569c37(0x2ea) + _0x569c37(0x27a) + _0x569c37(0x321) + _0x569c37(0x242) + _0x569c37(0x307) + _0x569c37(0x251) + _0x569c37(0x269) + _0x569c37(0x26d) + _0x569c37(0x21c) + _0x569c37(0x253) + _0x569c37(0x34d) + _0x569c37(0x1d2) + _0x569c37(0x1c8) + _0x569c37(0x249) + _0x569c37(0x207) + _0x569c37(0x2a2) + _0x569c37(0x1df) + _0x569c37(0x2e7) + _0x569c37(0x2d6) + _0x569c37(0x2fe) + '48') + (_0x35b5c6[_0x569c37(0x334)] || '') + (_0x569c37(0x2cf) + _0x569c37(0x332) + _0x569c37(0x2c1) + _0x569c37(0x24a) + _0x569c37(0x237) + _0x569c37(0x309) + _0x569c37(0x260) + _0x569c37(0x1f3) + _0x569c37(0x1c9) + _0x569c37(0x213)) + _0x35b5c6[_0x569c37(0x1eb)] + (_0x569c37(0x23e) + _0x569c37(0x33d) + _0x569c37(0x2bd) + _0x569c37(0x285) + _0x569c37(0x296) + _0x569c37(0x2b2)) + _0x35b5c6[_0x569c37(0x270)] + (_0x569c37(0x2b5) + _0x569c37(0x1d3) + _0x569c37(0x1fb) + _0x569c37(0x1fc) + _0x569c37(0x314) + _0x569c37(0x2ac)))[_0x569c37(0x2be)]('');
+    } catch (_0x791a7a) {
+        console[_0x569c37(0x22a)](_0x4de4c9[_0x569c37(0x357)], _0x791a7a), _0x4de4c9[_0x569c37(0x1ce)](showNotFoundMessageInsideCard, _0x5cf707, _0x4de4c9[_0x569c37(0x284)]);
     }
 }
-
-//  schedule sidebar
 async function fetchScheduleSidebar() {
-    const container = document.getElementById("schedule-sidebar");
-    if (!container) return;
-
-    container.innerHTML = `<p class="text-white text-lg font-bold mb-4">Upcoming Schedule</p>`;
-
+    const _0x2b9967 = _0x3562, _0x1f0f59 = {
+            'PlGOy': _0x2b9967(0x207) + _0x2b9967(0x2a2) + _0x2b9967(0x1df) + _0x2b9967(0x2e7) + _0x2b9967(0x2d6) + _0x2b9967(0x2fe) + _0x2b9967(0x286) + _0x2b9967(0x1ed),
+            'QZslb': _0x2b9967(0x26f) + _0x2b9967(0x36f),
+            'GSCZk': function (_0x42db2e, _0xf6a5ce) {
+                return _0x42db2e(_0xf6a5ce);
+            },
+            'fscGx': _0x2b9967(0x2db) + _0x2b9967(0x214) + _0x2b9967(0x229) + _0x2b9967(0x1e8) + _0x2b9967(0x2fc),
+            'MqMtC': function (_0x1f0564, _0x4097a0) {
+                return _0x1f0564(_0x4097a0);
+            },
+            'PsEXl': _0x2b9967(0x231) + _0x2b9967(0x33b),
+            'lpteb': _0x2b9967(0x369) + _0x2b9967(0x2b9),
+            'IsmnJ': function (_0x3291eb, _0x429b07) {
+                return _0x3291eb === _0x429b07;
+            },
+            'Kgoos': function (_0x526cee, _0x58dcb0, _0x1ddb7f) {
+                return _0x526cee(_0x58dcb0, _0x1ddb7f);
+            },
+            'SBIoH': _0x2b9967(0x352) + _0x2b9967(0x291),
+            'aEYGK': _0x2b9967(0x331) + _0x2b9967(0x2cb) + _0x2b9967(0x336) + 'r:',
+            'wDcZU': function (_0xce5256, _0x3952c6, _0x4abb3f) {
+                return _0xce5256(_0x3952c6, _0x4abb3f);
+            },
+            'YclJZ': _0x2b9967(0x369) + _0x2b9967(0x288) + _0x2b9967(0x1d6)
+        }, _0x8a10a2 = document[_0x2b9967(0x35e) + _0x2b9967(0x1e9)](_0x1f0f59[_0x2b9967(0x1db)]);
+    if (!_0x8a10a2)
+        return;
+    _0x8a10a2[_0x2b9967(0x2a7)] = _0x2b9967(0x342) + _0x2b9967(0x24b) + _0x2b9967(0x209) + _0x2b9967(0x22d) + _0x2b9967(0x2f3) + _0x2b9967(0x370) + _0x2b9967(0x257);
     try {
-        const [scheduleResponse, theaterResponse] = await Promise.all([
-            fetch("https://48intensapi.my.id/api/schedule/section"),
-            fetch("/data/theater.json")
+        const [_0x5f4bc4, _0x3b3d2d] = await Promise[_0x2b9967(0x1d1)]([
+            _0x1f0f59[_0x2b9967(0x232)](fetch, _0x1f0f59[_0x2b9967(0x24c)]),
+            _0x1f0f59[_0x2b9967(0x236)](fetch, _0x1f0f59[_0x2b9967(0x1f8)])
         ]);
-
-        if (!scheduleResponse.ok || !theaterResponse.ok) throw new Error("Failed to fetch data");
-
-        const schedules = await scheduleResponse.json();
-        const theaterData = await theaterResponse.json();
-        const limitedSchedules = schedules.slice(0, 3);
-
-        if (limitedSchedules.length === 0) {
-            showNotFoundMessageInsideCard(container, "No upcoming events.");
+        if (!_0x5f4bc4['ok'] || !_0x3b3d2d['ok'])
+            throw new Error(_0x1f0f59[_0x2b9967(0x24d)]);
+        const _0xb1b82f = await _0x5f4bc4[_0x2b9967(0x266)](), _0x37be94 = await _0x3b3d2d[_0x2b9967(0x266)](), _0x512bfc = _0xb1b82f[_0x2b9967(0x1e0)](0x2488 + 0x1bf1 + -0xce5 * 0x5, 0x1f0f + -0x2bf * -0x2 + -0x617 * 0x6);
+        if (_0x1f0f59[_0x2b9967(0x281)](_0x512bfc[_0x2b9967(0x2c2)], 0x250 + -0x36c + 0x11c)) {
+            _0x1f0f59[_0x2b9967(0x31d)](showNotFoundMessageInsideCard, _0x8a10a2, _0x1f0f59[_0x2b9967(0x2d7)]);
             return;
         }
-
-        container.innerHTML += limitedSchedules.map(({ tanggal, hari, bulan, events }) =>
-            events.map(event => {
-                const matchingTheater = theaterData.find(theater => theater.setlist === event.eventName);
-                const badgeUrl = matchingTheater
-                    ? matchingTheater.image
-                    : "https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${event.eventUrl}";
-
-                return `
-            <a href="/home" class="block bg-gray-700 hover:bg-gray-600 text-white rounded-2xl p-4 mb-2 shadow-md transition-all">
-              <div class="flex items-center gap-3">
-                <img src="${badgeUrl}" alt="${event.eventName}" class="w-10 h-10 rounded-lg object-cover">
-                <div>
-                  <h3 class="text-sm font-bold">${event.eventName}</h3>
-                  <span class="text-xs text-gray-300">${hari}, ${tanggal} ${bulan}</span>
-                </div>
-              </div>
-            </a>
-          `;
-            }).join("")
-        ).join("");
-    } catch (error) {
-        console.error("Error fetching Schedule Sidebar:", error);
-        showNotFoundMessageInsideCard(container, "Failed to load schedule.");
+        _0x8a10a2[_0x2b9967(0x2a7)] += _0x512bfc[_0x2b9967(0x27b)](({
+            tanggal: _0x4e58e7,
+            hari: _0x176efe,
+            bulan: _0x3db993,
+            events: _0x480c33
+        }) => _0x480c33[_0x2b9967(0x27b)](_0x2f038f => {
+            const _0x37bfb5 = _0x2b9967, _0x308cad = _0x37be94[_0x37bfb5(0x2ce)](_0x2ce8b1 => _0x2ce8b1[_0x37bfb5(0x31c)] === _0x2f038f[_0x37bfb5(0x2a9)]), _0x44e746 = _0x308cad ? _0x308cad[_0x37bfb5(0x204)] : _0x1f0f59[_0x37bfb5(0x277)];
+            return _0x37bfb5(0x297) + _0x37bfb5(0x29a) + _0x37bfb5(0x1dd) + _0x37bfb5(0x298) + _0x37bfb5(0x2c4) + _0x37bfb5(0x36d) + _0x37bfb5(0x1dc) + _0x37bfb5(0x24b) + _0x37bfb5(0x299) + _0x37bfb5(0x263) + _0x37bfb5(0x268) + _0x37bfb5(0x28e) + _0x37bfb5(0x20c) + _0x37bfb5(0x1c8) + _0x37bfb5(0x2e3) + _0x37bfb5(0x2f2) + _0x37bfb5(0x21b) + _0x37bfb5(0x330) + _0x37bfb5(0x1c8) + _0x37bfb5(0x26e) + _0x37bfb5(0x29c) + _0x44e746 + _0x37bfb5(0x322) + _0x2f038f[_0x37bfb5(0x2a9)] + (_0x37bfb5(0x2cf) + _0x37bfb5(0x347) + _0x37bfb5(0x2ed) + _0x37bfb5(0x274) + _0x37bfb5(0x2bb) + _0x37bfb5(0x325) + _0x37bfb5(0x1fb) + _0x37bfb5(0x1c8) + _0x37bfb5(0x2ba) + _0x37bfb5(0x1c5) + _0x37bfb5(0x1f9) + '>') + _0x2f038f[_0x37bfb5(0x2a9)] + (_0x37bfb5(0x23e) + _0x37bfb5(0x1c8) + _0x37bfb5(0x1e1) + _0x37bfb5(0x33f) + _0x37bfb5(0x31f) + _0x37bfb5(0x2fd)) + _0x176efe + ',\x20' + _0x4e58e7 + '\x20' + _0x3db993 + (_0x37bfb5(0x2b5) + _0x37bfb5(0x1c8) + _0x37bfb5(0x20f) + _0x37bfb5(0x1c8) + _0x37bfb5(0x282) + _0x37bfb5(0x1d3) + _0x37bfb5(0x206) + '\x20');
+        })[_0x2b9967(0x2be)](''))[_0x2b9967(0x2be)]('');
+    } catch (_0x45477b) {
+        console[_0x2b9967(0x22a)](_0x1f0f59[_0x2b9967(0x25a)], _0x45477b), _0x1f0f59[_0x2b9967(0x31e)](showNotFoundMessageInsideCard, _0x8a10a2, _0x1f0f59[_0x2b9967(0x24e)]);
     }
 }
-
-
-fetchNewsSidebar();
-fetchScheduleSidebar();
-fetchPageNews();
-fetchDetailNews();
+fetchNewsSidebar(), fetchScheduleSidebar(), fetchPageNews(), fetchDetailNews();
