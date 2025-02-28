@@ -1,728 +1,267 @@
-(function (_0x4c2647, _0x38a8fd) {
-    const _0x10cada = _0x759a, _0x8679b = _0x4c2647();
-    while (!![]) {
-        try {
-            const _0x46c65f = parseInt(_0x10cada(0x1e2)) / (0xd3 + 0x11 * 0x233 + -0x2635 * 0x1) + -parseInt(_0x10cada(0x1a5)) / (0xdd5 * -0x2 + 0x196c + 0xc0 * 0x3) * (parseInt(_0x10cada(0x28b)) / (-0x14 * -0x1e + -0xcc * -0xa + -0xa4d)) + -parseInt(_0x10cada(0x15c)) / (0x944 + 0x1d * -0x61 + -0x59 * -0x5) * (-parseInt(_0x10cada(0x1e7)) / (0xbd6 + -0x4 * 0x643 + -0x1 * -0xd3b)) + parseInt(_0x10cada(0x26e)) / (-0x1a1 * -0x16 + 0x1a1 * 0x7 + -0x2f37) * (parseInt(_0x10cada(0x139)) / (0x1a55 + 0x17a3 + 0x31f1 * -0x1)) + parseInt(_0x10cada(0x278)) / (0x935 * 0x1 + -0x110a * -0x1 + -0x1a37) + -parseInt(_0x10cada(0x1a0)) / (0xb * -0xb + -0x1 * 0x1b59 + 0x1bdb * 0x1) * (parseInt(_0x10cada(0xda)) / (-0x25c2 + 0x2a5 * -0x1 + 0x2871)) + -parseInt(_0x10cada(0x201)) / (-0x355 * 0x5 + 0x1b42 + 0xc1 * -0xe);
-            if (_0x46c65f === _0x38a8fd)
-                break;
-            else
-                _0x8679b['push'](_0x8679b['shift']());
-        } catch (_0xcf5f17) {
-            _0x8679b['push'](_0x8679b['shift']());
-        }
+function showNotFoundMessage(container, message) {
+    container.className = 'flex items-center justify-center min-h-[24rem]';
+    container.innerHTML = `
+      <div class="flex flex-col items-center">
+        <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" alt="Not Found" class="w-64 mb-4">
+        <p class="text-gray-500 text-lg font-bold">${message}</p>
+      </div>
+    `;
+  }
+  
+  function showNotFoundMessageInsideCard(container, message) {
+    container.innerHTML = `
+      <div class="bg-gray-700 text-white rounded-2xl p-4 mb-2 shadow-md">
+        <div class="flex flex-col items-center justify-center py-8">
+          <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" alt="Not Found" class="w-32 mb-4">
+          <p class="text-gray-400 text-center">${message}</p>
+        </div>
+      </div>
+    `;
+  }
+  
+  
+  // list news
+  
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+  
+  async function fetchPageNews() {
+    const container = document.getElementById("page-news-container");
+  
+    if (!container) {
+      console.error("Not found");
+      return;
     }
-}(_0xa3f9, -0x48b * -0x15 + -0x28117 + 0x5 * 0x168d9));
-function showNotFoundMessage(_0x1e8d65, _0x131c71) {
-    const _0x5e8e4c = _0x759a, _0x59b319 = { 'TdKQg': _0x5e8e4c(0x250) + _0x5e8e4c(0xf5) + _0x5e8e4c(0x1cc) + _0x5e8e4c(0x1e4) + _0x5e8e4c(0x132) };
-    _0x1e8d65[_0x5e8e4c(0x230)] = _0x59b319[_0x5e8e4c(0x1bc)], _0x1e8d65[_0x5e8e4c(0x18e)] = _0x5e8e4c(0x184) + _0x5e8e4c(0x16c) + _0x5e8e4c(0x1a4) + _0x5e8e4c(0x29d) + _0x5e8e4c(0x295) + _0x5e8e4c(0x284) + _0x5e8e4c(0x1e0) + _0x5e8e4c(0x1ba) + _0x5e8e4c(0xf4) + _0x5e8e4c(0x17c) + _0x5e8e4c(0x121) + _0x5e8e4c(0x14c) + _0x5e8e4c(0x1fc) + _0x5e8e4c(0x26a) + _0x5e8e4c(0x10b) + _0x5e8e4c(0x299) + _0x5e8e4c(0x100) + _0x5e8e4c(0x23d) + _0x5e8e4c(0x224) + _0x5e8e4c(0x285) + _0x5e8e4c(0x265) + _0x5e8e4c(0xf8) + _0x5e8e4c(0x10f) + _0x5e8e4c(0x17a) + _0x131c71 + (_0x5e8e4c(0x135) + _0x5e8e4c(0x1d4));
-}
-function showNotFoundMessageInsideCard(_0x2cc33d, _0x3dc27b) {
-    const _0x1a1920 = _0x759a;
-    _0x2cc33d[_0x1a1920(0x18e)] = _0x1a1920(0x184) + _0x1a1920(0x189) + _0x1a1920(0x158) + _0x1a1920(0x1c7) + _0x1a1920(0x25c) + _0x1a1920(0x1c8) + _0x1a1920(0x119) + _0x1a1920(0x1b0) + _0x1a1920(0x1ce) + _0x1a1920(0x1cd) + _0x1a1920(0x101) + _0x1a1920(0xf5) + _0x1a1920(0x1cc) + _0x1a1920(0xdc) + _0x1a1920(0x1d8) + _0x1a1920(0x172) + _0x1a1920(0x1ea) + _0x1a1920(0x292) + _0x1a1920(0x1b7) + _0x1a1920(0x13a) + _0x1a1920(0x1db) + _0x1a1920(0x276) + _0x1a1920(0xe9) + _0x1a1920(0x1b6) + _0x1a1920(0x18c) + _0x1a1920(0x1df) + _0x1a1920(0x1a1) + _0x1a1920(0x169) + _0x1a1920(0x127) + _0x1a1920(0x1bf) + _0x1a1920(0xe7) + _0x1a1920(0x1ab) + _0x1a1920(0x11f) + _0x3dc27b + (_0x1a1920(0x14b) + _0x1a1920(0x289) + _0x1a1920(0x187) + '\x20');
-}
-function getQueryParam(_0x5f402e) {
-    const _0x22c400 = _0x759a, _0x58004b = new URLSearchParams(window[_0x22c400(0x15e)][_0x22c400(0x1f2)]);
-    return _0x58004b[_0x22c400(0x1bd)](_0x5f402e);
-}
-async function fetchPageNews() {
-    const _0xf1a832 = _0x759a, _0x4af6ba = {
-            'tLGCQ': _0xf1a832(0x24b) + _0xf1a832(0x117) + _0xf1a832(0x282) + _0xf1a832(0x27c),
-            'EDAkk': _0xf1a832(0x248) + _0xf1a832(0x12d),
-            'hdcXo': _0xf1a832(0x10e) + _0xf1a832(0x12d),
-            'MZkqc': function (_0x2bf04b, _0x4da87f) {
-                return _0x2bf04b % _0x4da87f;
-            },
-            'cTJzc': _0xf1a832(0x266) + _0xf1a832(0xf6),
-            'mXDMK': _0xf1a832(0x153),
-            'IJhsq': function (_0x256d99, _0x238212) {
-                return _0x256d99 < _0x238212;
-            },
-            'geSwp': function (_0x341d10, _0x38db94) {
-                return _0x341d10(_0x38db94);
-            },
-            'BVUbi': _0xf1a832(0x29a) + _0xf1a832(0x18f) + _0xf1a832(0x123) + _0xf1a832(0x113),
-            'dMgWl': _0xf1a832(0x175) + _0xf1a832(0x20b) + _0xf1a832(0x149),
-            'CdGoj': _0xf1a832(0x160) + '0',
-            'uuqko': _0xf1a832(0x22b) + _0xf1a832(0x157),
-            'HKciV': _0xf1a832(0x27f) + '00',
-            'MfFaE': _0xf1a832(0x211) + _0xf1a832(0x222),
-            'ETdkq': function (_0x496bae, _0x4348da) {
-                return _0x496bae === _0x4348da;
-            },
-            'fVFbT': function (_0x4cedb2, _0xdba5fa, _0x5cd599) {
-                return _0x4cedb2(_0xdba5fa, _0x5cd599);
-            },
-            'pKshO': _0xf1a832(0x182) + _0xf1a832(0x10a),
-            'bavBa': _0xf1a832(0x27b) + _0xf1a832(0x1e3) + _0xf1a832(0x275)
-        }, _0x5de9b9 = document[_0xf1a832(0x209) + _0xf1a832(0x26b)](_0x4af6ba[_0xf1a832(0xea)]);
-    if (!_0x5de9b9) {
-        console[_0xf1a832(0x136)](_0x4af6ba[_0xf1a832(0x1ca)]);
-        return;
+  
+    const skeletonCount = 16;
+    container.innerHTML = "";
+    for (let i = 0; i < skeletonCount; i++) {
+      const skeletonCard = ` 
+      <div class="block bg-gray-300 rounded-3xl shadow-md animate-pulse overflow-hidden">
+        <div class="p-4">
+          <div class="w-20 h-5 bg-gray-400 rounded-3xl mb-3"></div>
+          <div class="h-6 bg-gray-400 rounded mb-2"></div>
+          <div class="h-4 bg-gray-400 rounded w-3/4"></div>
+        </div>
+      </div>
+      `;
+      container.innerHTML += skeletonCard;
     }
-    const _0x33df28 = 0x1330 + 0x1a9b + -0x2dbb;
-    _0x5de9b9[_0xf1a832(0x18e)] = '';
-    for (let _0x4425f8 = 0xf1 * 0x1d + 0x27 * -0xa7 + -0x1dc; _0x4af6ba[_0xf1a832(0x16b)](_0x4425f8, _0x33df28); _0x4425f8++) {
-        const _0x5d7fa7 = _0xf1a832(0x21f) + _0xf1a832(0x152) + _0xf1a832(0xe0) + _0xf1a832(0x129) + _0xf1a832(0x105) + _0xf1a832(0x1f9) + _0xf1a832(0x14d) + _0xf1a832(0x237) + _0xf1a832(0x18d) + _0xf1a832(0x1dd) + _0xf1a832(0x1f1) + _0xf1a832(0x28d) + _0xf1a832(0x28f) + _0xf1a832(0x107) + _0xf1a832(0x280) + _0xf1a832(0x128) + _0xf1a832(0xf9) + _0xf1a832(0x1d1) + _0xf1a832(0x24a) + _0xf1a832(0x21a) + _0xf1a832(0x1aa) + _0xf1a832(0x24f) + _0xf1a832(0x130) + _0xf1a832(0x221) + _0xf1a832(0x270) + _0xf1a832(0x170) + _0xf1a832(0x272) + _0xf1a832(0xff) + _0xf1a832(0x110) + _0xf1a832(0x24e) + _0xf1a832(0x289) + _0xf1a832(0x187) + _0xf1a832(0x25e);
-        _0x5de9b9[_0xf1a832(0x18e)] += _0x5d7fa7;
-    }
+  
     try {
-        const _0x131248 = await _0x4af6ba[_0xf1a832(0x192)](fetch, _0x4af6ba[_0xf1a832(0x2a1)]);
-        if (!_0x131248['ok'])
-            throw new Error(_0x4af6ba[_0xf1a832(0x115)]);
-        const _0x540491 = await _0x131248[_0xf1a832(0x13c)](), _0x2edbc3 = _0x540491[_0xf1a832(0x29f)][_0xf1a832(0x2a2)](0xc1d * 0x3 + -0x890 + -0x1bc7, 0x8 * -0xe5 + -0x1e63 + 0x259b), _0x2eaa73 = [
-                _0x4af6ba[_0xf1a832(0x22c)],
-                _0x4af6ba[_0xf1a832(0x204)],
-                _0x4af6ba[_0xf1a832(0x229)],
-                _0x4af6ba[_0xf1a832(0x24c)]
-            ];
-        _0x5de9b9[_0xf1a832(0x18e)] = '';
-        if (_0x4af6ba[_0xf1a832(0x151)](_0x2edbc3[_0xf1a832(0xde)], -0x129 * 0x9 + -0x69d * -0x3 + -0x966)) {
-            _0x4af6ba[_0xf1a832(0x120)](showNotFoundMessage, _0x5de9b9, _0x4af6ba[_0xf1a832(0x21d)]);
-            return;
-        }
-        _0x2edbc3[_0xf1a832(0x174)]((_0x375d33, _0x5417f4) => {
-            const _0x1a11f4 = _0xf1a832, _0x2d1519 = _0x375d33[_0x1a11f4(0x277)] || '', _0x2f1f1c = _0x375d33[_0x1a11f4(0x20d)] ? _0x1a11f4(0x1ac) + _0x1a11f4(0x234) + _0x1a11f4(0x13d) + _0x1a11f4(0x249) + _0x1a11f4(0x291) + _0x1a11f4(0x244) + '48' + _0x375d33[_0x1a11f4(0x20d)] : _0x4af6ba[_0x1a11f4(0x233)], _0x12885a = _0x375d33[_0x1a11f4(0x16f)] || _0x4af6ba[_0x1a11f4(0x11c)], _0x4bb07c = _0x375d33[_0x1a11f4(0x181)] || _0x4af6ba[_0x1a11f4(0xfe)], _0x27d592 = _0x2eaa73[_0x4af6ba[_0x1a11f4(0x180)](_0x5417f4, _0x2eaa73[_0x1a11f4(0xde)])], _0x43fe08 = _0x1a11f4(0x112) + _0x2d1519, _0xa40f06 = _0x1a11f4(0x104) + _0x1a11f4(0x1ee) + _0x43fe08 + (_0x1a11f4(0x28a) + _0x1a11f4(0x166)) + _0x27d592 + (_0x1a11f4(0x145) + _0x1a11f4(0x10d) + _0x1a11f4(0x1c2) + _0x1a11f4(0x1f7) + _0x1a11f4(0x1ec) + _0x1a11f4(0xfc) + _0x1a11f4(0x215) + _0x1a11f4(0x1d2) + _0x1a11f4(0x27d) + _0x1a11f4(0x28c) + _0x1a11f4(0x1fa) + _0x1a11f4(0x23c) + _0x1a11f4(0x162) + _0x1a11f4(0x298) + _0x1a11f4(0x1b4)) + _0x27d592 + (_0x1a11f4(0x118) + _0x1a11f4(0x193) + _0x1a11f4(0x133) + _0x1a11f4(0x235) + _0x1a11f4(0x164) + '\x22') + _0x2f1f1c + (_0x1a11f4(0x274) + _0x1a11f4(0xee) + _0x1a11f4(0x227) + _0x1a11f4(0x26c) + _0x1a11f4(0x17f) + _0x1a11f4(0x161) + _0x1a11f4(0x15f) + _0x1a11f4(0x167) + _0x1a11f4(0x245) + _0x1a11f4(0x240) + _0x1a11f4(0x1d0)) + _0x4bb07c + (_0x1a11f4(0x1c6) + _0x1a11f4(0x165) + _0x1a11f4(0x22a) + _0x1a11f4(0x163) + _0x1a11f4(0x186) + _0x1a11f4(0x281)) + _0x12885a + (_0x1a11f4(0x1be) + _0x1a11f4(0x16e) + _0x1a11f4(0x10c) + _0x1a11f4(0x1ed));
-            _0x5de9b9[_0x1a11f4(0x18e)] += _0xa40f06;
+      const response = await fetch(
+        "https://48intensapi.my.id/api/news"
+      );
+  
+      if (!response.ok) throw new Error("Network response was not ok");
+  
+      const data = await response.json();
+  
+      const News = data.berita.slice(0, 16);
+  
+      const colors = ["bg-blue-400", "bg-purple-400", "bg-green-400", "bg-red-400/50"];
+  
+      container.innerHTML = "";
+  
+      if (News.length === 0) {
+        showNotFoundMessage(container, "News Not Found 😭");
+        return;
+      }
+  
+      News.forEach((news, index) => {
+        const beritaId = news.berita_id || "";
+        const badgeUrl = news.badge_url
+          ? `https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url}`
+          : "https://jkt48.com/images/logo.svg";
+        const waktu = news.waktu || "Waktu tidak tersedia";
+        const judul = news.judul || "Judul tidak tersedia";
+  
+        const colorClass = colors[index % colors.length];
+        const detailUrl = `/news/${beritaId}`;
+        const newsCard = `
+        <a href="${detailUrl}" class="block ${colorClass} text-white rounded-3xl shadow-md hover:shadow-lg overflow-hidden transition-all duration-300"
+          onclick="localStorage.setItem('newsColor', '${colorClass}')">
+          <div class="p-4">
+            <img src="${badgeUrl}" alt="Badge" class="w-14 h-5 mb-3 rounded-3xl">
+            <h3 class="text-lg text-white font-bold mb-2">${judul}</h3>
+            <span class="text-sm text-white-200">${waktu}</span>
+          </div>
+        </a>
+        `;
+        container.innerHTML += newsCard;
+      });
+    } catch (error) {
+      console.error("Error fetching Page News:", error);
+      showNotFoundMessage(container, "News Not Found 😭");
+    }
+  }
+  
+  
+  //  detail news
+  async function fetchDetailNews() {
+    try {
+      const pathSegments = window.location.pathname.split('/');
+      const beritaId = pathSegments[pathSegments.length - 1];
+      const container = document.getElementById("news-detail-container");
+  
+      if (!beritaId) {
+        console.error("Berita ID tidak ditemukan di URL.");
+        showNotFoundMessage(container, "Detail News Not Found 😭");
+        return;
+      }
+  
+      try {
+        const response = await fetch(`https://48intensapi.my.id/api/news/detail/${beritaId}`);
+        if (!response.ok) throw new Error("Failed to fetch news details");
+  
+        const data = await response.json();
+        const judul = data.judul || "Judul tidak tersedia";
+        const tanggal = data.tanggal || "Tanggal tidak tersedia";
+        
+        let konten = data.konten || "Konten tidak tersedia";
+  
+        // Deteksi jika ada URL gambar yang berdiri sendiri dan konversi ke tag <img>
+        konten = konten.replace(/https?:\/\/[^\s<>]+\.(png|jpg|jpeg|gif|webp)(\b|$)/gi, (match) => {
+          return `<img src="${match}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
         });
-    } catch (_0xcdbba) {
-        console[_0xf1a832(0x136)](_0x4af6ba[_0xf1a832(0x154)], _0xcdbba), _0x4af6ba[_0xf1a832(0x120)](showNotFoundMessage, _0x5de9b9, _0x4af6ba[_0xf1a832(0x21d)]);
+  
+        // Ganti newline dengan <br> dan format tautan yang bukan gambar
+        konten = konten.replace(/\n/g, "<br>")
+          .replace(/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, (match) => {
+            // Skip URLs that are already part of image tags or are image URLs
+            if (konten.includes(`<img src="${match}"`) || match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
+              return match;
+            }
+            return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
+          });
+  
+        const detailTemplate = `
+          <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
+            <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
+            <p class="text-white text-base mb-6">${tanggal}</p>
+            <div class="text-white leading-relaxed text-sm font-semibold">${konten}</div>
+          </div>
+        `;
+  
+        container.innerHTML = detailTemplate;
+  
+        // Tambahkan style untuk memastikan semua teks di dalam konten berwarna putih
+        // tapi jangan mengubah warna tautan
+        const kontenElement = container.querySelector('.text-white.leading-relaxed');
+        if (kontenElement) {
+          kontenElement.querySelectorAll('*:not(a)').forEach(el => {
+            el.style.color = 'white';
+          });
+        }
+      } catch (error) {
+        console.error("Error parsing detail news:", error);
+        showNotFoundMessage(container, "Detail News Not Found 😭");
+      }
+    } catch (error) {
+      console.error("Error fetching Detail News:", error);
+      showNotFoundMessage(container, "Gagal memuat detail berita. Silakan coba lagi nanti.");
     }
-}
-function _0x759a(_0x1e8512, _0x1c4671) {
-    const _0x254663 = _0xa3f9();
-    return _0x759a = function (_0x55c021, _0x3d74ab) {
-        _0x55c021 = _0x55c021 - (-0x2bc + 0x1eb + 0x1ab);
-        let _0x46ce47 = _0x254663[_0x55c021];
-        return _0x46ce47;
-    }, _0x759a(_0x1e8512, _0x1c4671);
-}
-async function fetchDetailNews() {
-    const _0x411e26 = _0x759a, _0x13c34c = {
-            'puQJc': _0x411e26(0x251) + _0x411e26(0x198) + _0x411e26(0x148) + _0x411e26(0x111),
-            'empNj': _0x411e26(0x2a3),
-            'KtfMR': function (_0x37d98c, _0x36117c) {
-                return _0x37d98c - _0x36117c;
-            },
-            'sLKbf': _0x411e26(0x19d) + _0x411e26(0x1f8) + 'r',
-            'vPiNV': _0x411e26(0x296) + _0x411e26(0x147) + _0x411e26(0x297) + _0x411e26(0x21b),
-            'ZJPRH': function (_0x302a35, _0x592367, _0x332fa4) {
-                return _0x302a35(_0x592367, _0x332fa4);
-            },
-            'soFak': _0x411e26(0x271) + _0x411e26(0x138) + _0x411e26(0x1a9),
-            'jeHaq': function (_0x40b2fe, _0x3fc427) {
-                return _0x40b2fe(_0x3fc427);
-            },
-            'lyzaO': _0x411e26(0x191) + _0x411e26(0x143) + _0x411e26(0xed),
-            'urlrT': _0x411e26(0x10e) + _0x411e26(0x12d),
-            'FRmvi': _0x411e26(0x238) + _0x411e26(0x20c) + 'ia',
-            'Kyojn': _0x411e26(0xec) + _0x411e26(0x11d) + 'a',
-            'kIGYE': _0x411e26(0x150),
-            'DKcOB': _0x411e26(0x131) + _0x411e26(0x212) + _0x411e26(0x257),
-            'KxkkW': _0x411e26(0x1fe),
-            'yPUzx': _0x411e26(0x1ae) + _0x411e26(0x141) + _0x411e26(0x203),
-            'AitqI': function (_0x42a582, _0x348975, _0x319aa7) {
-                return _0x42a582(_0x348975, _0x319aa7);
-            },
-            'rFrhV': _0x411e26(0x27b) + _0x411e26(0x199) + _0x411e26(0x217),
-            'DDpTR': _0x411e26(0x1da) + _0x411e26(0x12e) + _0x411e26(0x17d) + _0x411e26(0x179) + _0x411e26(0x1f4) + 'i.'
-        };
+  }
+  
+  function showNotFoundMessage(container, message) {
+    container.innerHTML = `
+      <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
+        <h1 class="text-3xl font-bold mb-6 text-white">${message}</h1>
+      </div>
+    `;
+  }
+  // news sidebar
+  
+  async function fetchNewsSidebar() {
+    const container = document.getElementById("news-list-sidebar");
+    if (!container) return;
+  
+    container.innerHTML = `<p class="text-white text-lg font-bold mb-4">Latest News</p>`;
+  
     try {
-        const _0x3eb450 = window[_0x411e26(0x15e)][_0x411e26(0x228)][_0x411e26(0x14f)]('/'), _0x2b971d = _0x3eb450[_0x13c34c[_0x411e26(0xe1)](_0x3eb450[_0x411e26(0xde)], -0x2e3 + -0x1b51 + -0x1 * -0x1e35)], _0x3ed861 = document[_0x411e26(0x209) + _0x411e26(0x26b)](_0x13c34c[_0x411e26(0x1ff)]);
-        if (!_0x2b971d) {
-            console[_0x411e26(0x136)](_0x13c34c[_0x411e26(0x23b)]), _0x13c34c[_0x411e26(0x287)](showNotFoundMessage, _0x3ed861, _0x13c34c[_0x411e26(0x1e9)]);
-            return;
-        }
-        try {
-            const _0x30adfc = await _0x13c34c[_0x411e26(0x23e)](fetch, _0x411e26(0x29a) + _0x411e26(0x18f) + _0x411e26(0x123) + _0x411e26(0x231) + 'l/' + _0x2b971d);
-            if (!_0x30adfc['ok'])
-                throw new Error(_0x13c34c[_0x411e26(0x103)]);
-            const _0x338b4d = await _0x30adfc[_0x411e26(0x13c)](), _0x49216e = _0x338b4d[_0x411e26(0x181)] || _0x13c34c[_0x411e26(0x18a)], _0x1dd08e = _0x338b4d[_0x411e26(0x16d)] || _0x13c34c[_0x411e26(0x232)];
-            let _0x40a125 = _0x338b4d[_0x411e26(0x1b1)] || _0x13c34c[_0x411e26(0x13f)];
-            _0x40a125 = _0x40a125[_0x411e26(0x15a)](/https?:\/\/[^\s<>]+\.(png|jpg|jpeg|gif|webp)(\b|$)/gi, _0x13a862 => {
-                const _0x2cc22e = _0x411e26;
-                return _0x13a862[_0x2cc22e(0x21c)](_0x13c34c[_0x2cc22e(0x2a0)]) ? _0x2cc22e(0x200) + _0x13a862 + (_0x2cc22e(0x268) + _0x2cc22e(0x106) + _0x2cc22e(0x262) + _0x2cc22e(0x195) + _0x2cc22e(0x155) + _0x2cc22e(0x1c9)) : _0x2cc22e(0x200) + _0x2cc22e(0x251) + _0x2cc22e(0x198) + _0x2cc22e(0x148) + _0x2cc22e(0x111) + _0x13a862 + (_0x2cc22e(0x268) + _0x2cc22e(0x106) + _0x2cc22e(0x262) + _0x2cc22e(0x195) + _0x2cc22e(0x155) + _0x2cc22e(0x1c9));
-            }), _0x40a125 = _0x40a125[_0x411e26(0x15a)](/src="([^"]+)"/g, (_0x277ed8, _0x49a4f8) => {
-                const _0x1ee171 = _0x411e26;
-                return _0x49a4f8[_0x1ee171(0x21c)](_0x13c34c[_0x1ee171(0x2a0)]) ? _0x1ee171(0x258) + _0x49a4f8 + '\x22' : _0x1ee171(0x19f) + _0x1ee171(0x1d3) + _0x1ee171(0x19e) + _0x1ee171(0xe5) + _0x1ee171(0x225) + _0x49a4f8 + '\x22';
-            }), _0x40a125 = _0x40a125[_0x411e26(0x15a)](/\n/g, _0x13c34c[_0x411e26(0x125)])[_0x411e26(0x15a)](/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, _0x25b601 => {
-                const _0x171953 = _0x411e26;
-                if (_0x40a125[_0x171953(0x1d5)](_0x171953(0x200) + _0x25b601 + '\x22') || _0x40a125[_0x171953(0x1d5)](_0x171953(0x200) + _0x171953(0x251) + _0x171953(0x198) + _0x171953(0x148) + _0x171953(0x111) + _0x25b601 + '\x22'))
-                    return _0x25b601;
-                return _0x171953(0x108) + _0x25b601 + (_0x171953(0x1f3) + _0x171953(0x252) + _0x171953(0x1a3) + _0x171953(0x196) + _0x171953(0x269)) + _0x25b601 + _0x171953(0x134);
-            });
-            const _0x2e2f58 = _0x411e26(0x127) + _0x411e26(0x1ce) + _0x411e26(0xfd) + _0x411e26(0x243) + _0x411e26(0x14a) + _0x411e26(0x2a4) + _0x411e26(0x242) + _0x411e26(0x17f) + _0x411e26(0x161) + _0x411e26(0x1a7) + _0x411e26(0x177) + _0x411e26(0x240) + _0x411e26(0x1b3) + _0x411e26(0x19a) + _0x49216e + (_0x411e26(0xdb) + _0x411e26(0x124) + _0x411e26(0x267) + _0x411e26(0x216) + _0x411e26(0x20a) + _0x411e26(0x288)) + _0x1dd08e + (_0x411e26(0x14b) + _0x411e26(0x270) + _0x411e26(0x2a8) + _0x411e26(0x2a5) + _0x411e26(0x207) + _0x411e26(0x264) + _0x411e26(0x1cb) + _0x411e26(0xdf)) + _0x40a125 + (_0x411e26(0x221) + _0x411e26(0x122) + _0x411e26(0x210));
-            _0x3ed861[_0x411e26(0x18e)] = _0x2e2f58;
-            const _0x538bcb = _0x3ed861[_0x411e26(0x12f) + _0x411e26(0x1b9)](_0x13c34c[_0x411e26(0x171)]);
-            _0x538bcb && _0x538bcb[_0x411e26(0x12f) + _0x411e26(0xfb)](_0x13c34c[_0x411e26(0x27a)])[_0x411e26(0x174)](_0x9f284f => {
-                const _0xecdb6 = _0x411e26;
-                _0x9f284f[_0xecdb6(0x2a7)][_0xecdb6(0x1ef)] = _0x13c34c[_0xecdb6(0x22e)];
-            });
-        } catch (_0x22ab89) {
-            console[_0x411e26(0x136)](_0x13c34c[_0x411e26(0x1e1)], _0x22ab89), _0x13c34c[_0x411e26(0x1b5)](showNotFoundMessage, _0x3ed861, _0x13c34c[_0x411e26(0x1e9)]);
-        }
-    } catch (_0x4e56ae) {
-        console[_0x411e26(0x136)](_0x13c34c[_0x411e26(0x19c)], _0x4e56ae), _0x13c34c[_0x411e26(0x287)](showNotFoundMessage, container, _0x13c34c[_0x411e26(0x22f)]);
-    }
-}
-function showNotFoundMessage(_0x5cf321, _0xb9966d) {
-    const _0x5bec0b = _0x759a;
-    _0x5cf321[_0x5bec0b(0x18e)] = _0x5bec0b(0x184) + _0x5bec0b(0x28e) + _0x5bec0b(0x23f) + _0x5bec0b(0x185) + _0x5bec0b(0x1d6) + _0x5bec0b(0x168) + _0x5bec0b(0x176) + _0x5bec0b(0x146) + _0x5bec0b(0x21e) + _0x5bec0b(0x14e) + _0x5bec0b(0x20e) + _0x5bec0b(0x1d9) + _0x5bec0b(0x11a) + _0xb9966d + (_0x5bec0b(0xdb) + _0x5bec0b(0x144));
-}
-async function fetchNewsSidebar() {
-    const _0x2ea332 = _0x759a, _0x5129fb = {
-            'WwMnK': _0x2ea332(0x26f) + _0x2ea332(0x2a6),
-            'hjUSx': function (_0x2d5f30, _0x58be90) {
-                return _0x2d5f30(_0x58be90);
-            },
-            'EpCsY': _0x2ea332(0x29a) + _0x2ea332(0x18f) + _0x2ea332(0x123) + _0x2ea332(0x113),
-            'bgnyB': _0x2ea332(0x191) + _0x2ea332(0x143),
-            'BpFzH': function (_0x5bfdb7, _0x489a81) {
-                return _0x5bfdb7 === _0x489a81;
-            },
-            'QudQq': function (_0x103cce, _0x1346c5, _0x137978) {
-                return _0x103cce(_0x1346c5, _0x137978);
-            },
-            'MdzAc': _0x2ea332(0x259) + _0x2ea332(0x24d),
-            'nOAJu': _0x2ea332(0x27b) + _0x2ea332(0x1c1) + _0x2ea332(0x26d),
-            'nICYw': function (_0x3cd1bc, _0x34d93e, _0x29a770) {
-                return _0x3cd1bc(_0x34d93e, _0x29a770);
-            },
-            'gUvEY': _0x2ea332(0x191) + _0x2ea332(0xf3)
-        }, _0x3bf666 = document[_0x2ea332(0x209) + _0x2ea332(0x26b)](_0x5129fb[_0x2ea332(0x29c)]);
-    if (!_0x3bf666)
+      const response = await fetch("https://48intensapi.my.id/api/news");
+      if (!response.ok) throw new Error("Failed to fetch news");
+  
+      const data = await response.json();
+      const News = data.berita.slice(0, 5);
+  
+      if (News.length === 0) {
+        showNotFoundMessageInsideCard(container, "No news available.");
         return;
-    _0x3bf666[_0x2ea332(0x18e)] = _0x2ea332(0x1bb) + _0x2ea332(0x255) + _0x2ea332(0x1c3) + _0x2ea332(0x240) + _0x2ea332(0x12b) + _0x2ea332(0xeb);
-    try {
-        const _0x583294 = await _0x5129fb[_0x2ea332(0x1f5)](fetch, _0x5129fb[_0x2ea332(0x29b)]);
-        if (!_0x583294['ok'])
-            throw new Error(_0x5129fb[_0x2ea332(0x25d)]);
-        const _0x37ca35 = await _0x583294[_0x2ea332(0x13c)](), _0x5a687a = _0x37ca35[_0x2ea332(0x29f)][_0x2ea332(0x2a2)](0x1af + 0x14 * 0x100 + 0x15af * -0x1, -0x1 * -0x1e0e + -0x29 * -0xe5 + 0x215b * -0x2);
-        if (_0x5129fb[_0x2ea332(0x1a6)](_0x5a687a[_0x2ea332(0xde)], -0x1151 + -0x1 * -0x875 + -0x12 * -0x7e)) {
-            _0x5129fb[_0x2ea332(0x156)](showNotFoundMessageInsideCard, _0x3bf666, _0x5129fb[_0x2ea332(0x226)]);
-            return;
-        }
-        _0x3bf666[_0x2ea332(0x18e)] += _0x5a687a[_0x2ea332(0x236)](_0xc40bd1 => _0x2ea332(0x104) + _0x2ea332(0x20f) + 's/' + _0xc40bd1[_0x2ea332(0x277)] + (_0x2ea332(0x28a) + _0x2ea332(0x213) + _0x2ea332(0x1de) + _0x2ea332(0x283) + _0x2ea332(0x197) + _0x2ea332(0x1e5) + _0x2ea332(0x25f) + _0x2ea332(0x140) + _0x2ea332(0x205) + _0x2ea332(0x1e8) + _0x2ea332(0x1f6) + _0x2ea332(0x28f) + _0x2ea332(0x15b) + _0x2ea332(0x279) + _0x2ea332(0x214) + _0x2ea332(0x16a) + _0x2ea332(0x200) + _0x2ea332(0x1ac) + _0x2ea332(0x234) + _0x2ea332(0x13d) + _0x2ea332(0x249) + _0x2ea332(0x291) + _0x2ea332(0x244) + '48') + (_0xc40bd1[_0x2ea332(0x20d)] || '') + (_0x2ea332(0x1a1) + _0x2ea332(0x1af) + _0x2ea332(0x27e) + _0x2ea332(0xef) + _0x2ea332(0x1eb) + _0x2ea332(0x1dc) + _0x2ea332(0x219) + _0x2ea332(0x267) + _0x2ea332(0x1f0) + _0x2ea332(0x260)) + _0xc40bd1[_0x2ea332(0x181)] + (_0x2ea332(0x1c6) + _0x2ea332(0x1c4) + _0x2ea332(0x254) + _0x2ea332(0x239) + _0x2ea332(0x1fb) + _0x2ea332(0x183)) + _0xc40bd1[_0x2ea332(0x16f)] + (_0x2ea332(0x1be) + _0x2ea332(0x241) + _0x2ea332(0x24e) + _0x2ea332(0x1e6) + _0x2ea332(0x1c5) + _0x2ea332(0x1a2)))[_0x2ea332(0x208)]('');
-    } catch (_0x4226d0) {
-        console[_0x2ea332(0x136)](_0x5129fb[_0x2ea332(0x218)], _0x4226d0), _0x5129fb[_0x2ea332(0x256)](showNotFoundMessageInsideCard, _0x3bf666, _0x5129fb[_0x2ea332(0xf1)]);
+      }
+  
+      container.innerHTML += News.map(news => `
+        <a href="/news/${news.berita_id}" class="block bg-gray-700 hover:bg-gray-600 text-white rounded-2xl p-4 mb-2 shadow-md transition-all">
+          <div class="flex items-center gap-3">
+            <img src="https://res.cloudinary.com/haymzm4wp/image/upload/assets/jkt48${news.badge_url || ''}" class="w-14 h-5 mb-3 rounded-3xl">
+            <div>
+              <h3 class="text-sm font-bold">${news.judul}</h3>
+              <span class="text-xs text-gray-300">${news.waktu}</span>
+            </div>
+          </div>
+        </a>
+      `).join("");
+    } catch (error) {
+      console.error("Error fetching News Sidebar:", error);
+      showNotFoundMessageInsideCard(container, "Failed to load news.");
     }
-}
-async function fetchScheduleSidebar() {
-    const _0x1dbd8c = _0x759a, _0x99bb5e = {
-            'uEtDW': _0x1dbd8c(0x24b) + _0x1dbd8c(0x117) + _0x1dbd8c(0x282) + _0x1dbd8c(0x27c),
-            'sGcuL': _0x1dbd8c(0x25b) + _0x1dbd8c(0x13e),
-            'fdSTz': function (_0x7150df, _0xf2151d) {
-                return _0x7150df(_0xf2151d);
-            },
-            'aTyiH': _0x1dbd8c(0x29a) + _0x1dbd8c(0x18f) + _0x1dbd8c(0x123) + _0x1dbd8c(0x1d7) + _0x1dbd8c(0x293),
-            'wpDPf': _0x1dbd8c(0x25a) + _0x1dbd8c(0x109),
-            'eUEyJ': _0x1dbd8c(0x191) + _0x1dbd8c(0x263),
-            'rCYKW': function (_0x2388a9, _0x51599b) {
-                return _0x2388a9 === _0x51599b;
-            },
-            'nVFcU': function (_0x202ca0, _0x57ae2d, _0x419c55) {
-                return _0x202ca0(_0x57ae2d, _0x419c55);
-            },
-            'OfVBR': _0x1dbd8c(0x1fd) + _0x1dbd8c(0x247),
-            'RmfxI': _0x1dbd8c(0x27b) + _0x1dbd8c(0x188) + _0x1dbd8c(0x18b) + 'r:',
-            'EiMTm': _0x1dbd8c(0x191) + _0x1dbd8c(0x286) + _0x1dbd8c(0xe8)
-        }, _0x4406a6 = document[_0x1dbd8c(0x209) + _0x1dbd8c(0x26b)](_0x99bb5e[_0x1dbd8c(0x202)]);
-    if (!_0x4406a6)
+  }
+  
+  //  schedule sidebar
+  async function fetchScheduleSidebar() {
+    const container = document.getElementById("schedule-sidebar");
+    if (!container) return;
+  
+    container.innerHTML = `<p class="text-white text-lg font-bold mb-4">Upcoming Schedule</p>`;
+  
+    try {
+      const [scheduleResponse, theaterResponse] = await Promise.all([
+        fetch("https://48intensapi.my.id/api/schedule/section"),
+        fetch("/data/theater.json")
+      ]);
+  
+      if (!scheduleResponse.ok || !theaterResponse.ok) throw new Error("Failed to fetch data");
+  
+      const schedules = await scheduleResponse.json();
+      const theaterData = await theaterResponse.json();
+      const limitedSchedules = schedules.slice(0, 3);
+  
+      if (limitedSchedules.length === 0) {
+        showNotFoundMessageInsideCard(container, "No upcoming events.");
         return;
-    _0x4406a6[_0x1dbd8c(0x18e)] = _0x1dbd8c(0x1bb) + _0x1dbd8c(0x255) + _0x1dbd8c(0x1c3) + _0x1dbd8c(0x240) + _0x1dbd8c(0x114) + _0x1dbd8c(0x253) + _0x1dbd8c(0x261);
-    try {
-        const [_0xd445a1, _0x3d4e4b] = await Promise[_0x1dbd8c(0x137)]([
-            _0x99bb5e[_0x1dbd8c(0x173)](fetch, _0x99bb5e[_0x1dbd8c(0x19b)]),
-            _0x99bb5e[_0x1dbd8c(0x173)](fetch, _0x99bb5e[_0x1dbd8c(0xfa)])
-        ]);
-        if (!_0xd445a1['ok'] || !_0x3d4e4b['ok'])
-            throw new Error(_0x99bb5e[_0x1dbd8c(0xf2)]);
-        const _0x182780 = await _0xd445a1[_0x1dbd8c(0x13c)](), _0x4b5725 = await _0x3d4e4b[_0x1dbd8c(0x13c)](), _0x4ca671 = _0x182780[_0x1dbd8c(0x2a2)](0x380 + -0x1c2d + 0x1 * 0x18ad, 0x4 * -0x9b3 + -0x4ad * 0x2 + -0x3029 * -0x1);
-        if (_0x99bb5e[_0x1dbd8c(0x11b)](_0x4ca671[_0x1dbd8c(0xde)], 0x1426 + 0x347 * 0x7 + -0x2b17)) {
-            _0x99bb5e[_0x1dbd8c(0xdd)](showNotFoundMessageInsideCard, _0x4406a6, _0x99bb5e[_0x1dbd8c(0x102)]);
-            return;
-        }
-        _0x4406a6[_0x1dbd8c(0x18e)] += _0x4ca671[_0x1dbd8c(0x236)](({
-            tanggal: _0x4e1e7b,
-            hari: _0x484369,
-            bulan: _0x2fb593,
-            events: _0x2d8313
-        }) => _0x2d8313[_0x1dbd8c(0x236)](_0x45105e => {
-            const _0x1805d8 = _0x1dbd8c, _0x25f5f6 = _0x4b5725[_0x1805d8(0x1b8)](_0x5a17ce => _0x5a17ce[_0x1805d8(0x116)] === _0x45105e[_0x1805d8(0x22d)]), _0x415ddd = _0x25f5f6 ? _0x25f5f6[_0x1805d8(0x11e)] : _0x99bb5e[_0x1805d8(0x206)];
-            return _0x1805d8(0x235) + _0x1805d8(0x190) + _0x1805d8(0x142) + _0x1805d8(0xe3) + _0x1805d8(0xf0) + _0x1805d8(0x1b2) + _0x1805d8(0x126) + _0x1805d8(0x255) + _0x1805d8(0x294) + _0x1805d8(0x23a) + _0x1805d8(0xe4) + _0x1805d8(0x290) + _0x1805d8(0x273) + _0x1805d8(0x16a) + _0x1805d8(0x1c0) + _0x1805d8(0x159) + _0x1805d8(0x220) + _0x1805d8(0x17b) + _0x1805d8(0x16a) + _0x1805d8(0xe6) + _0x1805d8(0x12c) + _0x415ddd + _0x1805d8(0x1ad) + _0x45105e[_0x1805d8(0x22d)] + (_0x1805d8(0x1a1) + _0x1805d8(0x1a8) + _0x1805d8(0x246) + _0x1805d8(0x15d) + _0x1805d8(0x13b) + _0x1805d8(0x161) + _0x1805d8(0x24e) + _0x1805d8(0x16a) + _0x1805d8(0x29e) + _0x1805d8(0x194) + _0x1805d8(0x12a) + '>') + _0x45105e[_0x1805d8(0x22d)] + (_0x1805d8(0x1c6) + _0x1805d8(0x16a) + _0x1805d8(0xf7) + _0x1805d8(0x1a3) + _0x1805d8(0x1cf) + _0x1805d8(0x178)) + _0x484369 + ',\x20' + _0x4e1e7b + '\x20' + _0x2fb593 + (_0x1805d8(0x1be) + _0x1805d8(0x16a) + _0x1805d8(0x187) + _0x1805d8(0x16a) + _0x1805d8(0x289) + _0x1805d8(0x241) + _0x1805d8(0x223) + '\x20');
-        })[_0x1dbd8c(0x208)](''))[_0x1dbd8c(0x208)]('');
-    } catch (_0x57adc6) {
-        console[_0x1dbd8c(0x136)](_0x99bb5e[_0x1dbd8c(0x17e)], _0x57adc6), _0x99bb5e[_0x1dbd8c(0xdd)](showNotFoundMessageInsideCard, _0x4406a6, _0x99bb5e[_0x1dbd8c(0xe2)]);
+      }
+  
+      container.innerHTML += limitedSchedules.map(({ tanggal, hari, bulan, events }) =>
+        events.map(event => {
+          const matchingTheater = theaterData.find(theater => theater.setlist === event.eventName);
+          const badgeUrl = matchingTheater
+            ? matchingTheater.image
+            : "https://jkt48.com/images/logo.svg";
+  
+          return `
+            <a href="/home" class="block bg-gray-700 hover:bg-gray-600 text-white rounded-2xl p-4 mb-2 shadow-md transition-all">
+              <div class="flex items-center gap-3">
+                <img src="${badgeUrl}" alt="${event.eventName}" class="w-10 h-10 rounded-lg object-cover">
+                <div>
+                  <h3 class="text-sm font-bold">${event.eventName}</h3>
+                  <span class="text-xs text-gray-300">${hari}, ${tanggal} ${bulan}</span>
+                </div>
+              </div>
+            </a>
+          `;
+        }).join("")
+      ).join("");
+    } catch (error) {
+      console.error("Error fetching Schedule Sidebar:", error);
+      showNotFoundMessageInsideCard(container, "Failed to load schedule.");
     }
-}
-function _0xa3f9() {
-    const _0x31c735 = [
-        'ext-gray-3',
-        '118/z0erje',
-        'No\x20upcomin',
-        '*:not(a)',
-        'sLKbf',
-        '<img\x20src=\x22',
-        '3432682EJDJpt',
-        'sGcuL',
-        '\x20news:',
-        'uuqko',
-        'dow-md\x20tra',
-        'uEtDW',
-        'ading-rela',
-        'join',
-        'getElement',
-        't-base\x20mb-',
-        'sponse\x20was',
-        'dak\x20tersed',
-        'badge_url',
-        '\x20font-bold',
-        'href=\x22/new',
-        '>\x0a\x20\x20\x20\x20\x20\x20',
-        'bg-red-400',
-        'e.leading-',
-        'lock\x20bg-gr',
-        'r\x20gap-3\x22>\x0a',
-        'idden\x20tran',
-        '-white\x20tex',
-        'l\x20News:',
-        'nOAJu',
-        '\x20\x20\x20\x20\x20<h3\x20c',
-        'iv\x20class=\x22',
-        'RL.',
-        'startsWith',
-        'pKshO',
-        '\x20<h1\x20class',
-        '\x20\x0a\x20\x20\x20\x20<div',
-        'ems-center',
-        '</div>\x0a\x20\x20\x20',
-        '/50',
-        'a>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        '-4\x22>\x0a\x20\x20\x20\x20\x20',
-        'dev/',
-        'MdzAc',
-        '\x22w-14\x20h-5\x20',
-        'pathname',
-        'HKciV',
-        'n\x20class=\x22t',
-        'bg-purple-',
-        'CdGoj',
-        'eventName',
-        'empNj',
-        'DDpTR',
-        'className',
-        'news/detai',
-        'FRmvi',
-        'tLGCQ',
-        's.cloudina',
-        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        'map',
-        'e\x20overflow',
-        'Tanggal\x20ti',
-        '\x22text-xs\x20t',
-        'xl\x20p-4\x20mb-',
-        'vPiNV',
-        '=\x22localSto',
-        's=\x22w-64\x20mb',
-        'jeHaq',
-        '-w-5xl\x20mx-',
-        'ont-bold\x20m',
-        '\x20\x20\x20\x20\x20\x20\x20\x20</',
-        'w-lg\x20round',
-        '\x20mx-auto\x20p',
-        'assets/jkt',
-        'xt-white\x20f',
-        'ounded-lg\x20',
-        'g\x20events.',
-        'Waktu\x20tida',
-        'mzm4wp/ima',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<d',
-        'https://jk',
-        'MfFaE',
-        'ailable.',
-        'div>\x0a\x20\x20\x20\x20\x20',
-        'y-400\x20roun',
-        'flex\x20items',
-        'https://fr',
-        '_blank\x22\x20cl',
-        'ing\x20Schedu',
-        'pan\x20class=',
-        'text-white',
-        'nICYw',
-        'relaxed',
-        'src=\x22',
-        'No\x20news\x20av',
-        '/data/thea',
-        'schedule-s',
-        'rounded-2x',
-        'bgnyB',
-        '\x20\x20\x20',
-        'ded-2xl\x20p-',
-        'old\x22>',
-        'le</p>',
-        'lass=\x22max-',
-        'fetch\x20data',
-        'xed\x20text-s',
-        '\x22text-gray',
-        'page-news-',
-        'lass=\x22text',
-        '\x22\x20alt=\x22New',
-        'nderline\x22>',
-        'cyq6twx7cm',
-        'ById',
-        'mb-3\x20round',
-        'Sidebar:',
-        '6JbJATG',
-        'news-list-',
-        '\x20\x20\x20\x20\x20<div\x20',
-        'Detail\x20New',
-        '\x20bg-gray-4',
-        'on-all\x22>\x0a\x20',
-        '\x22\x20alt=\x22Bad',
-        'News:',
-        '737173118/',
-        'berita_id',
-        '4931232tMEqMd',
-        'tems-cente',
-        'KxkkW',
-        'Error\x20fetc',
-        'svg',
-        '\x20duration-',
-        '-3\x20rounded',
-        'bg-green-4',
-        '-5\x20bg-gray',
-        '0\x22>',
-        'ages/logo.',
-        'er:bg-gray',
-        '\x20\x20<img\x20src',
-        '\x20<p\x20class=',
-        'load\x20sched',
-        'ZJPRH',
-        '6\x22>',
-        '\x20</div>\x0a\x20\x20',
-        '\x22\x20class=\x22b',
-        '1883247xUSjOV',
-        '300\x22\x0a\x20\x20\x20\x20\x20',
-        '4\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        'class=\x22max',
-        '\x20\x20<div\x20cla',
-        'd\x20transiti',
-        'ge/upload/',
-        'cloudinary',
-        'ection',
-        '\x20rounded-2',
-        'ter\x22>\x0a\x20\x20\x20\x20',
-        'Berita\x20ID\x20',
-        'mukan\x20di\x20U',
-        'em(\x27newsCo',
-        'alt=\x22Not\x20F',
-        'https://48',
-        'EpCsY',
-        'WwMnK',
-        '\x20items-cen',
-        '\x20<h3\x20class',
-        'berita',
-        'puQJc',
-        'BVUbi',
-        'slice',
-        'white',
-        '-800\x20shado',
-        't-white\x20le',
-        'sidebar',
-        'style',
-        'class=\x22tex',
-        '4281500MWzzyc',
-        '</h1>\x0a\x20\x20\x20\x20',
-        'er\x20py-8\x22>\x0a',
-        'nVFcU',
-        'length',
-        'ibold\x22>',
-        'ock\x20bg-gra',
-        'KtfMR',
-        'EiMTm',
-        'ss=\x22block\x20',
-        '2\x20shadow-m',
-        'n.workers.',
-        '\x20\x20\x20<img\x20sr',
-        'ext-gray-4',
-        'ule.',
-        'z0erjecyq6',
-        'cTJzc',
-        't\x20News</p>',
-        'Konten\x20tid',
-        '\x20details',
-        'ge\x22\x20class=',
-        '-3xl\x22>\x0a\x20\x20\x20',
-        'bg-gray-70',
-        'gUvEY',
-        'eUEyJ',
-        'load\x20news.',
-        'nary.com/d',
-        '-center\x20ju',
-        'container',
-        '\x20\x20<span\x20cl',
-        '-500\x20text-',
-        'ed-3xl\x20mb-',
-        'wpDPf',
-        'torAll',
-        'overflow-h',
-        '\x22max-w-5xl',
-        'hdcXo',
-        '00\x20rounded',
-        'ound\x22\x20clas',
-        '-col\x20items',
-        'OfVBR',
-        'lyzaO',
-        '\x0a\x20\x20\x20\x20\x20\x20<a\x20',
-        'ded-3xl\x20sh',
-        's\x20Image\x22\x20c',
-        'ss=\x22w-20\x20h',
-        '<a\x20href=\x22',
-        'ter.json',
-        'ound\x20😭',
-        'naii.png\x22\x20',
-        'v>\x0a\x20\x20\x20\x20\x20\x20<',
-        'e\x20rounded-',
-        'Judul\x20tida',
-        'lg\x20font-bo',
-        '\x20w-3/4\x22></',
-        'kers.dev/',
-        '/news/',
-        'news',
-        'b-4\x22>Upcom',
-        'dMgWl',
-        'setlist',
-        't48.com/im',
-        '\x27)\x22>\x0a\x20\x20\x20\x20\x20',
-        '\x20shadow-md',
-        '-white\x22>',
-        'rCYKW',
-        'EDAkk',
-        'ak\x20tersedi',
-        'image',
-        'nter\x22>',
-        'fVFbT',
-        'mage/uploa',
-        '\x20\x20\x20\x20\x20</div',
-        'my.id/api/',
-        '\x20\x20\x20\x20\x20\x20<p\x20c',
-        'kIGYE',
-        '-gray-600\x20',
-        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<',
-        '-400\x20round',
-        'y-300\x20roun',
-        'font-bold\x22',
-        'b-4\x22>Lates',
-        'c=\x22',
-        'k\x20tersedia',
-        'at\x20detail\x20',
-        'querySelec',
-        'ded\x20mb-2\x22>',
-        '.text-whit',
-        '24rem]',
-        'ass=\x22p-4\x22>',
-        '</a>',
-        '</p>\x0a\x20\x20\x20\x20<',
-        'error',
-        'all',
-        's\x20Not\x20Foun',
-        '811867zXfaGO',
-        'm7ha/image',
-        'er\x22>\x0a\x20\x20\x20\x20\x20',
-        'json',
-        'ry.com/hay',
-        'idebar',
-        'Kyojn',
-        '4\x20mb-2\x20sha',
-        'ing\x20detail',
-        '/home\x22\x20cla',
-        'fetch\x20news',
-        '</div>\x0a\x20\x20',
-        '\x20text-whit',
-        'xl\x22>\x0a\x20\x20\x20\x20\x20',
-        'tidak\x20dite',
-        'gi-san.wor',
-        '\x20not\x20ok',
-        '-8\x20bg-gray',
-        '</p>\x0a\x20\x20\x20\x20\x20',
-        'd/v1737173',
-        'imate-puls',
-        '=\x22text-3xl',
-        'split',
-        '<br>',
-        'ETdkq',
-        '\x20class=\x22bl',
-        'Not\x20found',
-        'bavBa',
-        '4\x20rounded-',
-        'QudQq',
-        '400',
-        'gray-700\x20t',
-        's=\x22flex\x20it',
-        'replace',
-        'ss=\x22flex\x20i',
-        '136004vUiEYH',
-        'object-cov',
-        'location',
-        'h3\x20class=\x22',
-        'bg-blue-40',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
-        'rage.setIt',
-        'ext-sm\x20tex',
-        '\x20<img\x20src=',
-        '\x20\x20\x20\x20\x20\x20<spa',
-        'lock\x20',
-        'text-lg\x20te',
-        '\x20shadow-lg',
-        '-32\x20mb-4\x22>',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        'IJhsq',
-        'class=\x22fle',
-        'tanggal',
-        '\x20\x20\x20\x20\x20\x20</di',
-        'waktu',
-        'class=\x22h-4',
-        'DKcOB',
-        'mg\x20src=\x22ht',
-        'fdSTz',
-        'forEach',
-        'Network\x20re',
-        '\x20rounded-3',
-        'text-3xl\x20f',
-        'ay-300\x22>',
-        'lakan\x20coba',
-        'ld\x22>',
-        '\x20gap-3\x22>\x0a\x20',
-        'lx2zm7ha/i',
-        'berita.\x20Si',
-        'RmfxI',
-        'ed-3xl\x22>\x0a\x20',
-        'MZkqc',
-        'judul',
-        'News\x20Not\x20F',
-        '00\x22>',
-        '\x0a\x20\x20\x20\x20<div\x20',
-        'auto\x20p-8\x20b',
-        't-white-20',
-        '\x20\x20</div>\x0a\x20',
-        'hing\x20Sched',
-        'class=\x22bg-',
-        'urlrT',
-        'ule\x20Sideba',
-        '.png\x22\x20alt=',
-        '-hidden\x22>\x0a',
-        'innerHTML',
-        'intensapi.',
-        '\x20<a\x20href=\x22',
-        'Failed\x20to\x20',
-        'geSwp',
-        '\x20\x20\x20<div\x20cl',
-        '=\x22text-sm\x20',
-        'w-full\x20my-',
-        'blue-400\x20u',
-        '-600\x20text-',
-        'ieren.taka',
-        'hing\x20Detai',
-        'hite\x22>',
-        'aTyiH',
-        'rFrhV',
-        'news-detai',
-        '.takagi-sa',
-        'src=\x22https',
-        '9JOEPot',
-        '\x22\x20class=\x22w',
-        '\x0a\x20\x20\x20\x20',
-        'ass=\x22text-',
-        'x\x20flex-col',
-        '2FmIXMa',
-        'BpFzH',
-        'h1\x20class=\x22',
-        '-10\x20h-10\x20r',
-        'd\x20😭',
-        'h-6\x20bg-gra',
-        '00\x20text-ce',
-        'https://re',
-        '\x22\x20alt=\x22',
-        'Error\x20pars',
-        '-14\x20h-5\x20mb',
-        '\x22>\x0a\x20\x20\x20\x20\x20\x20<',
-        'konten',
-        '0\x20hover:bg',
-        'b-6\x20text-w',
-        'lor\x27,\x20\x27',
-        'AitqI',
-        'twx7cmnaii',
-        '.com/dlx2z',
-        'find',
-        'tor',
-        'res.cloudi',
-        '<p\x20class=\x22',
-        'TdKQg',
-        'get',
-        '</span>\x0a\x20\x20',
-        'p\x20class=\x22t',
-        '\x20<div\x20clas',
-        'hing\x20News\x20',
-        '3xl\x20shadow',
-        '\x20text-lg\x20f',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<s',
-        '\x20\x20\x20\x20\x20\x20</a>',
-        '</h3>\x0a\x20\x20\x20\x20',
-        'ext-white\x20',
-        'l\x20p-4\x20mb-2',
-        'lg\x22>',
-        'mXDMK',
-        'm\x20font-sem',
-        'stify-cent',
-        '\x22flex\x20flex',
-        'div\x20class=',
-        'xs\x20text-gr',
-        'b-2\x22>',
-        '3\x22></div>\x0a',
-        'sition-all',
-        '://frieren',
-        '/div>\x0a\x20\x20',
-        'includes',
-        'g-gray-800',
-        'schedule/s',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<i',
-        '\x20mb-6\x20text',
-        'Gagal\x20memu',
-        '/upload/v1',
-        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20<div',
-        'ay-700\x20hov',
-        '\x22Not\x20Found',
-        '=\x22https://',
-        'yPUzx',
-        '583754zkfagL',
-        'hing\x20Page\x20',
-        'er\x20min-h-[',
-        'white\x20roun',
-        '\x20\x20\x20</div>\x0a',
-        '55nHgXTE',
-        'nsition-al',
-        'soFak',
-        'tps://res.',
-        '\x20\x20\x20\x20\x20\x20\x20<di',
-        'shadow-lg\x20',
-        '/a>\x0a\x20\x20\x20\x20\x20\x20',
-        'href=\x22',
-        'color',
-        '-sm\x20font-b',
-        '\x20class=\x22p-',
-        'search',
-        '\x22\x20target=\x22',
-        '\x20lagi\x20nant',
-        'hjUSx',
-        'l\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        '-md\x20hover:',
-        'l-containe',
-        'adow-md\x20an',
-        '\x20\x20\x20onclick'
-    ];
-    _0xa3f9 = function () {
-        return _0x31c735;
-    };
-    return _0xa3f9();
-}
-fetchNewsSidebar(), fetchScheduleSidebar(), fetchPageNews(), fetchDetailNews();
+  }
+  
+  
+  fetchNewsSidebar();
+  fetchScheduleSidebar();
+  fetchPageNews();
+  fetchDetailNews();
+  
