@@ -122,46 +122,71 @@ async function fetchDetailNews() {
 
       let konten = data.konten || "Konten tidak tersedia";
 
-      // Improve image URL extraction to handle concatenated URLs
-      // Regular expression to find patterns like domain.com/path/file.jpg followed by another domain
-      const baseUrlPattern = /https?:\/\/[^\/]+\/[^\s]+?\.(jpg|jpeg|png|gif|webp)/gi;
-      let match;
-      let startIdx = 0;
-      let processedContent = '';
-      let imageUrls = [];
-
-      // Process the content character by character
-      while ((match = baseUrlPattern.exec(konten)) !== null) {
-        const matchedUrl = match[0];
-        const matchStartIdx = match.index;
+      // Step 1: First, remove duplicate text blocks if they exist
+      // This is a simplified approach - we look for repeated paragraphs
+      const removeDuplicateContent = (text) => {
+        // Split into paragraphs
+        const paragraphs = text.split(/\n{2,}/);
+        const uniqueParagraphs = [];
+        const seenParagraphs = new Set();
         
-        // Add text before the URL
-        processedContent += konten.substring(startIdx, matchStartIdx);
-        
-        // Find the end of this URL (looking for next URL or non-URL character)
-        let endIdx = matchStartIdx + matchedUrl.length;
-        
-        // Check if there's another URL immediately after
-        let nextUrlMatch = /^https?:\/\//i.exec(konten.substring(endIdx));
-        
-        if (nextUrlMatch) {
-          // The current matched URL was cut off, need to adjust baseUrlPattern's lastIndex
-          baseUrlPattern.lastIndex = endIdx;
-        } else {
-          // This is a complete URL, add it to our list
-          imageUrls.push(matchedUrl);
-          processedContent += `<img src="${matchedUrl}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
-          startIdx = endIdx;
+        for (const paragraph of paragraphs) {
+          // Use a simple hash of the paragraph - first 50 chars should be enough for most duplicates
+          const hash = paragraph.trim().substring(0, 50);
+          if (!seenParagraphs.has(hash) && hash.length > 10) {  // Only consider substantial paragraphs
+            seenParagraphs.add(hash);
+            uniqueParagraphs.push(paragraph);
+          }
         }
-      }
+        
+        return uniqueParagraphs.join("\n\n");
+      };
       
-      // Add any remaining content after the last URL
-      processedContent += konten.substring(startIdx);
-      
-      // Replace the content with our processed version
-      konten = processedContent;
+      konten = removeDuplicateContent(konten);
 
-      // Handle formatting for remaining text
+      // Step 2: Extract and process all image URLs
+      const processImageUrls = (text) => {
+        // This regex looks for image URLs that might be concatenated
+        const urlRegex = /(https?:\/\/[^\s<>"']+\.(jpg|jpeg|png|gif|webp))/gi;
+        
+        // Find all image URLs in the content
+        const allImageUrls = [];
+        let match;
+        while ((match = urlRegex.exec(text)) !== null) {
+          const fullUrl = match[0];
+          // Check if this URL is concatenated with another
+          if (fullUrl.indexOf('https', 1) !== -1) {
+            // Split concatenated URLs
+            const urls = fullUrl.split(/(https:\/\/)/);
+            for (let i = 0; i < urls.length; i++) {
+              if (urls[i] === 'https://' && i + 1 < urls.length) {
+                const completeUrl = 'https://' + urls[i + 1];
+                if (completeUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+                  allImageUrls.push(completeUrl);
+                }
+              }
+            }
+          } else if (fullUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+            // This is a single URL
+            allImageUrls.push(fullUrl);
+          }
+        }
+        
+        // Replace all image URLs with proper <img> tags
+        let processedText = text;
+        allImageUrls.forEach(url => {
+          // Use a more specific replace to avoid replacing partial URLs
+          const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const regex = new RegExp(escapedUrl, 'g');
+          processedText = processedText.replace(regex, `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg">`);
+        });
+        
+        return processedText;
+      };
+      
+      konten = processImageUrls(konten);
+      
+      // Step 3: Handle remaining text formatting (line breaks, links)
       konten = konten
         .replace(/\n/g, "<br>")
         .replace(/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, (match) => {
@@ -170,7 +195,9 @@ async function fetchDetailNews() {
             return match;
           }
           return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
-        });
+        })
+        // Remove any "News Image" text that might have been in the original content
+        .replace(/News Image/g, "");
 
       const detailTemplate = `
         <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
