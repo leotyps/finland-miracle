@@ -121,58 +121,36 @@ async function fetchDetailNews() {
             const tanggal = data.tanggal || "Tanggal tidak tersedia";
 
             let konten = data.konten || "Konten tidak tersedia";
-
-            // Split content to handle HTML properly
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = konten;
             
-            // Fix concatenated image URLs by examining all img tags
-            const imgTags = tempDiv.querySelectorAll('img');
-            imgTags.forEach(img => {
-                const srcAttr = img.getAttribute('src');
+            // Extract all image URLs from the content
+            const imageUrls = [];
+            const imgRegex = /src="(https?:\/\/[^"]+\.(jpg|jpeg|png|gif|webp))"/gi;
+            let match;
+            
+            while ((match = imgRegex.exec(konten)) !== null) {
+                imageUrls.push(match[1]);
+            }
+            
+            // If we found image URLs in img tags, let's replace the existing img tags
+            if (imageUrls.length > 0) {
+                // Remove existing img tags
+                konten = konten.replace(/<img[^>]+>/gi, '');
                 
-                // Check if URL appears to be concatenated (contains multiple "http" or ".jpg" sequences)
-                if (srcAttr && 
-                    (srcAttr.match(/https?:\/\//g)?.length > 1 || 
-                     srcAttr.match(/\.(jpg|jpeg|png|gif|webp)/gi)?.length > 1)) {
-                    
-                    // Split the concatenated URLs
-                    const urls = srcAttr.match(/(https?:\/\/[^\s"]+?\.(jpg|jpeg|png|gif|webp))/gi);
-                    
-                    if (urls && urls.length > 0) {
-                        // Replace the current img with its first URL
-                        img.setAttribute('src', urls[0]);
-                        
-                        // Add additional images after this one
-                        for (let i = 1; i < urls.length; i++) {
-                            const newImg = document.createElement('img');
-                            newImg.setAttribute('src', urls[i]);
-                            newImg.setAttribute('alt', 'News Image');
-                            newImg.setAttribute('class', 'max-w-full my-4 rounded-lg');
-                            newImg.setAttribute('style', 'color: white !important;');
-                            
-                            // Copy other attributes like title, width, etc.
-                            if (img.getAttribute('title')) newImg.setAttribute('title', img.getAttribute('title'));
-                            if (img.getAttribute('width')) newImg.setAttribute('width', img.getAttribute('width'));
-                            if (img.getAttribute('height')) newImg.setAttribute('height', img.getAttribute('height'));
-                            if (img.getAttribute('border')) newImg.setAttribute('border', img.getAttribute('border'));
-                            
-                            // Insert the new image after the current one
-                            img.insertAdjacentElement('afterend', newImg);
-                        }
-                    }
-                }
-            });
-            
-            // Get the updated HTML content
-            konten = tempDiv.innerHTML;
+                // Create proper HTML for each image
+                const imagesHTML = imageUrls.map(url => 
+                    `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg" style="display: block;">`
+                ).join('');
+                
+                // Add all images at the beginning of the content
+                konten = imagesHTML + konten;
+            } else {
+                // Fallback: Process standalone image URLs (if any)
+                konten = konten.replace(/https?:\/\/[^\s<>]+\.(png|jpg|jpeg|gif|webp)(\b|$)/gi, match => {
+                    return `<img src="${match}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
+                });
+            }
 
-            // Process standalone image URLs
-            konten = konten.replace(/https?:\/\/[^\s<>]+\.(png|jpg|jpeg|gif|webp)(\b|$)/gi, match => {
-                return `<img src="${match}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
-            });
-
-            // Handle newlines and links
+            // Process line breaks and links
             konten = konten.replace(/\n/g, "<br>")
                 .replace(/(?<!["=])(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)(?!["=])/g, match => {
                     if (match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
@@ -206,6 +184,10 @@ async function fetchDetailNews() {
                     img.style.display = 'block'; // Ensure proper spacing
                 });
             }
+            
+            // Debug: log extracted image URLs
+            console.log("Extracted image URLs:", imageUrls);
+            
         } catch (error) {
             console.error("Error parsing detail news:", error);
             showNotFoundMessage(container, "Detail News Not Found 😭");
