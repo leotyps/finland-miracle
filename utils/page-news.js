@@ -122,25 +122,64 @@ async function fetchDetailNews() {
 
             let konten = data.konten || "Konten tidak tersedia";
 
-            // Skip processing if the content already contains HTML image tags
-            if (!konten.includes('<img')) {
-                // Deteksi jika ada URL gambar yang berdiri sendiri dan konversi ke tag <img>
-                konten = konten.replace(/https?:\/\/[^\s<>]+\.(png|jpg|jpeg|gif|webp)(\b|$)/gi, (match) => {
-                    return `<img src="${match}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
-                });
-            }
-
-            // Ganti newline dengan <br> untuk formatting teks
-            konten = konten.replace(/\n/g, "<br>");
-
-            // Format tautan yang bukan gambar dan bukan bagian dari tag HTML
-            konten = konten.replace(/(?<!["=])(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)(?!["=])/g, (match) => {
-                // Skip URLs that are already part of image tags or are image URLs
-                if (match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
-                    return match;
+            // Split content to handle HTML properly
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = konten;
+            
+            // Fix concatenated image URLs by examining all img tags
+            const imgTags = tempDiv.querySelectorAll('img');
+            imgTags.forEach(img => {
+                const srcAttr = img.getAttribute('src');
+                
+                // Check if URL appears to be concatenated (contains multiple "http" or ".jpg" sequences)
+                if (srcAttr && 
+                    (srcAttr.match(/https?:\/\//g)?.length > 1 || 
+                     srcAttr.match(/\.(jpg|jpeg|png|gif|webp)/gi)?.length > 1)) {
+                    
+                    // Split the concatenated URLs
+                    const urls = srcAttr.match(/(https?:\/\/[^\s"]+?\.(jpg|jpeg|png|gif|webp))/gi);
+                    
+                    if (urls && urls.length > 0) {
+                        // Replace the current img with its first URL
+                        img.setAttribute('src', urls[0]);
+                        
+                        // Add additional images after this one
+                        for (let i = 1; i < urls.length; i++) {
+                            const newImg = document.createElement('img');
+                            newImg.setAttribute('src', urls[i]);
+                            newImg.setAttribute('alt', 'News Image');
+                            newImg.setAttribute('class', 'max-w-full my-4 rounded-lg');
+                            newImg.setAttribute('style', 'color: white !important;');
+                            
+                            // Copy other attributes like title, width, etc.
+                            if (img.getAttribute('title')) newImg.setAttribute('title', img.getAttribute('title'));
+                            if (img.getAttribute('width')) newImg.setAttribute('width', img.getAttribute('width'));
+                            if (img.getAttribute('height')) newImg.setAttribute('height', img.getAttribute('height'));
+                            if (img.getAttribute('border')) newImg.setAttribute('border', img.getAttribute('border'));
+                            
+                            // Insert the new image after the current one
+                            img.insertAdjacentElement('afterend', newImg);
+                        }
+                    }
                 }
-                return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
             });
+            
+            // Get the updated HTML content
+            konten = tempDiv.innerHTML;
+
+            // Process standalone image URLs
+            konten = konten.replace(/https?:\/\/[^\s<>]+\.(png|jpg|jpeg|gif|webp)(\b|$)/gi, match => {
+                return `<img src="${match}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
+            });
+
+            // Handle newlines and links
+            konten = konten.replace(/\n/g, "<br>")
+                .replace(/(?<!["=])(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)(?!["=])/g, match => {
+                    if (match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
+                        return match;
+                    }
+                    return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
+                });
 
             const detailTemplate = `
         <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
@@ -152,15 +191,14 @@ async function fetchDetailNews() {
 
             container.innerHTML = detailTemplate;
 
-            // Tambahkan style untuk memastikan semua teks di dalam konten berwarna putih
-            // dan gambar yang responsive
+            // Apply styles to ensure proper rendering
             const kontenElement = container.querySelector('.news-content');
             if (kontenElement) {
                 // Ensure all text is white except links
                 kontenElement.querySelectorAll('*:not(a)').forEach(el => {
                     el.style.color = 'white';
                 });
-
+                
                 // Make all images responsive
                 kontenElement.querySelectorAll('img').forEach(img => {
                     img.classList.add('max-w-full', 'my-4', 'rounded-lg');
