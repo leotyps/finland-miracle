@@ -101,81 +101,81 @@ async function fetchPageNews() {
 
 //  detail news
 async function fetchDetailNews() {
-  try {
-      const pathSegments = window.location.pathname.split('/');
-      const beritaId = pathSegments[pathSegments.length - 1];
-      const container = document.getElementById("news-detail-container");
+    try {
+        const pathSegments = window.location.pathname.split('/');
+        const beritaId = pathSegments[pathSegments.length - 1];
+        const container = document.getElementById("news-detail-container");
 
-      if (!beritaId) {
-          console.error("Berita ID tidak ditemukan di URL.");
-          showNotFoundMessage(container, "Detail News Not Found 😭");
-          return;
-      }
+        if (!beritaId) {
+            console.error("Berita ID tidak ditemukan di URL.");
+            showNotFoundMessage(container, "Detail News Not Found 😭");
+            return;
+        }
 
-      try {
-          const response = await fetch(`https://48intensapi.my.id/api/news/detail/${beritaId}`);
-          if (!response.ok) throw new Error("Failed to fetch news details");
+        try {
+            const response = await fetch(`https://48intensapi.my.id/api/news/detail/${beritaId}`);
+            if (!response.ok) throw new Error("Failed to fetch news details");
 
-          const data = await response.json();
-          const judul = data.judul || "Judul tidak tersedia";
-          const tanggal = data.tanggal || "Tanggal tidak tersedia";
+            const data = await response.json();
+            const judul = data.judul || "Judul tidak tersedia";
+            const tanggal = data.tanggal || "Tanggal tidak tersedia";
 
-          let konten = data.konten || "Konten tidak tersedia";
+            let konten = data.konten || "Konten tidak tersedia";
 
-          // Memisahkan URL gambar yang digabungkan menjadi array
-          const imageUrls = konten.match(/(https?:\/\/[^\s<>]+\.(?:png|jpg|jpeg|gif|webp)(?:\b|$))/gi) || [];
+            // Memisahkan URL gambar yang digabungkan menjadi array
+            const imageUrls = konten.match(/(https?:\/\/[^\s<>]+\.(?:png|jpg|jpeg|gif|webp)(?:\b|$))/gi) || [];
 
-          // Membuat tag <img> untuk setiap URL gambar
-          let imagesHTML = '';
-          imageUrls.forEach(url => {
-              imagesHTML += `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
-          });
+            // Membuat tag <img> untuk setiap URL gambar
+            let imagesHTML = '';
+            imageUrls.forEach(url => {
+                imagesHTML += `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
+            });
 
-          // Ganti newline dengan <br> dan format tautan yang bukan gambar
-          konten = konten.replace(/\n/g, "<br>")
-              .replace(/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, (match) => {
-                  // Skip URLs that are already part of image tags or are image URLs
-                  if (konten.includes(`<img src="${match}"`) || match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
-                      return match;
-                  }
-                  return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
-              });
+            // Ganti newline dengan <br> dan format tautan yang bukan gambar
+            konten = konten.replace(/\n/g, "<br>")
+                .replace(/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, (match) => {
+                    // Skip URLs that are already part of image tags or are image URLs
+                    if (konten.includes(`<img src="${match}"`) || match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
+                        return match;
+                    }
+                    return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
+                });
 
-          const detailTemplate = `
-      <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
-        <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
-        <p class="text-white text-base mb-6">${tanggal}</p>
-        <div class="text-white leading-relaxed text-sm font-semibold">${konten}</div>
-        <div class="mt-6">${imagesHTML}</div>
-      </div>
-    `;
+            const detailTemplate = `
+        <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
+          <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
+          <p class="text-white text-base mb-6">${tanggal}</p>
+          <div class="text-white leading-relaxed text-sm font-semibold">${konten}</div>
+          <div class="mt-6">${imagesHTML}</div>
+        </div>
+      `;
 
-          container.innerHTML = detailTemplate;
+            container.innerHTML = detailTemplate;
 
-          // Tambahkan style untuk memastikan semua teks di dalam konten berwarna putih
-          // tapi jangan mengubah warna tautan
-          const kontenElement = container.querySelector('.text-white.leading-relaxed');
-          if (kontenElement) {
-              kontenElement.querySelectorAll('*:not(a)').forEach(el => {
-                  el.style.color = 'white';
-              });
-          }
-      } catch (error) {
-          console.error("Error parsing detail news:", error);
-          showNotFoundMessage(container, "Detail News Not Found 😭");
-      }
-  } catch (error) {
-      console.error("Error fetching Detail News:", error);
-      showNotFoundMessage(container, "Gagal memuat detail berita. Silakan coba lagi nanti.");
-  }
+            // Tambahkan style untuk memastikan semua teks di dalam konten berwarna putih
+            // tapi jangan mengubah warna tautan
+            const kontenElement = container.querySelector('.text-white.leading-relaxed');
+            if (kontenElement) {
+                kontenElement.querySelectorAll('*:not(a)').forEach(el => {
+                    el.style.color = 'white';
+                });
+            }
+        } catch (error) {
+            console.error("Error parsing detail news:", error);
+            showNotFoundMessage(container, "Detail News Not Found 😭");
+        }
+    } catch (error) {
+        console.error("Error fetching Detail News:", error);
+        showNotFoundMessage(container, "Gagal memuat detail berita. Silakan coba lagi nanti.");
+    }
 }
 
 function showNotFoundMessage(container, message) {
-  container.innerHTML = `
-  <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
-    <h1 class="text-3xl font-bold mb-6 text-white">${message}</h1>
-  </div>
-`;
+    container.innerHTML = `
+    <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
+      <h1 class="text-3xl font-bold mb-6 text-white">${message}</h1>
+    </div>
+  `;
 }
 // news sidebar
 
