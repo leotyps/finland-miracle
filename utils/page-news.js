@@ -122,9 +122,9 @@ async function fetchDetailNews() {
 
             let konten = data.konten || "Konten tidak tersedia";
 
-            // Deteksi semua URL gambar dan konversi ke tag <img>
-            konten = konten.replace(/<img[^>]+src="([^">]+)"[^>]*>/gi, (match, src) => {
-                return `<img src="${src}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
+            // Deteksi URL gambar yang berdiri sendiri dan konversi ke tag <img>
+            konten = konten.replace(/(https?:\/\/[^\s<>]+\.(?:png|jpg|jpeg|gif|webp)(?:\b|$))/gi, (match) => {
+                return `<img src="${match}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
             });
 
             // Ganti newline dengan <br> dan format tautan yang bukan gambar
