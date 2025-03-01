@@ -122,13 +122,15 @@ async function fetchDetailNews() {
 
           let konten = data.konten || "Konten tidak tersedia";
 
-        // Deteksi URL gambar yang digabungkan dan pisahkan menjadi array
-        const imageUrls = konten.match(/(https?:\/\/[^\s<>]+\.(?:png|jpg|jpeg|gif|webp)(?:\b|$))/gi) || [];
+          // Memisahkan URL gambar yang digabungkan menjadi array
+          const imageUrls = konten.match(/(https?:\/\/[^\s<>]+\.(?:png|jpg|jpeg|gif|webp)(?:\b|$))/gi) || [];
 
-        // Ganti URL gambar yang digabungkan dengan tag <img> untuk setiap gambar
-        imageUrls.forEach(url => {
-            konten = konten.replace(new RegExp(url, 'g'), `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg">`);
-        });
+          // Membuat tag <img> untuk setiap URL gambar
+          let imagesHTML = '';
+          imageUrls.forEach(url => {
+              imagesHTML += `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
+          });
+
           // Ganti newline dengan <br> dan format tautan yang bukan gambar
           konten = konten.replace(/\n/g, "<br>")
               .replace(/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, (match) => {
@@ -144,6 +146,7 @@ async function fetchDetailNews() {
         <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
         <p class="text-white text-base mb-6">${tanggal}</p>
         <div class="text-white leading-relaxed text-sm font-semibold">${konten}</div>
+        <div class="mt-6">${imagesHTML}</div>
       </div>
     `;
 
