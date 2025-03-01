@@ -122,8 +122,7 @@ async function fetchDetailNews() {
 
       let konten = data.konten || "Konten tidak tersedia";
 
-      // Step 1: First, remove duplicate text blocks if they exist
-      // This is a simplified approach - we look for repeated paragraphs
+      // Step 1: Remove duplicate content
       const removeDuplicateContent = (text) => {
         // Split into paragraphs
         const paragraphs = text.split(/\n{2,}/);
@@ -133,7 +132,7 @@ async function fetchDetailNews() {
         for (const paragraph of paragraphs) {
           // Use a simple hash of the paragraph - first 50 chars should be enough for most duplicates
           const hash = paragraph.trim().substring(0, 50);
-          if (!seenParagraphs.has(hash) && hash.length > 10) {  // Only consider substantial paragraphs
+          if (!seenParagraphs.has(hash) && hash.length > 5) {  // Consider even shorter paragraphs
             seenParagraphs.add(hash);
             uniqueParagraphs.push(paragraph);
           }
@@ -186,18 +185,24 @@ async function fetchDetailNews() {
       
       konten = processImageUrls(konten);
       
-      // Step 3: Handle remaining text formatting (line breaks, links)
+      // Step 3: Improve handling of line breaks to preserve whitespace
       konten = konten
-        .replace(/\n/g, "<br>")
+        // Replace multiple consecutive newlines with a special marker
+        .replace(/\n{2,}/g, '<DOUBLE_BREAK>')
+        // Replace single newlines with <br>
+        .replace(/\n/g, '<br>')
+        // Replace our special marker with a paragraph break (double <br>)
+        .replace(/<DOUBLE_BREAK>/g, '<br><br>')
+        // Remove "News Image" text that might have been in the original content
+        .replace(/News Image/g, "")
+        // Handle links
         .replace(/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, (match) => {
           // Skip URLs that are already part of image tags or are image URLs
           if (konten.includes(`<img src="${match}"`) || match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
             return match;
           }
           return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
-        })
-        // Remove any "News Image" text that might have been in the original content
-        .replace(/News Image/g, "");
+        });
 
       const detailTemplate = `
         <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
