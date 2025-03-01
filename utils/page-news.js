@@ -121,39 +121,17 @@ async function fetchDetailNews() {
             const tanggal = data.tanggal || "Tanggal tidak tersedia";
 
             let konten = data.konten || "Konten tidak tersedia";
-            
-            // Extract all image URLs from the content
-            const imageUrls = [];
-            const imgRegex = /src="(https?:\/\/[^"]+\.(jpg|jpeg|png|gif|webp))"/gi;
-            let match;
-            
-            while ((match = imgRegex.exec(konten)) !== null) {
-                imageUrls.push(match[1]);
-            }
-            
-            // If we found image URLs in img tags, let's replace the existing img tags
-            if (imageUrls.length > 0) {
-                // Remove existing img tags
-                konten = konten.replace(/<img[^>]+>/gi, '');
-                
-                // Create proper HTML for each image
-                const imagesHTML = imageUrls.map(url => 
-                    `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg" style="display: block;">`
-                ).join('');
-                
-                // Add all images at the beginning of the content
-                konten = imagesHTML + konten;
-            } else {
-                // Fallback: Process standalone image URLs (if any)
-                konten = konten.replace(/https?:\/\/[^\s<>]+\.(png|jpg|jpeg|gif|webp)(\b|$)/gi, match => {
-                    return `<img src="${match}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
-                });
-            }
 
-            // Process line breaks and links
+            // Deteksi semua URL gambar dan konversi ke tag <img>
+            konten = konten.replace(/<img[^>]+src="([^">]+)"[^>]*>/gi, (match, src) => {
+                return `<img src="${src}" alt="News Image" class="max-w-full my-4 rounded-lg">`;
+            });
+
+            // Ganti newline dengan <br> dan format tautan yang bukan gambar
             konten = konten.replace(/\n/g, "<br>")
-                .replace(/(?<!["=])(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)(?!["=])/g, match => {
-                    if (match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
+                .replace(/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, (match) => {
+                    // Skip URLs that are already part of image tags or are image URLs
+                    if (konten.includes(`<img src="${match}"`) || match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
                         return match;
                     }
                     return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
@@ -163,31 +141,20 @@ async function fetchDetailNews() {
         <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
           <h1 class="text-3xl font-bold mb-6 text-white">${judul}</h1>
           <p class="text-white text-base mb-6">${tanggal}</p>
-          <div class="text-white leading-relaxed text-sm font-semibold news-content">${konten}</div>
+          <div class="text-white leading-relaxed text-sm font-semibold">${konten}</div>
         </div>
       `;
 
             container.innerHTML = detailTemplate;
 
-            // Apply styles to ensure proper rendering
-            const kontenElement = container.querySelector('.news-content');
+            // Tambahkan style untuk memastikan semua teks di dalam konten berwarna putih
+            // tapi jangan mengubah warna tautan
+            const kontenElement = container.querySelector('.text-white.leading-relaxed');
             if (kontenElement) {
-                // Ensure all text is white except links
                 kontenElement.querySelectorAll('*:not(a)').forEach(el => {
                     el.style.color = 'white';
                 });
-                
-                // Make all images responsive
-                kontenElement.querySelectorAll('img').forEach(img => {
-                    img.classList.add('max-w-full', 'my-4', 'rounded-lg');
-                    img.style.height = 'auto'; // Override any fixed height
-                    img.style.display = 'block'; // Ensure proper spacing
-                });
             }
-            
-            // Debug: log extracted image URLs
-            console.log("Extracted image URLs:", imageUrls);
-            
         } catch (error) {
             console.error("Error parsing detail news:", error);
             showNotFoundMessage(container, "Detail News Not Found 😭");
