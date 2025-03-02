@@ -121,34 +121,12 @@ async function fetchDetailNews() {
       const tanggal = data.tanggal || "Tanggal tidak tersedia";
 
       let konten = data.konten || "Konten tidak tersedia";
-      
-      // Step 1: Handle HTML encoded entities (like \u003C becomes <)
-      konten = konten.replace(/\\u003C/g, '<')
-                     .replace(/\\u003E/g, '>')
-                     .replace(/\\n/g, '\n')
-                     .replace(/\\"/g, '"')
-                     .replace(/\\'/g, "'")
-                     .replace(/\\t/g, '\t');
-      
-      // Step 2: Clean up common HTML artifacts from Word/Office exports
-      konten = konten.replace(/\<\!-- \[if \!supportLineBreakNewLine\]--\>\<br\> \<\!--\[endif\]--\>/g, '<br><br>')
-                     .replace(/<span[^>]*>/g, '')
-                     .replace(/<\/span>/g, '')
-                     .replace(/<p>/g, '')
-                     .replace(/<\/p>/g, '<br><br>')
-                     .replace(/<html>|<\/html>|<head>|<\/head>|<body>|<\/body>/g, '');
-      
-      // Step 3: Remove duplicate content
       const removeDuplicateContent = (text) => {
-        const paragraphs = text.split(/\n{2,}|(<br\s*\/?>\s*){2,}/i);
+        const paragraphs = text.split(/\n{2,}/);
         const uniqueParagraphs = [];
         const seenParagraphs = new Set();
         
         for (const paragraph of paragraphs) {
-          // Skip if paragraph is undefined or null
-          if (!paragraph) continue;
-          
-          // Use a simple hash of the paragraph - first 50 chars should be enough for most duplicates
           const hash = paragraph.trim().substring(0, 50);
           if (!seenParagraphs.has(hash) && hash.length > 5) { 
             seenParagraphs.add(hash);
@@ -156,12 +134,10 @@ async function fetchDetailNews() {
           }
         }
         
-        return uniqueParagraphs.join("<br><br>");
+        return uniqueParagraphs.join("\n\n");
       };
       
       konten = removeDuplicateContent(konten);
-      
-      // Step 4: Process image URLs
       const processImageUrls = (text) => {
         const urlRegex = /(https?:\/\/[^\s<>"']+\.(jpg|jpeg|png|gif|webp))/gi;
         
@@ -183,15 +159,11 @@ async function fetchDetailNews() {
             allImageUrls.push(fullUrl);
           }
         }
-        
         let processedText = text;
         allImageUrls.forEach(url => {
-          // Only replace if not already in an img tag
-          if (!processedText.includes(`<img src="${url}"`)) {
-            const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(escapedUrl, 'g');
-            processedText = processedText.replace(regex, `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg">`);
-          }
+          const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const regex = new RegExp(escapedUrl, 'g');
+          processedText = processedText.replace(regex, `<img src="${url}" alt="News Image" class="max-w-full my-4 rounded-lg">`);
         });
         
         return processedText;
@@ -199,31 +171,17 @@ async function fetchDetailNews() {
       
       konten = processImageUrls(konten);
       
-      // Step 5: Preserve list formatting while handling line breaks
-      // First make sure numbered lists are preserved
-      konten = konten.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (match) => {
-        return match.replace(/<br><br>/g, '<br>');
-      });
-      
-      // Process line breaks for remaining content
       konten = konten
-        // Replace multiple consecutive <br> or linebreaks with a standard double break
-        .replace(/(<br\s*\/?>\s*){2,}|\n{2,}/gi, '<br><br>')
-        // Replace single newlines with <br>
+        .replace(/\n{2,}/g, '<DOUBLE_BREAK>')
         .replace(/\n/g, '<br>')
-        // Ensure double line breaks are preserved
-        .replace(/(<br><br>)\s*(<br>)+/g, '$1')
+        .replace(/<DOUBLE_BREAK>/g, '<br><br>')
         .replace(/News Image/g, "")
-        // Handle links but avoid image URLs
         .replace(/(https?:\/\/[^\s<>]+\.(?:com|id|net|org)[^\s<>]*)/g, (match) => {
           if (konten.includes(`<img src="${match}"`) || match.match(/\.(png|jpg|jpeg|gif|webp)(\b|$)/i)) {
             return match;
           }
           return `<a href="${match}" target="_blank" class="text-blue-400 underline">${match}</a>`;
         });
-      
-      // Ensure proper spacing for list items
-      konten = konten.replace(/<\/li>/g, '</li><br>');
 
       const detailTemplate = `
         <div class="max-w-5xl mx-auto p-8 bg-gray-800 shadow-lg rounded-3xl">
@@ -234,29 +192,10 @@ async function fetchDetailNews() {
       `;
 
       container.innerHTML = detailTemplate;
-      
-      // Apply consistent text styling
       const kontenElement = container.querySelector('.text-white.leading-relaxed');
       if (kontenElement) {
-        // Make sure all text content is white except for links
         kontenElement.querySelectorAll('*:not(a)').forEach(el => {
           el.style.color = 'white';
-        });
-        
-        // Add proper spacing to list elements
-        kontenElement.querySelectorAll('ol, ul').forEach(list => {
-          list.style.marginTop = '1rem';
-          list.style.marginBottom = '1rem';
-          list.style.paddingLeft = '2rem';
-        });
-        
-        kontenElement.querySelectorAll('li').forEach(item => {
-          item.style.marginBottom = '0.5rem';
-        });
-        
-        // Style strong/bold text
-        kontenElement.querySelectorAll('strong').forEach(strong => {
-          strong.style.fontWeight = 'bold';
         });
       }
     } catch (error) {
