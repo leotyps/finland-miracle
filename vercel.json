@@ -82,6 +82,10 @@
             "destination": "/components/detail/member?id=:id"
         },
         {
+            "source": "/recentlive/:data_id",
+            "destination": "/components/detail/recentlive.html"
+        },
+        {
             "source": "/teamintens",
             "destination": "/components/page/teams"
         },
