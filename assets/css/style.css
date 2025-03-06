@@ -212,3 +212,17 @@ body.no-scroll {
 #addStreamInsideModal {
     z-index: 10; /* Pastikan tombol berada di atas konten lain */
 }
+#pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem; /* Equivalent to space-1 */
+}
+
+@media (max-width: 640px) {
+    #pagination-container button {
+        padding: 0.5rem 1rem; /* Slightly larger touch targets */
+        font-size: 0.75rem; /* Smaller text on very small screens */
+    }
+}
