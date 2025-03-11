@@ -1,1015 +1,383 @@
-function _0x5d5e() {
-    const _0x23579d = [
-        'ems-center',
-        'idnlive/jk',
-        '\x20\x20\x20\x20\x20\x20',
-        'pan>\x0a\x20\x20\x20\x20\x20',
-        '\x20text-whit',
-        'd-3xl\x20hove',
-        'lamp-2\x22>',
-        '\x20Streamers',
-        '68D391]\x20ro',
-        '</span>\x0a\x20\x20',
-        'imaXI',
-        'eGsir',
-        'llow-500',
-        'gSAcX',
-        'XUoBk',
-        'OkLkW',
-        'iv\x20class=\x22',
-        '\x22flex\x20item',
-        '\x20\x20\x20\x20\x20\x20\x20</a',
-        'v\x20class=\x22h',
-        'lable\x20at\x20t',
-        '\x20shadow-md',
-        'y-700\x22>Top',
-        'tive\x20group',
-        'streamers\x20',
-        '-300\x20shado',
-        'e-300\x20to-c',
-        'ing\x20live\x20s',
-        '\x20\x20\x20\x20</div>',
-        '>LIVE</spa',
-        '\x20\x20\x20\x20\x20YouTu',
-        'xt-white\x20p',
-        'image_url',
-        '\x20\x20<h4\x20clas',
-        'ext-gray-7',
-        'oeYNi',
-        'ne-block\x20w',
-        'MdIyo',
-        'enter\x20spac',
-        'yEdrv',
-        '2\x20class=\x22t',
-        'ce-x-2\x20sha',
-        '00\x22>',
-        'v\x20class=\x22b',
-        'idn',
-        'et-0\x20group',
-        '\x20bg-gray-5',
-        'cyq6twx7cm',
-        'abs',
-        'v\x20class=\x22r',
-        'ace-x-2\x22>\x0a',
-        'border-ora',
-        'mhAqZ',
-        'humbnail\x22\x20',
-        '\x20h-4\x20bg-[#',
-        '11KJWvFI',
-        'r:opacity-',
-        'ded-3xl\x20ho',
-        '\x20\x20\x20\x20<div\x20c',
-        '\x20</div>\x0a\x20\x20',
-        'text',
-        '0\x22></div>\x0a',
-        '\x22\x20alt=\x22Ava',
-        '00\x22>Top\x20St',
-        'topStreame',
-        'liToU',
-        'zIzVt',
-        'animate-pu',
-        '\x20\x20\x20\x20\x20\x20\x20<im',
-        'ttext-gray',
-        'white\x20roun',
-        '-medium\x22>\x0a',
-        '\x20\x20<a\x20href=',
-        'stream_url',
-        '\x20followers',
-        'hTsNL',
-        'w-2\x20h-2\x20bg',
-        'getElement',
-        '-4\x20mb-4\x22>\x0a',
-        '/live/idn/',
-        '</p>\x0a\x20\x20\x20\x20\x20',
-        '-1.5\x20round',
-        '-lg\x22>\x0a\x20\x20\x20\x20',
-        'eft-2\x20w-6\x20',
-        'SHOWROOM\x0a\x20',
-        '\x20\x20\x20\x20\x20\x20</di',
-        '\x22absolute\x20',
-        'w.idn.app/',
-        'jkt48-offi',
-        's=\x22absolut',
-        'old\x20mb-6\x20t',
-        'vUIDb',
-        'Not\x20Found\x22',
-        'idnlv',
-        'TRIAL',
-        'iZzhD',
-        'l\x20text-cen',
-        'v\x20class=\x22f',
-        '\x20\x20\x20\x20\x20\x20\x20<h3',
-        '1007tHZEoW',
-        'order-gray',
-        'lass=\x22rela',
-        '3\x20class=\x22f',
-        'imate-puls',
-        'ext-xl\x20fon',
-        'intensapi.',
-        'vqGRh',
-        'low-200',
-        'ex\x20items-c',
-        'forEach',
-        'lass=\x22inli',
-        'youtubeliv',
-        'createDocu',
-        'g-gray-300',
-        'rsContaine',
-        'WvZcP',
-        '/div>\x0a\x20\x20\x20\x20',
-        'all',
-        'ers\x20of\x20the',
-        'er:shadow-',
-        'gDLst',
-        'rdKDF',
-        'data',
-        'link',
-        'ter\x20space-',
-        'dium\x20text-',
-        '\x20line-clam',
-        'acity-100\x20',
-        'uunQz',
-        '\x20😭',
-        '\x22></i>\x0a\x20\x20\x20',
-        '/live/sr/',
-        '\x20\x20\x20\x20\x20\x20\x20<di',
-        'dow-lg\x20p-6',
-        'OeRAX',
-        'CdlAG',
-        'TEMEN\x20MAIN',
-        'jkt48_',
-        'fkDqT',
-        '\x20border-wh',
-        'class=\x22fle',
-        'topstreame',
-        'ss=\x22text-s',
-        'ekatepatla',
-        'avatar',
-        'w-md\x20hover',
-        'e/jkt48v',
-        'lex\x20items-',
-        'alt',
-        't48showroo',
-        'length',
-        '0\x20rounded-',
-        'e\x20px-3\x20py-',
-        'nimate-pul',
-        'ium\x20text-g',
-        '\x20class=\x22ab',
-        '700',
-        'v\x20class=\x22a',
-        '1014532blQDck',
-        'title',
-        '\x20hover:sha',
-        'b-4\x22>\x0a\x20\x20\x20\x20',
-        'res.cloudi',
-        'n>LIVE</sp',
-        'r\x20from-ros',
-        '\x22\x20alt=\x22',
-        'y-300\x20roun',
-        '-3\x20left-3\x20',
-        '</h3>\x0a\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20<div\x20',
-        'full\x20borde',
-        '-12\x20h-12\x20b',
-        'room_url_k',
-        'e\x22></span>',
-        'TEMEN\x20MAKA',
-        'unded-full',
-        's\x20fa-users',
-        '\x20\x20\x20\x20<p\x20cla',
-        'rc=\x22',
-        'e\x20top-3\x20ri',
-        'm\x20text-whi',
-        'ass=\x22p-5\x22>',
-        '\x20\x20\x20IDN\x20Liv',
-        'hite\x20px-3\x20',
-        'ded-full\x22>',
-        '118/z0erje',
-        'username',
-        'd-full\x20tex',
-        'n-300\x20grou',
-        '</span>',
-        '\x20\x20\x20\x20\x20\x20\x20\x20Wa',
-        'createElem',
-        'text-orang',
-        'lZEDh',
-        '\x20\x20\x20\x20\x20\x20\x20</d',
-        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        'No\x20live\x20st',
-        '=\x22bg-red-6',
-        'nt-medium\x20',
-        'm-api.my.i',
-        '\x20\x20\x20\x20<i\x20cla',
-        'streaming_',
-        'startsWith',
-        '\x20border-2\x20',
-        't-sm\x22>',
-        'rounded\x20w-',
-        'e-x-2\x20shad',
-        '\x22bg-gray-5',
-        '2\x20h-2\x20bg-w',
-        'i\x20class=\x22f',
-        'g\x20src=\x22',
-        '-4\x20bg-gray',
-        '\x20items-cen',
-        'e-block\x20w-',
-        '\x20\x20\x20<i\x20clas',
-        's=\x22bg-blac',
-        'ded-full\x20a',
-        '=\x22text-xl\x20',
-        'rounded-fu',
-        'rounded-3x',
-        '0\x20text-whi',
-        'Get\x20Ticket',
-        'der-gray-2',
-        'ulse\x22>\x0a\x20\x20\x20',
-        'ft-2\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20\x20<sp',
-        'dient-to-r',
-        'ont-bold\x20t',
-        'y-500\x20text',
-        '_blank\x22\x20cl',
-        'center\x20gap',
-        'view_count',
-        '\x20load\x20top\x20',
-        'ner',
-        'zxroj',
-        'toLocaleSt',
-        'ded-full\x20t',
-        'm-gray-400',
-        't-to-r\x20fro',
-        'll\x20flex\x20it',
-        'm-pink-300',
-        '\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'hite\x20round',
-        '\x20\x20\x20\x20',
-        'error',
-        'y-600\x22>',
-        'ce-x-2\x22>\x0a\x20',
-        'ter\x20px-6\x20p',
-        '-400\x20to-ye',
-        's=\x22font-me',
-        'ine-block\x20',
-        'tar\x22\x20class',
-        'div',
-        'all\x20durati',
-        'p-1\x22>',
-        'TEMEN\x20MASA',
-        'treams.\x20Pl',
-        'acity-80\x20t',
-        'inset-0\x20fl',
-        'transition',
-        'ion-all\x20du',
-        'TEMEN\x20NGOB',
-        'gradient',
-        'from-amber',
-        'd/v1737173',
-        't48',
-        'ded-lg\x20mb-',
-        '6\x20text-gra',
-        '<p\x20class=\x22',
-        'w-lg\x20p-6\x22>',
-        'ext-gray-8',
-        'main_name',
-        's-center\x20s',
-        '-2\x20h-2\x20bg-',
-        'QYwUG',
-        'yLLTk',
-        'ite\x20font-m',
-        'rank',
-        'bject-cove',
-        'ntChild',
-        'toUpperCas',
-        '3\x20left-3\x20f',
-        '\x22\x20class=\x22b',
-        'FBygu',
-        'tch\x20Stream',
-        'on-300\x20sha',
-        'Ezepi',
-        '-opacity\x20d',
-        '\x20<h2\x20class',
-        'CJGUo',
-        'STRRh',
-        '<span>',
-        '\x20\x20\x20\x20<span\x20',
-        'd-3xl\x20shad',
-        'e\x20font-med',
-        '\x20\x20\x20\x20\x20\x20\x20',
-        'ed\x20w-1/2\x22>',
-        '-[#6CB2EB]',
-        'JgqqE',
-        'shadow-xl\x22',
-        'r-2\x20border',
-        'sWLuh',
-        'showroom/j',
-        'data</p>\x0a\x20',
-        '\x20\x20<p\x20class',
-        '/75\x20backdr',
-        'charCodeAt',
-        '3xl\x20shadow',
-        'absolute\x20-',
-        '=\x22relative',
-        'border-yel',
-        'iv>\x0a\x20\x20\x20\x20\x20\x20',
-        'text-yello',
-        'liveContai',
-        'gray-700\x22>',
-        '\x20<img\x20src=',
-        'https://ww',
-        'opacity\x20du',
-        'view_num',
-        'QICRC',
-        'ottom-1\x20-r',
-        'XEGIJ',
-        'EB]\x20text-w',
-        'pace-x-4\x22>',
-        '-3\x20right-3',
-        '4814950WQnzuD',
-        'medium\x20tex',
-        '80\x20transit',
-        'etween\x20mb-',
-        'name',
-        'e\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        'text-sm\x20fo',
-        'treamers:',
-        'on-transfo',
-        'ed-full\x20te',
-        'right-1\x20w-',
-        'solute\x20top',
-        'an>LIVE</s',
-        'ow-lg\x22>\x0a\x20\x20',
-        'play\x20mr-2\x22',
-        'x-4\x20mb-4\x22>',
-        'y-1.5\x20roun',
-        'ple-100',
-        'UDVIe',
-        '\x20\x20\x20\x20<img\x20s',
-        'JKT48_',
-        'e\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
-        'ass=\x22inlin',
-        'ss=\x22text-g',
-        '\x22\x20target=\x22',
-        'old\x20shadow',
-        '2\x22></i>\x0a\x20\x20',
-        'er\x20space-x',
-        'img\x20src=\x22',
-        '\x20Watch\x20now',
-        'r\x20from-amb',
-        'div\x20class=',
-        'https://jk',
-        'k/75\x20backd',
-        'rop-blur-s',
-        'image',
-        'toString',
-        'json',
-        'yan-300',
-        '-lg\x20font-b',
-        '\x20\x20\x20\x20\x20<h2\x20c',
-        'genre_name',
-        'et-0\x20\x20grou',
-        'e-400\x20to-r',
-        'naii.png\x22\x20',
-        'class=\x22abs',
-        'ease\x20try\x20a',
-        'ed-full\x20an',
-        'ext-sm\x20fon',
-        'my.id/api/',
-        'ter\x22>\x0a\x20\x20\x20\x20',
-        'UoQPi',
-        'nt-bold\x20',
-        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<',
-        'mage/uploa',
-        'lse\x22></spa',
-        '</div>\x0a\x20\x20\x20',
-        'url_list',
-        '\x20<h4\x20class',
-        'border-2\x20b',
-        '-white\x20rou',
-        '\x20\x20\x20\x20\x20</a>\x0a',
-        'mb-6\x20text-',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        'lock\x20w-ful',
-        'stream_',
-        '-3xl\x20shado',
-        'he\x20moment\x20',
-        'uration-30',
-        'tive\x22>\x0a\x20\x20\x20',
-        'lass=\x22text',
-        '800\x20text-s',
-        'lmdRw',
-        '-lg\x20overfl',
-        '=\x22https://',
-        '\x20the\x20Week<',
-        'total_live',
-        '\x20from-rose',
-        '\x20w-full\x20te',
-        '<div\x20class',
-        '=\x22text-gra',
-        '=\x22absolute',
-        'border-pur',
-        'ration-300',
-        '\x20\x20\x20\x20<a\x20hre',
-        'n>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'olute\x20top-',
-        's=\x22relativ',
-        '3919740QRGsKl',
-        'mentFragme',
-        '\x22bg-red-60',
-        '0\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        'ray-500\x22>\x0a',
-        'MOxdj',
-        'xt-center\x20',
-        '560357OkWzio',
-        'ray-600\x20fa',
-        'ite\x20px-3\x20p',
-        'ajYSe',
-        'NUNGGU\x20BED',
-        'px-6\x20py-3\x20',
-        'high',
-        'xt-sm\x20font',
-        'https://48',
-        '-top-2\x20-le',
-        'enter\x20just',
-        'sroom',
-        'GaTRz',
-        '3\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        'h\x20Stream\x0a\x20',
-        'font-bold\x20',
-        'cial',
-        '0\x20space-x-',
-        '\x20justify-c',
-        'y-3\x20bg-gra',
-        'ById',
-        'gain\x20later',
-        'rm\x20duratio',
-        's=\x22w-64\x20\x20m',
-        '\x20Week</h2>',
-        'channelTit',
-        'a-play\x20mr-',
-        '\x20-top-2\x20-l',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<i',
-        '\x20\x20\x20\x20\x20\x20\x20\x20</',
-        'class=\x22w-f',
-        'OnNkM',
-        'success',
-        'className',
-        '\x20via-purpl',
-        'Uhzbn',
-        '\x22\x20alt=\x22Liv',
-        'cyMIo',
-        'user',
-        'r-2\x20',
-        'items-cent',
-        't-sm\x20font-',
-        '\x22p-5\x22>\x0a\x20\x20\x20',
-        'pan',
-        'medium\x22>\x0a\x20',
-        'toLowerCas',
-        '3YVUHbI',
-        '-center\x20sp',
-        'as\x20',
-        'mg\x20src=\x22',
-        'fill',
-        'GLvHe',
-        'l\x20hover:op',
-        'ass=\x22block',
-        'appendChil',
-        'keVhT',
-        'p-hover:sc',
-        '\x20of\x20the\x20We',
-        'NfNhx',
-        'ull\x20h-56\x20o',
-        'fa-play',
-        'Top\x20Stream',
-        'se-500\x20tex',
-        '\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
-        '\x20mr-2\x22></i',
-        'border-whi',
-        'h-6\x20bg-gra',
-        '-sm\x20font-b',
-        '/h2>\x0a\x20\x20\x20\x20\x20',
-        'bsolute\x20-b',
-        'bg-[#63B3E',
-        's=\x22fas\x20fa-',
-        '\x20\x20\x20\x20\x20\x20Watc',
-        '></i>\x0a\x20\x20\x20\x20',
-        'ransition-',
-        '16UjAWdo',
-        '\x20\x20\x20\x20\x20</div',
-        'm-yellow-4',
-        'now',
-        'lass=\x22flex',
-        'ass=\x22flex\x20',
-        ':shadow-lg',
-        'g-white\x20bo',
-        's=\x22flex\x20it',
-        'zVnmE',
-        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'iv>\x0a\x20\x20\x20\x20',
-        'ass=\x22bg-gr',
-        'w-500',
-        'adow-lg\x22>\x0a',
-        'ent',
-        'ow-600',
-        'XgpqP',
-        'monDp',
-        'ass=\x22fas\x20f',
-        'ion-300\x20ho',
-        'gtzis',
-        'old\x22>',
-        'VLMHT',
-        'ek</h2>\x0a\x20\x20',
-        'div>\x0a\x20\x20\x20\x20\x20',
-        'ale-105\x22>\x0a',
-        '-gray-300\x20',
-        'ow-lg\x20p-6\x22',
-        'nge-200',
-        'm\x22>Live\x20on',
-        '\x20<span\x20cla',
-        '299E1]\x20tra',
-        'hing\x20top\x20s',
-        '-2\x22>\x0a\x20\x20\x20\x20\x20',
-        'dow-md\x20hov',
-        'adient-to-',
-        'MgZqh',
-        '\x20\x20\x20\x20\x20\x20<spa',
-        '\x20\x20\x20<div\x20cl',
-        '3\x20skeleton',
-        '3/4\x20mb-2\x22>',
-        'an>\x0a\x20\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<d',
-        't-medium\x22>',
-        'te\x22></div>',
-        '\x20\x20\x20\x20\x20class',
-        'gray-800\x20m',
-        'py-1.5\x20rou',
-        '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'e\x20w-6\x20h-6\x20',
-        'uIxfm',
-        '\x20\x20\x20\x20\x20<i\x20cl',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
-        'image_squa',
-        'hgEWj',
-        '>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
-        '\x22bg-[#6CB2',
-        'y-500\x22>',
-        '00\x20text-wh',
-        '2\x20rounded-',
-        'reams\x20avai',
-        'lg\x20p-4\x20mb-',
-        '-600\x20font-',
-        'm-amber-50',
-        'ium\x22>\x0a\x20\x20\x20\x20',
-        '-purple-10',
-        'ver:scale-',
-        'dow-lg\x22>\x0a\x20',
-        'edium\x20roun',
-        '\x20watching\x0a',
-        'ite\x22></div',
-        'yellow-500',
-        'badge',
-        'e-500',
-        'ss=\x22h-5\x20bg',
-        'x-3\x20py-1.5',
-        't-white\x20fo',
-        '=\x22w-12\x20h-1',
-        '1.5\x20rounde',
-        '=\x22p-5\x22>\x0a\x20\x20',
-        'l\x20duration',
-        '\x20justify-b',
-        'border',
-        'xt-center\x22',
-        'fKkvX',
-        '\x20\x20\x20\x20\x20<span',
-        'em]\x20relati',
-        '\x20<div\x20clas',
-        'x-2\x20text-g',
-        'ver:bg-[#4',
-        'er-400\x20to-',
-        'ull\x20h-48\x20o',
-        'UvzWD',
-        'showroom',
-        'join',
-        'city-100\x20t',
-        'label',
-        '\x20\x20\x20<span\x20c',
-        '\x20\x20\x20\x20\x20alt=\x22',
-        '\x20YouTube\x20-',
-        '\x20class=\x22fo',
-        'ose-500\x20te',
-        'follower_n',
-        '-4\x20line-cl',
-        '1480962EtoCNX',
-        'se\x22></span',
-        'ify-center',
-        'ray-500\x20te',
-        'solute\x20ins',
-        'flex-1\x22>\x0a\x20',
-        'elative\x22>\x0a',
-        'te\x20px-3\x20py',
-        'ite\x20rounde',
-        '102\x20hover:',
-        'default',
-        '600\x22>',
-        'hing\x20data:',
-        'text-gray-',
-        'Error\x20load',
-        '\x20\x20<div\x20cla',
-        'fa-ticket-',
-        'stringify',
-        'lg\x22>\x0a\x20\x20\x20\x20\x20',
-        'ed-3xl\x20sha',
-        'FmAtF',
-        'rder-2\x20bor',
-        'class=\x22inl',
-        'flex\x20items',
-        '-medium\x20fl',
-        'reen-500\x20r',
-        'oTbVb',
-        'ass=\x22bg-wh',
-        '-hover:opa',
-        'Error\x20fetc',
-        'firstEleme',
-        'ium\x20rounde',
-        '\x20to-gray-6',
-        'includes',
-        'p-hover:op',
-        'heigX',
-        'b-4\x20line-c',
-        '5nZpZYz',
-        '2474442Mwupok',
-        'ounded-ful',
-        '\x20\x20\x20</div>\x0a',
-        'LCpCU',
-        'nded-full\x20',
-        '-200\x20round',
-        'amp-2\x22>',
-        'nary.com/d',
-        '\x20\x20<span\x20cl',
-        'replace',
-        'h3\x20class=\x22',
-        '4\x20p-4\x20roun',
-        'm\x20text-gra',
-        'reamers\x20of',
-        'map',
-        'op-blur-sm',
-        '00\x20to-yell',
-        'm\x22>@',
-        '0\x20to-orang',
-        '\x20animate-p',
-        '00\x20rounded',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        'e\x20Stream\x20T',
-        '\x20\x20\x20\x20\x20\x20clas',
-        'bg-gradien',
-        'ROL',
-        'd/proxy?ur',
-        'slice',
-        'thumbnails',
-        '>Failed\x20to',
-        '\x20rounded-f',
-        '4\x20h-4\x20bg-g',
-        's=\x22flex-1\x22',
-        'innerHTML',
-        'y-200',
-        'zFYZc',
-        'enter\x20text',
-        'some',
-        'setItem',
-        '4\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        '\x20\x20\x20',
-        'relative\x22>',
-        'x\x20flex-col',
-        'transform\x20',
-        'min-h-[24r',
-        'dPJQD',
-        'r\x20transiti',
-        'border-gra',
-        '800',
-        '800\x22>',
-        'JRIdh',
-        '</h4>\x0a\x20\x20\x20\x20',
-        '226fPaIMB',
-        '=\x22font-med',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<h',
-        'ace-x-2\x20sh',
-        'url',
-        '\x22bg-white\x20',
-        '=\x22bg-black',
-        'e-600',
-        'm\x20font-med',
-        'f=\x22',
-        'jWfVW',
-        '-all\x20durat',
-        'bottom-1\x20-',
-        't-medium\x20f',
-        'nsition-al',
-        'ght-3\x22>\x0a\x20\x20',
-        'kvdOz',
-        'icon',
-        'BDTrA',
-        '_stream',
-        'be\x20Live\x0a\x20\x20',
-        'ray-800\x20mb',
-        '-300\x20round',
-        '\x20\x20\x20\x20\x20\x20<div',
-        't-bold\x20mb-',
-        'ow-hidden\x20',
-        'v\x20class=\x22w',
-        'D]\x20text-wh',
-        '!</p>\x0a\x20\x20\x20\x20',
-        'ull\x20text-s',
-        '-xl\x20font-b',
-        '\x20\x20<img\x20src',
-        'center\x20spa',
-        'ull\x22></div',
-        'ight-1\x20w-4',
-        '-400\x20to-ro',
-        'lx2zm7ha/i',
-        'livejkt48/',
-        'YuttF',
-        '\x22></div>\x0a\x20',
-        'ce-x-4\x20mb-',
-        '\x20\x20</div>\x0a\x20',
-        'Watch\x20Stre',
-        'ring',
-        'l\x20border-2'
-    ];
-    _0x5d5e = function () {
-        return _0x23579d;
-    };
-    return _0x5d5e();
-}
-(function (_0x519e20, _0x46fc4c) {
-    const _0x20d472 = _0x11fa, _0x129d83 = _0x519e20();
-    while (!![]) {
-        try {
-            const _0x178b06 = parseInt(_0x20d472(0x368)) / (0xdd6 + 0xb5 * -0x2a + -0x1f * -0x83) * (parseInt(_0x20d472(0x2d8)) / (-0x26f * -0xe + 0x7ed * 0x1 + -0x29fd)) + parseInt(_0x20d472(0x1f8)) / (0x1711 * -0x1 + 0x1639 * 0x1 + 0xdb) * (parseInt(_0x20d472(0x3a3)) / (-0x4c * -0x6e + 0x1314 + -0x33b8)) + -parseInt(_0x20d472(0x2a3)) / (0x2f4 + 0x280 + -0x56f) * (-parseInt(_0x20d472(0x27e)) / (0x21d * 0x7 + -0x23b + -0xc8a)) + -parseInt(_0x20d472(0x1ca)) / (0x1 * 0x1053 + 0x301 * 0x6 + -0x2252) * (-parseInt(_0x20d472(0x215)) / (0x2a * -0xb1 + -0x8 * 0x176 + 0x28c2)) + parseInt(_0x20d472(0x2a4)) / (0xa81 * 0x3 + 0x1fb1 + 0x9d * -0x67) + -parseInt(_0x20d472(0x44b)) / (-0x257f * -0x1 + 0x1fe7 + -0x455c) * (parseInt(_0x20d472(0x33c)) / (-0x1c35 + -0x2656 + -0xb19 * -0x6)) + -parseInt(_0x20d472(0x1c3)) / (-0x23a * 0xd + -0xf53 + 0x2c51 * 0x1);
-            if (_0x178b06 === _0x46fc4c)
-                break;
-            else
-                _0x129d83['push'](_0x129d83['shift']());
-        } catch (_0x5b1218) {
-            _0x129d83['push'](_0x129d83['shift']());
-        }
-    }
-}(_0x5d5e, 0x7347 + 0x50036 * -0x1 + 0x83aee));
+// live.js
 async function fetchLiveData() {
-    const _0x3b85f8 = _0x11fa, _0x4cfbf8 = {
-            'MdIyo': function (_0x1d33a3, _0x28ad92) {
-                return _0x1d33a3(_0x28ad92);
-            },
-            'zIzVt': _0x3b85f8(0x402),
-            'XUoBk': function (_0x38797b, _0x3ab802) {
-                return _0x38797b(_0x3ab802);
-            },
-            'zVnmE': _0x3b85f8(0x43f) + _0x3b85f8(0x3ef),
-            'zFYZc': _0x3b85f8(0x1d2) + _0x3b85f8(0x36e) + _0x3b85f8(0x19c) + _0x3b85f8(0x306) + _0x3b85f8(0x40f),
-            'hTsNL': function (_0x539f79, _0x46d5f4) {
-                return _0x539f79(_0x46d5f4);
-            },
-            'mhAqZ': _0x3b85f8(0x1d2) + _0x3b85f8(0x36e) + _0x3b85f8(0x19c) + _0x3b85f8(0x434) + _0x3b85f8(0x394) + _0x3b85f8(0x1f5),
-            'liToU': _0x3b85f8(0x1d2) + _0x3b85f8(0x36e) + _0x3b85f8(0x19c) + _0x3b85f8(0x374) + _0x3b85f8(0x397),
-            'vUIDb': function (_0x2c4f8c, _0x12628f) {
-                return _0x2c4f8c > _0x12628f;
-            },
-            'rdKDF': function (_0x5415c6, _0x3db836) {
-                return _0x5415c6 > _0x3db836;
-            },
-            'OkLkW': function (_0x42a19c, _0x410817) {
-                return _0x42a19c > _0x410817;
-            },
-            'uunQz': function (_0x52f49a, _0x24230, _0x240304) {
-                return _0x52f49a(_0x24230, _0x240304);
-            },
-            'oTbVb': _0x3b85f8(0x3c9) + _0x3b85f8(0x252) + _0x3b85f8(0x319) + _0x3b85f8(0x1ae) + '😭',
-            'OeRAX': _0x3b85f8(0x29b) + _0x3b85f8(0x28a),
-            'imaXI': function (_0x11826c, _0x54cf1b, _0x3a329f) {
-                return _0x11826c(_0x54cf1b, _0x3a329f);
-            },
-            'FBygu': _0x3b85f8(0x28c) + _0x3b85f8(0x320) + _0x3b85f8(0x406) + _0x3b85f8(0x199) + _0x3b85f8(0x1df) + _0x3b85f8(0x386)
-        };
     try {
-        const _0xc5c385 = document[_0x3b85f8(0x352) + _0x3b85f8(0x1de)](_0x4cfbf8[_0x3b85f8(0x21e)]), _0x4a4831 = document[_0x3b85f8(0x375) + _0x3b85f8(0x1c4) + 'nt']();
-        _0xc5c385[_0x3b85f8(0x2c5)] = '';
-        const [_0x3c9ba0, _0x4ce3bb, _0x2ed082] = await Promise[_0x3b85f8(0x37a)]([
-                _0x4cfbf8[_0x3b85f8(0x32a)](fetch, _0x4cfbf8[_0x3b85f8(0x2c7)]),
-                _0x4cfbf8[_0x3b85f8(0x350)](fetch, _0x4cfbf8[_0x3b85f8(0x339)]),
-                _0x4cfbf8[_0x3b85f8(0x350)](fetch, _0x4cfbf8[_0x3b85f8(0x346)])
-            ]), _0xc2ecbd = await _0x3c9ba0[_0x3b85f8(0x470)](), _0x1639c1 = await _0x4ce3bb[_0x3b85f8(0x470)](), _0x29390c = await _0x2ed082[_0x3b85f8(0x470)]();
-        let _0x522fd0 = ![];
-        _0xc2ecbd[_0x3b85f8(0x37f)] && _0x4cfbf8[_0x3b85f8(0x360)](_0xc2ecbd[_0x3b85f8(0x37f)][_0x3b85f8(0x39b)], -0x1d13 + 0xcf4 * 0x1 + 0x101f) && (_0xc2ecbd[_0x3b85f8(0x37f)][_0x3b85f8(0x372)](_0x937093 => {
-            const _0x48c504 = _0x3b85f8, _0x1310d6 = _0x4cfbf8[_0x48c504(0x32a)](createIDNCard, _0x937093), _0x4e13fb = document[_0x48c504(0x3c4) + _0x48c504(0x224)](_0x4cfbf8[_0x48c504(0x347)]);
-            _0x4e13fb[_0x48c504(0x2c5)] = _0x1310d6, _0x4a4831[_0x48c504(0x200) + 'd'](_0x4e13fb[_0x48c504(0x29c) + _0x48c504(0x41d)]);
-        }), _0x522fd0 = !![]), _0x1639c1 && _0x4cfbf8[_0x3b85f8(0x37e)](_0x1639c1[_0x3b85f8(0x39b)], 0x7fe + -0xa74 + 0x276) && (_0x1639c1[_0x3b85f8(0x372)](_0x5c3def => {
-            const _0x265a42 = _0x3b85f8, _0x16f0f9 = _0x4cfbf8[_0x265a42(0x32a)](createShowroomCard, _0x5c3def), _0x49296e = document[_0x265a42(0x3c4) + _0x265a42(0x224)](_0x4cfbf8[_0x265a42(0x347)]);
-            _0x49296e[_0x265a42(0x2c5)] = _0x16f0f9, _0x4a4831[_0x265a42(0x200) + 'd'](_0x49296e[_0x265a42(0x29c) + _0x265a42(0x41d)]);
-        }), _0x522fd0 = !![]), _0x29390c[_0x3b85f8(0x1ea)] && _0x29390c[_0x3b85f8(0x37f)] && _0x4cfbf8[_0x3b85f8(0x314)](_0x29390c[_0x3b85f8(0x37f)][_0x3b85f8(0x39b)], 0x2 * 0xa6f + -0xcab + 0x833 * -0x1) && (_0x29390c[_0x3b85f8(0x37f)][_0x3b85f8(0x372)](_0x326ed1 => {
-            const _0x1b15dd = _0x3b85f8, _0x1a208d = _0x4cfbf8[_0x1b15dd(0x313)](createJKT48VLiveCard, _0x326ed1), _0x5e8332 = document[_0x1b15dd(0x3c4) + _0x1b15dd(0x224)](_0x4cfbf8[_0x1b15dd(0x347)]);
-            _0x5e8332[_0x1b15dd(0x2c5)] = _0x1a208d, _0x4a4831[_0x1b15dd(0x200) + 'd'](_0x5e8332[_0x1b15dd(0x29c) + _0x1b15dd(0x41d)]);
-        }), _0x522fd0 = !![]), !_0x522fd0 ? _0x4cfbf8[_0x3b85f8(0x385)](showNotFoundMessage, _0xc5c385, _0x4cfbf8[_0x3b85f8(0x298)]) : _0xc5c385[_0x3b85f8(0x200) + 'd'](_0x4a4831);
-    } catch (_0x26f381) {
-        console[_0x3b85f8(0x3fa)](_0x4cfbf8[_0x3b85f8(0x38b)], _0x26f381);
-        const _0x1d9f42 = document[_0x3b85f8(0x352) + _0x3b85f8(0x1de)](_0x4cfbf8[_0x3b85f8(0x21e)]);
-        _0x4cfbf8[_0x3b85f8(0x30f)](showNotFoundMessage, _0x1d9f42, _0x4cfbf8[_0x3b85f8(0x421)]);
+        const container = document.getElementById('liveContainer');
+        const fragment = document.createDocumentFragment(); 
+
+        container.innerHTML = ''; 
+
+        const [idnResponse, showroomResponse, jkt48vResponse] = await Promise.all([
+            fetch('https://48intensapi.my.id/api/idnlive/jkt48'),
+            fetch('https://48intensapi.my.id/api/showroom/jekatepatlapan'),
+            fetch('https://48intensapi.my.id/api/youtubelive/jkt48v')
+        ]);
+
+        const idnData = await idnResponse.json();
+        const showroomData = await showroomResponse.json();
+        const jkt48vData = await jkt48vResponse.json();
+
+        let hasContent = false;
+
+        if (idnData.data && idnData.data.length > 0) {
+            idnData.data.forEach(stream => {
+                const card = createIDNCard(stream);
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = card;
+                fragment.appendChild(wrapper.firstElementChild); 
+            });
+            hasContent = true;
+        }
+
+        if (showroomData && showroomData.length > 0) {
+            showroomData.forEach(stream => {
+                const card = createShowroomCard(stream);
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = card;
+                fragment.appendChild(wrapper.firstElementChild);
+            });
+            hasContent = true;
+        }
+
+        if (jkt48vData.success && jkt48vData.data && jkt48vData.data.length > 0) {
+            jkt48vData.data.forEach(stream => {
+                const card = createJKT48VLiveCard(stream);
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = card;
+                fragment.appendChild(wrapper.firstElementChild);
+            });
+            hasContent = true;
+        }
+
+        if (!hasContent) {
+            showNotFoundMessage(container, 'No live streams available at the moment 😭');
+        } else {
+            container.appendChild(fragment);
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        const container = document.getElementById('liveContainer');
+        showNotFoundMessage(container, 'Error loading live streams. Please try again later 😭');
     }
 }
-function showNotFoundMessage(_0x2b245d, _0x5ced59) {
-    const _0x34849c = _0x11fa, _0x5bd700 = { 'heigX': _0x34849c(0x2d0) + _0x34849c(0x26c) + 've' };
-    _0x2b245d[_0x34849c(0x2c5)] = '', _0x2b245d[_0x34849c(0x1eb)] = _0x5bd700[_0x34849c(0x2a1)];
-    const _0x3bf6c6 = _0x34849c(0x1a0) + _0x34849c(0x46a) + _0x34849c(0x35b) + _0x34849c(0x408) + _0x34849c(0x371) + _0x34849c(0x1d4) + _0x34849c(0x280) + _0x34849c(0x246) + _0x34849c(0x3ae) + _0x34849c(0x391) + _0x34849c(0x2ce) + _0x34849c(0x3d9) + _0x34849c(0x19d) + _0x34849c(0x1aa) + _0x34849c(0x2f7) + _0x34849c(0x1b5) + _0x34849c(0x3a7) + _0x34849c(0x2ab) + _0x34849c(0x2fc) + _0x34849c(0x1a1) + _0x34849c(0x40e) + _0x34849c(0x3be) + _0x34849c(0x334) + _0x34849c(0x477) + _0x34849c(0x3c8) + _0x34849c(0x1aa) + _0x34849c(0x278) + _0x34849c(0x361) + _0x34849c(0x209) + _0x34849c(0x1aa) + _0x34849c(0x2bb) + _0x34849c(0x1e1) + _0x34849c(0x3a6) + _0x34849c(0x1aa) + _0x34849c(0x436) + _0x34849c(0x1bb) + _0x34849c(0x3ea) + _0x34849c(0x472) + _0x34849c(0x22b) + _0x5ced59 + (_0x34849c(0x355) + _0x34849c(0x3c7) + _0x34849c(0x43d) + _0x34849c(0x301) + _0x34849c(0x2cc));
-    _0x2b245d[_0x34849c(0x2c5)] = _0x3bf6c6;
+
+function showNotFoundMessage(container, message) {
+    container.innerHTML = '';
+    container.className = 'min-h-[24rem] relative';
+
+    const notFoundContent = `
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="flex flex-col items-center">
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" 
+                        alt="Not Found" 
+                        class="w-64  mb-4">
+                <p class="text-gray-500 text-lg font-bold">${message}</p>
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = notFoundContent;
 }
-function compressStreamData(_0x42e8c2, _0x1e2106) {
-    const _0x245f44 = _0x11fa, _0x5e0444 = {
-            'XEGIJ': function (_0xd28c83, _0x1e6231) {
-                return _0xd28c83(_0x1e6231);
-            },
-            'iZzhD': function (_0x429efb, _0x26985f) {
-                return _0x429efb === _0x26985f;
-            },
-            'JRIdh': _0x245f44(0x273),
-            'LCpCU': _0x245f44(0x1d5),
-            'oeYNi': _0x245f44(0x362),
-            'QYwUG': function (_0x43fe17, _0x1dc536) {
-                return _0x43fe17 + _0x1dc536;
-            },
-            'gSAcX': function (_0x208af2, _0x4e27db) {
-                return _0x208af2 * _0x4e27db;
-            },
-            'keVhT': function (_0x39d3d1, _0x4cc812) {
-                return _0x39d3d1 * _0x4cc812;
-            }
-        }, _0xa9afa0 = _0x5e0444[_0x245f44(0x447)](generateShortId, _0x42e8c2), _0x2f7bec = {
-            'mpath': _0x42e8c2,
-            'ptype': _0x5e0444[_0x245f44(0x364)](_0x1e2106, _0x5e0444[_0x245f44(0x2d6)]) ? _0x5e0444[_0x245f44(0x2a7)] : _0x5e0444[_0x245f44(0x328)],
-            'exp': _0x5e0444[_0x245f44(0x418)](Date[_0x245f44(0x218)](), _0x5e0444[_0x245f44(0x312)](_0x5e0444[_0x245f44(0x312)](_0x5e0444[_0x245f44(0x201)](-0x2047 * -0x1 + 0x7d * 0x4 + 0x88e * -0x4, 0x9db * 0x1 + 0x13 * -0xed + 0x2 * 0x3fc), -0x1 * -0x1565 + 0x1bd1 + -0x30fa), -0xffa + -0x1a61 + 0x1 * 0x2e43))
-        };
-    return localStorage[_0x245f44(0x2ca)](_0x245f44(0x1ac) + _0xa9afa0, JSON[_0x245f44(0x28f)](_0x2f7bec)), _0xa9afa0;
-}
-function _0x11fa(_0x18e8c2, _0x562b21) {
-    const _0x207a53 = _0x5d5e();
-    return _0x11fa = function (_0x515739, _0x17c55d) {
-        _0x515739 = _0x515739 - (-0x151 * -0x4 + -0x18bb + 0x150f);
-        let _0x380de0 = _0x207a53[_0x515739];
-        return _0x380de0;
-    }, _0x11fa(_0x18e8c2, _0x562b21);
-}
-function generateShortId(_0xd7a4de) {
-    const _0x45c6a5 = _0x11fa, _0x3ee3c8 = {
-            'hgEWj': function (_0x2eac36, _0x58988f) {
-                return _0x2eac36 < _0x58988f;
-            },
-            'VLMHT': function (_0x7046e7, _0x5ecc3c) {
-                return _0x7046e7 + _0x5ecc3c;
-            },
-            'fKkvX': function (_0x3fa3c0, _0xa9086f) {
-                return _0x3fa3c0 - _0xa9086f;
-            },
-            'eGsir': function (_0x472981, _0x218e9b) {
-                return _0x472981 << _0x218e9b;
-            },
-            'uIxfm': function (_0x3117fd, _0x220a93) {
-                return _0x3117fd & _0x220a93;
-            }
-        };
-    let _0x336998 = -0x493 * -0x8 + -0x8c8 + -0x28 * 0xb2;
-    for (let _0x241bae = 0xf6f * -0x2 + -0x68f + -0xd * -0x2e1; _0x3ee3c8[_0x45c6a5(0x24c)](_0x241bae, _0xd7a4de[_0x45c6a5(0x39b)]); _0x241bae++) {
-        const _0x19767e = _0xd7a4de[_0x45c6a5(0x438)](_0x241bae);
-        _0x336998 = _0x3ee3c8[_0x45c6a5(0x22c)](_0x3ee3c8[_0x45c6a5(0x26a)](_0x3ee3c8[_0x45c6a5(0x310)](_0x336998, -0xf9 * 0x2 + -0xb53 + 0x6a5 * 0x2), _0x336998), _0x19767e), _0x336998 = _0x3ee3c8[_0x45c6a5(0x248)](_0x336998, _0x336998);
-    }
-    return Math[_0x45c6a5(0x335)](_0x336998)[_0x45c6a5(0x46f)](-0x85 * 0x19 + 0x131c + -0x1 * 0x5fb)[_0x45c6a5(0x2bf)](-(-0x2bc + -0xe * -0x4f + -0x190));
-}
-function createIDNCard(_0x411ac9) {
-    const _0x26f41d = _0x11fa, _0x40973f = {
-            'YuttF': _0x26f41d(0x38e),
-            'NfNhx': function (_0x3b76e1, _0x1c9d3e) {
-                return _0x3b76e1(_0x1c9d3e);
-            },
-            'MgZqh': function (_0x128744, _0x2cc60, _0x2f6a24) {
-                return _0x128744(_0x2cc60, _0x2f6a24);
-            },
-            'UoQPi': _0x26f41d(0x331),
-            'XgpqP': _0x26f41d(0x40b) + _0x26f41d(0x2bd),
-            'kvdOz': _0x26f41d(0x38d),
-            'WvZcP': _0x26f41d(0x405) + 'K',
-            'gDLst': _0x26f41d(0x3b3) + 'N',
-            'CJGUo': _0x26f41d(0x1ce) + 'UG',
-            'UDVIe': _0x26f41d(0x363),
-            'BDTrA': _0x26f41d(0x3e2),
-            'jWfVW': _0x26f41d(0x442) + _0x26f41d(0x35c) + _0x26f41d(0x35d) + _0x26f41d(0x1da),
-            'QICRC': _0x26f41d(0x28e) + _0x26f41d(0x399),
-            'FmAtF': _0x26f41d(0x40d) + _0x26f41d(0x3fe) + _0x26f41d(0x311),
-            'UvzWD': function (_0x8105ef, _0x25f300) {
-                return _0x8105ef || _0x25f300;
-            },
-            'fkDqT': _0x26f41d(0x302) + 'am',
-            'Ezepi': _0x26f41d(0x206)
-        }, _0x20cb1e = _0x411ac9[_0x26f41d(0x1f0)][_0x26f41d(0x3bf)][_0x26f41d(0x2ad)](_0x40973f[_0x26f41d(0x2fe)], ''), _0x3aa421 = _0x26f41d(0x46b) + _0x26f41d(0x39a) + _0x26f41d(0x3cc) + _0x26f41d(0x2be) + 'l=' + _0x40973f[_0x26f41d(0x204)](encodeURIComponent, _0x411ac9[_0x26f41d(0x34e)]), _0x19e7bc = _0x40973f[_0x26f41d(0x23a)](compressStreamData, _0x3aa421, _0x40973f[_0x26f41d(0x19e)]), _0x227754 = _0x26f41d(0x354) + _0x20cb1e + '/' + _0x19e7bc, _0x18f556 = [
-            _0x40973f[_0x26f41d(0x226)],
-            _0x40973f[_0x26f41d(0x2e8)],
-            _0x40973f[_0x26f41d(0x378)],
-            _0x40973f[_0x26f41d(0x37d)],
-            _0x40973f[_0x26f41d(0x427)],
-            _0x40973f[_0x26f41d(0x45d)]
-        ], _0x4efcf5 = _0x18f556[_0x26f41d(0x2c9)](_0x2133bd => _0x411ac9[_0x26f41d(0x3a4)] && _0x411ac9[_0x26f41d(0x3a4)][_0x26f41d(0x41e) + 'e']()[_0x26f41d(0x29f)](_0x2133bd[_0x26f41d(0x41e) + 'e']())), _0x583df7 = _0x411ac9[_0x26f41d(0x1f0)][_0x26f41d(0x3bf)][_0x26f41d(0x3cf)](_0x40973f[_0x26f41d(0x2fe)]);
-    let _0x16f21d = {
-        'label': _0x40973f[_0x26f41d(0x2ea)],
-        'link': _0x40973f[_0x26f41d(0x2e2)],
-        'icon': _0x40973f[_0x26f41d(0x445)],
-        'gradient': _0x40973f[_0x26f41d(0x292)]
+
+function compressStreamData(url, platform) {
+    const streamId = generateShortId(url);
+    const streamData = {
+        mpath: url,
+        ptype: platform === 'showroom' ? 'sroom' : 'idnlv',
+        exp: Date.now() + (3 * 60 * 60 * 1000)
     };
-    return _0x40973f[_0x26f41d(0x272)](_0x4efcf5, _0x583df7) && (_0x16f21d = {
-        'label': _0x40973f[_0x26f41d(0x38f)],
-        'link': _0x227754,
-        'icon': _0x40973f[_0x26f41d(0x424)],
-        'gradient': _0x40973f[_0x26f41d(0x292)]
-    }), _0x26f41d(0x1a0) + _0x26f41d(0x46a) + _0x26f41d(0x3d4) + _0x26f41d(0x39c) + _0x26f41d(0x439) + _0x26f41d(0x1b4) + _0x26f41d(0x2f1) + _0x26f41d(0x2cf) + _0x26f41d(0x409) + _0x26f41d(0x2e3) + _0x26f41d(0x229) + _0x26f41d(0x258) + _0x26f41d(0x287) + _0x26f41d(0x431) + _0x26f41d(0x24d) + _0x26f41d(0x33f) + _0x26f41d(0x36a) + _0x26f41d(0x31c) + _0x26f41d(0x246) + _0x26f41d(0x24a) + _0x26f41d(0x467) + _0x411ac9[_0x26f41d(0x46e)] + (_0x26f41d(0x1ee) + _0x26f41d(0x2ba) + _0x26f41d(0x33a) + _0x26f41d(0x1e8) + _0x26f41d(0x205) + _0x26f41d(0x41c) + _0x26f41d(0x2d2) + _0x26f41d(0x453) + _0x26f41d(0x1e0) + _0x26f41d(0x3c1) + _0x26f41d(0x202) + _0x26f41d(0x22f) + _0x26f41d(0x1aa) + _0x26f41d(0x2ef) + _0x26f41d(0x3a0) + _0x26f41d(0x282) + _0x26f41d(0x332) + _0x26f41d(0x29a) + _0x26f41d(0x275) + _0x26f41d(0x214) + _0x26f41d(0x443) + _0x26f41d(0x1be) + _0x26f41d(0x2ff) + _0x26f41d(0x1aa) + _0x26f41d(0x3ae) + _0x26f41d(0x198) + _0x26f41d(0x1c1) + _0x26f41d(0x41f) + _0x26f41d(0x398) + _0x26f41d(0x2f8) + _0x26f41d(0x3fc) + _0x26f41d(0x1aa) + _0x26f41d(0x24a) + _0x26f41d(0x46a) + _0x26f41d(0x1c5) + _0x26f41d(0x3e1) + _0x26f41d(0x285) + _0x26f41d(0x356) + _0x26f41d(0x454) + _0x26f41d(0x1d1) + _0x26f41d(0x296) + _0x26f41d(0x371) + _0x26f41d(0x32b) + _0x26f41d(0x3d3) + _0x26f41d(0x458) + _0x26f41d(0x1aa) + _0x26f41d(0x1aa) + _0x26f41d(0x2ac) + _0x26f41d(0x461) + _0x26f41d(0x3da) + _0x26f41d(0x3d5) + _0x26f41d(0x3f8) + _0x26f41d(0x19a) + _0x26f41d(0x36c) + _0x26f41d(0x3b2) + _0x26f41d(0x3c8) + _0x26f41d(0x1aa) + _0x26f41d(0x26b) + _0x26f41d(0x322) + _0x26f41d(0x1c0) + _0x26f41d(0x1aa) + _0x26f41d(0x2a6) + _0x26f41d(0x1aa) + _0x26f41d(0x1aa) + _0x26f41d(0x1ba) + _0x26f41d(0x2de) + _0x26f41d(0x437) + _0x26f41d(0x2b3) + _0x26f41d(0x309) + _0x26f41d(0x39d) + _0x26f41d(0x264) + _0x26f41d(0x3c0) + _0x26f41d(0x1f3) + _0x26f41d(0x1f6) + _0x26f41d(0x1aa) + _0x26f41d(0x1aa) + _0x26f41d(0x2cc)) + _0x411ac9[_0x26f41d(0x3ed)] + (_0x26f41d(0x25b) + _0x26f41d(0x1aa) + _0x26f41d(0x1aa) + _0x26f41d(0x1a3) + _0x26f41d(0x1aa) + _0x26f41d(0x2a6) + _0x26f41d(0x1aa) + _0x26f41d(0x2ef) + _0x26f41d(0x3a0) + _0x26f41d(0x456) + _0x26f41d(0x44a) + _0x26f41d(0x246) + _0x26f41d(0x1aa) + _0x26f41d(0x23c) + _0x26f41d(0x221) + _0x26f41d(0x239) + _0x26f41d(0x469) + _0x26f41d(0x270) + _0x26f41d(0x25d) + _0x26f41d(0x309) + _0x26f41d(0x39d) + _0x26f41d(0x264) + _0x26f41d(0x3c0) + _0x26f41d(0x1f3) + _0x26f41d(0x1f6) + _0x26f41d(0x1aa) + _0x26f41d(0x1aa) + _0x26f41d(0x3bb) + _0x26f41d(0x460) + _0x26f41d(0x1aa) + _0x26f41d(0x301) + _0x26f41d(0x1aa) + _0x26f41d(0x216) + _0x26f41d(0x24d) + _0x26f41d(0x321) + _0x26f41d(0x3c8) + _0x26f41d(0x23c) + _0x26f41d(0x3ba) + _0x26f41d(0x3c8) + _0x26f41d(0x389) + _0x26f41d(0x366) + _0x26f41d(0x398) + _0x26f41d(0x2f8) + _0x26f41d(0x300) + _0x26f41d(0x2cb) + _0x26f41d(0x1aa) + _0x26f41d(0x33f) + _0x26f41d(0x36a) + _0x26f41d(0x1b0) + _0x26f41d(0x1aa) + _0x26f41d(0x1aa) + _0x26f41d(0x441) + '\x22') + _0x411ac9[_0x26f41d(0x1f0)][_0x26f41d(0x395)] + (_0x26f41d(0x343) + _0x26f41d(0x401) + _0x26f41d(0x263) + _0x26f41d(0x251) + _0x26f41d(0x3af) + _0x26f41d(0x432) + _0x26f41d(0x257) + _0x26f41d(0x1c6) + _0x26f41d(0x1aa) + _0x26f41d(0x240) + _0x26f41d(0x315) + _0x26f41d(0x43a) + _0x26f41d(0x2e4) + _0x26f41d(0x455) + _0x26f41d(0x2c3) + _0x26f41d(0x297) + _0x26f41d(0x2a5) + _0x26f41d(0x304) + _0x26f41d(0x390) + _0x26f41d(0x25c) + _0x26f41d(0x24d) + _0x26f41d(0x1aa) + _0x26f41d(0x301) + _0x26f41d(0x1aa) + _0x26f41d(0x24a) + _0x26f41d(0x22e) + _0x26f41d(0x1aa) + _0x26f41d(0x24a) + _0x26f41d(0x2ae) + _0x26f41d(0x1d9) + _0x26f41d(0x28b) + _0x26f41d(0x2d5)) + _0x411ac9[_0x26f41d(0x1f0)][_0x26f41d(0x44f)] + (_0x26f41d(0x3ad) + _0x26f41d(0x1aa) + _0x26f41d(0x1aa) + _0x26f41d(0x412) + _0x26f41d(0x28b) + _0x26f41d(0x1b2) + _0x26f41d(0x2b5)) + _0x411ac9[_0x26f41d(0x1f0)][_0x26f41d(0x3bf)] + (_0x26f41d(0x355) + _0x26f41d(0x1aa) + _0x26f41d(0x216) + _0x26f41d(0x24d) + _0x26f41d(0x1e7) + _0x26f41d(0x22e) + _0x26f41d(0x1aa) + _0x26f41d(0x1a5) + _0x26f41d(0x2d9) + _0x26f41d(0x39f) + _0x26f41d(0x2ed) + _0x26f41d(0x27d) + _0x26f41d(0x2aa)) + _0x411ac9[_0x26f41d(0x3a4)] + (_0x26f41d(0x2d7) + _0x26f41d(0x1aa) + _0x26f41d(0x34d) + '\x22') + _0x16f21d[_0x26f41d(0x380)] + (_0x26f41d(0x420) + _0x26f41d(0x1ab) + _0x26f41d(0x365) + _0x26f41d(0x3fd) + _0x26f41d(0x1dd) + _0x26f41d(0x3e8) + '\x20') + _0x16f21d[_0x26f41d(0x40c)] + (_0x26f41d(0x309) + _0x26f41d(0x42c) + _0x26f41d(0x29d) + _0x26f41d(0x30a) + _0x26f41d(0x33d) + _0x26f41d(0x44d) + _0x26f41d(0x40a) + _0x26f41d(0x1be) + _0x26f41d(0x31a) + _0x26f41d(0x3a5) + _0x26f41d(0x259) + _0x26f41d(0x1aa) + _0x26f41d(0x24a) + _0x26f41d(0x3d6) + _0x26f41d(0x1fa)) + _0x16f21d[_0x26f41d(0x2e9)] + (_0x26f41d(0x20a) + _0x26f41d(0x24d) + _0x26f41d(0x1aa) + '\x20\x20') + _0x16f21d[_0x26f41d(0x276)] + (_0x26f41d(0x3c8) + _0x26f41d(0x317) + _0x26f41d(0x24d) + _0x26f41d(0x321) + _0x26f41d(0x1a0) + _0x26f41d(0x379));
+
+    localStorage.setItem(`stream_${streamId}`, JSON.stringify(streamData));
+    return streamId;
 }
-function createShowroomCard(_0x3354a9) {
-    const _0x2075e3 = _0x11fa, _0xae847 = {
-            'GLvHe': _0x2075e3(0x45f),
-            'GaTRz': function (_0x1fea16, _0x287280, _0x131ffa) {
-                return _0x1fea16(_0x287280, _0x131ffa);
-            },
-            'monDp': _0x2075e3(0x273)
-        }, _0x36fab6 = _0x3354a9[_0x2075e3(0x3b1) + 'ey'][_0x2075e3(0x2ad)](_0xae847[_0x2075e3(0x1fd)], '')[_0x2075e3(0x1f7) + 'e'](), _0x40cc65 = _0xae847[_0x2075e3(0x1d6)](compressStreamData, _0x3354a9[_0x2075e3(0x3ce) + _0x2075e3(0x1a4)][-0x123c + 0x1e * -0x102 + 0x3078][_0x2075e3(0x2dc)], _0xae847[_0x2075e3(0x227)]), _0x4f7e78 = _0x2075e3(0x388) + _0x36fab6 + '/' + _0x40cc65;
-    return _0x2075e3(0x1a0) + _0x2075e3(0x46a) + _0x2075e3(0x3d4) + _0x2075e3(0x39c) + _0x2075e3(0x439) + _0x2075e3(0x1b4) + _0x2075e3(0x2f1) + _0x2075e3(0x2cf) + _0x2075e3(0x409) + _0x2075e3(0x2e3) + _0x2075e3(0x229) + _0x2075e3(0x258) + _0x2075e3(0x287) + _0x2075e3(0x431) + _0x2075e3(0x24d) + _0x2075e3(0x33f) + _0x2075e3(0x36a) + _0x2075e3(0x31c) + _0x2075e3(0x246) + _0x2075e3(0x24a) + _0x2075e3(0x467) + _0x3354a9[_0x2075e3(0x46e)] + (_0x2075e3(0x1ee) + _0x2075e3(0x2ba) + _0x2075e3(0x33a) + _0x2075e3(0x1e8) + _0x2075e3(0x205) + _0x2075e3(0x41c) + _0x2075e3(0x2d2) + _0x2075e3(0x453) + _0x2075e3(0x1e0) + _0x2075e3(0x3c1) + _0x2075e3(0x202) + _0x2075e3(0x22f) + _0x2075e3(0x1aa) + _0x2075e3(0x2ef) + _0x2075e3(0x3a0) + _0x2075e3(0x282) + _0x2075e3(0x475) + _0x2075e3(0x2a0) + _0x2075e3(0x384) + _0x2075e3(0x409) + _0x2075e3(0x425) + _0x2075e3(0x1af) + _0x2075e3(0x342) + _0x2075e3(0x1aa) + _0x2075e3(0x2ef) + _0x2075e3(0x3a0) + _0x2075e3(0x456) + _0x2075e3(0x3ac) + _0x2075e3(0x295) + _0x2075e3(0x1f9) + _0x2075e3(0x337) + _0x2075e3(0x1aa) + _0x2075e3(0x1aa) + _0x2075e3(0x1ba) + _0x2075e3(0x3ca) + _0x2075e3(0x250) + _0x2075e3(0x1cc) + _0x2075e3(0x45b) + _0x2075e3(0x3f2) + _0x2075e3(0x19b) + _0x2075e3(0x2e5) + _0x2075e3(0x398) + _0x2075e3(0x2f8) + _0x2075e3(0x32e) + _0x2075e3(0x259) + _0x2075e3(0x1aa) + _0x2075e3(0x1aa) + _0x2075e3(0x277) + _0x2075e3(0x373) + _0x2075e3(0x329) + _0x2075e3(0x417) + _0x2075e3(0x34b) + _0x2075e3(0x3dd) + _0x2075e3(0x39e) + _0x2075e3(0x27f) + _0x2075e3(0x24d) + _0x2075e3(0x1aa) + _0x2075e3(0x23b) + _0x2075e3(0x3a8) + _0x2075e3(0x23f) + _0x2075e3(0x1aa) + _0x2075e3(0x321) + _0x2075e3(0x3c8) + _0x2075e3(0x1aa) + _0x2075e3(0x26d) + _0x2075e3(0x3dc) + _0x2075e3(0x46c) + _0x2075e3(0x46d) + _0x2075e3(0x3b9) + _0x2075e3(0x285) + _0x2075e3(0x356) + _0x2075e3(0x454) + _0x2075e3(0x1d1) + _0x2075e3(0x34c) + _0x2075e3(0x1aa) + _0x2075e3(0x1aa) + _0x2075e3(0x3f9)) + _0x3354a9[_0x2075e3(0x444)][_0x2075e3(0x3f1) + _0x2075e3(0x303)]() + (_0x2075e3(0x25b) + _0x2075e3(0x1aa) + _0x2075e3(0x1aa) + _0x2075e3(0x1a3) + _0x2075e3(0x1aa) + _0x2075e3(0x2a6) + _0x2075e3(0x1aa) + _0x2075e3(0x2ef) + _0x2075e3(0x3a0) + _0x2075e3(0x456) + _0x2075e3(0x44a) + _0x2075e3(0x246) + _0x2075e3(0x1aa) + _0x2075e3(0x23c) + _0x2075e3(0x221) + _0x2075e3(0x239) + _0x2075e3(0x3a9) + _0x2075e3(0x476) + _0x2075e3(0x27b) + _0x2075e3(0x324) + _0x2075e3(0x261) + _0x2075e3(0x2c2) + _0x2075e3(0x2f5) + _0x2075e3(0x2e0) + _0x2075e3(0x256) + _0x2075e3(0x1aa) + _0x2075e3(0x1aa) + _0x2075e3(0x359) + _0x2075e3(0x1aa) + _0x2075e3(0x24a) + _0x2075e3(0x379) + _0x2075e3(0x1aa) + _0x2075e3(0x301) + _0x2075e3(0x1aa) + _0x2075e3(0x340) + _0x2075e3(0x1aa) + _0x2075e3(0x1ba) + _0x2075e3(0x265) + _0x2075e3(0x1aa) + _0x2075e3(0x33f) + _0x2075e3(0x219) + _0x2075e3(0x3d9) + _0x2075e3(0x381) + _0x2075e3(0x45a) + _0x2075e3(0x3c8) + _0x2075e3(0x1aa) + _0x2075e3(0x26d) + _0x2075e3(0x1c2) + _0x2075e3(0x450) + _0x2075e3(0x1aa) + _0x2075e3(0x1e6) + _0x2075e3(0x1fb)) + _0x3354a9[_0x2075e3(0x24b) + 're'] + (_0x2075e3(0x343) + _0x2075e3(0x401) + _0x2075e3(0x263) + _0x2075e3(0x251) + _0x2075e3(0x3af) + _0x2075e3(0x432) + _0x2075e3(0x257) + _0x2075e3(0x1c6) + _0x2075e3(0x1aa) + _0x2075e3(0x240) + _0x2075e3(0x315) + _0x2075e3(0x43a) + _0x2075e3(0x2e4) + _0x2075e3(0x455) + _0x2075e3(0x2c3) + _0x2075e3(0x297) + _0x2075e3(0x2a5) + _0x2075e3(0x304) + _0x2075e3(0x390) + _0x2075e3(0x25c) + _0x2075e3(0x24d) + _0x2075e3(0x1aa) + _0x2075e3(0x301) + _0x2075e3(0x1aa) + _0x2075e3(0x24a) + _0x2075e3(0x22e) + _0x2075e3(0x1aa) + _0x2075e3(0x24a) + _0x2075e3(0x2ae) + _0x2075e3(0x1d9) + _0x2075e3(0x28b) + _0x2075e3(0x289)) + _0x3354a9[_0x2075e3(0x415)] + (_0x2075e3(0x3ad) + _0x2075e3(0x1aa) + _0x2075e3(0x1aa) + _0x2075e3(0x412) + _0x2075e3(0x34a) + _0x2075e3(0x254) + _0x2075e3(0x44c) + _0x2075e3(0x3d1)) + _0x3354a9[_0x2075e3(0x474)] + (_0x2075e3(0x355) + _0x2075e3(0x1aa) + _0x2075e3(0x216) + _0x2075e3(0x24d) + _0x2075e3(0x1e7) + _0x2075e3(0x22e) + _0x2075e3(0x1aa) + _0x2075e3(0x26d) + _0x2075e3(0x21d) + _0x2075e3(0x305) + _0x2075e3(0x267) + _0x2075e3(0x44e) + _0x2075e3(0x2cb) + _0x2075e3(0x1aa) + _0x2075e3(0x33f) + _0x2075e3(0x219) + _0x2075e3(0x3d9) + _0x2075e3(0x381) + _0x2075e3(0x26e) + _0x2075e3(0x1c7) + _0x2075e3(0x1aa) + _0x2075e3(0x1aa) + _0x2075e3(0x3cd) + _0x2075e3(0x462) + _0x2075e3(0x1cb) + _0x2075e3(0x3b5) + _0x2075e3(0x387) + _0x2075e3(0x1aa) + _0x2075e3(0x1aa) + _0x2075e3(0x234) + _0x2075e3(0x393) + _0x2075e3(0x2b0) + _0x2075e3(0x3fb)) + _0x3354a9[_0x2075e3(0x27c) + 'um'][_0x2075e3(0x3f1) + _0x2075e3(0x303)]() + (_0x2075e3(0x34f) + _0x2075e3(0x30e) + _0x2075e3(0x1aa) + _0x2075e3(0x1e7) + _0x2075e3(0x22e) + _0x2075e3(0x1aa) + _0x2075e3(0x340) + _0x2075e3(0x1aa) + _0x2075e3(0x1bf) + _0x2075e3(0x2e1)) + _0x4f7e78 + (_0x2075e3(0x420) + _0x2075e3(0x1ab) + _0x2075e3(0x365) + _0x2075e3(0x3fd) + _0x2075e3(0x1dd) + _0x2075e3(0x3e8) + _0x2075e3(0x1b8) + _0x2075e3(0x2fb) + _0x2075e3(0x208) + _0x2075e3(0x262) + _0x2075e3(0x3cb) + _0x2075e3(0x3e0) + _0x2075e3(0x1fe) + _0x2075e3(0x407) + _0x2075e3(0x214) + _0x2075e3(0x403) + _0x2075e3(0x423) + _0x2075e3(0x238) + _0x2075e3(0x37c) + _0x2075e3(0x290) + _0x2075e3(0x1aa) + _0x2075e3(0x249) + _0x2075e3(0x228) + _0x2075e3(0x1e4) + _0x2075e3(0x465) + _0x2075e3(0x1aa) + _0x2075e3(0x3c3) + _0x2075e3(0x422) + _0x2075e3(0x3c8) + _0x2075e3(0x317) + _0x2075e3(0x24d) + _0x2075e3(0x321) + _0x2075e3(0x1a0) + _0x2075e3(0x379));
+
+function generateShortId(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return Math.abs(hash).toString(36).slice(-6);
 }
-function createJKT48VLiveCard(_0x13ab18) {
-    const _0x559be8 = _0x11fa, _0x3304ed = _0x13ab18[_0x559be8(0x2dc)];
-    return _0x559be8(0x1a0) + _0x559be8(0x46a) + _0x559be8(0x3d4) + _0x559be8(0x39c) + _0x559be8(0x439) + _0x559be8(0x1b4) + _0x559be8(0x2f1) + _0x559be8(0x2cf) + _0x559be8(0x409) + _0x559be8(0x2e3) + _0x559be8(0x229) + _0x559be8(0x258) + _0x559be8(0x287) + _0x559be8(0x431) + _0x559be8(0x24d) + _0x559be8(0x33f) + _0x559be8(0x36a) + _0x559be8(0x31c) + _0x559be8(0x246) + _0x559be8(0x24a) + _0x559be8(0x467) + _0x13ab18[_0x559be8(0x2c0)][_0x559be8(0x1d0)][_0x559be8(0x2dc)] + (_0x559be8(0x1ee) + _0x559be8(0x2ba) + _0x559be8(0x33a) + _0x559be8(0x1e8) + _0x559be8(0x271) + _0x559be8(0x41c) + _0x559be8(0x2d2) + _0x559be8(0x453) + _0x559be8(0x1e0) + _0x559be8(0x3c1) + _0x559be8(0x202) + _0x559be8(0x22f) + _0x559be8(0x1aa) + _0x559be8(0x2ef) + _0x559be8(0x3a0) + _0x559be8(0x282) + _0x559be8(0x332) + _0x559be8(0x29a) + _0x559be8(0x275) + _0x559be8(0x214) + _0x559be8(0x443) + _0x559be8(0x1be) + _0x559be8(0x2ff) + _0x559be8(0x1aa) + _0x559be8(0x3ae) + _0x559be8(0x198) + _0x559be8(0x1c1) + _0x559be8(0x41f) + _0x559be8(0x398) + _0x559be8(0x2f8) + _0x559be8(0x3fc) + _0x559be8(0x1aa) + _0x559be8(0x24a) + _0x559be8(0x46a) + _0x559be8(0x24e) + _0x559be8(0x448) + _0x559be8(0x3bc) + _0x559be8(0x245) + _0x559be8(0x2a8) + _0x559be8(0x451) + _0x559be8(0x3cb) + _0x559be8(0x295) + _0x559be8(0x1f9) + _0x559be8(0x2db) + _0x559be8(0x223) + _0x559be8(0x1aa) + _0x559be8(0x1aa) + _0x559be8(0x42a) + _0x559be8(0x294) + _0x559be8(0x400) + _0x559be8(0x351) + _0x559be8(0x1a7) + _0x559be8(0x2a8) + _0x559be8(0x348) + _0x559be8(0x1a2) + _0x559be8(0x1c0) + _0x559be8(0x1aa) + _0x559be8(0x3e7) + _0x559be8(0x457) + _0x559be8(0x308) + _0x559be8(0x1aa) + _0x559be8(0x216) + _0x559be8(0x24d) + _0x559be8(0x1e7) + _0x559be8(0x22e) + _0x559be8(0x1aa) + _0x559be8(0x26d) + _0x559be8(0x35e) + _0x559be8(0x3b8) + _0x559be8(0x2e7) + _0x559be8(0x1aa) + _0x559be8(0x240) + _0x559be8(0x315) + _0x559be8(0x210) + _0x559be8(0x2f3) + _0x559be8(0x1cc) + _0x559be8(0x45b) + _0x559be8(0x3f2) + _0x559be8(0x19b) + _0x559be8(0x241) + _0x559be8(0x3c8) + _0x559be8(0x1aa) + _0x559be8(0x323) + _0x559be8(0x2ec) + _0x559be8(0x1aa) + _0x559be8(0x1e7) + _0x559be8(0x22e) + _0x559be8(0x1aa) + _0x559be8(0x340) + _0x559be8(0x1aa) + _0x559be8(0x1a3) + _0x559be8(0x24a) + _0x559be8(0x46a) + _0x559be8(0x1f4) + _0x559be8(0x1aa) + _0x559be8(0x23c) + _0x559be8(0x21a) + _0x559be8(0x1f2) + _0x559be8(0x466) + _0x559be8(0x353) + (_0x559be8(0x1aa) + _0x559be8(0x1aa) + _0x559be8(0x1ba) + _0x559be8(0x43b) + _0x559be8(0x246) + _0x559be8(0x1aa) + _0x559be8(0x349) + _0x559be8(0x3d7))) + _0x13ab18[_0x559be8(0x2c0)][_0x559be8(0x288)][_0x559be8(0x2dc)] + (_0x559be8(0x343) + _0x559be8(0x401) + _0x559be8(0x263) + _0x559be8(0x251) + _0x559be8(0x3af) + _0x559be8(0x432) + _0x559be8(0x42f) + _0x559be8(0x246) + _0x559be8(0x1aa) + _0x559be8(0x389) + _0x559be8(0x3a2) + _0x559be8(0x20f) + _0x559be8(0x446) + _0x559be8(0x2fa) + _0x559be8(0x33b) + _0x559be8(0x30d) + _0x559be8(0x3b4) + _0x559be8(0x3d0) + _0x559be8(0x20b) + _0x559be8(0x242) + _0x559be8(0x3c8) + _0x559be8(0x1aa) + _0x559be8(0x340) + _0x559be8(0x1aa) + _0x559be8(0x240) + _0x559be8(0x43d) + _0x559be8(0x1aa) + _0x559be8(0x2da) + _0x559be8(0x36b) + _0x559be8(0x3e9) + _0x559be8(0x414) + _0x559be8(0x32f)) + _0x13ab18[_0x559be8(0x1e3) + 'le'] + (_0x559be8(0x3ad) + _0x559be8(0x1aa) + _0x559be8(0x1aa) + _0x559be8(0x412) + _0x559be8(0x28b) + _0x559be8(0x1b2) + _0x559be8(0x233) + _0x559be8(0x279) + _0x559be8(0x468) + _0x559be8(0x2f4) + _0x559be8(0x1aa) + _0x559be8(0x35a) + _0x559be8(0x21f) + _0x559be8(0x24a) + _0x559be8(0x379) + _0x559be8(0x1aa) + _0x559be8(0x326) + _0x559be8(0x3ff) + _0x559be8(0x382) + _0x559be8(0x244) + _0x559be8(0x2a2) + _0x559be8(0x30b)) + _0x13ab18[_0x559be8(0x3a4)] + (_0x559be8(0x2d7) + _0x559be8(0x1aa) + _0x559be8(0x34d) + '\x22') + _0x3304ed + (_0x559be8(0x463) + _0x559be8(0x3eb) + _0x559be8(0x1ff) + _0x559be8(0x1b9) + _0x559be8(0x1c9) + _0x559be8(0x1cf) + _0x559be8(0x210) + _0x559be8(0x2f3) + _0x559be8(0x41a) + _0x559be8(0x25a) + _0x559be8(0x33e) + _0x559be8(0x26f) + _0x559be8(0x235) + _0x559be8(0x2e6) + _0x559be8(0x266) + _0x559be8(0x31e) + _0x559be8(0x396) + _0x559be8(0x21b) + _0x559be8(0x246) + _0x559be8(0x1aa) + _0x559be8(0x3db) + _0x559be8(0x211) + _0x559be8(0x459) + _0x559be8(0x213) + _0x559be8(0x1aa) + _0x559be8(0x212) + _0x559be8(0x1d8) + _0x559be8(0x1aa) + _0x559be8(0x1a8) + _0x559be8(0x1aa) + _0x559be8(0x301) + _0x559be8(0x3c7) + _0x559be8(0x220));
+
+
+function createIDNCard(stream) {
+    const memberUsername = stream.user.username.replace('jkt48_', '');
+    const proxyStreamUrl = `https://jkt48showroom-api.my.id/proxy?url=${encodeURIComponent(stream.stream_url)}`;
+    const streamId = compressStreamData(proxyStreamUrl, 'idn');
+    const watchUrl = `/live/idn/${memberUsername}/${streamId}`;
+
+    const freeStreamTitles = [
+        'TEMEN NGOBROL',
+        'TEMEN MAIN',
+        'TEMEN MASAK',
+        'TEMEN MAKAN',
+        'NUNGGU BEDUG',
+        'TRIAL'
+    ];
+
+    const isFreeStream = freeStreamTitles.some(title => 
+        stream.title && stream.title.toUpperCase().includes(title.toUpperCase())
+    );
+    
+    const isMemberAccount = stream.user.username.startsWith('jkt48_');
+
+    let buttonProps = {
+        label: "Get Ticket",
+        link: "https://www.idn.app/jkt48-official",
+        icon: "fa-ticket-alt",
+        gradient: "from-amber-400 to-yellow-500"
+    };
+    
+    if (isFreeStream || isMemberAccount) {
+        buttonProps = {
+            label: "Watch Stream",
+            link: watchUrl,
+            icon: "fa-play",
+            gradient: "from-amber-400 to-yellow-500"
+        };
+    }
+
+    return `
+        <div class="bg-gray-50 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
+            <div class="relative group">
+                <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
+                <div class="absolute inset-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute top-3 left-3 flex items-center space-x-2">
+                    <div class="bg-red-600 text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg">
+                        <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                        <span>LIVE</span>
+                    </div>
+                    <div class="bg-black/75 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                        ${stream.view_count} watching
+                    </div>
+                </div>
+                <div class="absolute top-3 right-3">
+                    <div class="bg-gradient-to-r from-amber-400 to-yellow-500 text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                        IDN Live
+                    </div>
+                </div>
+            </div>
+            <div class="p-5">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="relative">
+                        <img src="${stream.user.avatar}" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-purple-100">
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800">${stream.user.name}</h3>
+                        <p class="text-gray-800 text-sm">@${stream.user.username}</p>
+                    </div>
+                </div>
+                <h4 class="font-medium text-gray-800 mb-4 line-clamp-2">${stream.title}</h4>
+                <a href="${buttonProps.link}" class="block w-full text-center px-6 py-3 bg-gradient-to-r ${buttonProps.gradient} text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                    <i class="fas ${buttonProps.icon} mr-2"></i>
+                    ${buttonProps.label}
+                </a>
+            </div>
+        </div>
+    `;
 }
+
+function createJKT48VLiveCard(stream) {
+    const watchUrl = stream.url; 
+
+    return `
+            <div class="bg-gray-50 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
+        <div class="relative group">
+            <img src="https://i.ytimg.com/vi/IAxvoqSi16w/hqdefault_live.jpg" alt="Live Stream Thumbnail" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+            <div class="absolute inset-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute top-3 left-3 flex items-center space-x-2">
+                <div class="bg-[#6CB2EB] text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg">
+                    <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                    <span>LIVE</span>
+                </div>
+            </div>
+            <div class="absolute top-3 right-3">
+                <div class="bg-[#63B3ED] text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                    YouTube Live
+                </div>
+            </div>
+        </div>
+        <div class="p-5">
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="relative">
+                    <img src="https://i.ytimg.com/vi/IAxvoqSi16w/default_live.jpg" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-[#6CB2EB]">
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-[#68D391] rounded-full border-2 border-white"></div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-800">Tana Nona - JKT48V</h3>
+                    <p class="text-gray-800 text-sm">Live on YouTube - Watch now!</p>
+                </div>
+            </div>
+            <h4 class="font-medium text-gray-800 mb-4 line-clamp-2">【#SahurTon】Menulis kisah kita - Storyteller【Tana Nona - JKT48V】</h4>
+            <a href="https://www.youtube.com/watch?v=IAxvoqSi16w" target="_blank" class="block w-full text-center px-6 py-3 bg-[#63B3ED] text-white font-medium rounded-3xl hover:bg-[#4299E1] transition-all duration-300 shadow-md hover:shadow-lg">
+                <i class="fas fa-play mr-2"></i>
+                Watch Stream
+            </a>
+        </div>
+    </div>
+    `;
+}
+
+
+function createShowroomCard(stream) {
+    const memberUsername = stream.room_url_key.replace('JKT48_', '').toLowerCase();
+    const streamId = compressStreamData(stream.streaming_url_list[0].url, 'showroom');
+    const watchUrl = `/live/sr/${memberUsername}/${streamId}`;
+
+    return `
+        <div class="bg-gray-50 rounded-3xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-102 hover:shadow-xl">
+            <div class="relative group">
+                <img src="${stream.image}" alt="Live Stream Thumbnail" class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105">
+                <div class="absolute inset-0  group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute top-3 left-3 flex items-center space-x-2">
+                    <div class="bg-red-600 text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center space-x-2 shadow-lg">
+                        <span class="inline-block w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                        <span>LIVE</span>
+                    </div>
+                    <div class="bg-black/75 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                        ${stream.view_num.toLocaleString()} watching
+                    </div>
+                </div>
+                <div class="absolute top-3 right-3">
+                    <div class="bg-gradient-to-r from-rose-400 to-rose-500 text-white px-3 py-1.5 rounded-full text-sm font-medium">
+                        SHOWROOM
+                    </div>
+                </div>
+            </div>
+            <div class="p-5">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="relative">
+                        <img src="${stream.image_square}" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-purple-100">
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-600">${stream.main_name}</h3>
+                        <p class="ttext-gray-600 font-medium text-sm">${stream.genre_name}</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-2 text-gray-500">
+                        <i class="text-gray-600 fas fa-users"></i>
+                        <span class="text-sm text-gray-600">${stream.follower_num.toLocaleString()} followers</span>
+                    </div>
+                </div>
+                <a href="${watchUrl}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-rose-400 to-rose-500 text-white font-medium rounded-3xl hover:opacity-80 transition-all duration-300 shadow-md hover:shadow-lg">
+                    <i class="fas fa-play mr-2"></i>
+                    Watch Stream
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+
+
+
 async function fetchTopStreamers() {
-    const _0x48d658 = _0x11fa, _0x2302dd = {
-            'lZEDh': _0x48d658(0x2bc) + _0x48d658(0x3f4) + _0x48d658(0x217) + _0x48d658(0x2b4) + _0x48d658(0x225),
-            'OnNkM': _0x48d658(0x43e) + _0x48d658(0x222),
-            'ajYSe': _0x48d658(0x43c) + _0x48d658(0x370),
-            'zxroj': _0x48d658(0x2bc) + _0x48d658(0x3f4) + _0x48d658(0x3f3) + _0x48d658(0x29e) + '00',
-            'yLLTk': _0x48d658(0x28b) + _0x48d658(0x2d4),
-            'STRRh': _0x48d658(0x2d3) + _0x48d658(0x2c6),
-            'gtzis': _0x48d658(0x2bc) + _0x48d658(0x3f4) + _0x48d658(0x255) + _0x48d658(0x2b6) + _0x48d658(0x2df),
-            'dPJQD': _0x48d658(0x3c5) + _0x48d658(0x25f),
-            'Uhzbn': _0x48d658(0x338) + _0x48d658(0x232),
-            'CdlAG': _0x48d658(0x2bc) + _0x48d658(0x3f4) + _0x48d658(0x3f6) + _0x48d658(0x1ec) + _0x48d658(0x31f) + _0x48d658(0x471),
-            'vqGRh': _0x48d658(0x28b) + _0x48d658(0x3a1),
-            'yEdrv': _0x48d658(0x1bd) + _0x48d658(0x45c),
-            'sWLuh': function (_0xbd6c0e, _0x2e4e8e) {
-                return _0xbd6c0e(_0x2e4e8e);
-            },
-            'lmdRw': _0x48d658(0x345) + _0x48d658(0x377) + 'r',
-            'cyMIo': function (_0xecefd, _0x118493) {
-                return _0xecefd(_0x118493);
-            },
-            'JgqqE': _0x48d658(0x1d2) + _0x48d658(0x36e) + _0x48d658(0x19c) + _0x48d658(0x2fd) + _0x48d658(0x392) + 'r',
-            'MOxdj': _0x48d658(0x29b) + _0x48d658(0x236) + _0x48d658(0x452)
-        }, _0x141c0d = document[_0x48d658(0x352) + _0x48d658(0x1de)](_0x2302dd[_0x48d658(0x1b3)]), _0x26c579 = _0x2302dd[_0x48d658(0x1ef)](Array, 0x7 * 0xf8 + -0xcc0 + 0x3 * 0x1ff)[_0x48d658(0x1fc)]()[_0x48d658(0x2b2)](() => _0x48d658(0x1a0) + _0x48d658(0x46a) + _0x48d658(0x3d4) + _0x48d658(0x39c) + _0x48d658(0x253) + _0x48d658(0x23d) + _0x48d658(0x2b7) + _0x48d658(0x3e4) + _0x48d658(0x24a) + _0x48d658(0x46a) + _0x48d658(0x316) + _0x48d658(0x416) + _0x48d658(0x449) + _0x48d658(0x3c8) + _0x48d658(0x389) + _0x48d658(0x336) + _0x48d658(0x284) + _0x48d658(0x1aa) + _0x48d658(0x1aa) + _0x48d658(0x1ba) + _0x48d658(0x1bc) + _0x48d658(0x1e5) + _0x48d658(0x358) + _0x48d658(0x20c) + _0x48d658(0x3ab) + _0x48d658(0x3bd) + _0x48d658(0x1a3) + _0x48d658(0x1aa) + _0x48d658(0x389) + _0x48d658(0x2f2) + _0x48d658(0x3b0) + _0x48d658(0x376) + _0x48d658(0x2c2) + _0x48d658(0x2f9) + _0x48d658(0x24d) + _0x48d658(0x1e7) + _0x48d658(0x22e) + _0x48d658(0x1aa) + _0x48d658(0x26d) + _0x48d658(0x2c4) + _0x48d658(0x24d) + _0x48d658(0x1aa) + _0x48d658(0x28d) + _0x48d658(0x260) + _0x48d658(0x230) + _0x48d658(0x3d2) + _0x48d658(0x23e) + _0x48d658(0x1a3) + _0x48d658(0x1aa) + _0x48d658(0x389) + _0x48d658(0x318) + _0x48d658(0x3d8) + _0x48d658(0x2ee) + _0x48d658(0x42e) + _0x48d658(0x1a3) + _0x48d658(0x1aa) + _0x48d658(0x2a6) + _0x48d658(0x1aa) + _0x48d658(0x301) + _0x48d658(0x3c7) + _0x48d658(0x220))[_0x48d658(0x274)]('');
-    _0x141c0d[_0x48d658(0x2c5)] = _0x48d658(0x1a0) + _0x48d658(0x46a) + _0x48d658(0x2dd) + _0x48d658(0x1a6) + _0x48d658(0x369) + _0x48d658(0x2a9) + _0x48d658(0x291) + _0x48d658(0x38a) + _0x48d658(0x246) + _0x48d658(0x473) + _0x48d658(0x1b1) + _0x48d658(0x2f6) + _0x48d658(0x35f) + _0x48d658(0x327) + _0x48d658(0x344) + _0x48d658(0x2b1) + _0x48d658(0x1b6) + _0x48d658(0x20e) + _0x48d658(0x42d) + _0x26c579 + (_0x48d658(0x1a0) + _0x48d658(0x379));
+    const topStreamersContainer = document.getElementById('topStreamersContainer');
+    
+    const skeletonCards = Array(5).fill().map(() => `
+        <div class="bg-gray-50 rounded-lg p-4 mb-3 skeleton animate-pulse">
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <div class="absolute -top-2 -left-2 w-6 h-6 bg-gray-300 rounded-full"></div>
+                    <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+                </div>
+                <div class="flex-1">
+                    <div class="h-5 bg-gray-300 rounded w-3/4 mb-2"></div>
+                    <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    topStreamersContainer.innerHTML = `
+        <div class="bg-white border-2 border-gray-200 rounded-3xl shadow-lg p-6">
+            <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
+            ${skeletonCards}
+        </div>
+    `;
+
     try {
-        const _0x427126 = await _0x2302dd[_0x48d658(0x433)](fetch, _0x2302dd[_0x48d658(0x430)]), _0x53d6ec = await _0x427126[_0x48d658(0x470)]();
-        if (_0x53d6ec[_0x48d658(0x1ea)] && _0x53d6ec[_0x48d658(0x37f)]) {
-            const _0x22eb62 = _0x53d6ec[_0x48d658(0x37f)], _0x918f0e = _0x12f087 => {
-                    const _0x430f61 = _0x48d658;
-                    switch (_0x12f087) {
-                    case 0xcc + 0x1 * -0x4d4 + 0x1 * 0x409:
+        const response = await fetch('https://48intensapi.my.id/api/livejkt48/topstreamer');
+        const data = await response.json();
+        
+        if (data.success && data.data) {
+            const streamers = data.data;
+            const getRankStyle = (rank) => {
+                switch(rank) {
+                    case 1:
                         return {
-                            'badge': _0x2302dd[_0x430f61(0x3c6)],
-                            'text': _0x2302dd[_0x430f61(0x1e9)],
-                            'border': _0x2302dd[_0x430f61(0x1cd)],
-                            'icon': '👑'
+                            badge: 'bg-gradient-to-r from-yellow-400 to-yellow-600',
+                            text: 'text-yellow-500',
+                            border: 'border-yellow-200',
+                            icon: '👑'
                         };
-                    case 0x1 * -0x21ce + 0x5 * -0x25e + 0x2da6:
+                    case 2:
                         return {
-                            'badge': _0x2302dd[_0x430f61(0x3f0)],
-                            'text': _0x2302dd[_0x430f61(0x419)],
-                            'border': _0x2302dd[_0x430f61(0x428)],
-                            'icon': '⭐'
+                            badge: 'bg-gradient-to-r from-gray-400 to-gray-600',
+                            text: 'text-gray-800',
+                            border: 'border-gray-200',
+                            icon: '⭐'
                         };
-                    case -0x15f3 + 0x1f0f + -0x1 * 0x919:
+                    case 3:
                         return {
-                            'badge': _0x2302dd[_0x430f61(0x22a)],
-                            'text': _0x2302dd[_0x430f61(0x2d1)],
-                            'border': _0x2302dd[_0x430f61(0x1ed)],
-                            'icon': '🔥'
+                            badge: 'bg-gradient-to-r from-amber-500 to-orange-600',
+                            text: 'text-orange-500',
+                            border: 'border-orange-200',
+                            icon: '🔥'
                         };
                     default:
                         return {
-                            'badge': _0x2302dd[_0x430f61(0x38c)],
-                            'text': _0x2302dd[_0x430f61(0x36f)],
-                            'border': _0x2302dd[_0x430f61(0x32c)],
-                            'icon': ''
+                            badge: 'bg-gradient-to-r from-pink-300 via-purple-300 to-cyan-300',
+                            text: 'text-gray-700',
+                            border: 'border-purple-100',
+                            icon: ''
                         };
-                    }
-                }, _0x5d6cfe = _0x22eb62[_0x48d658(0x2b2)](_0xc51e90 => {
-                    const _0x1ee8e3 = _0x48d658, _0x5b204a = _0x2302dd[_0x1ee8e3(0x433)](_0x918f0e, _0xc51e90[_0x1ee8e3(0x41b)]);
-                    return _0x1ee8e3(0x3c8) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x26d) + _0x1ee8e3(0x21d) + _0x1ee8e3(0x305) + _0x1ee8e3(0x333) + _0x1ee8e3(0x1db) + _0x1ee8e3(0x2af) + _0x1ee8e3(0x410) + _0x1ee8e3(0x1d7) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x240) + _0x1ee8e3(0x315) + _0x1ee8e3(0x2cd) + _0x1ee8e3(0x3c8) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x24a) + _0x1ee8e3(0x46a) + _0x1ee8e3(0x35b) + _0x1ee8e3(0x1d3) + _0x1ee8e3(0x3e5) + _0x5b204a[_0x1ee8e3(0x25e)] + (_0x1ee8e3(0x309) + _0x1ee8e3(0x247) + _0x1ee8e3(0x3df) + _0x1ee8e3(0x3f5) + _0x1ee8e3(0x305) + _0x1ee8e3(0x1dc) + _0x1ee8e3(0x2c8) + _0x1ee8e3(0x20d) + _0x1ee8e3(0x464) + _0x1ee8e3(0x357) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x3e6)) + _0xc51e90[_0x1ee8e3(0x41b)] + (_0x1ee8e3(0x3c8) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x24a) + _0x1ee8e3(0x379) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x45e) + _0x1ee8e3(0x3b7)) + _0xc51e90[_0x1ee8e3(0x325)] + _0x1ee8e3(0x3aa) + _0xc51e90[_0x1ee8e3(0x44f)] + (_0x1ee8e3(0x3f7) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x243) + _0x1ee8e3(0x263) + _0x1ee8e3(0x251) + _0x1ee8e3(0x3af) + _0x1ee8e3(0x1f1)) + _0x5b204a[_0x1ee8e3(0x268)] + (_0x1ee8e3(0x246) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x3c7) + _0x1ee8e3(0x43d) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x240) + _0x1ee8e3(0x315) + _0x1ee8e3(0x283) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x389) + _0x1ee8e3(0x366) + _0x1ee8e3(0x398) + _0x1ee8e3(0x3ec) + _0x1ee8e3(0x237) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x367) + _0x1ee8e3(0x27a) + _0x1ee8e3(0x19f)) + _0x5b204a[_0x1ee8e3(0x341)] + (_0x1ee8e3(0x383) + _0x1ee8e3(0x404)) + _0xc51e90[_0x1ee8e3(0x44f)] + (_0x1ee8e3(0x3ad) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x3e6)) + (_0x5b204a[_0x1ee8e3(0x2e9)] ? _0x1ee8e3(0x429) + _0x5b204a[_0x1ee8e3(0x2e9)] + _0x1ee8e3(0x3c2) : '') + (_0x1ee8e3(0x3c8) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x24a) + _0x1ee8e3(0x379) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x3b6) + _0x1ee8e3(0x393) + _0x1ee8e3(0x2b0) + _0x1ee8e3(0x24f)) + _0xc51e90[_0x1ee8e3(0x1b7) + _0x1ee8e3(0x2eb)] + (_0x1ee8e3(0x355) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x24a) + _0x1ee8e3(0x379) + _0x1ee8e3(0x1aa) + _0x1ee8e3(0x35a) + _0x1ee8e3(0x21f) + _0x1ee8e3(0x2b9));
-                })[_0x48d658(0x274)]('');
-            _0x141c0d[_0x48d658(0x2c5)] = _0x48d658(0x3c8) + _0x48d658(0x389) + _0x48d658(0x330) + _0x48d658(0x21c) + _0x48d658(0x293) + _0x48d658(0x3e3) + _0x48d658(0x2b8) + _0x48d658(0x1ad) + _0x48d658(0x413) + _0x48d658(0x3c8) + _0x48d658(0x1aa) + _0x48d658(0x426) + _0x48d658(0x3de) + _0x48d658(0x1d9) + _0x48d658(0x1a9) + _0x48d658(0x440) + _0x48d658(0x207) + _0x48d658(0x37b) + _0x48d658(0x1e2) + _0x48d658(0x3c8) + _0x48d658(0x1aa) + '\x20' + _0x5d6cfe + (_0x48d658(0x3c8) + _0x48d658(0x3c7) + _0x48d658(0x43d) + _0x48d658(0x307));
+                }
+            };
+            
+            const streamersList = streamers.map(streamer => {
+                const style = getRankStyle(streamer.rank);
+                return `
+                    <div class="flex items-center bg-gray-50 space-x-4 p-4 rounded-lg mb-3">
+                        <div class="relative">
+                            <div class="absolute -top-2 -left-2 ${style.badge} text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
+                                ${streamer.rank}
+                            </div>
+                            <img src="${streamer.image_url}" alt="${streamer.name}" 
+                                class="w-12 h-12 rounded-full border-2 ${style.border}">
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2">
+                                <h3 class="font-bold ${style.text} line-clamp-1">${streamer.name}</h3>
+                                ${style.icon ? `<span>${style.icon}</span>` : ''}
+                            </div>
+                            <p class="text-sm text-gray-500">${streamer.total_live_stream}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            topStreamersContainer.innerHTML = `
+                <div class="bg-white border-2 border-gray-200 rounded-3xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
+                    ${streamersList}
+                </div>
+            `;
         }
-    } catch (_0x4c8c0d) {
-        console[_0x48d658(0x3fa)](_0x2302dd[_0x48d658(0x1c8)], _0x4c8c0d), _0x141c0d[_0x48d658(0x2c5)] = _0x48d658(0x3c8) + _0x48d658(0x23c) + _0x48d658(0x299) + _0x48d658(0x286) + _0x48d658(0x42b) + _0x48d658(0x231) + _0x48d658(0x24d) + _0x48d658(0x2da) + _0x48d658(0x32d) + _0x48d658(0x36d) + _0x48d658(0x2f0) + _0x48d658(0x411) + _0x48d658(0x31b) + _0x48d658(0x30c) + _0x48d658(0x203) + _0x48d658(0x22d) + _0x48d658(0x1aa) + _0x48d658(0x3b6) + _0x48d658(0x462) + _0x48d658(0x281) + _0x48d658(0x269) + _0x48d658(0x2c1) + _0x48d658(0x3ee) + _0x48d658(0x31d) + _0x48d658(0x435) + _0x48d658(0x1aa) + _0x48d658(0x340) + _0x48d658(0x307);
+    } catch (error) {
+        console.error('Error fetching top streamers:', error);
+        topStreamersContainer.innerHTML = `
+            <div class="bg-white rounded-3xl shadow-lg p-6">
+                <h2 class="text-xl font-bold mb-6 text-gray-700">Top Streamers of the Week</h2>
+                <p class="text-gray-500 text-center">Failed to load top streamers data</p>
+            </div>
+        `;
     }
 }
-fetchTopStreamers(), fetchLiveData(), fetchJKT48VLiveData(), setInterval(fetchLiveData, 0x95 * -0x58 + 0xa9b9 + 0x3 * 0xc95);
+fetchTopStreamers();
+fetchLiveData();
+setInterval(fetchLiveData, 30000);
