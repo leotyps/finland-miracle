@@ -1,1168 +1,430 @@
-const _0x38577e = _0x20bc;
-(function (_0x5ae7dd, _0x454569) {
-    const _0x50bd48 = _0x20bc, _0x4ccf73 = _0x5ae7dd();
-    while (!![]) {
-        try {
-            const _0x1dc1d1 = parseInt(_0x50bd48(0x44d)) / (-0x1 * -0x1097 + 0x757 * -0x3 + 0x1 * 0x56f) + -parseInt(_0x50bd48(0x490)) / (-0x186b * -0x1 + 0x5d9 * 0x3 + -0x29f4) + -parseInt(_0x50bd48(0x22d)) / (-0x7 * -0xb5 + 0x156a * 0x1 + -0x1a5a) * (parseInt(_0x50bd48(0x239)) / (0x65 * -0x5d + -0x1c5d + 0x4112)) + parseInt(_0x50bd48(0x2c7)) / (-0x15d1 + 0x14ed + -0x1 * -0xe9) + parseInt(_0x50bd48(0x32e)) / (-0x1db9 + 0x592 * -0x6 + 0x3f2b) * (parseInt(_0x50bd48(0x3c9)) / (0x34 * 0x83 + 0x1c63 + 0x8 * -0x6df)) + -parseInt(_0x50bd48(0x2ed)) / (-0x2174 + -0x83f * -0x1 + -0x1f1 * -0xd) + -parseInt(_0x50bd48(0x2db)) / (-0x3 * 0xbaf + 0x1c30 + 0x6e6);
-            if (_0x1dc1d1 === _0x454569)
-                break;
-            else
-                _0x4ccf73['push'](_0x4ccf73['shift']());
-        } catch (_0x1d8c91) {
-            _0x4ccf73['push'](_0x4ccf73['shift']());
-        }
-    }
-}(_0x2d54, -0x6b * 0xdfd + -0x673ea + -0x563 * -0x48b));
-const liveDetailContainer = document[_0x38577e(0x2cf) + _0x38577e(0x4b4)](_0x38577e(0x37d) + _0x38577e(0x208) + 'r'), loadingSkeleton = document[_0x38577e(0x2cf) + _0x38577e(0x4b4)](_0x38577e(0x2f6) + _0x38577e(0x302)), errorContainer = document[_0x38577e(0x2cf) + _0x38577e(0x4b4)](_0x38577e(0x1b0) + _0x38577e(0x4d3));
-function formatDate(_0x4fdd62) {
-    const _0x56f064 = _0x38577e, _0x3fc66c = {
-            'ptdic': _0x56f064(0x310),
-            'DfoLy': _0x56f064(0x4a5),
-            'ntXBb': _0x56f064(0x287),
-            'khPLu': _0x56f064(0x352) + 'ta'
-        }, _0x4273c5 = new Date(_0x4fdd62);
-    return '' + _0x4273c5[_0x56f064(0x2c3) + _0x56f064(0x384)](_0x3fc66c[_0x56f064(0x313)], {
-        'day': _0x3fc66c[_0x56f064(0x4d8)],
-        'month': _0x3fc66c[_0x56f064(0x4d8)],
-        'year': _0x3fc66c[_0x56f064(0x25e)],
-        'hour': _0x3fc66c[_0x56f064(0x4d8)],
-        'minute': _0x3fc66c[_0x56f064(0x4d8)],
-        'hour12': ![],
-        'timeZone': _0x3fc66c[_0x56f064(0x1a5)]
-    });
+const liveDetailContainer = document.getElementById("live-detail-container");
+const loadingSkeleton = document.getElementById("loading-skeleton");
+const errorContainer = document.getElementById("error-container");
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return `${date.toLocaleString("id-ID", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: 'Asia/Jakarta'
+    })}`;
 }
-function formatDuration(_0x5638a8) {
-    const _0x1b1b73 = _0x38577e, _0x491df5 = {
-            'eWYDw': _0x1b1b73(0x44a),
-            'rHEsT': _0x1b1b73(0x444)
-        };
-    return _0x5638a8[_0x1b1b73(0x4d6)](_0x491df5[_0x1b1b73(0x23d)], 'm')[_0x1b1b73(0x4d6)](_0x491df5[_0x1b1b73(0x409)], 'h');
+
+function formatDuration(duration) {
+    return duration.replace(' minutes', 'm').replace(' hour', 'h');
 }
-function getPlatformBadge(_0x38ed6b) {
-    const _0x4025b7 = _0x38577e, _0x11ee99 = {
-            'gVpzv': _0x4025b7(0x2df),
-            'cwaHB': _0x4025b7(0x423)
-        };
-    switch (_0x38ed6b[_0x4025b7(0x3f1) + 'e']()) {
-    case _0x11ee99[_0x4025b7(0x42c)]:
-        return _0x4025b7(0x187) + _0x4025b7(0x381) + _0x4025b7(0x260) + _0x4025b7(0x33b) + _0x4025b7(0x17d) + _0x4025b7(0x392) + _0x4025b7(0x413) + _0x4025b7(0x1e2) + _0x4025b7(0x38b) + _0x4025b7(0x28e) + _0x4025b7(0x1fb) + _0x4025b7(0x1ca) + _0x4025b7(0x445) + _0x4025b7(0x40e) + _0x4025b7(0x20f) + _0x4025b7(0x48f) + _0x4025b7(0x213) + _0x4025b7(0x421) + _0x4025b7(0x389) + _0x4025b7(0x1c4) + _0x4025b7(0x421) + _0x4025b7(0x25f);
-    case _0x11ee99[_0x4025b7(0x1bc)]:
-        return _0x4025b7(0x187) + _0x4025b7(0x381) + _0x4025b7(0x260) + _0x4025b7(0x33b) + _0x4025b7(0x17d) + _0x4025b7(0x392) + _0x4025b7(0x413) + _0x4025b7(0x1e2) + _0x4025b7(0x38b) + _0x4025b7(0x28e) + _0x4025b7(0x1fb) + _0x4025b7(0x1ca) + _0x4025b7(0x334) + _0x4025b7(0x336) + _0x4025b7(0x2bf) + _0x4025b7(0x186) + _0x4025b7(0x1dd) + _0x4025b7(0x421) + _0x4025b7(0x4b2) + _0x4025b7(0x1ec) + _0x4025b7(0x421) + _0x4025b7(0x1f2) + '>';
-    default:
-        return _0x4025b7(0x187) + _0x4025b7(0x381) + _0x4025b7(0x260) + _0x4025b7(0x33b) + _0x4025b7(0x17d) + _0x4025b7(0x392) + _0x4025b7(0x413) + _0x4025b7(0x1e2) + _0x4025b7(0x38b) + _0x4025b7(0x28e) + _0x4025b7(0x1fb) + _0x4025b7(0x1ca) + _0x4025b7(0x448) + _0x4025b7(0x3f7) + _0x4025b7(0x20f) + _0x4025b7(0x48f) + _0x4025b7(0x213) + _0x4025b7(0x421) + _0x4025b7(0x474) + _0x4025b7(0x187) + _0x4025b7(0x3da) + _0x4025b7(0x4e4);
+
+function getPlatformBadge(platform) {
+    switch (platform.toLowerCase()) {
+        case 'showroom':
+            return `
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-rose-400 to-rose-500 text-white shadow-sm">
+                    Showroom
+                </span>`;
+        case 'idn':
+            return `
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-amber-400 to-yellow-500 text-white shadow-sm">
+                    IDN Live
+                </span>`;
+        default:
+            return `
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-gray-500 to-gray-600 text-white shadow-sm">
+                    Live
+                </span>`;
     }
 }
-function _0x20bc(_0x1aa6dc, _0x5d4597) {
-    const _0x30ae01 = _0x2d54();
-    return _0x20bc = function (_0x3809ee, _0x40ac04) {
-        _0x3809ee = _0x3809ee - (0xe3 + 0xc1c + -0xb86);
-        let _0x4e15ea = _0x30ae01[_0x3809ee];
-        return _0x4e15ea;
-    }, _0x20bc(_0x1aa6dc, _0x5d4597);
+
+function createShowroomGiftLog(gifts) {
+    if (!gifts || gifts.length === 0) {
+        return `
+            <div class="flex items-center justify-center py-8">
+                <div class="flex flex-col items-center">
+                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V4m0 13a9 9 0 01-9 9m9-9a9 9 0 019 9m-9-2a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0m6 0a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0"></path>
+                    </svg>
+                    <p class="text-gray-500 text-lg font-medium mt-2">No gift data available</p>
+                </div>
+            </div>`;
+    }
+
+    return `
+    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                <tr>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">User</th>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gift</th>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Qty</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                ${gifts.map(gift => `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-3 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
+                                    <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover" src="${gift.avatar_url}" alt="${gift.name}" onerror="this.src='https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png'">
+                                </div>
+                                <div class="ml-2 sm:ml-4">
+                                    <div class="text-sm font-medium text-gray-900 truncate max-w-[100px] sm:max-w-none">${gift.name}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <img src="${gift.image}" alt="${gift.name}" class="h-6 w-6 sm:h-8 sm:w-8 mr-1 sm:mr-2 object-contain" onerror="this.src='https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png'">
+                                <span class="text-sm text-gray-900 truncate max-w-[80px] sm:max-w-none">${gift.name}</span>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${gift.num.toLocaleString()}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    </div>
+    `;
 }
-function createShowroomGiftLog(_0x27e589) {
-    const _0x205a86 = _0x38577e, _0x4f8b71 = {
-            'VMaoz': function (_0x40b519, _0x4ac30a) {
-                return _0x40b519 === _0x4ac30a;
-            }
-        };
-    if (!_0x27e589 || _0x4f8b71[_0x205a86(0x1e4)](_0x27e589[_0x205a86(0x368)], -0x1534 * -0x1 + -0xf01 + -0x633))
-        return _0x205a86(0x187) + _0x205a86(0x254) + _0x205a86(0x49d) + _0x205a86(0x31a) + _0x205a86(0x4d4) + _0x205a86(0x346) + _0x205a86(0x35d) + _0x205a86(0x421) + _0x205a86(0x26e) + _0x205a86(0x345) + _0x205a86(0x4d9) + _0x205a86(0x453) + _0x205a86(0x383) + _0x205a86(0x421) + _0x205a86(0x39c) + _0x205a86(0x475) + _0x205a86(0x2da) + _0x205a86(0x410) + _0x205a86(0x349) + _0x205a86(0x442) + _0x205a86(0x38c) + _0x205a86(0x4c2) + _0x205a86(0x3c5) + _0x205a86(0x1ac) + _0x205a86(0x180) + _0x205a86(0x1e9) + _0x205a86(0x42d) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x446) + _0x205a86(0x361) + _0x205a86(0x1b9) + _0x205a86(0x376) + _0x205a86(0x1a3) + _0x205a86(0x286) + _0x205a86(0x3dd) + _0x205a86(0x188) + _0x205a86(0x2e8) + _0x205a86(0x193) + _0x205a86(0x2e7) + _0x205a86(0x482) + _0x205a86(0x2b2) + _0x205a86(0x1ab) + _0x205a86(0x42f) + _0x205a86(0x39d) + _0x205a86(0x20e) + _0x205a86(0x27a) + _0x205a86(0x41d) + _0x205a86(0x2ae) + _0x205a86(0x27d) + _0x205a86(0x19f) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x24b) + _0x205a86(0x421) + _0x205a86(0x197) + _0x205a86(0x2eb) + _0x205a86(0x38a) + _0x205a86(0x3ef) + _0x205a86(0x34a) + _0x205a86(0x1a9) + _0x205a86(0x209) + _0x205a86(0x3a5) + _0x205a86(0x321) + _0x205a86(0x421) + _0x205a86(0x276) + _0x205a86(0x2ab) + _0x205a86(0x320);
-    return _0x205a86(0x26b) + _0x205a86(0x35e) + _0x205a86(0x4d5) + _0x205a86(0x436) + _0x205a86(0x437) + _0x205a86(0x4c3) + _0x205a86(0x28c) + _0x205a86(0x1dd) + _0x205a86(0x212) + _0x205a86(0x3eb) + _0x205a86(0x418) + _0x205a86(0x2ac) + _0x205a86(0x33a) + _0x205a86(0x4ba) + _0x205a86(0x421) + _0x205a86(0x455) + _0x205a86(0x484) + _0x205a86(0x181) + _0x205a86(0x2cb) + _0x205a86(0x42a) + _0x205a86(0x405) + _0x205a86(0x421) + _0x205a86(0x441) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x48a) + _0x205a86(0x326) + _0x205a86(0x1ee) + _0x205a86(0x4b6) + _0x205a86(0x42e) + _0x205a86(0x342) + _0x205a86(0x261) + _0x205a86(0x284) + _0x205a86(0x265) + _0x205a86(0x3a7) + _0x205a86(0x3a2) + _0x205a86(0x305) + _0x205a86(0x3e2) + _0x205a86(0x187) + _0x205a86(0x421) + _0x205a86(0x4a1) + _0x205a86(0x1cc) + _0x205a86(0x4dd) + _0x205a86(0x2cc) + _0x205a86(0x3aa) + _0x205a86(0x4d2) + _0x205a86(0x4e3) + _0x205a86(0x3be) + _0x205a86(0x337) + _0x205a86(0x243) + _0x205a86(0x272) + _0x205a86(0x36e) + _0x205a86(0x1cf) + _0x205a86(0x383) + _0x205a86(0x421) + _0x205a86(0x3d4) + _0x205a86(0x270) + _0x205a86(0x451) + _0x205a86(0x1d6) + _0x205a86(0x371) + _0x205a86(0x215) + _0x205a86(0x370) + _0x205a86(0x22f) + _0x205a86(0x458) + _0x205a86(0x2de) + _0x205a86(0x4ab) + _0x205a86(0x24e) + _0x205a86(0x3d0) + _0x205a86(0x383) + _0x205a86(0x4c5) + _0x205a86(0x1eb) + _0x205a86(0x1f0) + _0x205a86(0x2c5) + _0x205a86(0x221) + _0x205a86(0x485) + _0x205a86(0x420) + _0x205a86(0x30a) + _0x205a86(0x1b8) + _0x205a86(0x2d2) + _0x205a86(0x421) + _0x205a86(0x3fa) + _0x27e589[_0x205a86(0x2fb)](_0x335771 => _0x205a86(0x187) + _0x205a86(0x421) + _0x205a86(0x4c1) + _0x205a86(0x3f8) + _0x205a86(0x1df) + _0x205a86(0x211) + _0x205a86(0x2f8) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x36f) + _0x205a86(0x4dd) + _0x205a86(0x32d) + _0x205a86(0x44f) + _0x205a86(0x3db) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x24d) + _0x205a86(0x2a5) + _0x205a86(0x2ba) + _0x205a86(0x33d) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x3a9) + _0x205a86(0x205) + _0x205a86(0x426) + _0x205a86(0x2e0) + _0x205a86(0x24c) + _0x205a86(0x1d2) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x487) + _0x205a86(0x43a) + _0x205a86(0x1d1) + _0x205a86(0x403) + _0x205a86(0x1c5) + _0x205a86(0x27b) + _0x205a86(0x4ec) + '=\x22' + _0x335771[_0x205a86(0x461)] + _0x205a86(0x43b) + _0x335771[_0x205a86(0x2a2)] + (_0x205a86(0x314) + _0x205a86(0x34e) + _0x205a86(0x491) + _0x205a86(0x463) + _0x205a86(0x1da) + _0x205a86(0x3ba) + _0x205a86(0x3e8) + _0x205a86(0x4ca) + _0x205a86(0x271) + _0x205a86(0x44b) + _0x205a86(0x236) + _0x205a86(0x187) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x32a) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x24d) + _0x205a86(0x43d) + _0x205a86(0x38e) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x274) + _0x205a86(0x2eb) + _0x205a86(0x3ac) + _0x205a86(0x37a) + _0x205a86(0x3e9) + _0x205a86(0x33f) + _0x205a86(0x231) + _0x205a86(0x433) + _0x205a86(0x387)) + _0x335771[_0x205a86(0x2a2)] + (_0x205a86(0x276) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x2ab) + _0x205a86(0x251) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x281) + _0x205a86(0x187) + _0x205a86(0x421) + _0x205a86(0x4db) + _0x205a86(0x187) + _0x205a86(0x421) + _0x205a86(0x273) + _0x205a86(0x49e) + _0x205a86(0x2d8) + _0x205a86(0x432) + _0x205a86(0x3bc) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x17c) + _0x205a86(0x45f) + _0x205a86(0x1d9) + _0x205a86(0x31d) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x23f) + _0x205a86(0x1b1)) + _0x335771[_0x205a86(0x386)] + _0x205a86(0x43b) + _0x335771[_0x205a86(0x2a2)] + (_0x205a86(0x493) + _0x205a86(0x2be) + _0x205a86(0x312) + _0x205a86(0x18f) + _0x205a86(0x288) + _0x205a86(0x1b5) + _0x205a86(0x1bb) + _0x205a86(0x3c0) + _0x205a86(0x339) + _0x205a86(0x41e) + _0x205a86(0x229) + _0x205a86(0x1c1) + _0x205a86(0x3ad) + _0x205a86(0x1e6) + _0x205a86(0x4b0) + _0x205a86(0x235) + _0x205a86(0x41f) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x465) + _0x205a86(0x374) + _0x205a86(0x479) + _0x205a86(0x372) + _0x205a86(0x3b5) + _0x205a86(0x30b) + _0x205a86(0x2bd) + _0x205a86(0x427)) + _0x335771[_0x205a86(0x2a2)] + (_0x205a86(0x21f) + _0x205a86(0x421) + _0x205a86(0x421) + _0x205a86(0x190) + _0x205a86(0x37c) + _0x205a86(0x421) + _0x205a86(0x1e0) + _0x205a86(0x4cc) + _0x205a86(0x421) + _0x205a86(0x291) + _0x205a86(0x27f) + _0x205a86(0x1bf) + _0x205a86(0x2f5) + _0x205a86(0x1c0) + _0x205a86(0x1f6) + _0x205a86(0x3b0) + _0x205a86(0x4cd) + '>') + _0x335771[_0x205a86(0x280)][_0x205a86(0x2c3) + _0x205a86(0x384)]() + (_0x205a86(0x36c) + _0x205a86(0x421) + _0x205a86(0x335) + _0x205a86(0x383) + _0x205a86(0x2a4)))[_0x205a86(0x289)]('') + (_0x205a86(0x187) + _0x205a86(0x266) + _0x205a86(0x383) + _0x205a86(0x41c) + _0x205a86(0x32a) + _0x205a86(0x2d0));
+
+function createIdnGiftLog(gifts) {
+    if (!gifts || gifts.length === 0) {
+        return `
+            <div class="flex items-center justify-center py-8">
+                <div class="flex flex-col items-center">
+                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V4m0 13a9 9 0 01-9 9m9-9a9 9 0 019 9m-9-2a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0m6 0a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0"></path>
+                    </svg>
+                    <p class="text-gray-500 text-lg font-medium mt-2">No gift data available</p>
+                </div>
+            </div>`;
+    }
+
+    return `
+    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                <tr>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Rank</th>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">User</th>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Points</th>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gold</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                ${gifts.map(gift => `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${gift.rank}</td>
+                        <td class="px-3 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
+                                    <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover" src="${gift.image_url}" alt="${gift.name}" onerror="this.src='https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png'">
+                                </div>
+                                <div class="ml-2 sm:ml-4">
+                                    <div class="text-sm font-medium text-gray-900 truncate max-w-[100px] sm:max-w-none">${gift.name}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${gift.total_point.toLocaleString()}</td>
+                        <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${gift.gold.toLocaleString()}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    </div>
+    `;
 }
-function createIdnGiftLog(_0x2d7b11) {
-    const _0x5d244f = _0x38577e, _0x327a9a = {
-            'PPEpX': function (_0x2ed1e5, _0x26c816) {
-                return _0x2ed1e5 === _0x26c816;
-            }
-        };
-    if (!_0x2d7b11 || _0x327a9a[_0x5d244f(0x17f)](_0x2d7b11[_0x5d244f(0x368)], 0x16a7 + 0x1 * 0x23ef + 0x1 * -0x3a96))
-        return _0x5d244f(0x187) + _0x5d244f(0x254) + _0x5d244f(0x49d) + _0x5d244f(0x31a) + _0x5d244f(0x4d4) + _0x5d244f(0x346) + _0x5d244f(0x35d) + _0x5d244f(0x421) + _0x5d244f(0x26e) + _0x5d244f(0x345) + _0x5d244f(0x4d9) + _0x5d244f(0x453) + _0x5d244f(0x383) + _0x5d244f(0x421) + _0x5d244f(0x39c) + _0x5d244f(0x475) + _0x5d244f(0x2da) + _0x5d244f(0x410) + _0x5d244f(0x349) + _0x5d244f(0x442) + _0x5d244f(0x38c) + _0x5d244f(0x4c2) + _0x5d244f(0x3c5) + _0x5d244f(0x1ac) + _0x5d244f(0x180) + _0x5d244f(0x1e9) + _0x5d244f(0x42d) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x446) + _0x5d244f(0x361) + _0x5d244f(0x1b9) + _0x5d244f(0x376) + _0x5d244f(0x1a3) + _0x5d244f(0x286) + _0x5d244f(0x3dd) + _0x5d244f(0x188) + _0x5d244f(0x2e8) + _0x5d244f(0x193) + _0x5d244f(0x2e7) + _0x5d244f(0x482) + _0x5d244f(0x2b2) + _0x5d244f(0x1ab) + _0x5d244f(0x42f) + _0x5d244f(0x39d) + _0x5d244f(0x20e) + _0x5d244f(0x27a) + _0x5d244f(0x41d) + _0x5d244f(0x2ae) + _0x5d244f(0x27d) + _0x5d244f(0x19f) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x24b) + _0x5d244f(0x421) + _0x5d244f(0x197) + _0x5d244f(0x2eb) + _0x5d244f(0x38a) + _0x5d244f(0x3ef) + _0x5d244f(0x34a) + _0x5d244f(0x1a9) + _0x5d244f(0x209) + _0x5d244f(0x3a5) + _0x5d244f(0x321) + _0x5d244f(0x421) + _0x5d244f(0x276) + _0x5d244f(0x2ab) + _0x5d244f(0x320);
-    return _0x5d244f(0x26b) + _0x5d244f(0x35e) + _0x5d244f(0x4d5) + _0x5d244f(0x436) + _0x5d244f(0x437) + _0x5d244f(0x4c3) + _0x5d244f(0x28c) + _0x5d244f(0x1dd) + _0x5d244f(0x212) + _0x5d244f(0x3eb) + _0x5d244f(0x418) + _0x5d244f(0x2ac) + _0x5d244f(0x33a) + _0x5d244f(0x4ba) + _0x5d244f(0x421) + _0x5d244f(0x455) + _0x5d244f(0x484) + _0x5d244f(0x181) + _0x5d244f(0x2cb) + _0x5d244f(0x42a) + _0x5d244f(0x405) + _0x5d244f(0x421) + _0x5d244f(0x441) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x48a) + _0x5d244f(0x326) + _0x5d244f(0x1ee) + _0x5d244f(0x4b6) + _0x5d244f(0x42e) + _0x5d244f(0x342) + _0x5d244f(0x261) + _0x5d244f(0x284) + _0x5d244f(0x265) + _0x5d244f(0x3a7) + _0x5d244f(0x3a2) + _0x5d244f(0x305) + _0x5d244f(0x32b) + _0x5d244f(0x187) + _0x5d244f(0x421) + _0x5d244f(0x4a1) + _0x5d244f(0x1cc) + _0x5d244f(0x4dd) + _0x5d244f(0x2cc) + _0x5d244f(0x3aa) + _0x5d244f(0x4d2) + _0x5d244f(0x4e3) + _0x5d244f(0x3be) + _0x5d244f(0x337) + _0x5d244f(0x243) + _0x5d244f(0x272) + _0x5d244f(0x36e) + _0x5d244f(0x2bb) + _0x5d244f(0x383) + _0x5d244f(0x421) + _0x5d244f(0x3d4) + _0x5d244f(0x270) + _0x5d244f(0x451) + _0x5d244f(0x1d6) + _0x5d244f(0x371) + _0x5d244f(0x215) + _0x5d244f(0x370) + _0x5d244f(0x22f) + _0x5d244f(0x458) + _0x5d244f(0x2de) + _0x5d244f(0x4ab) + _0x5d244f(0x24e) + _0x5d244f(0x3b2) + _0x5d244f(0x2fa) + _0x5d244f(0x421) + _0x5d244f(0x4ce) + _0x5d244f(0x277) + _0x5d244f(0x27f) + _0x5d244f(0x2ea) + _0x5d244f(0x355) + _0x5d244f(0x1fd) + _0x5d244f(0x26a) + _0x5d244f(0x1a1) + _0x5d244f(0x3d9) + _0x5d244f(0x3ff) + _0x5d244f(0x2d3) + _0x5d244f(0x3cb) + _0x5d244f(0x3ed) + _0x5d244f(0x22a) + _0x5d244f(0x421) + _0x5d244f(0x495) + _0x5d244f(0x421) + _0x5d244f(0x4a4) + _0x5d244f(0x421) + _0x5d244f(0x4da) + _0x5d244f(0x4cb) + _0x5d244f(0x3ee) + _0x5d244f(0x3ce) + _0x5d244f(0x412) + _0x5d244f(0x187) + _0x5d244f(0x34f) + _0x2d7b11[_0x5d244f(0x2fb)](_0x3f629e => _0x5d244f(0x187) + _0x5d244f(0x421) + _0x5d244f(0x4c1) + _0x5d244f(0x3f8) + _0x5d244f(0x1df) + _0x5d244f(0x211) + _0x5d244f(0x2f8) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x36f) + _0x5d244f(0x4dd) + _0x5d244f(0x32d) + _0x5d244f(0x44f) + _0x5d244f(0x18c) + _0x5d244f(0x399) + _0x5d244f(0x479) + _0x5d244f(0x4e8) + _0x3f629e[_0x5d244f(0x296)] + (_0x5d244f(0x36c) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x297) + _0x5d244f(0x1e5) + _0x5d244f(0x36b) + _0x5d244f(0x348) + _0x5d244f(0x187) + _0x5d244f(0x421) + _0x5d244f(0x2ab) + _0x5d244f(0x20b) + _0x5d244f(0x250) + _0x5d244f(0x308) + _0x5d244f(0x187) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x254) + _0x5d244f(0x264) + _0x5d244f(0x2ad) + _0x5d244f(0x43c) + _0x5d244f(0x470) + _0x5d244f(0x22e) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x4bd) + _0x5d244f(0x398) + _0x5d244f(0x44e) + _0x5d244f(0x248) + _0x5d244f(0x3d2) + _0x5d244f(0x328) + _0x5d244f(0x23a)) + _0x3f629e[_0x5d244f(0x257)] + _0x5d244f(0x43b) + _0x3f629e[_0x5d244f(0x2a2)] + (_0x5d244f(0x314) + _0x5d244f(0x34e) + _0x5d244f(0x491) + _0x5d244f(0x463) + _0x5d244f(0x1da) + _0x5d244f(0x3ba) + _0x5d244f(0x3e8) + _0x5d244f(0x4ca) + _0x5d244f(0x271) + _0x5d244f(0x44b) + _0x5d244f(0x236) + _0x5d244f(0x187) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x32a) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x24d) + _0x5d244f(0x43d) + _0x5d244f(0x38e) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x274) + _0x5d244f(0x2eb) + _0x5d244f(0x3ac) + _0x5d244f(0x37a) + _0x5d244f(0x3e9) + _0x5d244f(0x33f) + _0x5d244f(0x231) + _0x5d244f(0x433) + _0x5d244f(0x387)) + _0x3f629e[_0x5d244f(0x2a2)] + (_0x5d244f(0x276) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x2ab) + _0x5d244f(0x251) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x281) + _0x5d244f(0x187) + _0x5d244f(0x421) + _0x5d244f(0x4db) + _0x5d244f(0x187) + _0x5d244f(0x421) + _0x5d244f(0x273) + _0x5d244f(0x49e) + _0x5d244f(0x2d8) + _0x5d244f(0x432) + _0x5d244f(0x1c2) + _0x5d244f(0x1e8) + _0x5d244f(0x36d) + _0x5d244f(0x340)) + _0x3f629e[_0x5d244f(0x283) + 't'][_0x5d244f(0x2c3) + _0x5d244f(0x384)]() + (_0x5d244f(0x36c) + _0x5d244f(0x421) + _0x5d244f(0x421) + _0x5d244f(0x297) + _0x5d244f(0x1e5) + _0x5d244f(0x36b) + _0x5d244f(0x466) + _0x5d244f(0x1d3) + _0x5d244f(0x1e3) + _0x5d244f(0x1c3) + _0x5d244f(0x4eb)) + _0x3f629e[_0x5d244f(0x1aa)][_0x5d244f(0x2c3) + _0x5d244f(0x384)]() + (_0x5d244f(0x36c) + _0x5d244f(0x421) + _0x5d244f(0x335) + _0x5d244f(0x383) + _0x5d244f(0x2a4)))[_0x5d244f(0x289)]('') + (_0x5d244f(0x187) + _0x5d244f(0x266) + _0x5d244f(0x383) + _0x5d244f(0x41c) + _0x5d244f(0x32a) + _0x5d244f(0x2d0));
+
+function createShowroomStageUsers(users) {
+    if (!users || users.length === 0) {
+        return `
+            <div class="flex items-center justify-center py-8">
+                <div class="flex flex-col items-center">
+                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V4m0 13a9 9 0 01-9 9m9-9a9 9 0 019 9m-9-2a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0m6 0a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0"></path>
+                    </svg>
+                    <p class="text-gray-500 text-lg font-medium mt-2">No stage user data available</p>
+                </div>
+            </div>`;
+    }
+
+    return `
+    <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gradient-to-r from-gray-50 to-gray-100">
+                <tr>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Rank</th>
+                    <th scope="col" class="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">User</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                ${users.map(user => `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${user.rank}</td>
+                        <td class="px-3 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
+                                    <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover" src="${user.user.avatar_url}" alt="${user.user.name}" onerror="this.src='https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png'">
+                                </div>
+                                <div class="ml-2 sm:ml-4">
+                                    <div class="text-sm font-medium text-gray-900 truncate max-w-[100px] sm:max-w-none">${user.user.name}</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    </div>
+    `;
 }
-function createShowroomStageUsers(_0x4ac45d) {
-    const _0x9ae261 = _0x38577e, _0x4cb4b3 = {
-            'BfksE': function (_0x55b55f, _0x4eba79) {
-                return _0x55b55f === _0x4eba79;
-            }
-        };
-    if (!_0x4ac45d || _0x4cb4b3[_0x9ae261(0x47d)](_0x4ac45d[_0x9ae261(0x368)], 0x1851 + 0xd82 + -0x17 * 0x1a5))
-        return _0x9ae261(0x187) + _0x9ae261(0x254) + _0x9ae261(0x49d) + _0x9ae261(0x31a) + _0x9ae261(0x4d4) + _0x9ae261(0x346) + _0x9ae261(0x35d) + _0x9ae261(0x421) + _0x9ae261(0x26e) + _0x9ae261(0x345) + _0x9ae261(0x4d9) + _0x9ae261(0x453) + _0x9ae261(0x383) + _0x9ae261(0x421) + _0x9ae261(0x39c) + _0x9ae261(0x475) + _0x9ae261(0x2da) + _0x9ae261(0x410) + _0x9ae261(0x349) + _0x9ae261(0x442) + _0x9ae261(0x38c) + _0x9ae261(0x4c2) + _0x9ae261(0x3c5) + _0x9ae261(0x1ac) + _0x9ae261(0x180) + _0x9ae261(0x1e9) + _0x9ae261(0x42d) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x446) + _0x9ae261(0x361) + _0x9ae261(0x1b9) + _0x9ae261(0x376) + _0x9ae261(0x1a3) + _0x9ae261(0x286) + _0x9ae261(0x3dd) + _0x9ae261(0x188) + _0x9ae261(0x2e8) + _0x9ae261(0x193) + _0x9ae261(0x2e7) + _0x9ae261(0x482) + _0x9ae261(0x2b2) + _0x9ae261(0x1ab) + _0x9ae261(0x42f) + _0x9ae261(0x39d) + _0x9ae261(0x20e) + _0x9ae261(0x27a) + _0x9ae261(0x41d) + _0x9ae261(0x2ae) + _0x9ae261(0x27d) + _0x9ae261(0x19f) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x24b) + _0x9ae261(0x421) + _0x9ae261(0x197) + _0x9ae261(0x2eb) + _0x9ae261(0x38a) + _0x9ae261(0x3ef) + _0x9ae261(0x34a) + _0x9ae261(0x1a9) + _0x9ae261(0x19c) + _0x9ae261(0x472) + _0x9ae261(0x1a0) + _0x9ae261(0x421) + _0x9ae261(0x190) + _0x9ae261(0x37c) + _0x9ae261(0x450) + '>';
-    return _0x9ae261(0x26b) + _0x9ae261(0x35e) + _0x9ae261(0x4d5) + _0x9ae261(0x436) + _0x9ae261(0x437) + _0x9ae261(0x4c3) + _0x9ae261(0x28c) + _0x9ae261(0x1dd) + _0x9ae261(0x212) + _0x9ae261(0x3eb) + _0x9ae261(0x418) + _0x9ae261(0x2ac) + _0x9ae261(0x33a) + _0x9ae261(0x4ba) + _0x9ae261(0x421) + _0x9ae261(0x455) + _0x9ae261(0x484) + _0x9ae261(0x181) + _0x9ae261(0x2cb) + _0x9ae261(0x42a) + _0x9ae261(0x405) + _0x9ae261(0x421) + _0x9ae261(0x441) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x48a) + _0x9ae261(0x326) + _0x9ae261(0x1ee) + _0x9ae261(0x4b6) + _0x9ae261(0x42e) + _0x9ae261(0x342) + _0x9ae261(0x261) + _0x9ae261(0x284) + _0x9ae261(0x265) + _0x9ae261(0x3a7) + _0x9ae261(0x3a2) + _0x9ae261(0x305) + _0x9ae261(0x32b) + _0x9ae261(0x187) + _0x9ae261(0x421) + _0x9ae261(0x4a1) + _0x9ae261(0x1cc) + _0x9ae261(0x4dd) + _0x9ae261(0x2cc) + _0x9ae261(0x3aa) + _0x9ae261(0x4d2) + _0x9ae261(0x4e3) + _0x9ae261(0x3be) + _0x9ae261(0x337) + _0x9ae261(0x243) + _0x9ae261(0x272) + _0x9ae261(0x36e) + _0x9ae261(0x2bb) + _0x9ae261(0x383) + _0x9ae261(0x4c5) + _0x9ae261(0x1eb) + _0x9ae261(0x1f0) + _0x9ae261(0x2c5) + _0x9ae261(0x221) + _0x9ae261(0x485) + _0x9ae261(0x420) + _0x9ae261(0x30a) + _0x9ae261(0x1b8) + _0x9ae261(0x2d2) + _0x9ae261(0x421) + _0x9ae261(0x3fa) + _0x4ac45d[_0x9ae261(0x2fb)](_0x3c73fb => _0x9ae261(0x187) + _0x9ae261(0x421) + _0x9ae261(0x4c1) + _0x9ae261(0x3f8) + _0x9ae261(0x1df) + _0x9ae261(0x211) + _0x9ae261(0x2f8) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x36f) + _0x9ae261(0x4dd) + _0x9ae261(0x32d) + _0x9ae261(0x44f) + _0x9ae261(0x18c) + _0x9ae261(0x399) + _0x9ae261(0x479) + _0x9ae261(0x4e8) + _0x3c73fb[_0x9ae261(0x296)] + (_0x9ae261(0x36c) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x297) + _0x9ae261(0x1e5) + _0x9ae261(0x36b) + _0x9ae261(0x348) + _0x9ae261(0x187) + _0x9ae261(0x421) + _0x9ae261(0x2ab) + _0x9ae261(0x20b) + _0x9ae261(0x250) + _0x9ae261(0x308) + _0x9ae261(0x187) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x254) + _0x9ae261(0x264) + _0x9ae261(0x2ad) + _0x9ae261(0x43c) + _0x9ae261(0x470) + _0x9ae261(0x22e) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x4bd) + _0x9ae261(0x398) + _0x9ae261(0x44e) + _0x9ae261(0x248) + _0x9ae261(0x3d2) + _0x9ae261(0x328) + _0x9ae261(0x23a)) + _0x3c73fb[_0x9ae261(0x47f)][_0x9ae261(0x461)] + _0x9ae261(0x43b) + _0x3c73fb[_0x9ae261(0x47f)][_0x9ae261(0x2a2)] + (_0x9ae261(0x314) + _0x9ae261(0x34e) + _0x9ae261(0x491) + _0x9ae261(0x463) + _0x9ae261(0x1da) + _0x9ae261(0x3ba) + _0x9ae261(0x3e8) + _0x9ae261(0x4ca) + _0x9ae261(0x271) + _0x9ae261(0x44b) + _0x9ae261(0x236) + _0x9ae261(0x187) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x32a) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x24d) + _0x9ae261(0x43d) + _0x9ae261(0x38e) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x274) + _0x9ae261(0x2eb) + _0x9ae261(0x3ac) + _0x9ae261(0x37a) + _0x9ae261(0x3e9) + _0x9ae261(0x33f) + _0x9ae261(0x231) + _0x9ae261(0x433) + _0x9ae261(0x387)) + _0x3c73fb[_0x9ae261(0x47f)][_0x9ae261(0x2a2)] + (_0x9ae261(0x276) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x2ab) + _0x9ae261(0x251) + _0x9ae261(0x421) + _0x9ae261(0x421) + _0x9ae261(0x281) + _0x9ae261(0x187) + _0x9ae261(0x421) + _0x9ae261(0x4db) + _0x9ae261(0x187) + _0x9ae261(0x421) + _0x9ae261(0x47c) + _0x9ae261(0x421) + _0x9ae261(0x3fa)))[_0x9ae261(0x289)]('') + (_0x9ae261(0x187) + _0x9ae261(0x266) + _0x9ae261(0x383) + _0x9ae261(0x41c) + _0x9ae261(0x32a) + _0x9ae261(0x2d0));
-}
-function updateDocumentMeta(_0x1c6fe9) {
-    const _0x389fb = _0x38577e, _0x33fb00 = {
-            'MBqpP': _0x389fb(0x3f2),
-            'xCkiP': _0x389fb(0x4a8),
-            'JLyOn': _0x389fb(0x2a2),
-            'dXZbJ': _0x389fb(0x317),
-            'JyXIb': function (_0x2180d5, _0x4d7777) {
-                return _0x2180d5 === _0x4d7777;
-            },
-            'csvLr': _0x389fb(0x2df),
-            'oakaN': _0x389fb(0x380),
-            'SooWb': _0x389fb(0x483) + _0x389fb(0x1db),
-            'lyNvX': _0x389fb(0x1c9),
-            'Gjcnb': _0x389fb(0x49b),
-            'Nvhkn': _0x389fb(0x3ea),
-            'cFeOe': _0x389fb(0x200),
-            'NFsVY': _0x389fb(0x4df),
-            'PXBgC': _0x389fb(0x234) + 'r',
-            'zndgC': _0x389fb(0x17a) + 'rd',
-            'URvpU': _0x389fb(0x4c8) + _0x389fb(0x2e1),
-            'mYmkJ': _0x389fb(0x263) + _0x389fb(0x3c8),
-            'IUpbc': _0x389fb(0x26d) + _0x389fb(0x24f),
-            'xHivv': _0x389fb(0x223) + _0x389fb(0x35f),
-            'SqZlH': _0x389fb(0x473) + _0x389fb(0x295) + _0x389fb(0x46f) + _0x389fb(0x476) + _0x389fb(0x347),
-            'ccxci': _0x389fb(0x473) + _0x389fb(0x4c7) + _0x389fb(0x29d),
-            'MuyTA': function (_0x5f2a13, _0x30a890) {
-                return _0x5f2a13 + _0x30a890;
-            },
-            'ZFcAb': _0x389fb(0x40f) + _0x389fb(0x2f2) + _0x389fb(0x259)
-        }, {
-            type: _0x1635ce,
-            member: _0x348f43,
-            platform_data: _0x1ba2d0
-        } = _0x1c6fe9, _0x4e1eba = _0x33fb00[_0x389fb(0x2ef)](_0x1635ce[_0x389fb(0x3f1) + 'e'](), _0x33fb00[_0x389fb(0x1f3)]);
-    document[_0x389fb(0x30d)] = _0x348f43[_0x389fb(0x2a2)] + (_0x389fb(0x3b6) + _0x389fb(0x19b) + _0x389fb(0x46c) + _0x389fb(0x4e5));
-    const _0x11fc1a = _0x4e1eba ? _0x348f43[_0x389fb(0x386)][_0x389fb(0x192)] : _0x1ba2d0[_0x389fb(0x192)], _0x57c7e4 = [
-            {
-                'property': _0x33fb00[_0x389fb(0x21a)],
-                'content': _0x348f43[_0x389fb(0x2a2)] + (_0x389fb(0x333) + _0x389fb(0x46b))
-            },
-            {
-                'property': _0x33fb00[_0x389fb(0x360)],
-                'content': _0x389fb(0x3b3) + _0x348f43[_0x389fb(0x2a2)] + (_0x389fb(0x39b) + _0x389fb(0x369) + _0x389fb(0x467)) + (_0x4e1eba ? _0x33fb00[_0x389fb(0x2b1)] : _0x33fb00[_0x389fb(0x255)])
-            },
-            {
-                'property': _0x33fb00[_0x389fb(0x4bb)],
-                'content': _0x11fc1a
-            },
-            {
-                'property': _0x33fb00[_0x389fb(0x4ac)],
-                'content': window[_0x389fb(0x31c)][_0x389fb(0x179)]
-            },
-            {
-                'property': _0x33fb00[_0x389fb(0x3c2)],
-                'content': _0x33fb00[_0x389fb(0x49a)]
-            },
-            {
-                'name': _0x33fb00[_0x389fb(0x2ce)],
-                'content': _0x33fb00[_0x389fb(0x195)]
-            },
-            {
-                'name': _0x33fb00[_0x389fb(0x40c)],
-                'content': _0x348f43[_0x389fb(0x2a2)] + (_0x389fb(0x333) + _0x389fb(0x46b))
-            },
-            {
-                'name': _0x33fb00[_0x389fb(0x1b6)],
-                'content': _0x389fb(0x3b3) + _0x348f43[_0x389fb(0x2a2)] + (_0x389fb(0x39b) + _0x389fb(0x369) + 'm')
-            },
-            {
-                'name': _0x33fb00[_0x389fb(0x49f)],
-                'content': _0x11fc1a
-            }
-        ];
-    document[_0x389fb(0x1b3) + _0x389fb(0x35c)](_0x33fb00[_0x389fb(0x351)])[_0x389fb(0x44c)](_0x4126df => _0x4126df[_0x389fb(0x440)]()), _0x57c7e4[_0x389fb(0x44c)](_0x1eed35 => {
-        const _0x48e8a8 = _0x389fb, _0x28f20d = document[_0x48e8a8(0x2b6) + _0x48e8a8(0x2a7)](_0x33fb00[_0x48e8a8(0x26f)]);
-        _0x1eed35[_0x48e8a8(0x4a8)] ? _0x28f20d[_0x48e8a8(0x300) + 'te'](_0x33fb00[_0x48e8a8(0x3d5)], _0x1eed35[_0x48e8a8(0x4a8)]) : _0x28f20d[_0x48e8a8(0x300) + 'te'](_0x33fb00[_0x48e8a8(0x253)], _0x1eed35[_0x48e8a8(0x2a2)]), _0x28f20d[_0x48e8a8(0x300) + 'te'](_0x33fb00[_0x48e8a8(0x25c)], _0x1eed35[_0x48e8a8(0x317)]), document[_0x48e8a8(0x249)][_0x48e8a8(0x47e) + 'd'](_0x28f20d);
+
+function updateDocumentMeta(data) {
+    const { type, member, platform_data } = data;
+    const isShowroom = type.toLowerCase() === 'showroom';
+    
+    // Set document title
+    document.title = `${member.name} - Recent Live | JKT48 Showroom & IDN`;
+
+    // Get thumbnail URL based on platform
+    const thumbnailUrl = isShowroom 
+        ? member.image.thumbnail 
+        : platform_data.thumbnail;
+
+    // Hapus semua meta tag OG dan Twitter yang ada
+    document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(el => {
+        el.parentNode.removeChild(el);
     });
-    const _0x15382b = _0x389fb(0x267) + new Date()[_0x389fb(0x1cb)]();
-    document[_0x389fb(0x1b3) + _0x389fb(0x3e1)](_0x33fb00[_0x389fb(0x492)])[_0x389fb(0x300) + 'te'](_0x33fb00[_0x389fb(0x25c)], _0x33fb00[_0x389fb(0x2aa)](_0x11fc1a, _0x15382b)), document[_0x389fb(0x1b3) + _0x389fb(0x3e1)](_0x33fb00[_0x389fb(0x4e1)])[_0x389fb(0x300) + 'te'](_0x33fb00[_0x389fb(0x25c)], _0x33fb00[_0x389fb(0x2aa)](_0x11fc1a, _0x15382b));
-}
-function renderLiveDetail(_0x711da) {
-    const _0x3de365 = _0x38577e, _0x511262 = {
-            'yvQxr': function (_0x19245d, _0x1f1806) {
-                return _0x19245d(_0x1f1806);
-            },
-            'bljDU': function (_0x57c9cf, _0x140ce3) {
-                return _0x57c9cf === _0x140ce3;
-            },
-            'RYdZJ': _0x3de365(0x2df),
-            'mzBQq': function (_0xeef8d0, _0x1cf53a) {
-                return _0xeef8d0(_0x1cf53a);
-            },
-            'sHseI': function (_0x186fc5, _0x3383c2) {
-                return _0x186fc5(_0x3383c2);
-            },
-            'fVVFY': function (_0x2d940c, _0x4dd63f) {
-                return _0x2d940c(_0x4dd63f);
-            },
-            'XakOY': _0x3de365(0x438),
-            'CHWAu': function (_0x1bd10f, _0x54af59) {
-                return _0x1bd10f / _0x54af59;
-            },
-            'DWxDE': function (_0x484f8b, _0x2ec7af) {
-                return _0x484f8b / _0x2ec7af;
-            },
-            'AUsTR': function (_0x38410a, _0x49e621) {
-                return _0x38410a(_0x49e621);
-            },
-            'RkmaB': function (_0x2e0d2a, _0x111148) {
-                return _0x2e0d2a(_0x111148);
-            }
-        };
-    _0x511262[_0x3de365(0x391)](updateDocumentMeta, _0x711da);
-    const {
-            type: _0x1116cc,
-            member: _0x58c8b8,
-            live_info: _0x4fed6e,
-            gift_metrics: _0x2b2d44,
-            details: _0x3cf53a,
-            platform_data: _0x185967
-        } = _0x711da, _0x471e0c = _0x511262[_0x3de365(0x4e0)](_0x1116cc[_0x3de365(0x3f1) + 'e'](), _0x511262[_0x3de365(0x4c6)]), _0x1746f8 = _0x3de365(0x26b) + _0x3de365(0x2a8) + _0x3de365(0x230) + _0x3de365(0x39a) + _0x3de365(0x4de) + _0x3de365(0x3e6) + _0x3de365(0x241) + _0x3de365(0x39f) + _0x3de365(0x457) + _0x3de365(0x4be) + _0x3de365(0x3b9) + _0x3de365(0x439) + _0x3de365(0x227) + _0x3de365(0x489) + _0x3de365(0x45b) + _0x3de365(0x4d0) + _0x3de365(0x425) + _0x3de365(0x26c) + _0x3de365(0x350) + _0x3de365(0x2c0) + _0x3de365(0x421) + _0x3de365(0x4bd) + _0x3de365(0x2c4) + _0x3de365(0x2e3) + _0x3de365(0x27e) + _0x3de365(0x45a) + _0x58c8b8[_0x3de365(0x386)][_0x3de365(0x192)] + _0x3de365(0x43b) + _0x58c8b8[_0x3de365(0x2a2)] + (_0x3de365(0x3af) + _0x3de365(0x23b) + _0x3de365(0x3ab) + _0x3de365(0x4e2) + _0x3de365(0x1a2) + _0x3de365(0x2f0) + _0x3de365(0x3a6) + _0x3de365(0x30c) + _0x3de365(0x43e) + _0x3de365(0x1a8) + _0x3de365(0x20a) + _0x3de365(0x341) + _0x3de365(0x190) + _0x3de365(0x37c) + _0x3de365(0x26e) + _0x3de365(0x293) + _0x3de365(0x1ed) + _0x3de365(0x2b5) + _0x3de365(0x17e) + _0x3de365(0x3e5) + _0x3de365(0x1ad) + _0x3de365(0x415) + _0x3de365(0x240) + _0x3de365(0x1de) + _0x3de365(0x299) + _0x3de365(0x274) + _0x3de365(0x45e) + _0x3de365(0x1b2) + _0x3de365(0x2b0) + _0x3de365(0x4e6) + _0x3de365(0x269) + _0x3de365(0x404) + _0x3de365(0x299) + _0x3de365(0x2ab) + _0x3de365(0x20b) + _0x3de365(0x2e9) + _0x3de365(0x3d1) + _0x3de365(0x494) + _0x3de365(0x354) + _0x3de365(0x303) + _0x3de365(0x3fb) + _0x3de365(0x421) + _0x3de365(0x17c) + _0x3de365(0x3dc) + _0x3de365(0x244) + _0x3de365(0x379) + _0x3de365(0x4ea) + _0x3de365(0x198) + _0x3de365(0x2d4) + _0x3de365(0x1dc) + _0x3de365(0x4ae) + _0x3de365(0x28b) + _0x3de365(0x47a) + _0x3de365(0x2f3) + _0x3de365(0x421) + _0x3de365(0x23f) + _0x3de365(0x2e6) + _0x3de365(0x2b7) + _0x3de365(0x456) + _0x3de365(0x22c) + _0x3de365(0x27e) + _0x3de365(0x45a)) + _0x58c8b8[_0x3de365(0x386)][_0x3de365(0x192)] + _0x3de365(0x43b) + _0x58c8b8[_0x3de365(0x2a2)] + (_0x3de365(0x314) + _0x3de365(0x34e) + _0x3de365(0x491) + _0x3de365(0x463) + _0x3de365(0x1da) + _0x3de365(0x3ba) + _0x3de365(0x3e8) + _0x3de365(0x4ca) + _0x3de365(0x271) + _0x3de365(0x44b) + _0x3de365(0x236) + _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x31b) + _0x3de365(0x421) + _0x3de365(0x281) + _0x3de365(0x187) + _0x3de365(0x489) + _0x3de365(0x40d) + _0x3de365(0x480) + _0x3de365(0x2a3) + _0x3de365(0x421) + _0x3de365(0x274) + _0x3de365(0x45e) + _0x3de365(0x1b2) + _0x3de365(0x23c) + _0x3de365(0x2ec) + _0x3de365(0x48c) + _0x3de365(0x3cc) + _0x3de365(0x344) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x17c) + _0x3de365(0x23e) + _0x3de365(0x3a4) + _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x4b5) + _0x3de365(0x29c) + _0x3de365(0x2d7) + _0x3de365(0x2b9) + _0x3de365(0x2ca) + _0x3de365(0x4b8)) + _0x58c8b8[_0x3de365(0x2a2)] + (_0x3de365(0x19d) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2af) + _0x3de365(0x34d) + _0x3de365(0x32c) + _0x3de365(0x220) + _0x3de365(0x2a9)) + _0x58c8b8[_0x3de365(0x452)] + (_0x3de365(0x1ba) + _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x450) + _0x3de365(0x383) + _0x3de365(0x421) + _0x3de365(0x3a9) + _0x3de365(0x37f) + _0x3de365(0x2ff) + _0x3de365(0x299) + _0x3de365(0x421) + _0x3de365(0x421) + '\x20') + _0x511262[_0x3de365(0x1b4)](getPlatformBadge, _0x1116cc) + (_0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x450) + _0x3de365(0x383) + _0x3de365(0x421) + _0x3de365(0x24a) + _0x3de365(0x421) + _0x3de365(0x252) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x201) + _0x3de365(0x29f) + _0x3de365(0x258) + _0x3de365(0x449) + _0x3de365(0x20c) + _0x3de365(0x1a6) + _0x3de365(0x449) + _0x3de365(0x324) + _0x3de365(0x421) + _0x3de365(0x189) + _0x3de365(0x233) + _0x3de365(0x20d) + _0x3de365(0x3b8) + _0x3de365(0x356) + _0x3de365(0x4d7) + _0x3de365(0x4be) + _0x3de365(0x3b9) + _0x3de365(0x396) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2af) + _0x3de365(0x3a8) + _0x3de365(0x46e) + _0x3de365(0x30e) + _0x3de365(0x3f5) + _0x3de365(0x242) + _0x3de365(0x477) + _0x3de365(0x226) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2e2) + _0x3de365(0x1d4) + _0x3de365(0x33c) + _0x3de365(0x2b9) + _0x3de365(0x2ca) + _0x3de365(0x343)) + _0x4fed6e[_0x3de365(0x2b8)][_0x3de365(0x2c3) + _0x3de365(0x384)]() + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x251) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x201) + _0x3de365(0x353) + _0x3de365(0x2f4) + _0x3de365(0x3fe) + _0x3de365(0x4a2) + _0x3de365(0x27c) + _0x3de365(0x1f1) + _0x3de365(0x285) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x203) + _0x3de365(0x362) + _0x3de365(0x4c9) + _0x3de365(0x385) + _0x3de365(0x435) + _0x3de365(0x3be) + _0x3de365(0x375) + _0x3de365(0x25d) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2af) + _0x3de365(0x382) + _0x3de365(0x3de) + _0x3de365(0x1d7) + _0x3de365(0x458) + _0x3de365(0x323)) + _0x511262[_0x3de365(0x1b4)](formatDuration, _0x4fed6e[_0x3de365(0x35b)][_0x3de365(0x2dc)]) + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x251) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x201) + _0x3de365(0x353) + _0x3de365(0x2f4) + _0x3de365(0x3fe) + _0x3de365(0x4a2) + _0x3de365(0x27c) + _0x3de365(0x1f1) + _0x3de365(0x285) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x203) + _0x3de365(0x362) + _0x3de365(0x4c9) + _0x3de365(0x385) + _0x3de365(0x435) + _0x3de365(0x3be) + _0x3de365(0x21c) + _0x3de365(0x31e) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x18d) + _0x3de365(0x4ed) + _0x3de365(0x3cf) + _0x3de365(0x3f4) + _0x3de365(0x1e7) + _0x3de365(0x2c9) + '\x22>') + _0x2b2d44[_0x3de365(0x283) + 'ts'][_0x3de365(0x2c3) + _0x3de365(0x384)]() + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x251) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x201) + _0x3de365(0x353) + _0x3de365(0x2f4) + _0x3de365(0x3fe) + _0x3de365(0x4a2) + _0x3de365(0x27c) + _0x3de365(0x1f1) + _0x3de365(0x285) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x203) + _0x3de365(0x362) + _0x3de365(0x4c9) + _0x3de365(0x385) + _0x3de365(0x435) + _0x3de365(0x3be) + _0x3de365(0x419) + _0x3de365(0x17b) + _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x498) + _0x3de365(0x218) + _0x3de365(0x3ca) + _0x3de365(0x497) + _0x3de365(0x367) + _0x3de365(0x3e7)) + _0x2b2d44[_0x3de365(0x2a6) + _0x3de365(0x422)][_0x3de365(0x1f7)](0xf9d * 0x2 + 0x1 * 0xf4a + -0x2e82 * 0x1) + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x251) + _0x3de365(0x421) + _0x3de365(0x190) + _0x3de365(0x37c) + _0x3de365(0x2ab) + _0x3de365(0x251) + _0x3de365(0x4c5) + _0x3de365(0x309) + _0x3de365(0x32a) + _0x3de365(0x3df) + _0x3de365(0x20b) + _0x3de365(0x363) + _0x3de365(0x3fb) + _0x3de365(0x3a9) + _0x3de365(0x2dd) + _0x3de365(0x443) + _0x3de365(0x307) + _0x3de365(0x217) + _0x3de365(0x25b) + _0x3de365(0x39e) + _0x3de365(0x421) + _0x3de365(0x18e) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x30f) + _0x3de365(0x322) + _0x3de365(0x497) + _0x3de365(0x2cd) + _0x3de365(0x2f1) + _0x3de365(0x394) + _0x3de365(0x294) + _0x3de365(0x434) + _0x3de365(0x421) + _0x3de365(0x189) + _0x3de365(0x233) + _0x3de365(0x210) + _0x3de365(0x21d) + _0x3de365(0x4a6) + _0x3de365(0x407) + _0x3de365(0x1f1) + _0x3de365(0x3fd) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x24d) + _0x3de365(0x481) + _0x3de365(0x4af) + _0x3de365(0x3a1) + _0x3de365(0x4c0) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x3a9) + _0x3de365(0x383) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2af) + _0x3de365(0x3a8) + _0x3de365(0x46e) + _0x3de365(0x30e) + _0x3de365(0x3f5) + _0x3de365(0x242) + _0x3de365(0x417) + _0x3de365(0x226) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x4b3) + _0x3de365(0x1f9) + _0x3de365(0x37a) + _0x3de365(0x3e9) + '\x22>') + _0x511262[_0x3de365(0x400)](formatDate, _0x4fed6e[_0x3de365(0x35b)][_0x3de365(0x2a0)]) + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x32a) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x189) + _0x3de365(0x408) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x203) + _0x3de365(0x362) + _0x3de365(0x4c9) + _0x3de365(0x385) + _0x3de365(0x435) + _0x3de365(0x3be) + _0x3de365(0x4a9) + _0x3de365(0x226) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x4b3) + _0x3de365(0x1f9) + _0x3de365(0x37a) + _0x3de365(0x3e9) + '\x22>') + _0x511262[_0x3de365(0x290)](formatDate, _0x4fed6e[_0x3de365(0x35b)][_0x3de365(0x3ae)]) + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x32a) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2a4)) + (_0x471e0c ? _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x309) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x197) + _0x3de365(0x2eb) + _0x3de365(0x3e3) + _0x3de365(0x3b4) + _0x3de365(0x468) + _0x3de365(0x22f) + _0x3de365(0x478) + _0x3de365(0x238) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x18d) + _0x3de365(0x330) + _0x3de365(0x1fc) + _0x3de365(0x2ca) + _0x3de365(0x4b8) + _0x185967[_0x3de365(0x28a)] + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x32a) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2a4)) : _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x309) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x197) + _0x3de365(0x2eb) + _0x3de365(0x3e3) + _0x3de365(0x3b4) + _0x3de365(0x468) + _0x3de365(0x22f) + _0x3de365(0x4bc) + _0x3de365(0x278) + _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x21b) + _0x3de365(0x3bd) + _0x3de365(0x1c6) + _0x3de365(0x377) + (_0x185967[_0x3de365(0x30d)] || _0x511262[_0x3de365(0x29e)]) + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x32a) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2a4))) + (_0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x450) + _0x3de365(0x383) + _0x3de365(0x421) + _0x3de365(0x24a) + _0x3de365(0x421) + _0x3de365(0x450) + _0x3de365(0x196) + _0x3de365(0x274) + _0x3de365(0x3f6) + _0x3de365(0x378) + _0x3de365(0x383) + _0x3de365(0x1f8) + _0x3de365(0x414) + _0x3de365(0x2a1) + _0x3de365(0x1e7) + _0x3de365(0x3e9) + _0x3de365(0x1ce) + _0x3de365(0x1d0) + _0x3de365(0x338) + _0x3de365(0x2e4) + _0x3de365(0x2ab) + _0x3de365(0x20b) + _0x3de365(0x358) + _0x3de365(0x3d8) + _0x3de365(0x207) + _0x3de365(0x2ee) + _0x3de365(0x4c3) + _0x3de365(0x4ba) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x498) + _0x3de365(0x184) + _0x3de365(0x38a) + _0x3de365(0x3b7) + _0x3de365(0x4e7) + _0x3de365(0x383) + _0x3de365(0x421) + _0x3de365(0x486) + _0x3de365(0x199) + _0x3de365(0x48d) + _0x3de365(0x279) + _0x3de365(0x4ad) + _0x3de365(0x2e5) + _0x3de365(0x3f0) + _0x3de365(0x2b4) + _0x3de365(0x3d6) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x21e) + _0x3de365(0x219) + _0x3de365(0x34b) + _0x3de365(0x228) + _0x3de365(0x431) + _0x3de365(0x4aa) + _0x3de365(0x331) + _0x3de365(0x421) + _0x3de365(0x4c5) + _0x3de365(0x226) + _0x3de365(0x421) + _0x3de365(0x3fa)) + (_0x471e0c ? _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x26e) + _0x3de365(0x1b7) + _0x3de365(0x46d) + _0x3de365(0x1ea) + _0x3de365(0x2bc) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x430) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x4b3) + _0x3de365(0x3bb) + _0x3de365(0x4b1) + _0x3de365(0x3f3) + _0x3de365(0x182) + _0x3de365(0x284) + _0x3de365(0x41b) + _0x3de365(0x393) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x197) + _0x3de365(0x2eb) + _0x3de365(0x43f) + _0x3de365(0x1bd) + _0x3de365(0x428) + _0x3de365(0x1ff) + '>' + _0x2b2d44[_0x3de365(0x283) + 'ts'][_0x3de365(0x2c3) + _0x3de365(0x384)]() + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x251) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x49c) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x2af) + _0x3de365(0x3a8) + _0x3de365(0x46e) + _0x3de365(0x30e) + _0x3de365(0x3f5) + _0x3de365(0x242) + _0x3de365(0x357) + _0x3de365(0x48b) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x197) + _0x3de365(0x2eb) + _0x3de365(0x43f) + _0x3de365(0x1bd) + _0x3de365(0x428) + _0x3de365(0x1ff) + '>') + _0x2b2d44[_0x3de365(0x2a6) + _0x3de365(0x422)][_0x3de365(0x1f7)](-0x22 * 0x7a + 0x199 * -0xb + 0x21c9) + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x251) + _0x3de365(0x421) + _0x3de365(0x190) + _0x3de365(0x37c) + _0x3de365(0x421) + _0x3de365(0x3fa)) : _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x26e) + _0x3de365(0x1b7) + _0x3de365(0x46d) + _0x3de365(0x1ea) + _0x3de365(0x2bc) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x430) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x4b3) + _0x3de365(0x3bb) + _0x3de365(0x4b1) + _0x3de365(0x3f3) + _0x3de365(0x182) + _0x3de365(0x284) + _0x3de365(0x4a3) + _0x3de365(0x402) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x4b3) + _0x3de365(0x3bb) + _0x3de365(0x1af) + _0x3de365(0x32f) + _0x3de365(0x33e) + _0x3de365(0x3d3) + Math[_0x3de365(0x395)](_0x511262[_0x3de365(0x1fa)](_0x2b2d44[_0x3de365(0x283) + 'ts'], -0x7d + 0xa07 + -0x1 * 0x986)) + (_0x3de365(0x42b) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x281) + _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x447) + _0x3de365(0x187) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x498) + _0x3de365(0x184) + _0x3de365(0x38a) + _0x3de365(0x3a3) + _0x3de365(0x3b7) + _0x3de365(0x45d) + _0x3de365(0x373) + _0x3de365(0x383) + _0x3de365(0x421) + _0x3de365(0x421) + _0x3de365(0x4a0) + _0x3de365(0x19e) + _0x3de365(0x22b) + _0x3de365(0x1e1) + _0x3de365(0x28d) + _0x3de365(0x4eb)) + _0x511262[_0x3de365(0x191)](_0x2b2d44[_0x3de365(0x2a6) + _0x3de365(0x422)], 0x54c + -0x1fab + 0x1a63)[_0x3de365(0x1f7)](0x37 * -0x54 + -0x475 * 0x4 + 0x23e2) + (_0x3de365(0x2fc) + _0x3de365(0x421) + _0x3de365(0x2ab) + _0x3de365(0x251) + _0x3de365(0x421) + _0x3de365(0x190) + _0x3de365(0x37c) + _0x3de365(0x421) + _0x3de365(0x3fa))) + (_0x3de365(0x187) + _0x3de365(0x206) + _0x3de365(0x408) + _0x3de365(0x190) + _0x3de365(0x315) + _0x3de365(0x3a9) + _0x3de365(0x37f) + _0x3de365(0x1a7) + _0x3de365(0x299) + _0x3de365(0x2ab) + _0x3de365(0x30f) + _0x3de365(0x322) + _0x3de365(0x497) + _0x3de365(0x2cd) + _0x3de365(0x2f1) + _0x3de365(0x31f) + _0x3de365(0x325) + _0x3de365(0x421) + _0x3de365(0x28f)) + (_0x471e0c ? _0x511262[_0x3de365(0x401)](createShowroomGiftLog, _0x3cf53a[_0x3de365(0x2d9)]) : _0x511262[_0x3de365(0x3d7)](createIdnGiftLog, _0x3cf53a[_0x3de365(0x2d9)])) + (_0x3de365(0x187) + _0x3de365(0x32a) + _0x3de365(0x187) + _0x3de365(0x3fa)) + (_0x471e0c && _0x3cf53a[_0x3de365(0x3c6) + 's'] ? _0x3de365(0x187) + _0x3de365(0x254) + _0x3de365(0x3b1) + _0x3de365(0x3bf) + _0x3de365(0x421) + _0x3de365(0x29b) + _0x3de365(0x2eb) + _0x3de365(0x25a) + _0x3de365(0x3c4) + _0x3de365(0x2c1) + _0x3de365(0x1a4) + _0x3de365(0x311) + _0x3de365(0x245) + _0x3de365(0x2e4) + _0x3de365(0x4a7) + _0x511262[_0x3de365(0x391)](createShowroomStageUsers, _0x3cf53a[_0x3de365(0x3c6) + 's']) + (_0x3de365(0x187) + _0x3de365(0x32a) + _0x3de365(0x421) + '\x20\x20') : '') + (_0x3de365(0x3df) + _0x3de365(0x251) + _0x3de365(0x276) + '\x20');
-    liveDetailContainer[_0x3de365(0x46a)] = _0x1746f8;
-}
-function _0x2d54() {
-    const _0x13679f = [
-        'ody\x20class=',
-        '\x20\x20\x20\x20\x20\x20⚠️\x20No',
-        '\x20\x20\x20\x20<img\x20c',
-        'nclick=\x22fe',
-        '\x20\x20\x20\x20\x20\x20\x20<di',
-        '<th\x20scope=',
-        'ewer</p>\x0a\x20',
-        's-center\x20s',
-        'pada\x20card\x20',
-        'g\x22\x20\x0a\x20\x20\x20\x20\x20\x20',
-        'ite\x20shadow',
-        '270432XnVSJo',
-        '\x27https://r',
-        'ccxci',
-        '\x22\x20class=\x22h',
-        'md:mb-0\x20md',
-        '\x20\x20</tr>\x0a\x20\x20',
-        '\x20inset-0\x20f',
-        'nt-bold\x20te',
-        'p\x20class=\x22t',
-        'ded-lg\x20tra',
-        'PXBgC',
-        'IDN\x20Live',
-        '<div>\x0a\x20\x20\x20\x20',
-        'ass=\x22flex\x20',
-        'lass=\x22px-3',
-        'xHivv',
-        '<p\x20class=\x22',
-        '\x20<th\x20scope',
-        'lg\x20shadow-',
-        '\x22>Total\x20Go',
-        '</thead>\x0a\x20',
-        '2-digit',
-        'g\x20p-3\x20sm:p',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        'property',
-        'd\x22>Ended</',
-        'gan\x20sumber',
-        'ercase\x20tra',
-        'cFeOe',
-        'c\x20mungkin\x20',
-        'er-white\x20s',
-        'rid-cols-1',
-        '/z0erjecyq',
-        'xs\x20text-gr',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20I',
-        '\x20\x20\x20\x20\x20<p\x20cl',
-        'ById',
-        'h1\x20class=\x22',
-        '-2\x20sm:px-6',
-        'jKmsu',
-        '900\x22>',
-        'dient-to-r',
-        'ay-200\x22>\x0a\x20',
-        'Nvhkn',
-        'ld\x22>Stream',
-        '\x20<img\x20clas',
-        '\x20border\x20bo',
-        'kGBsc',
-        'gap-4\x22>\x0a\x20\x20',
-        '\x20<tr\x20class',
-        'r\x22\x20viewBox',
-        '\x20border-gr',
-        'ails',
-        '\x20\x20\x20\x20\x20\x20\x20\x20</',
-        'RYdZJ',
-        'rty=\x22og:im',
-        'summary_la',
-        '-xs\x20text-g',
-        '/v17371731',
-        'ass=\x22bg-wh',
-        'd>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        '-gray-900\x22',
-        '\x20\x20\x20\x20\x20<th\x20s',
-        'fetchLiveD',
-        '-full\x20h-48',
-        'ex\x20flex-co',
-        'text-left\x20',
-        'ainer',
-        'er\x20justify',
-        'rflow-x-au',
-        'replace',
-        '\x20shadow-sm',
-        'DfoLy',
-        'ex-col\x20ite',
-        '\x20<tbody\x20cl',
-        '\x20\x20\x20\x20\x20</td>',
-        'stener',
-        'ss=\x22px-3\x20p',
-        ':rounded-x',
-        'og:type',
-        'bljDU',
-        'ZFcAb',
-        'tps://res.',
-        'text-xs\x20fo',
-        'pan>',
-        'm\x20&\x20IDN',
-        'ow\x20items-s',
-        'bold\x20mb-2\x22',
-        'y-900\x22>',
-        'etail',
-        '8\x20rounded-',
-        '00\x22>',
-        'cover\x22\x20src',
-        '\x20class=\x22te',
-        'nsition-co',
-        'href',
-        'twitter:ca',
-        'Viewer</p>',
-        '\x20\x20\x20\x20<div\x20c',
-        'x\x20items-ce',
-        '100\x20to-blu',
-        'PPEpX',
-        'http://www',
-        'adient-to-',
-        'ercase\x20fon',
-        'Live\x20strea',
-        'ext-xs\x20tex',
-        'classList',
-        '-white\x20sha',
-        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        '2\x22\x20d=\x22M9\x201',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<d',
-        '\x20Not\x20Found',
-        'search',
-        'p\x20text-sm\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<p',
-        '\x20\x20\x20<div>\x0a\x20',
-        '\x20mr-1\x20sm:m',
-        '\x20\x20\x20\x20\x20\x20</di',
-        'DWxDE',
-        'thumbnail',
-        '\x209\x200\x2001-9\x20',
-        'center\x22>\x0a\x20',
-        'URvpU',
-        '>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20\x20<p\x20',
-        'full\x20borde',
-        'ted:\x20Data\x20',
-        'er:from-bl',
-        'Live\x20|\x20JKT',
-        'stage\x20user',
-        '</h1>\x0a\x20\x20\x20\x20',
-        'text-lg\x20sm',
-        '\x22></path>\x0a',
-        'lable</p>\x0a',
-        's\x20font-sem',
-        'cloudinary',
-        'inejoin=\x22r',
-        'b-3\x20sm:mb-',
-        'khPLu',
-        ':gap-4\x20md:',
-        '-6\x20sm:mt-8',
-        'z0erjecyq6',
-        '\x20mt-2\x22>No\x20',
-        'gold',
-        '12-2V4a2\x202',
-        '4\x22\x20xmlns=\x22',
-        'sm:p-6\x20bor',
-        'ay-900\x20mb-',
-        'lg\x20sm:text',
-        'error-cont',
-        'mg\x20src=\x22',
-        'x\x20flex-col',
-        'querySelec',
-        'mzBQq',
-        '-contain\x22\x20',
-        'IUpbc',
-        's=\x22grid\x20gr',
-        'ivide-gray',
-        'cap=\x22round',
-        '\x20JKT48</p>',
-        'onerror=\x22t',
-        'cwaHB',
-        'xt-xl\x20font',
-        '\x20relative\x22',
-        '-3\x20py-4\x20wh',
-        'owrap\x20text',
-        'zm7ha/imag',
-        'rap\x20text-s',
-        'ext-gray-9',
-        'room\x0a\x20\x20\x20\x20\x20',
-        'rounded-fu',
-        'dium\x20text-',
-        '\x20from-blue',
-        'add',
-        'Showroom',
-        't-to-r\x20fro',
-        'getTime',
-        '=\x22col\x22\x20cla',
-        'adow-md\x22>\x0a',
-        '\x20mb-3\x20sm:m',
-        '\x22>Gift</th',
-        'b-4\x22>Gift\x20',
-        'w-8\x20sm:h-1',
-        ':w-10\x22>\x0a\x20\x20',
-        'ext-sm\x20fon',
-        '\x22text-lg\x20s',
-        'hCPYa',
-        'py-2\x20sm:px',
-        'xl\x20font-bo',
-        '\x20\x20</button',
-        '\x20items-cen',
-        'ary.com/dl',
-        'tion',
-        'der-4\x20bord',
-        'dow-sm\x22>\x0a\x20',
-        '0\x20relative',
-        '-gray-50\x20t',
-        '\x20\x20\x20\x20\x20\x20\x20</t',
-        'ont-bold\x20t',
-        'ed-full\x20te',
-        't-medium\x20t',
-        'VMaoz',
-        '\x22px-3\x20py-4',
-        '1737173118',
-        't-bold\x20tex',
-        'm\x20font-med',
-        '.w3.org/20',
-        'gap-3\x20sm:g',
-        'tr>\x0a\x20\x20\x20\x20\x20\x20',
-        'DN\x20Live\x0a\x20\x20',
-        'ient-to-r\x20',
-        's=\x22px-3\x20py',
-        '\x20\x20\x20\x20\x20<img\x20',
-        '\x20\x20\x20\x20\x20\x20</th',
-        'border-gra',
-        '\x20\x20\x20\x20</span',
-        'csvLr',
-        'Error:',
-        'https://48',
-        '-sm\x20font-m',
-        'toFixed',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<h',
-        'ass=\x22font-',
-        'CHWAu',
-        'bg-gradien',
-        'nt-medium\x20',
-        'y-3\x20text-l',
-        'l\x20items-ce',
-        '-gray-800\x22',
-        'og:url',
-        '<div\x20class',
-        '=\x22absolute',
-        '\x20\x20\x20\x20\x20\x20<p\x20c',
-        'y-500\x20mb-4',
-        '\x20class=\x22fl',
-        '\x20\x20\x20\x20\x20\x20\x20</d',
-        'lg\x20p-3\x20sm:',
-        'l-containe',
-        'gift\x20data\x20',
-        'twx7cmnaii',
-        'div\x20class=',
-        '2\x20gap-2\x20sm',
-        'bg-white\x20p',
-        '-4\x200m6\x200a2',
-        '00\x20text-wh',
-        'bg-gray-50',
-        'ransition-',
-        '\x20\x20\x20\x20\x20\x20\x20<ta',
-        '-sm\x22>\x0a\x20\x20\x20\x20',
-        'lors\x20durat',
-        '\x20text-left',
-        '-700\x20text-',
-        '\x20sm:gap-6\x20',
-        'ext-lg\x20sm:',
-        'ketidakses',
-        'oakaN',
-        '\x20\x20\x20<p\x20clas',
-        'd\x22>Total\x20P',
-        '\x20rounded-l',
-        '\x20Jika\x20ada\x20',
-        '</span>\x0a\x20\x20',
-        't-lg\x20text-',
-        '\x20\x20\x20\x20\x20\x20\x20<tb',
-        'ECVlq',
-        'twitter:im',
-        'y-2\x20bg-gra',
-        'ss=\x22px-4\x20p',
-        'p>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'm:mx-0\x22>\x0a\x20',
-        'on\x20dicek\x20k',
-        'y.com/dlx2',
-        '</th>\x0a\x20\x20\x20\x20',
-        ':text-xl\x20f',
-        'd-full\x20obj',
-        '1500FXdIiv',
-        '10\x22>\x0a\x20\x20\x20\x20\x20',
-        'ont-semibo',
-        'white\x20roun',
-        'max-w-[100',
-        'a/image/up',
-        'iv\x20class=\x22',
-        'video.othe',
-        '6twx7cmnai',
-        'aii.png\x27\x22>',
-        '\x20\x20<p\x20class',
-        'D</p>\x0a\x20\x20\x20\x20',
-        '6548wOWLSx',
-        'er\x22\x20src=\x22',
-        'nerror=\x22th',
-        '\x20sm:flex-r',
-        'eWYDw',
-        'lass=\x22mb-2',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<i',
-        'er-gray-20',
-        'd\x20sm:shado',
-        '-semibold\x22',
-        'y-600\x20uppe',
-        '\x20w-24\x20sm:h',
-        'porters</h',
-        'ue-600\x20hov',
-        'class=\x22min',
-        'm:w-10\x20rou',
-        'head',
-        '\x20\x20</div>\x0a\x20',
-        '</svg>\x0a\x20\x20\x20',
-        'sm:h-10\x20sm',
-        '\x20\x20<div\x20cla',
-        'cking-wide',
-        'scription',
-        '\x22flex\x20item',
-        '/div>\x0a\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a',
-        'JLyOn',
-        '\x20\x20\x20<div\x20cl',
-        'Gjcnb',
-        'hidden',
-        'image_url',
-        'mt-4\x20grid\x20',
-        'mage\x22]',
-        't-lg\x20font-',
-        'lg:grid-co',
-        'dXZbJ',
-        'n</p>\x0a\x20\x20\x20\x20',
-        'ntXBb',
-        '\x20</span>',
-        'an\x20class=\x22',
-        'ext-xs\x20fon',
-        'src=\x22https',
-        'twitter:ti',
-        'ass=\x22flex-',
-        '\x20text-gray',
-        '\x20\x20\x20</tbody',
-        '?t=',
-        'stream\x20det',
-        'tart\x20md:it',
-        'eft\x20text-x',
-        '\x0a\x20\x20\x20\x20<div\x20',
-        'g-gray-200',
-        'twitter:de',
-        '\x20<div\x20clas',
-        'MBqpP',
-        'e=\x22col\x22\x20cl',
-        '18/z0erjec',
-        'rcase\x20trac',
-        '\x20\x20\x20\x20\x20<td\x20c',
-        '\x20\x20\x20\x20\x20<div\x20',
-        'tchLiveDet',
-        '</div>\x0a\x20\x20\x20',
-        'cope=\x22col\x22',
-        '\x20Title</p>',
-        'gift\x20metri',
-        '\x202\x200\x20012-2',
-        'll\x20object-',
-        'sm\x20border\x20',
-        '2\x200\x2011-4\x200',
-        'ect-cover\x22',
-        '\x20class=\x22px',
-        'num',
-        '\x20\x20\x20\x20</div>',
-        'rLDMR',
-        'total_poin',
-        't-semibold',
-        'y-100\x22>\x0a\x20\x20',
-        'ound\x22\x20stro',
-        'numeric',
-        'r-2\x20object',
-        'join',
-        'room_id',
-        'hadow-lg\x20b',
-        'ay-200\x20sha',
-        'ext-gray-8',
-        '-semibold\x20',
-        '\x20\x20\x20\x20\x20\x20',
-        'fVVFY',
-        '\x20\x20\x20\x20\x20\x20\x20<td',
-        '173118/z0e',
-        's=\x22bg-grad',
-        '\x20Informati',
-        'rty^=\x22og:\x22',
-        'rank',
-        '<td\x20class=',
-        'b-4\x22>\x0a\x20\x20\x20\x20',
-        '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'test',
-        '\x20\x20\x20\x20\x20\x20<h2\x20',
-        'text-xl\x20sm',
-        'age\x22]',
-        'XakOY',
-        '=\x22mt-3\x20sm:',
-        'start',
-        'ext-lg\x20fon',
-        'name',
-        'll\x22>\x0a\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20',
-        'ss=\x22flex\x20i',
-        'points_per',
-        'ent',
-        'class=\x22bg-',
-        'gray-600\x22>',
-        'MuyTA',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
-        'l\x20divide-y',
-        'shrink-0\x20h',
-        '14\x200v15a2\x20',
-        '\x20\x20\x20\x20<p\x20cla',
-        '\x20md:flex-r',
-        'lyNvX',
-        '-2a2\x202\x200\x200',
-        'Retry\x0a\x20\x20\x20\x20',
-        'bilan\x20dari',
-        'from-pink-',
-        'createElem',
-        'h-full\x20w-f',
-        'viewers',
-        'font-bold\x20',
-        'tems-cente',
-        '\x22>User</th',
-        'ap-4\x22>\x0a\x20\x20\x20',
-        ':max-w-non',
-        '-6\x20w-6\x20sm:',
-        'w-500\x20text',
-        'hidden\x22>\x0a\x20',
-        'gray-900\x20m',
-        'split',
-        'toLocaleSt',
-        's=\x22w-full\x20',
-        'ead>\x0a\x20\x20\x20\x20\x20',
-        '7cmnaii.pn',
-        '2760670CeSKEr',
-        'load\x20live\x20',
-        't-gray-800',
-        'text-gray-',
-        'r\x20from-gra',
-        'y-2\x20sm:px-',
-        'xt-gray-90',
-        'zndgC',
-        'getElement',
-        '\x20\x20\x20\x20',
-        'load/v1737',
-        '-200\x22>\x0a\x20\x20\x20',
-        'uppercase\x20',
-        'r-2\x20sm:bor',
-        'DOMContent',
-        '-500\x20to-bl',
-        ':text-2xl\x20',
-        '\x20py-4\x20whit',
-        'gift_log',
-        '-16\x20text-g',
-        '1678752YsoYlD',
-        'duration',
-        '\x20class=\x22gr',
-        'ay-600\x20upp',
-        'showroom',
-        '0\x20h-8\x20w-8\x20',
-        'rge_image',
-        '\x20<p\x20class=',
-        'h-full\x20obj',
-        '2>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'ada\x20kesala',
-        'mg\x20class=\x22',
-        '9m9-9a9\x209\x20',
-        '7V4m0\x2013a9',
-        '\x22flex-shri',
-        '-3\x20py-2\x20sm',
-        'class=\x22tex',
-        'ow\x20sm:item',
-        '7752944RfJIUq',
-        'p-4\x20border',
-        'JyXIb',
-        '.com/dlx2z',
-        '0\x20mb-3\x20sm:',
-        '\x22twitter:i',
-        '1\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        '\x20p-2\x20sm:p-',
-        'itespace-n',
-        'loading-sk',
-        'Loaded',
-        'colors\x22>\x0a\x20',
-        'center\x20jus',
-        '/th>\x0a\x20\x20\x20\x20\x20',
-        'map',
-        '</p>\x0a\x20\x20\x20\x20\x20',
-        'udinary.co',
-        'lex\x20items-',
-        '-2\x20sm:mt-0',
-        'setAttribu',
-        'lass=\x22w-48',
-        'eleton',
-        'tive\x20-mt-1',
-        '\x20\x20\x20\x20\x20\x20\x20\x20al',
-        'ing-wider\x22',
-        'Failed\x20to\x20',
-        'ls-1\x20gap-4',
-        's-center\x22>',
-        'div>\x0a\x20\x20\x20\x20\x20',
-        'divide-y\x20d',
-        '-[80px]\x20sm',
-        '/upload/v1',
-        'title',
-        'y-500\x20uppe',
-        'h2\x20class=\x22',
-        'id-ID',
-        '4\x22>Top\x20Sup',
-        'h-8\x20sm:w-8',
-        'ptdic',
-        '\x22\x20onerror=',
-        'v>\x0a\x0a\x20\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20c',
-        'content',
-        'nATrS',
-        'orylive/',
-        'items-cent',
-        '\x20</div>\x0a\x20\x20',
-        'location',
-        'ter\x22>\x0a\x20\x20\x20\x20',
-        'oints</p>\x0a',
-        'mb-4\x22>Gift',
-        '/div>',
-        '/p>\x0a\x20\x20\x20\x20\x20\x20',
-        'text-lg\x20fo',
-        'ay-800\x22>',
-        '4\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        '\x20Log</h2>\x0a',
-        '\x22col\x22\x20clas',
-        'hLXMj',
-        'object-cov',
-        'nd\x22\x20\x0a\x20\x20\x20\x20\x20',
-        '\x20\x20\x20</div>\x0a',
-        '>Rank</th>',
-        'ase\x20sm:tex',
-        'y-4\x20whites',
-        '66cXFElA',
-        '-xl\x20font-b',
-        '\x20class=\x22fo',
-        '\x20resmi.\x0a\x20\x20',
-        'json',
-        '\x27s\x20Live\x20St',
-        'm-amber-40',
-        '\x20\x20\x20\x20\x20\x20</tr',
-        '0\x20to-yello',
-        'd\x20text-gra',
-        'Metrics</h',
-        'ttps://res',
-        '\x20divide-gr',
-        'inline-fle',
-        'm:text-xl\x20',
-        'r\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        'old\x20text-g',
-        '\x20truncate\x20',
-        'ray-900\x22>',
-        '.png\x27\x22>\x0a\x20\x20',
-        'ext-left\x20t',
-        '800\x22>',
-        'between\x22>\x0a',
-        's=\x22flex\x20fl',
-        '-center\x20py',
-        'er:\x22]',
-        'e-nowrap\x22>',
-        'ill=\x22none\x22',
-        'ont-medium',
-        'uaian,\x20moh',
-        '\x20sm:w-64\x20m',
-        'ss=\x22text-b',
-        '\x22this.src=',
-        '\x20\x20\x20\x20\x20\x20\x20',
-        '\x20overflow-',
-        'SqZlH',
-        'Asia/Jakar',
-        '=\x22bg-white',
-        ':mr-6\x20rela',
-        ':px-6\x20sm:p',
-        'rounded-lg',
-        '>Points/Vi',
-        '\x22bg-gray-5',
-        'VUnVp',
-        'ound',
-        'date',
-        'torAll',
-        '-8\x22>\x0a\x20\x20\x20\x20\x20',
-        'class=\x22ove',
-        'age',
-        'SooWb',
-        'troke-line',
-        'lass=\x22text',
-        '\x22p-4\x20sm:p-',
-        '</h3>\x0a\x20\x20\x20\x20',
-        'details',
-        'RyvXl',
-        'xt-gray-80',
-        'length',
-        'live\x20strea',
-        'status',
-        '\x20whitespac',
-        '</td>\x0a\x20\x20\x20\x20',
-        'ium\x20text-g',
-        'king-wider',
-        '\x20\x20\x20<td\x20cla',
-        '\x20text-xs\x20f',
-        '-6\x20sm:py-3',
-        'y-900\x20trun',
-        '/Viewer</p',
-        'ss=\x22text-s',
-        'd\x22>Duratio',
-        '\x22\x20stroke-l',
-        'gray-900\x22>',
-        '4\x20sm:mt-0\x22',
-        '-28\x20sm:w-2',
-        'medium\x20tex',
-        's=\x22text-lg',
-        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'live-detai',
-        'intensapi.',
-        '\x20class=\x22mt',
-        'og:title',
-        '\x20\x20\x20\x20\x20\x20\x20<sp',
-        'ss=\x22text-l',
-        '>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
-        'ring',
-        'ray-500\x20up',
-        'image',
-        '-w-none\x22>',
-        'get',
-        '\x20\x20\x20\x20\x20\x20Show',
-        't-gray-500',
-        'xt-xs\x20font',
-        'urrentColo',
-        '\x20<button\x20o',
-        'm:ml-4\x22>\x0a\x20',
-        'm\x20ID\x20not\x20f',
-        '-h-[24rem]',
-        'yvQxr',
-        'nter\x20px-3\x20',
-        'ints</p>\x0a\x20',
-        'mb-4\x22>Live',
-        'floor',
-        '100\x22>\x0a\x20\x20\x20\x20',
-        'message',
-        's=\x22h-8\x20w-8',
-        'font-mediu',
-        'ded-3xl\x20sm',
-        '\x27s\x20recent\x20',
-        '\x20\x20<svg\x20cla',
-        '5a2\x202\x200\x2011',
-        'ls-2\x22>\x0a\x20\x20\x20',
-        'w-xl\x20overf',
-        'juWuD',
-        '\x20gap-3\x20sm:',
-        'case\x20track',
-        '\x20uppercase',
-        '\x20sm:mb-0\x22>',
-        'available<',
-        'm7ha/image',
-        '-600\x20upper',
-        'ss=\x22text-x',
-        '\x20\x20\x20\x20\x20\x20<div',
-        '6\x20sm:py-3\x20',
-        'is.src=\x27ht',
-        't-sm\x20font-',
-        'e/upload/v',
-        'end',
-        '\x20banner\x22\x20o',
-        'edium\x20text',
-        'ass=\x22mt-6\x20',
-        'r\x22>Points<',
-        'Watch\x20',
-        'gray-500\x20u',
-        'cate\x20max-w',
-        '\x20-\x20Recent\x20',
-        '\x20font-semi',
-        '-2\x20sm:p-3\x20',
-        'rder-gray-',
-        'x2zm7ha/im',
-        'ass=\x22text-',
-        'rap\x22>\x0a\x20\x20\x20\x20',
-        's=\x22font-me',
-        'nt-semibol',
-        'sm:mt-8\x22>\x0a',
-        'his.src=\x27h',
-        'nter\x20text-',
-        'NFsVY',
-        'success',
-        'bold\x20text-',
-        '=\x220\x200\x2024\x202',
-        'stage_user',
-        'jkt48/hist',
-        'tle',
-        '572495DVymOS',
-        'text-xl\x20fo',
-        'tracking-w',
-        'm:justify-',
-        'IURLo',
-        '-y\x20divide-',
-        'xt-lg\x20sm:t',
-        'r\x22>Qty</th',
-        'nk-0\x20mb-4\x20',
-        'nded-full\x20',
-        'ray-800\x22>',
-        '\x20\x20<th\x20scop',
-        'xCkiP',
-        '\x20bot.\x20\x0a\x20\x20\x20',
-        'RkmaB',
-        '0\x20rounded-',
-        'ibold\x20text',
-        '\x20\x20\x20\x20\x20\x20\x20</s',
-        'p\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        'lass=\x22h-24',
-        'ke-width=\x22',
-        'g\x20sm:text-',
-        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<',
-        '=\x22text-gra',
-        'tor',
-        '>User</th>',
-        't-xs\x20text-',
-        'um\x20text-gr',
-        'e-100\x20p-4\x20',
-        'l\x20shadow-m',
-        '0\x22>',
-        'age/upload',
-        't-gray-900',
-        'og:image',
-        'ble\x20class=',
-        'data',
-        'ider\x22>Gold',
-        'ite\x20divide',
-        '\x20text-lg\x20f',
-        'han\x20pengam',
-        'toLowerCas',
-        'meta',
-        'ay-500\x20upp',
-        'ext-xl\x20fon',
-        'rcase\x20font',
-        'class=\x22mt-',
-        '\x20to-gray-6',
-        '=\x22hover:bg',
-        'my.id/api/',
-        '\x20\x20\x20',
-        '6\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        'pathname',
-        'y-200\x22>\x0a\x20\x20',
-        '3\x20rounded-',
-        '-gray-600\x20',
-        'sHseI',
-        'AUsTR',
-        'ld</p>\x0a\x20\x20\x20',
-        '0\x20sm:w-10\x20',
-        'ems-center',
-        'ay-100\x22>\x0a\x20',
-        '\x20\x20<h3\x20clas',
-        '-4\x20border\x20',
-        'iv>\x0a\x20\x20\x20\x20\x20\x20',
-        'rHEsT',
-        'rjecyq6twx',
-        'error',
-        'mYmkJ',
-        'v\x20class=\x22f',
-        '\x20to-rose-5',
-        'meta[name=',
-        'ray-400\x22\x20f',
-        't=\x22Not\x20Fou',
-        'gray-200\x22>',
-        'py-1\x20round',
-        '2\x20class=\x22t',
-        'der-b\x20bord',
-        'fetch\x20data',
-        '>Started</',
-        '\x22min-w-ful',
-        'd\x22>Points/',
-        'addEventLi',
-        '\x22>Total\x20Po',
-        '</table>\x0a\x20',
-        'V4a2\x202\x200\x201',
-        '.cloudinar',
-        'i.png\x27\x22>\x0a\x20',
-        '\x22bg-white\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        '_viewer',
-        'idn',
-        'ail()\x22\x20cla',
-        '\x20sm:h-64\x20b',
-        'ex-shrink-',
-        'e\x22>',
-        '-bold\x20text',
-        '://res.clo',
-        'y-50\x20to-gr',
-        '\x20Gold</p>\x0a',
-        'gVpzv',
-        '00/svg\x22>\x0a\x20',
-        '\x20sm:py-3\x20t',
-        '\x200\x20114\x200v1',
-        '\x20<div>\x0a\x20\x20\x20',
-        'embali\x20den',
-        'espace-now',
-        'px]\x20sm:max',
-        'on</h2>\x0a\x20\x20',
-        'percase\x20fo',
-        'to\x20rounded',
-        '-lg\x20border',
-        'N/A',
-        '200\x20mx-2\x20s',
-        'lass=\x22h-8\x20',
-        '\x22\x20alt=\x22',
-        '-8\x20w-8\x20sm:',
-        'ss=\x22ml-2\x20s',
-        '737173118/',
-        't-lg\x20sm:te',
-        'remove',
-        '\x20\x20\x20\x20\x20<tr>\x0a',
-        '\x20stroke=\x22c',
-        'id\x20grid-co',
-        '\x20hour',
-        'm-rose-400',
-        '\x20\x20\x20<path\x20s',
-        '\x20\x20\x20\x20\x20<div>',
-        'm-gray-500',
-        'grid-cols-',
-        '\x20minutes',
-        'yq6twx7cmn',
-        'forEach',
-        '1455313eYDlcT',
-        '\x20sm:h-10\x20s',
-        'pace-nowra',
-        '\x20\x20\x20\x20\x20</div',
-        'ass=\x22px-3\x20',
-        'nickname',
-        'ms-center\x22',
-        'dhpyJ',
-        '\x20<thead\x20cl',
-        'ull\x20rounde',
-        'low-hidden',
-        'ld\x20text-gr',
-        'UZdNd',
-        '\x20src=\x22',
-        'v\x20class=\x22w',
-        '\x20px-4\x22>',
-        'bold\x22>Gold',
-        'class=\x22fle',
-        'lass=\x22flex',
-        'er:to-blue',
-        'avatar_url',
-        'tify-cente',
-        'es.cloudin',
-        'ion-200\x20sh',
-        '\x20<span\x20cla',
-        'e-nowrap\x20t',
-        'm\x20on\x20',
-        'ppercase\x20f',
-        'm/dlx2zm7h',
-        'innerHTML',
-        'ream',
-        '48\x20Showroo',
-        'id-cols-2\x20',
-        's\x20text-gra',
-        '],\x20meta[na',
-        'h-10\x20sm:w-',
-        '\x20font-medi',
-        '\x20data\x20avai',
-        'meta[prope',
-        '\x20\x20\x20\x20\x20\x20Live',
-        'ss=\x22w-16\x20h',
-        'me^=\x22twitt',
-        '>Viewers</',
-        'ld\x22>Room\x20I',
-        'm\x20text-gra',
-        'g-white\x20p-',
-        '1\x22>Content',
-        '\x20</tr>\x0a\x20\x20\x20',
-        'BfksE',
-        'appendChil',
-        'user',
-        'lex-1\x20w-fu',
-        'ss=\x22grid\x20g',
-        '0\x20019\x209m-9',
-        'og:descrip',
-        'ass=\x22bg-gr'
+    
+    // Definisikan meta tag baru
+    const metaTags = [
+        { property: 'og:title', content: `${member.name}'s Live Stream` },
+        { property: 'og:description', content: `Watch ${member.name}'s recent live stream on ${isShowroom ? 'Showroom' : 'IDN Live'}` },
+        { property: 'og:image', content: thumbnailUrl + `?t=${new Date().getTime()}` },
+        { property: 'og:url', content: window.location.href },
+        { property: 'og:type', content: 'video.other' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: `${member.name}'s Live Stream` },
+        { name: 'twitter:description', content: `Watch ${member.name}'s recent live stream` },
+        { name: 'twitter:image', content: thumbnailUrl + `?t=${new Date().getTime()}` },
+        { name: 'twitter:creator', content: '@48intens' }
     ];
-    _0x2d54 = function () {
-        return _0x13679f;
-    };
-    return _0x2d54();
+
+    // Buat dan tambahkan meta tag baru
+    metaTags.forEach(tag => {
+        const element = document.createElement('meta');
+        if (tag.property) {
+            element.setAttribute('property', tag.property);
+        } else {
+            element.setAttribute('name', tag.name);
+        }
+        element.setAttribute('content', tag.content);
+        document.head.appendChild(element);
+    });
+    
+    // Log untuk debugging
+    console.log('Meta tags updated for', member.name);
+    console.log('Thumbnail URL:', thumbnailUrl);
 }
-function showNotFoundMessage(_0x4eb4a2) {
-    const _0xb39cec = _0x38577e, _0x4607cd = { 'nATrS': _0xb39cec(0x256) };
-    loadingSkeleton[_0xb39cec(0x185)][_0xb39cec(0x1c8)](_0x4607cd[_0xb39cec(0x318)]), errorContainer[_0xb39cec(0x185)][_0xb39cec(0x440)](_0x4607cd[_0xb39cec(0x318)]), errorContainer[_0xb39cec(0x46a)] = _0xb39cec(0x26b) + _0xb39cec(0x247) + _0xb39cec(0x390) + _0xb39cec(0x1be) + _0xb39cec(0x383) + _0xb39cec(0x201) + _0xb39cec(0x202) + _0xb39cec(0x496) + _0xb39cec(0x2fe) + _0xb39cec(0x2f9) + _0xb39cec(0x462) + _0xb39cec(0x33d) + _0xb39cec(0x3a9) + _0xb39cec(0x205) + _0xb39cec(0x4d1) + _0xb39cec(0x1fe) + _0xb39cec(0x3c1) + _0xb39cec(0x194) + _0xb39cec(0x421) + _0xb39cec(0x1ef) + _0xb39cec(0x262) + _0xb39cec(0x429) + _0xb39cec(0x2fd) + _0xb39cec(0x469) + _0xb39cec(0x232) + _0xb39cec(0x2d1) + _0xb39cec(0x292) + _0xb39cec(0x40a) + _0xb39cec(0x2c6) + _0xb39cec(0x48e) + _0xb39cec(0x421) + _0xb39cec(0x304) + _0xb39cec(0x411) + _0xb39cec(0x329) + _0xb39cec(0x421) + _0xb39cec(0x316) + _0xb39cec(0x301) + _0xb39cec(0x34c) + _0xb39cec(0x298) + _0xb39cec(0x421) + _0xb39cec(0x406) + _0xb39cec(0x37b) + _0xb39cec(0x471) + _0xb39cec(0x3e4) + _0xb39cec(0x1ae) + _0xb39cec(0x47b) + _0xb39cec(0x18a) + _0xb39cec(0x364) + _0xb39cec(0x421) + _0xb39cec(0x237) + _0xb39cec(0x3e0) + _0xb39cec(0x204) + _0xb39cec(0x45c) + _0x4eb4a2 + (_0xb39cec(0x2fc) + _0xb39cec(0x421) + _0xb39cec(0x38d) + _0xb39cec(0x488) + _0xb39cec(0x275) + _0xb39cec(0x424) + _0xb39cec(0x225) + _0xb39cec(0x224) + _0xb39cec(0x4b9) + _0xb39cec(0x1c7) + _0xb39cec(0x2d6) + _0xb39cec(0x246) + _0xb39cec(0x19a) + _0xb39cec(0x246) + _0xb39cec(0x460) + _0xb39cec(0x216) + _0xb39cec(0x230) + _0xb39cec(0x499) + _0xb39cec(0x4ee) + _0xb39cec(0x214) + _0xb39cec(0x464) + _0xb39cec(0x1cd) + _0xb39cec(0x421) + _0xb39cec(0x421) + _0xb39cec(0x2b3) + _0xb39cec(0x421) + _0xb39cec(0x1d8) + _0xb39cec(0x383) + _0xb39cec(0x281) + _0xb39cec(0x3df) + _0xb39cec(0x251) + _0xb39cec(0x276) + '\x20');
+
+function renderLiveDetail(data) {
+    updateDocumentMeta(data);
+    const { type, member, live_info, gift_metrics, details, platform_data } = data;
+    const isShowroom = type.toLowerCase() === 'showroom';
+    const content = `
+    <div class="bg-white rounded-3xl sm:rounded-xl shadow-md sm:shadow-xl overflow-hidden border border-gray-200 mx-2 sm:mx-0">
+        <div class="w-full h-48 sm:h-64 bg-gray-200 overflow-hidden">
+            <img class="w-full h-full object-cover" src="${member.image.thumbnail}" alt="${member.name} banner" onerror="this.src='https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png'">
+        </div>
+        <div class="bg-gradient-to-r from-pink-100 to-blue-100 p-4 sm:p-6 border-b border-gray-200 relative">
+            <div class="flex flex-col md:flex-row items-start md:items-center">
+                <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6 relative -mt-16">
+                    <div class="h-24 w-24 sm:h-28 sm:w-28 rounded-full border-2 sm:border-4 border-white shadow-lg bg-white p-1">
+                        <img class="h-full w-full rounded-full object-cover" src="${member.image.thumbnail}" alt="${member.name}" onerror="this.src='https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png'">
+                    </div>
+                </div>
+                <div class="flex-1 w-full">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                        <div class="mb-2 sm:mb-0">
+                            <h1 class="text-xl sm:text-2xl font-bold text-gray-900">${member.name}</h1>
+                            <p class="text-base sm:text-lg text-gray-600">${member.nickname} JKT48</p>
+                        </div>
+                        <div class="mt-2 sm:mt-0">
+                            ${getPlatformBadge(type)}
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 sm:mt-4 grid grid-cols-2 gap-2 sm:gap-4 md:grid-cols-4">
+                        <div class="bg-white p-2 sm:p-3 rounded-lg shadow-sm border border-gray-100">
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Viewers</p>
+                            <p class="text-lg sm:text-xl font-bold text-gray-800">${live_info.viewers.toLocaleString()}</p>
+                        </div>
+                        <div class="bg-white p-2 sm:p-3 rounded-lg shadow-sm border border-gray-100">
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Duration</p>
+                            <p class="text-lg sm:text-xl font-bold text-gray-800">${formatDuration(live_info.date.duration)}</p>
+                        </div>
+                        <div class="bg-white p-2 sm:p-3 rounded-lg shadow-sm border border-gray-100">
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Total Points</p>
+                            <p class="text-lg sm:text-xl font-bold text-gray-800">${gift_metrics.total_points.toLocaleString()}</p>
+                        </div>
+                        <div class="bg-white p-2 sm:p-3 rounded-lg shadow-sm border border-gray-100">
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Points/Viewer</p>
+                            <p class="text-lg sm:text-xl font-bold text-gray-800">${gift_metrics.points_per_viewer.toFixed(2)}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-4 sm:p-6">
+            <div class="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Live Information</h2>
+                    <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
+                        <div class="grid grid-cols-1 gap-3 sm:gap-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Started</p>
+                                <p class="font-medium text-gray-900">${formatDate(live_info.date.start)}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Ended</p>
+                                <p class="font-medium text-gray-900">${formatDate(live_info.date.end)}</p>
+                            </div>
+                            ${isShowroom ? `
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Room ID</p>
+                                <p class="font-medium text-gray-900">${platform_data.room_id}</p>
+                            </div>
+                            ` : `
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Stream Title</p>
+                                <p class="font-medium text-gray-900">${platform_data.title || 'N/A'}</p>
+                            </div>
+                            `}
+                        </div>
+                    </div>
+                </div>
+
+            <div class="mt-4 sm:mt-0">
+                <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Gift Metrics</h2>
+                <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
+                    <p class="text-xs text-gray-500 font-semibold mb-2">
+                        ⚠️ Noted: Data pada card gift metric mungkin ada kesalahan pengambilan dari bot. 
+                        Jika ada ketidaksesuaian, mohon dicek kembali dengan sumber resmi.
+                    </p>
+                    ${isShowroom ? `
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Total Points</p>
+                            <p class="text-lg sm:text-xl font-bold text-gray-800">${gift_metrics.total_points.toLocaleString()}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Points/Viewer</p>
+                            <p class="text-lg sm:text-xl font-bold text-gray-800">${gift_metrics.points_per_viewer.toFixed(2)}</p>
+                        </div>
+                    </div>
+                    ` : `
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Total Gold</p>
+                            <p class="text-lg sm:text-xl font-bold text-gray-800">${Math.floor(gift_metrics.total_points / 4)} Gold</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Gold/Viewer</p>
+                            <p class="text-lg sm:text-xl font-bold text-gray-800">${(gift_metrics.points_per_viewer / 4).toFixed(2)}</p>
+                        </div>
+                    </div>
+                    `}
+                </div>
+            </div>
+
+            <div class="mt-6 sm:mt-8">
+                <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Gift Log</h2>
+                ${isShowroom ? createShowroomGiftLog(details.gift_log) : createIdnGiftLog(details.gift_log)}
+            </div>
+
+            ${isShowroom && details.stage_users ? `
+            <div class="mt-6 sm:mt-8">
+                <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Top Supporters</h2>
+                ${createShowroomStageUsers(details.stage_users)}
+            </div>
+            ` : ''}
+        </div>
+    </div>
+    `;
+
+    liveDetailContainer.innerHTML = content;
 }
+
+function showNotFoundMessage(message) {
+    loadingSkeleton.classList.add('hidden');
+    errorContainer.classList.remove('hidden');
+    errorContainer.innerHTML = `
+    <div class="min-h-[24rem] relative">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="flex flex-col items-center text-center">
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" 
+                        alt="Not Found" 
+                        class="w-48 sm:w-64 mb-4">
+                <h3 class="text-lg font-medium text-gray-900 mb-1">Content Not Found</h3>
+                <p class="text-gray-500 mb-4 px-4">${message}</p>
+                <button onclick="fetchLiveDetail()" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-colors duration-200 shadow-md">
+                    Retry
+                </button>
+            </div>
+        </div>
+    </div>
+    `;
+}
+
 function getLiveIdFromUrl() {
-    const _0x53d904 = _0x38577e, _0xf344b7 = {
-            'RyvXl': function (_0x4f77a3, _0x75642f) {
-                return _0x4f77a3 - _0x75642f;
-            }
-        }, _0x41dcb6 = window[_0x53d904(0x31c)][_0x53d904(0x3fc)][_0x53d904(0x2c2)]('/'), _0x9b2986 = _0x41dcb6[_0xf344b7[_0x53d904(0x366)](_0x41dcb6[_0x53d904(0x368)], 0x2676 + -0x2597 + 0x6f * -0x2)];
-    if (/^[a-zA-Z0-9-_]+$/[_0x53d904(0x29a)](_0x9b2986))
-        return _0x9b2986;
-    const _0x4659c1 = new URLSearchParams(window[_0x53d904(0x31c)][_0x53d904(0x18b)]);
-    return _0x4659c1[_0x53d904(0x388)]('id');
+    const pathSegments = window.location.pathname.split('/');
+    const possibleId = pathSegments[pathSegments.length - 1];
+    if (/^[a-zA-Z0-9-_]+$/.test(possibleId)) {
+        return possibleId;
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
 }
+
 async function fetchLiveDetail() {
-    const _0x2543e8 = _0x38577e, _0x2e53d1 = {
-            'ECVlq': function (_0x56bee9) {
-                return _0x56bee9();
-            },
-            'VUnVp': _0x2543e8(0x183) + _0x2543e8(0x38f) + _0x2543e8(0x35a),
-            'dhpyJ': _0x2543e8(0x256),
-            'juWuD': function (_0x3a5c4e, _0x43ffe3) {
-                return _0x3a5c4e(_0x43ffe3);
-            },
-            'IURLo': function (_0x2f04a9, _0x3e5889) {
-                return _0x2f04a9 === _0x3e5889;
-            },
-            'rLDMR': _0x2543e8(0x3c3),
-            'kGBsc': function (_0x306a62, _0x5e1331) {
-                return _0x306a62(_0x5e1331);
-            },
-            'UZdNd': _0x2543e8(0x306) + _0x2543e8(0x2c8) + _0x2543e8(0x365),
-            'hCPYa': _0x2543e8(0x1f4),
-            'jKmsu': function (_0x585511, _0x3f74b6) {
-                return _0x585511(_0x3f74b6);
-            },
-            'hLXMj': _0x2543e8(0x306) + _0x2543e8(0x2c8) + _0x2543e8(0x268) + _0x2543e8(0x4c4)
-        };
     try {
-        const _0x40babf = _0x2e53d1[_0x2543e8(0x222)](getLiveIdFromUrl);
-        if (!_0x40babf)
-            throw new Error(_0x2e53d1[_0x2543e8(0x359)]);
-        loadingSkeleton[_0x2543e8(0x185)][_0x2543e8(0x440)](_0x2e53d1[_0x2543e8(0x454)]), errorContainer[_0x2543e8(0x185)][_0x2543e8(0x1c8)](_0x2e53d1[_0x2543e8(0x454)]), liveDetailContainer[_0x2543e8(0x46a)] = '';
-        const _0x3b2dae = await _0x2e53d1[_0x2543e8(0x3a0)](fetch, _0x2543e8(0x1f5) + _0x2543e8(0x37e) + _0x2543e8(0x3f9) + _0x2543e8(0x3c7) + _0x2543e8(0x319) + _0x40babf);
-        if (!_0x3b2dae['ok'])
-            throw new Error(_0x2543e8(0x306) + _0x2543e8(0x416) + ':\x20' + _0x3b2dae[_0x2543e8(0x36a)]);
-        const _0x2186d4 = await _0x3b2dae[_0x2543e8(0x332)]();
-        if (_0x2e53d1[_0x2543e8(0x3cd)](_0x2186d4[_0x2543e8(0x36a)], _0x2e53d1[_0x2543e8(0x282)]))
-            _0x2e53d1[_0x2543e8(0x4bf)](renderLiveDetail, _0x2186d4[_0x2543e8(0x3ec)]);
-        else
-            throw new Error(_0x2186d4[_0x2543e8(0x397)] || _0x2e53d1[_0x2543e8(0x459)]);
-    } catch (_0x12da9f) {
-        console[_0x2543e8(0x40b)](_0x2e53d1[_0x2543e8(0x1d5)], _0x12da9f), _0x2e53d1[_0x2543e8(0x4b7)](showNotFoundMessage, _0x12da9f[_0x2543e8(0x397)] || _0x2e53d1[_0x2543e8(0x327)]);
+        const liveId = getLiveIdFromUrl();
+
+        if (!liveId) {
+            throw new Error('Live stream ID not found');
+        }
+
+        loadingSkeleton.classList.remove('hidden');
+        errorContainer.classList.add('hidden');
+        liveDetailContainer.innerHTML = '';
+
+        const response = await fetch(`https://48intensapi.my.id/api/jkt48/historylive/${liveId}`);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+            renderLiveDetail(data.data);
+        } else {
+            throw new Error(data.message || 'Failed to load live details');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showNotFoundMessage(error.message || 'Failed to load live stream details');
     } finally {
-        loadingSkeleton[_0x2543e8(0x185)][_0x2543e8(0x1c8)](_0x2e53d1[_0x2543e8(0x454)]);
+        loadingSkeleton.classList.add('hidden');
     }
 }
-document[_0x38577e(0x41a) + _0x38577e(0x4dc)](_0x38577e(0x2d5) + _0x38577e(0x2f7), fetchLiveDetail), window[_0x38577e(0x4cf) + _0x38577e(0x4e9)] = fetchLiveDetail;
+
+
+document.addEventListener('DOMContentLoaded', fetchLiveDetail);
+window.fetchLiveDetail = fetchLiveDetail;
