@@ -184,8 +184,7 @@ function createShowroomStageUsers(users) {
 
 function updateDocumentMeta(data) {
     const { type, member, platform_data } = data;
-    const isShowroom = type.toLowerCase() === 'showroom'; // lowercase 'r' in 'room'
-    
+    const isShowroom = type.toLowerCase() === 'showroom';
     // 1. Update document title
     document.title = `${member.name} - Recent Live | JKT48 Showroom & IDN`;
 
@@ -214,7 +213,7 @@ function updateDocumentMeta(data) {
     const metaTagsData = [
         // Open Graph Tags
         { property: 'og:title', content: `${member.name}'s Live Stream` },
-        { property: 'og:description', content: `Watch ${member.name}'s recent live stream on ${isShowroom ? 'Showroom' : 'IDN Live'}` }, // Fixed: changed isShowRoom to isShowroom
+        { property: 'og:description', content: `Watch ${member.name}'s recent live stream on ${isShowRoom ? 'Showroom' : 'IDN Live'}` },
         { property: 'og:image', content: timestampedUrl },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
@@ -269,8 +268,7 @@ function addStructuredData(data) {
 
 
 function renderLiveDetail(data) {
-    updateDocumentMeta(data);
-     addStructuredData(data);
+
     const { type, member, live_info, gift_metrics, details, platform_data } = data;
     const isShowroom = type.toLowerCase() === 'showroom';
     const content = `
@@ -463,5 +461,6 @@ async function fetchLiveDetail() {
 }
 
 
-document.addEventListener('DOMContentLoaded', fetchLiveDetail);
+document.addEventListener('DOMContentLoaded',updateDocumentMeta(data),
+addStructuredData(data),fetchLiveDetail);
 window.fetchLiveDetail = fetchLiveDetail;
