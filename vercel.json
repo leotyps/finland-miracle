@@ -82,7 +82,7 @@
             "destination": "/components/detail/member?id=:id"
         },
         {
-            "source": "/recentlive/:data_id",
+            "source": "/recentlive/:id",
             "destination": "/components/detail/recentlive.html"
         },
         {

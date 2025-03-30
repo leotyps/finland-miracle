@@ -115,7 +115,24 @@
     </div>
 
     <div class="container mx-auto px-4 py-8 flex-grow">
-        <div id="recentlive-detail-container" class="gap-4"></div>
+        <div id="loading-skeleton" class="space-y-6">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden animate-pulse">
+                <div class="h-48 bg-gray-200"></div>
+                <div class="p-6 space-y-4">
+                    <div class="h-8 bg-gray-200 rounded w-3/4"></div>
+                    <div class="h-6 bg-gray-200 rounded w-1/2"></div>
+                    <div class="grid grid-cols-4 gap-4">
+                        <div class="h-20 bg-gray-200 rounded"></div>
+                        <div class="h-20 bg-gray-200 rounded"></div>
+                        <div class="h-20 bg-gray-200 rounded"></div>
+                        <div class="h-20 bg-gray-200 rounded"></div>
+                    </div>
+                    <div class="h-64 bg-gray-200 rounded"></div>
+                </div>
+            </div>
+        </div>
+        <div id="error-container" class="hidden"></div>
+        <div id="live-detail-container"></div>
     </div>
 
     <footer class="bg-gray-900 text-white py-8">
@@ -161,10 +178,10 @@
     </footer>
 
     <script src="/progress.js"></script>
-    <script src="/security/typicalsleepingboy.js"></script>
+    <script src="/utils/breadcrumb.js"></script>
     <script src="/utils/navbar.js"></script>
     <script src="/utils/toast.js"></script>
-    <script src="/utils/recentlive.js"></script>
+    <script src="/utils/recentlivedetail.js"></script>
     <script>
         const menuToggle = document.getElementById("menu-toggle");
         const mobileMenu = document.getElementById("mobile-menu");
