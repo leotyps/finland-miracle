@@ -448,6 +448,8 @@ async function fetchLiveDetail() {
         const data = await response.json();
 
         if (data.status === "success") {
+            updateDocumentMeta(data.data);  // Pindahkan ke sini
+            addStructuredData(data.data);   // Pindahkan ke sini
             renderLiveDetail(data.data);
         } else {
             throw new Error(data.message || 'Failed to load live details');
@@ -461,10 +463,10 @@ async function fetchLiveDetail() {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    updateDocumentMeta(data);
-    addStructuredData(data);
-    fetchLiveDetail();
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await fetchLiveDetail();
 });
+
 
 window.fetchLiveDetail = fetchLiveDetail;
