@@ -461,6 +461,10 @@ async function fetchLiveDetail() {
 }
 
 
-document.addEventListener('DOMContentLoaded',updateDocumentMeta(data),
-addStructuredData(data),fetchLiveDetail);
+document.addEventListener('DOMContentLoaded', () => {
+    updateDocumentMeta(data);
+    addStructuredData(data);
+    fetchLiveDetail();
+});
+
 window.fetchLiveDetail = fetchLiveDetail;
