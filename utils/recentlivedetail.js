@@ -250,8 +250,27 @@ function updateDocumentMeta(data) {
     }
 }
 
+function addStructuredData(data) {
+    const { member, live_info } = data;
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": `${member.name}'s Live Stream`,
+        "description": `Watch ${member.name}'s recent live stream`,
+        "thumbnailUrl": member.image.thumbnail,
+        "uploadDate": live_info.date.start,
+        "duration": live_info.date.duration,
+        "contentUrl": window.location.href
+    });
+    document.head.appendChild(script);
+}
+
+
 function renderLiveDetail(data) {
     updateDocumentMeta(data);
+    addStructuredData(data);
     const { type, member, live_info, gift_metrics, details, platform_data } = data;
     const isShowroom = type.toLowerCase() === 'showroom';
     const content = `
