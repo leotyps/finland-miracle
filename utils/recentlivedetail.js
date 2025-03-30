@@ -429,7 +429,7 @@ function renderLiveDetail(data) {
 
     liveDetailContainer.innerHTML = content;
 }
-function showNotFoundMessage {
+function showNotFoundMessage(message) {
     loadingSkeleton.classList.add('hidden');
     errorContainer.classList.remove('hidden');
     errorContainer.innerHTML = `
@@ -447,6 +447,7 @@ function showNotFoundMessage {
     </div>
     `;
 }
+
 
 function getLiveIdFromUrl() {
     const pathSegments = window.location.pathname.split('/');
