@@ -193,43 +193,51 @@ function updateDocumentMeta(data) {
     const thumbnailUrl = isShowroom 
         ? member.image.thumbnail 
         : platform_data.thumbnail;
+        
+    // Tambahkan timestamp untuk memaksa refresh cache
+    const timestampedUrl = `${thumbnailUrl}?t=${new Date().getTime()}`;
 
-    // Hapus semua meta tag OG dan Twitter yang ada
-    document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach(el => {
+    // Hapus SEMUA meta tag yang mungkin konflik (approach yang lebih agresif)
+    document.querySelectorAll('meta[property^="og:"], meta[name^="og:"], meta[property^="twitter:"], meta[name^="twitter:"]').forEach(el => {
+        console.log("Removing tag:", el.outerHTML);
         el.parentNode.removeChild(el);
     });
     
-    // Definisikan meta tag baru
-    const metaTags = [
-        { property: 'og:title', content: `${member.name}'s Live Stream` },
-        { property: 'og:description', content: `Watch ${member.name}'s recent live stream on ${isShowroom ? 'Showroom' : 'IDN Live'}` },
-        { property: 'og:image', content: thumbnailUrl + `?t=${new Date().getTime()}` },
-        { property: 'og:url', content: window.location.href },
-        { property: 'og:type', content: 'video.other' },
-        { property: 'og:image:width', content: '1200' },
-        { property: 'og:image:height', content: '630' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: `${member.name}'s Live Stream` },
-        { name: 'twitter:description', content: `Watch ${member.name}'s recent live stream` },
-        { name: 'twitter:image', content: thumbnailUrl + `?t=${new Date().getTime()}` },
-        { name: 'twitter:creator', content: '@48intens' }
+    // Definisikan semua meta tag baru dengan format yang benar
+    const metaTagsData = [
+        { type: 'property', name: 'og:title', content: `${member.name}'s Live Stream` },
+        { type: 'property', name: 'og:description', content: `Watch ${member.name}'s recent live stream on ${isShowroom ? 'Showroom' : 'IDN Live'}` },
+        { type: 'property', name: 'og:image', content: timestampedUrl },
+        { type: 'property', name: 'og:url', content: window.location.href },
+        { type: 'property', name: 'og:type', content: 'video.other' },
+        { type: 'property', name: 'og:image:width', content: '1200' },
+        { type: 'property', name: 'og:image:height', content: '630' },
+        { type: 'name', name: 'twitter:card', content: 'summary_large_image' },
+        { type: 'name', name: 'twitter:title', content: `${member.name}'s Live Stream` },
+        { type: 'name', name: 'twitter:description', content: `Watch ${member.name}'s recent live stream` },
+        { type: 'name', name: 'twitter:image', content: timestampedUrl },
+        { type: 'name', name: 'twitter:creator', content: '@48intens' }
     ];
 
     // Buat dan tambahkan meta tag baru
-    metaTags.forEach(tag => {
+    metaTagsData.forEach(tag => {
         const element = document.createElement('meta');
-        if (tag.property) {
-            element.setAttribute('property', tag.property);
-        } else {
-            element.setAttribute('name', tag.name);
-        }
+        element.setAttribute(tag.type, tag.name);
         element.setAttribute('content', tag.content);
         document.head.appendChild(element);
+        console.log("Added tag:", element.outerHTML);
     });
     
-    // Log untuk debugging
-    console.log('Meta tags updated for', member.name);
-    console.log('Thumbnail URL:', thumbnailUrl);
+    console.log('Meta tags updated for:', member.name);
+    console.log('Thumbnail URL:', timestampedUrl);
+    
+    // Tambahkan script untuk memaksa re-render preview (khusus untuk debugging)
+    const debugScript = document.createElement('script');
+    debugScript.textContent = `
+        // Kirim pesan ke konsol bahwa meta tags telah diperbarui
+        console.log('META TAGS UPDATE TIMESTAMP:', new Date().toISOString());
+    `;
+    document.head.appendChild(debugScript);
 }
 
 function renderLiveDetail(data) {
