@@ -429,7 +429,7 @@ function renderLiveDetail(data) {
 
     liveDetailContainer.innerHTML = content;
 }
-function showNotFoundMessage(message) {
+function showNotFoundMessage {
     loadingSkeleton.classList.add('hidden');
     errorContainer.classList.remove('hidden');
     errorContainer.innerHTML = `
@@ -439,8 +439,6 @@ function showNotFoundMessage(message) {
                 <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" 
                         alt="Not Found" 
                         class="w-48 sm:w-64 mb-4">
-                <h3 class="text-lg font-medium text-gray-900 mb-1">Content Not Found</h3>
-                <p class="text-gray-500 mb-4 px-4">${message}</p>
                 <button onclick="fetchLiveDetail()" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-colors duration-200 shadow-md">
                     Retry
                 </button>
