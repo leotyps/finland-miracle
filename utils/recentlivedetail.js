@@ -42,12 +42,14 @@ function getPlatformBadge(platform) {
 function createShowroomGiftLog(gifts) {
     if (!gifts || gifts.length === 0) {
         return `
-            <div class="flex items-center justify-center py-8">
-                <div class="flex flex-col items-center">
-                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V4m0 13a9 9 0 01-9 9m9-9a9 9 0 019 9m-9-2a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0m6 0a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0"></path>
-                    </svg>
-                    <p class="text-gray-500 text-lg font-medium mt-2">No gift data available</p>
+           <div class="flex items-center justify-center py-8">
+                <div class="flex flex-col items-center text-gray-400">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <p class="text-gray-500 text-lg font-medium">No gift data available</p>
                 </div>
             </div>`;
     }
@@ -93,15 +95,18 @@ function createShowroomGiftLog(gifts) {
 function createIdnGiftLog(gifts) {
     if (!gifts || gifts.length === 0) {
         return `
-            <div class="flex items-center justify-center py-8">
-                <div class="flex flex-col items-center">
-                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V4m0 13a9 9 0 01-9 9m9-9a9 9 0 019 9m-9-2a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0m6 0a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0"></path>
-                    </svg>
-                    <p class="text-gray-500 text-lg font-medium mt-2">No gift data available</p>
+           <div class="flex items-center justify-center py-8">
+                <div class="flex flex-col items-center text-gray-400">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <p class="text-gray-500 text-lg font-medium">No gift data available</p>
                 </div>
             </div>`;
     }
+
 
     return `
     <div class="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
@@ -141,12 +146,14 @@ function createIdnGiftLog(gifts) {
 function createShowroomStageUsers(users) {
     if (!users || users.length === 0) {
         return `
-            <div class="flex items-center justify-center py-8">
-                <div class="flex flex-col items-center">
-                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V4m0 13a9 9 0 01-9 9m9-9a9 9 0 019 9m-9-2a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0m6 0a2 2 0 012-2V4a2 2 0 114 0v15a2 2 0 11-4 0"></path>
-                    </svg>
-                    <p class="text-gray-500 text-lg font-medium mt-2">No stage user data available</p>
+           <div class="flex items-center justify-center py-8">
+                <div class="flex flex-col items-center text-gray-400">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <p class="text-gray-500 text-lg font-medium">No gift data available</p>
                 </div>
             </div>`;
     }
@@ -268,9 +275,9 @@ function addStructuredData(data) {
 
 
 function renderLiveDetail(data) {
-
     const { type, member, live_info, gift_metrics, details, platform_data } = data;
     const isShowroom = type.toLowerCase() === 'showroom';
+
     const content = `
     <div class="bg-white rounded-3xl sm:rounded-xl shadow-md sm:shadow-xl overflow-hidden border border-gray-200 mx-2 sm:mx-0">
         <div class="w-full h-48 sm:h-64 bg-gray-200 overflow-hidden">
@@ -345,57 +352,83 @@ function renderLiveDetail(data) {
                     </div>
                 </div>
 
-            <div class="mt-4 sm:mt-0">
-                <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Gift Metrics</h2>
-                <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
-                    <p class="text-xs text-gray-500 font-semibold mb-2">
-                        ⚠️ Noted: Data pada card gift metric mungkin ada kesalahan pengambilan dari bot. 
-                        Jika ada ketidaksesuaian, mohon dicek kembali dengan sumber resmi.
-                    </p>
-                    ${isShowroom ? `
-                    <div class="grid grid-cols-2 gap-3 sm:gap-4">
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase font-semibold">Total Points</p>
-                            <p class="text-lg sm:text-xl font-bold text-gray-800">${gift_metrics.total_points.toLocaleString()}</p>
+                <div class="mt-4 sm:mt-0">
+                    <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Gift Metrics</h2>
+                    <div class="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-200">
+                        <p class="text-xs text-gray-500 font-semibold mb-2">
+                            ⚠️ Noted: Data pada card gift metric mungkin ada kesalahan pengambilan dari bot. 
+                            Jika ada ketidaksesuaian, mohon dicek kembali dengan sumber resmi.
+                        </p>
+                        ${isShowroom ? `
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Total Points</p>
+                                <p class="text-lg sm:text-xl font-bold text-gray-800">${gift_metrics.total_points.toLocaleString()}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Points/Viewer</p>
+                                <p class="text-lg sm:text-xl font-bold text-gray-800">${gift_metrics.points_per_viewer.toFixed(2)}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase font-semibold">Points/Viewer</p>
-                            <p class="text-lg sm:text-xl font-bold text-gray-800">${gift_metrics.points_per_viewer.toFixed(2)}</p>
+                        ` : `
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Total Gold</p>
+                                <p class="text-lg sm:text-xl font-bold text-gray-800">${Math.floor(gift_metrics.total_points / 4)} Gold</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-semibold">Gold/Viewer</p>
+                                <p class="text-lg sm:text-xl font-bold text-gray-800">${(gift_metrics.points_per_viewer / 4).toFixed(2)}</p>
+                            </div>
                         </div>
+                        `}
                     </div>
-                    ` : `
-                    <div class="grid grid-cols-2 gap-3 sm:gap-4">
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase font-semibold">Total Gold</p>
-                            <p class="text-lg sm:text-xl font-bold text-gray-800">${Math.floor(gift_metrics.total_points / 4)} Gold</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase font-semibold">Gold/Viewer</p>
-                            <p class="text-lg sm:text-xl font-bold text-gray-800">${(gift_metrics.points_per_viewer / 4).toFixed(2)}</p>
-                        </div>
-                    </div>
-                    `}
                 </div>
             </div>
 
+            ${!isShowroom ? `
+            <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2">
+                    <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Gift Log</h2>
+                    ${createIdnGiftLog(details.gift_log)}
+                </div>
+                
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+                        <h3 class="text-lg font-semibold text-gray-900 p-4 border-b border-gray-200">
+                            Live Thumbnail
+                        </h3>
+                        <div class="p-4">
+                            <img src="${platform_data.thumbnail}" 
+                                    alt="${member.name} live thumbnail" 
+                                    class="w-full rounded-lg shadow-sm border border-gray-200"
+                                    onerror="this.src='https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png'">
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p class="font-medium">${platform_data.title || 'No title available'}</p>
+                                <p class="text-xs mt-1">Streamed on ${formatDate(live_info.date.start)}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ` : `
             <div class="mt-6 sm:mt-8">
                 <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Gift Log</h2>
-                ${isShowroom ? createShowroomGiftLog(details.gift_log) : createIdnGiftLog(details.gift_log)}
+                ${createShowroomGiftLog(details.gift_log)}
             </div>
-
-            ${isShowroom && details.stage_users ? `
+            ${details.stage_users ? `
             <div class="mt-6 sm:mt-8">
                 <h2 class="text-lg font-bold text-gray-900 mb-3 sm:mb-4">Top Supporters</h2>
                 ${createShowroomStageUsers(details.stage_users)}
             </div>
             ` : ''}
+            `}
         </div>
     </div>
     `;
 
     liveDetailContainer.innerHTML = content;
 }
-
 function showNotFoundMessage(message) {
     loadingSkeleton.classList.add('hidden');
     errorContainer.classList.remove('hidden');
