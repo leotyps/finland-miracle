@@ -146,72 +146,72 @@
       </h1>
     </div>
     <div id="recent-live-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div id="error-container" class="hidden"></div>
     </div>
   </div>
 
 
-  
-  <footer class="bg-gray-900 text-white py-8">
-    <div class="container mx-auto px-6">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-        <div class="mb-6 md:mb-0">
-          <h2 class="text-3xl font-extrabold text-white">48intens</h2>
-          <p class="text-base text-gray-400 mt-2">
-            Bringing JKT48 closer to you.
-          </p>
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div class="mb-6 md:mb-0">
+            <h2 class="text-3xl font-extrabold text-white">48intens</h2>
+            <p class="text-base text-gray-400 mt-2">
+              Bringing JKT48 closer to you.
+            </p>
+          </div>
+          <div class="flex flex-col md:flex-row md:items-center gap-4">
+            <a href="/about" class="text-lg font-medium text-gray-400 hover:text-white transition">About 48intens</a>
+            <a href="/member" class="text-lg font-medium text-gray-400 hover:text-white transition">Members</a>
+            <a href="/news" class="text-lg font-medium text-gray-400 hover:text-white transition">News</a>
+
+          </div>
         </div>
-        <div class="flex flex-col md:flex-row md:items-center gap-4">
-          <a href="/about" class="text-lg font-medium text-gray-400 hover:text-white transition">About 48intens</a>
-          <a href="/member" class="text-lg font-medium text-gray-400 hover:text-white transition">Members</a>
-          <a href="/news" class="text-lg font-medium text-gray-400 hover:text-white transition">News</a>
 
+        <div class="flex justify-center md:justify-end mt-6 space-x-6">
+          <a href="https://48intens.com/discord" target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-discord"></i>
+          </a>
+          <a href="https://48intens.com/instagram" target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://48intens.com/twitter" target="_blank"
+            class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="/teamintens" target="_blank" class="text-gray-400 hover:text-white text-2xl transition">
+            <i class="fas fa-user-group"></i>
+          </a>
+        </div>
+        <div class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
+          &copy; 2025 48intens. All rights reserved.<br />All 48Intens servers
+          are under managed by Typicalsleepingboy & RyuuG Dev
         </div>
       </div>
+    </footer>
 
-      <div class="flex justify-center md:justify-end mt-6 space-x-6">
-        <a href="https://48intens.com/discord" target="_blank"
-          class="text-gray-400 hover:text-white text-2xl transition">
-          <i class="fab fa-discord"></i>
-        </a>
-        <a href="https://48intens.com/instagram" target="_blank"
-          class="text-gray-400 hover:text-white text-2xl transition">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://48intens.com/twitter" target="_blank"
-          class="text-gray-400 hover:text-white text-2xl transition">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="/teamintens" target="_blank" class="text-gray-400 hover:text-white text-2xl transition">
-          <i class="fas fa-user-group"></i>
-        </a>
-      </div>
-      <div class="text-center text-gray-500 mt-8 text-sm border-t border-gray-700 pt-4">
-        &copy; 2025 48intens. All rights reserved.<br />All 48Intens servers
-        are under managed by Typicalsleepingboy & RyuuG Dev
-      </div>
-    </div>
-  </footer>
+    <script src="/progress.js"></script>
+    <script src="/utils/live.js"></script>
+    <script src="/utils/livedetail.js"></script>
+    <script src="/utils/recentlive.js"></script>
+    <script src="/utils/breadcrumb.js"></script>
+    <script src="/utils/navbar.js"></script>
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.querySelector(".menu-icon");
 
-  <script src="/progress.js"></script>
-  <script src="/utils/live.js"></script>
-  <script src="/utils/livedetail.js"></script>
-  <script src="/utils/recentlive.js"></script>
-  <script src="/utils/breadcrumb.js"></script>
-  <script src="/utils/navbar.js"></script>
-  <script>
-    const menuToggle = document.getElementById("menu-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const menuIcon = document.querySelector(".menu-icon");
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        menuIcon.classList.toggle("menu-active");
+        setTimeout(() => {
+          mobileMenu.classList.toggle("active");
+        }, 10);
+      });
 
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-      menuIcon.classList.toggle("menu-active");
-      setTimeout(() => {
-        mobileMenu.classList.toggle("active");
-      }, 10);
-    });
-
-  </script>
+    </script>
 </body>
 
 </html>
