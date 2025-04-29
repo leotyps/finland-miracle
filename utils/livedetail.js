@@ -55,11 +55,11 @@ function setupIDNChat(username, slug) {
             const response = await fetch(`https://fskhri.online/api/chat-proxy?username=${username}&slug=${slug}`);
             const data = await response.json();
 
-            if (!data.chatId) {
+            if (!data.channelId) {
                 throw new Error('Chat ID not found in response');
             }
 
-            return data.chatId;
+            return data.channelId;
         } catch (error) {
             console.error("Failed to get channel ID:", error);
             throw error;
