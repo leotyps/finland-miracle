@@ -1,292 +1,88 @@
-function _0x5714() {
-    const _0x57a422 = [
-        'nded-full\x20',
-        '744YOKmed',
-        'h3\x20class=\x22',
-        '\x20class=\x22p-',
-        '/a>\x0a\x20\x20\x20\x20\x20\x20',
-        's=\x22mb-4\x22>\x0a',
-        'g-white\x20bo',
-        'enter\x20just',
-        'ounded-2xl',
-        's/logo.svg',
-        '60BfEFni',
-        'min-h-[24r',
-        'nerror=\x22th',
-        'g-gray-300',
-        'der-gray-5',
-        '8\x20w-full\x20r',
-        'text-sm\x20te',
-        '.jpg',
-        '\x22text-gray',
-        'class=\x22p-4',
-        '\x22absolute\x20',
-        'Videos\x20Not',
-        'error',
-        '/embed/',
-        'url',
-        'youtube-co',
-        'intensapi.',
-        'img\x20\x0a\x20\x20\x20\x20\x20',
-        'mb-2\x22>\x0a\x20\x20\x20',
-        '\x20src=\x22',
-        'rder-4\x20bor',
-        'rounded\x22><',
-        '/h3>\x0a\x20\x20\x20\x20\x20',
-        'span>\x0a\x20\x20\x20\x20',
-        'nsition-sh',
-        's=\x22w-64\x20mb',
-        'ray-900\x20li',
-        'ntainer',
-        '\x20\x20\x20\x20\x20\x20\x20\x20<a',
-        '20321ngbcpz',
-        'naii.png\x22\x20',
-        'ytimg.com/',
-        '\x22>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'ion-300\x20w-',
-        'iv>\x0a\x20\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20</div>',
-        'dow-lg\x20tra',
-        '\x27\x22\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'ow-md\x20over',
-        'ite\x20rounde',
-        'gray-300\x20h',
-        '_blank\x22\x20cl',
-        '\x20\x20\x20\x20',
-        'v\x20class=\x22b',
-        'add',
-        'ass=\x22bg-gr',
-        'mr-2\x22></di',
-        '=null;\x20thi',
-        '=\x22flex\x20ite',
-        '\x20href=\x22htt',
-        'https://cd',
-        'low-hidden',
-        'div\x20class=',
-        '\x20\x20\x20\x20\x20\x20',
-        'lt=\x22JKT48\x22',
-        '\x20\x20\x20\x20\x20\x20\x20</d',
-        'l\x22\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'buZVG',
-        'ass=\x22w-ful',
-        'ne-clamp-2',
-        '0\x22>JKT48</',
-        'nary.com/d',
-        'Error\x20fetc',
-        'hing\x20YouTu',
-        '\x20\x20\x20\x20src=\x22',
-        'alt=\x22Not\x20F',
-        'rounded-2x',
-        'd-3xl\x20shad',
-        'classList',
-        'ay-300\x20h-6',
-        'ss=\x22w-6\x20h-',
-        'video',
-        'ay-300\x20h-4',
-        '\x20\x20\x20\x20\x20\x20</di',
-        '/mqdefault',
-        'em]',
-        'ms-center\x20',
-        '81363gOpgCf',
-        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20a',
-        'class=\x22bg-',
-        'repeat',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',
-        'forEach',
-        'font-semib',
-        'bold\x22>',
-        'IgdSw',
-        'ex\x20items-c',
-        '\x20\x20<img\x20\x0a\x20\x20',
-        '=\x22https://',
-        'ect-cover\x20',
-        '374980LCymRQ',
-        '-500\x20text-',
-        'split',
-        '\x20\x20</div>\x0a\x20',
-        '\x20\x20\x20\x20<div\x20c',
-        '-4\x22>\x0a\x20\x20\x20\x20\x20',
-        'inset-0\x20fl',
-        'class=\x22fle',
-        'YVEeu',
-        'lass=\x22flex',
-        'my.id/JKT4',
-        'ps://www.y',
-        'x\x20flex-col',
-        '\x20mb-4\x22></d',
-        '60cAHBWa',
-        '\x20items-cen',
-        'v>\x0a\x20\x20\x20\x20\x20\x20\x20',
-        '\x20hover:sha',
-        'lt=\x22',
-        'lRuIL',
-        '\x20\x20\x20\x20\x20\x20\x20cla',
-        'unded\x22></d',
-        '6\x20rounded-',
-        'center\x20tex',
-        '118/z0erje',
-        '\x20\x20<img\x20src',
-        'cyq6twx7cm',
-        'EBwkb',
-        '\x20\x20\x20\x20\x20\x20\x20<di',
-        'x-w-sm\x22>\x0a\x20',
-        '1955305lxmBwX',
-        '\x20\x20\x20\x20\x20',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20<',
-        'full\x20max-w',
-        'flow-hidde',
-        'ify-center',
-        'vi/',
-        '-sm\x22>\x0a\x20\x20\x20\x20',
-        'json',
-        'MdFPl',
-        'title',
-        '/div>\x0a\x20\x20\x20\x20',
-        'be\x20videos:',
-        'https://i.',
-        'old\x20text-g',
-        '>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
-        '0\x20rounded-',
-        '\x20w-full\x20ma',
-        'TDeIa',
-        'an\x20class=\x22',
-        'ter\x20mb-2\x22>',
-        '\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20',
-        '<div\x20class',
-        'wJkAO',
-        'adow\x20durat',
-        '/watch?v=',
-        '\x20\x20\x20\x20\x20\x20\x20\x20\x20o',
-        'nintens.48',
-        'relative',
-        '1915290SPbofv',
-        't-lg\x20font-',
-        '\x20\x20\x20>\x0a\x20\x20\x20\x20\x20',
-        'https://48',
-        '\x22\x20target=\x22',
-        '\x20\x20\x20\x20\x20<div\x20',
-        '\x20h-4\x20w-32\x20',
-        'd/v1737173',
-        'VvNDN',
-        '\x20\x20\x20',
-        'getElement',
-        '\x20\x20\x20\x20\x20>\x0a\x20\x20\x20',
-        'slice',
-        'n\x20skeleton',
-        '</p>\x0a\x20\x20\x20\x20\x20',
-        'my.id/api/',
-        '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<',
-        '\x20\x20\x20<div\x20cl',
-        '-6\x20w-6\x20rou',
-        'innerHTML',
-        'ztomh',
-        'ass=\x22block',
-        '\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20',
-        'length',
-        '3xl\x20\x20overf',
-        '\x20\x20\x20\x20\x20\x20<div',
-        'ound\x22\x20clas',
-        'full\x20mr-2\x22',
-        'l\x20h-48\x20obj',
-        'zFzGl',
-        'is.onerror',
-        '4\x22>\x0a\x20\x20\x20\x20\x20\x20',
-        '8.jpg',
-        '\x20Found\x20😭',
-        '1943832ksHCdh',
-        'mage/uploa',
-        '471364Ybbjpu',
-        '\x20w-full\x20ro',
-        'ById',
-        '.com/image',
-        'ps://jkt48',
-        'ter\x22>\x0a\x20\x20\x20\x20',
-        '</div>\x0a\x20\x20\x20',
-        'xt-gray-60',
-        '\x20<div\x20clas',
-        'OcSFR',
-        '\x20<p\x20class=',
-        'lx2zm7ha/i',
-        'outube.com',
-        '\x20\x20\x20\x20\x20\x20\x20\x20cl',
-        's.src=\x27htt',
-        'res.cloudi',
-        'ass=\x22bg-wh',
-        '\x20\x20\x20\x20\x20</div',
-        '\x20\x20\x20\x20\x20\x20\x20<sp'
-    ];
-    _0x5714 = function () {
-        return _0x57a422;
-    };
-    return _0x5714();
-}
-function _0x1b04(_0x544867, _0x46d627) {
-    const _0x2b5136 = _0x5714();
-    return _0x1b04 = function (_0x3043ed, _0x401192) {
-        _0x3043ed = _0x3043ed - (-0x7 * 0x11b + 0xd7 * -0x2d + -0xb8d * -0x4);
-        let _0x587de7 = _0x2b5136[_0x3043ed];
-        return _0x587de7;
-    }, _0x1b04(_0x544867, _0x46d627);
-}
-(function (_0x2baaf2, _0x1d93b5) {
-    const _0x3d5de1 = _0x1b04, _0x392fea = _0x2baaf2();
-    while (!![]) {
-        try {
-            const _0x1648f0 = -parseInt(_0x3d5de1(0x107)) / (0x3 * -0x716 + -0x1f93 + -0x34d6 * -0x1) + parseInt(_0x3d5de1(0x17f)) / (-0x168 * -0x9 + 0x4fd + -0x11a3) + -parseInt(_0x3d5de1(0x171)) / (-0x1 * 0xbdb + 0x43 * -0x86 + 0x10 * 0x2ef) * (parseInt(_0x3d5de1(0xb6)) / (0x1fe6 * -0x1 + -0x2 * -0x132d + -0x670)) + parseInt(_0x3d5de1(0xc6)) / (-0x1 * 0x6f7 + -0x14c6 + 0x1bc2) + -parseInt(_0x3d5de1(0x105)) / (0x26da + 0x1f38 * 0x1 + -0x460c) + parseInt(_0x3d5de1(0x141)) / (-0x7bb + 0x251b + 0xb * -0x2ab) * (-parseInt(_0x3d5de1(0x11b)) / (-0x234e + 0x1821 + 0xb35)) + -parseInt(_0x3d5de1(0xe3)) / (0x1d33 + 0x31e + -0x2048) * (-parseInt(_0x3d5de1(0x124)) / (0x1e7e + -0x102f + -0xe45));
-            if (_0x1648f0 === _0x1d93b5)
-                break;
-            else
-                _0x392fea['push'](_0x392fea['shift']());
-        } catch (_0x548157) {
-            _0x392fea['push'](_0x392fea['shift']());
-        }
-    }
-}(_0x5714, 0xc * -0x9ffb + -0xa4d17 + 0x17a60c));
 async function fetchYoutubeVideos() {
-    const _0x416b2c = _0x1b04, _0x47ba61 = {
-            'ztomh': _0x416b2c(0x131),
-            'zFzGl': _0x416b2c(0x156) + _0x416b2c(0xe1) + _0x416b2c(0x134) + _0x416b2c(0xb2) + _0x416b2c(0x103),
-            'YVEeu': _0x416b2c(0x133) + _0x416b2c(0x13f),
-            'EBwkb': function (_0x1f101b, _0x433f6e) {
-                return _0x1f101b(_0x433f6e);
-            },
-            'VvNDN': _0x416b2c(0xe6) + _0x416b2c(0x134) + _0x416b2c(0xf2) + _0x416b2c(0x16b),
-            'TDeIa': function (_0x546353, _0x5eb05e) {
-                return _0x546353 === _0x5eb05e;
-            },
-            'MdFPl': function (_0x2ef011, _0x34ef29, _0x4f82fd) {
-                return _0x2ef011(_0x34ef29, _0x4f82fd);
-            },
-            'wJkAO': _0x416b2c(0x12f) + _0x416b2c(0x104),
-            'IgdSw': _0x416b2c(0x162) + _0x416b2c(0x163) + _0x416b2c(0xd2),
-            'lRuIL': function (_0x1543e7, _0x4cf4fe, _0x1c894e) {
-                return _0x1543e7(_0x4cf4fe, _0x1c894e);
-            }
-        };
     try {
-        const _0x204802 = document[_0x416b2c(0xed) + _0x416b2c(0x109)](_0x47ba61[_0x416b2c(0xb0)]);
-        _0x204802[_0x416b2c(0xf6)] = (_0x416b2c(0x172) + _0x416b2c(0xf4) + _0x416b2c(0x117) + _0x416b2c(0x14b) + _0x416b2c(0x167) + _0x416b2c(0x14a) + _0x416b2c(0xca) + _0x416b2c(0xf0) + _0x416b2c(0xd7) + _0x416b2c(0xc5) + _0x416b2c(0x176) + _0x416b2c(0xe8) + _0x416b2c(0x12d) + _0x416b2c(0x144) + _0x416b2c(0x176) + _0x416b2c(0xf4) + _0x416b2c(0x151) + _0x416b2c(0x16c) + _0x416b2c(0x129) + _0x416b2c(0x122) + _0x416b2c(0xb5) + _0x416b2c(0x146) + _0x416b2c(0x176) + _0x416b2c(0xac) + _0x416b2c(0xb1) + _0x416b2c(0xb7) + _0x416b2c(0xda) + _0x416b2c(0x172) + _0x416b2c(0x176) + _0x416b2c(0xe8) + _0x416b2c(0x174) + _0x416b2c(0x14c) + _0x416b2c(0xf5) + _0x416b2c(0x11a) + _0x416b2c(0x152) + _0x416b2c(0xb8) + _0x416b2c(0x176) + _0x416b2c(0xc4) + _0x416b2c(0x14f) + _0x416b2c(0x127) + _0x416b2c(0xe9) + _0x416b2c(0x139) + _0x416b2c(0xd1) + _0x416b2c(0x176) + _0x416b2c(0x16d) + _0x416b2c(0xb8) + _0x416b2c(0x176) + _0x416b2c(0xf4) + _0x416b2c(0x151) + _0x416b2c(0x169) + _0x416b2c(0x108) + _0x416b2c(0xbd) + _0x416b2c(0x146) + _0x416b2c(0x176) + _0x416b2c(0x10d) + _0x416b2c(0xc8) + _0x416b2c(0xd1) + _0x416b2c(0x14e))[_0x416b2c(0x175)](0x49f * 0x5 + 0xaf3 * 0x1 + -0x1 * 0x220a);
-        const _0x3b39fe = await _0x47ba61[_0x416b2c(0xc3)](fetch, _0x47ba61[_0x416b2c(0xeb)]), _0x33ca4d = await _0x3b39fe[_0x416b2c(0xce)]();
-        _0x204802[_0x416b2c(0xf6)] = '';
-        if (!_0x33ca4d || _0x47ba61[_0x416b2c(0xd8)](_0x33ca4d[_0x416b2c(0xfa)], -0x1 * 0x271 + -0xa94 + 0xd05)) {
-            _0x47ba61[_0x416b2c(0xcf)](showNotFoundMessage, _0x204802, _0x47ba61[_0x416b2c(0xdd)]);
+        const container = document.getElementById('youtube-container');
+
+        // Tampilkan skeleton loading
+        container.innerHTML = `
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden skeleton w-full max-w-sm">
+                <div class="p-4">
+                    <div class="bg-gray-300 h-48 w-full rounded-2xl mb-4"></div>
+                    <div class="flex items-center mb-2">
+                        <div class="bg-gray-300 h-6 w-6 rounded-full mr-2"></div>
+                        <div class="bg-gray-300 h-4 w-32 rounded"></div>
+                    </div>
+                    <div class="bg-gray-300 h-6 w-full rounded"></div>
+                </div>
+            </div>
+        `.repeat(4);
+
+        // Ambil data dari API
+        const response = await fetch('https://48intensapi.my.id/api/video');
+        const videos = await response.json();
+
+        // Hapus skeleton
+        container.innerHTML = '';
+
+        // Cek apakah data kosong
+        if (!videos || videos.length === 0) {
+            showNotFoundMessage(container, 'Videos Not Found 😭');
             return;
         }
-        const _0x59f8a2 = _0x33ca4d[_0x416b2c(0xef)](-0xe50 + 0xa6f + 0x3e1, 0x1ede * -0x1 + -0x1f05 + 0x3de7);
-        _0x59f8a2[_0x416b2c(0x177)](_0x142cd0 => {
-            const _0x226dd6 = _0x416b2c, _0x4709d0 = _0x142cd0[_0x226dd6(0x132)][_0x226dd6(0x181)](_0x47ba61[_0x226dd6(0xf7)])[-0x18d3 + -0x261 * 0xb + -0xa33 * -0x5], _0x361d3f = _0x226dd6(0xd3) + _0x226dd6(0x143) + _0x226dd6(0xcc) + _0x4709d0 + (_0x226dd6(0x16e) + _0x226dd6(0x12b)), _0x16ec3a = _0x47ba61[_0x226dd6(0x100)], _0x16cb12 = _0x226dd6(0x172) + _0x226dd6(0xc4) + _0x226dd6(0x14f) + _0x226dd6(0x120) + _0x226dd6(0x138) + _0x226dd6(0x128) + _0x226dd6(0xd6) + _0x226dd6(0xfb) + _0x226dd6(0x157) + _0x226dd6(0xb9) + _0x226dd6(0x148) + _0x226dd6(0x13c) + _0x226dd6(0xde) + _0x226dd6(0x145) + _0x226dd6(0xc9) + _0x226dd6(0xcd) + _0x226dd6(0x176) + _0x226dd6(0xfc) + _0x226dd6(0x11d) + _0x226dd6(0x102) + _0x226dd6(0x176) + _0x226dd6(0x140) + _0x226dd6(0x155) + _0x226dd6(0xb3) + _0x226dd6(0x113) + _0x226dd6(0xdf) + _0x4709d0 + (_0x226dd6(0xe7) + _0x226dd6(0x14d) + _0x226dd6(0xf8) + _0x226dd6(0x144) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x10f) + _0x226dd6(0x11f) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x17c) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x164)) + _0x361d3f + (_0x226dd6(0xf9) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x173) + _0x226dd6(0xba)) + _0x142cd0[_0x226dd6(0xd0)] + (_0x226dd6(0xdb) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x114) + _0x226dd6(0x15e) + _0x226dd6(0xff) + _0x226dd6(0x17e) + _0x226dd6(0x166) + _0x226dd6(0x15c) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0xe0) + _0x226dd6(0x126) + _0x226dd6(0x101) + _0x226dd6(0x153) + _0x226dd6(0x115) + _0x226dd6(0x10b) + _0x226dd6(0x10a) + _0x226dd6(0x123) + _0x226dd6(0x149) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0xee) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x118) + _0x226dd6(0xd5) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0xdc) + _0x226dd6(0x154) + _0x226dd6(0x170) + _0x226dd6(0x136) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0xc8) + _0x226dd6(0x135) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x137)) + _0x16ec3a + (_0x226dd6(0xf9) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x173) + _0x226dd6(0x15a) + _0x226dd6(0x172) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0xbc) + _0x226dd6(0x16a) + _0x226dd6(0xbe) + _0x226dd6(0xfe) + _0x226dd6(0x172) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0xe5) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x119) + _0x226dd6(0xd9) + _0x226dd6(0x12a) + _0x226dd6(0x10e) + _0x226dd6(0x160) + _0x226dd6(0x13b) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0x147) + _0x226dd6(0x172) + _0x226dd6(0x176) + _0x226dd6(0xc8) + _0x226dd6(0x11c) + _0x226dd6(0x178) + _0x226dd6(0xd4) + _0x226dd6(0x13e) + _0x226dd6(0x15f) + _0x226dd6(0x144) + _0x226dd6(0x176) + _0x226dd6(0x176) + _0x226dd6(0xc7)) + _0x142cd0[_0x226dd6(0xd0)] + (_0x226dd6(0x172) + _0x226dd6(0x176) + _0x226dd6(0xc8) + _0x226dd6(0x13a) + _0x226dd6(0x176) + _0x226dd6(0xc8) + _0x226dd6(0x11e) + _0x226dd6(0x176) + _0x226dd6(0x147) + _0x226dd6(0x172) + _0x226dd6(0x15b) + _0x226dd6(0x146) + _0x226dd6(0x159));
-            _0x204802[_0x226dd6(0xf6)] += _0x16cb12;
+
+        const slicedVideos = videos.slice(0, 4);
+
+        // Tampilkan video
+        slicedVideos.forEach(video => {
+            const videoId = video.url.split('/embed/')[1];
+            const thumbnail = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
+            const channelImg = 'https://cdnintens.48intensapi.my.id/JKT48.jpg';
+
+            const card = `
+                <div class="bg-white border-4 border-gray-50 rounded-3xl overflow-hidden hover:shadow-lg transition-shadow duration-300 w-full max-w-sm">
+                    <div class="p-4">
+                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="block">
+                            <div class="mb-4">
+                                <img 
+                                    src="${thumbnail}" 
+                                    alt="${video.title}"
+                                    class="w-full h-48 object-cover rounded-2xl"
+                                    onerror="this.onerror=null; this.src='https://jkt48.com/images/logo.svg'"
+                                >
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <img 
+                                    src="${channelImg}" 
+                                    alt="JKT48"
+                                    class="w-6 h-6 rounded-full mr-2"
+                                >
+                                <span class="text-sm text-gray-600">JKT48</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 line-clamp-2">
+                                ${video.title}
+                            </h3>
+                        </a>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += card;
         });
-    } catch (_0x5db850) {
-        console[_0x416b2c(0x130)](_0x47ba61[_0x416b2c(0x17a)], _0x5db850), _0x47ba61[_0x416b2c(0xbb)](showNotFoundMessage, container, _0x47ba61[_0x416b2c(0xdd)]);
+    } catch (error) {
+        console.error('Error fetching YouTube videos:', error);
+        showNotFoundMessage(document.getElementById('youtube-container'), 'Videos Not Found 😭');
     }
 }
-function showNotFoundMessage(_0x285227, _0x16f71c) {
-    const _0x597cd1 = _0x1b04, _0x2f06d4 = {
-            'buZVG': _0x597cd1(0xe2),
-            'OcSFR': _0x597cd1(0x125) + _0x597cd1(0x16f)
-        };
-    _0x285227[_0x597cd1(0xf6)] = _0x597cd1(0xf3) + _0x597cd1(0x158) + _0x597cd1(0x12e) + _0x597cd1(0xae) + _0x597cd1(0x17b) + _0x597cd1(0x121) + _0x597cd1(0xcb) + _0x597cd1(0x144) + _0x597cd1(0xe8) + _0x597cd1(0xaf) + _0x597cd1(0xb4) + _0x597cd1(0xb7) + _0x597cd1(0x10c) + _0x597cd1(0x176) + _0x597cd1(0xc1) + _0x597cd1(0x17d) + _0x597cd1(0x116) + _0x597cd1(0x161) + _0x597cd1(0x112) + _0x597cd1(0x106) + _0x597cd1(0xea) + _0x597cd1(0xc0) + _0x597cd1(0xc2) + _0x597cd1(0x142) + _0x597cd1(0x165) + _0x597cd1(0xfd) + _0x597cd1(0x13d) + _0x597cd1(0xad) + _0x597cd1(0x176) + _0x597cd1(0x111) + _0x597cd1(0x12c) + _0x597cd1(0x180) + _0x597cd1(0xbf) + _0x597cd1(0xe4) + _0x597cd1(0x179) + _0x16f71c + (_0x597cd1(0xf1) + _0x597cd1(0x15b) + _0x597cd1(0x146) + _0x597cd1(0x182) + _0x597cd1(0xec)), _0x285227[_0x597cd1(0x168)][_0x597cd1(0x150)](_0x2f06d4[_0x597cd1(0x15d)], _0x2f06d4[_0x597cd1(0x110)]);
+
+function showNotFoundMessage(container, message) {
+    container.innerHTML = `
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="flex flex-col items-center">
+                <img src="https://res.cloudinary.com/dlx2zm7ha/image/upload/v1737173118/z0erjecyq6twx7cmnaii.png" alt="Not Found" class="w-64 mb-4">
+                <p class="text-gray-500 text-center text-lg font-bold">${message}</p>
+            </div>
+        </div>
+    `;
+    container.classList.add('relative', 'min-h-[24rem]');
 }
+
+// Jalankan fungsi saat halaman dimuat
 fetchYoutubeVideos();
